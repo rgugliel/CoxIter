@@ -37,10 +37,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "graphs.list.iterator.h"
 #include "graphs.product.h"
 #include "graphs.product.set.h"
-#include "../tools/regexp.h"
-#include "../tools/math_tools.h"
-#include "../tools/polynomials.h"
-#include "../tools/numbers/mpz_rational.h"
+#include "lib/regexp.h"
+#include "lib/math_tools.h"
+#include "lib/polynomials.h"
+#include "lib/numbers/mpz_rational.h"
 
 #include <algorithm>
 #include <iterator>

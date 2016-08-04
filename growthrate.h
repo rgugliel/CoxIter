@@ -36,7 +36,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <gmpxx.h>
 #include <iostream>
 
-#include "../tools/paripolynomials.h"
+#include "lib/paripolynomials.h"
 
 using namespace std;
 using namespace PariPolynomials;

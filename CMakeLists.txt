@@ -9,10 +9,10 @@ add_definitions("-Wno-reorder")
 set( CMAKE_BUILD_TYPE Release )
 
 # Main files
-add_executable(coxiter gbd.cpp ../tools/string.cpp ../tools/regexp.cpp coxiter.cpp arithmeticity.cpp app.cpp main.cpp)
+add_executable(coxiter gbd.cpp lib/string.cpp lib/regexp.cpp coxiter.cpp arithmeticity.cpp app.cpp main.cpp)
 
 # Maths: polynomials, fractions, varia functions
-add_library( coxiter_maths STATIC ../tools/math_tools.cpp ../tools/polynomials.cpp ../tools/numbers/number_template.cpp ../tools/numbers/mpz_rational.cpp )
+add_library( coxiter_maths STATIC lib/math_tools.cpp lib/polynomials.cpp lib/numbers/number_template.cpp lib/numbers/mpz_rational.cpp )
 target_link_libraries( coxiter coxiter_maths )
 
 # Graphs: graphs, products of graphs and iterators
@@ -39,17 +39,15 @@ target_link_libraries( coxiter ${GMP_LIBRARY} )
 find_library( GMP_LIBRARYXX gmpxx )
 target_link_libraries( coxiter ${GMP_LIBRARYXX} )
 
-if( COMPILE_WITH_PARI ) # Used for the growth rate and the Perron/Salem/Pisot tests
-	find_library( PARI_LIBRARY pari )
-	if( PARI_LIBRARY )
-		add_library( coxiter_pari STATIC ../tools/paripolynomials.cpp growthrate.cpp signature.cpp )
-		target_link_libraries( coxiter coxiter_pari )
-		
-		target_link_libraries( coxiter ${PARI_LIBRARY} )
-		add_definitions(-D_COMPILE_WITH_PARI_)
-	else()
-		message( WARNING "Warning: libpari not found. Some functions won't be avaible." )
-	endif()
-endif( COMPILE_WITH_PARI )
+find_library( PARI_LIBRARY pari )
+if( PARI_LIBRARY )
+	add_library( coxiter_pari STATIC lib/paripolynomials.cpp growthrate.cpp signature.cpp )
+	target_link_libraries( coxiter coxiter_pari )
+	
+	target_link_libraries( coxiter ${PARI_LIBRARY} )
+	add_definitions(-D_COMPILE_WITH_PARI_)
+else()
+	message( WARNING "Warning: PARI library was not found. CoxIter won't be able to compute growth rate and signature." )
+endif()
 
 install(TARGETS coxiter RUNTIME DESTINATION bin)
