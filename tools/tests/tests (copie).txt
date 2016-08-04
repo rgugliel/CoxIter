@@ -1,0 +1,880 @@
+18-vinb14_gamma2.in		non-cocompact
+17-vinb85.in 	0		non-cocompact		arithmetic
+17-tum04_13_01.in 0	non-cocompact
+16-tum03_236.in 	2499347/2360171042879569920000		non-cocompact
+16-vinb85.in		non-cocompact		arithmetic
+15-vinb85.in 	0		non-cocompact		arithmetic
+14-vinb85.in 	-87757/289236647411712000		non-cocompact		arithmetic
+13-mcl11.in 0
+13-vinb85.in 	0		non-cocompact		arithmetic
+13-tum04_13_01.in 	0		non-cocompact
+13-tum04_13_02.in 	0		non-cocompact
+13-tum04_13_03.in 	0		non-cocompact
+12-vinb85.in		non-cocompact		arithmetic
+12-tum04_12_01.in 	691/382588157952000	non-cocompact				# "Volumes of integral congruence hyperbolic manifolds", Ratcliffe, Tschantz
+12-tum04_12_02.in 	691/191294078976000	non-cocompact				# Relation de sous-groupes
+11-tum04_12_01.in 	0			non-cocompact
+11-tum04_12_02.in 	0			non-cocompact
+11-tum04_12_03.in 	0			non-cocompact
+11-tum04_12_04.in 	0			non-cocompact
+11-tum04_12_05.in 	0			non-cocompact
+11-vinb85.in 	0		non-cocompact		arithmetic
+11-mcl11.in 0
+10-thierryP_1-10.in 	-1/183936614400
+10-vinb85.in		non-cocompact		arithmetic
+10-tum04_12_01-k=2-l=3.in	non-cocompact
+10-tum04_12_01-k=3-l=3.in	non-cocompact
+10-tum04_12_01-k=4-l=3.in	non-cocompact
+10-tum04_12_01-k=2-l=4.in 	-1/11147673600		non-cocompact		# "Volumes of integral congruence hyperbolic manifolds", Ratcliffe, Tschantz
+10-tum04_12_01-k=3-l=4.in	non-cocompact
+10-tum04_12_01-k=4-l=4.in 	-1/5573836800		non-cocompact		# Relation de sous-groupes
+9-mcl11.in 0
+9-tum04_11_01.in 0		non-cocompact
+9-tum04_11_02.in 0		non-cocompact
+9-tum04_11_03.in 0		non-cocompact
+9-tum04_11_04.in 0		non-cocompact
+9-tum04_11_05.in 0		non-cocompact
+9-tum04_11_06.in 0		non-cocompact
+9-tum04_11_07.in 0		non-cocompact
+9-tum04_11_08.in 0		non-cocompact
+9-tum04_11_09-k=2.in 0		non-cocompact
+9-tum04_11_09-k=3.in 0		non-cocompact
+9-jkrt_351-01-T9.in			0		(10,45,120,210,252,210,120,45,10)		non-cocompact
+9-jkrt_351-02-S9.in 		0		(10,45,120,210,252,210,120,45,10)		non-cocompact
+9-jkrt_351-03-Q9.in 		0		(10,45,120,210,252,210,120,45,10)		non-cocompact
+8-Bugaenko.in			24187/8709120000	(41,164,316,374,294,156,54,11)		cocompact
+8-rk1999size_S8.in 		17/1393459200
+8-rk1999size_3514.in 		1/696729600
+8-rk1999size_3516.in 		17/696729600
+8-rk1999size_3517.in 		17/43545600
+8-jkrt_351-01-T8.coxiter	1/696729600	(9, 36, 84, 126, 126, 84, 36, 9)		arithmetic		non-cocompact		# Value: jkrt, commensurability
+8-jkrt_351-02-S8.coxiter	17/1393459200	(9, 36, 84, 126, 126, 84, 36, 9)		arithmetic		non-cocompact		# Value: jkrt, commensurability
+8-jkrt_351-03-Q8.coxiter	17/696729600	(9, 36, 84, 126, 126, 84, 36, 9)		arithmetic		non-cocompact		# Value: jkrt, commensurability
+8-jkrt_351-04-P8.coxiter	17/43545600	(9, 36, 84, 126, 126, 84, 36, 9)		arithmetic		non-cocompact		# Value: jkrt, commensurability
+8-tum04_11_13-k=3.in		non-cocompact
+8-tum04_11_13-k=2.in		non-cocompact
+8-tum04_11_12-k=3.in		non-cocompact
+8-tum04_11_12-k=2.in		non-cocompact
+8-tum04_11_11.in		non-cocompact
+8-tum04_11_10.in		non-cocompact
+8-tum04_11_09.in		non-cocompact
+8-tum04_11_08.in		non-cocompact
+8-tum04_11_07.in		non-cocompact
+8-tum04_11_06-k=2.in		non-cocompact
+8-tum04_11_06-k=3.in		non-cocompact
+8-tum04_11_05.in		non-cocompact
+8-tum04_11_04.in		non-cocompact
+8-tum04_11_03.in		non-cocompact
+8-tum04_11_02.in		non-cocompact
+8-tum04_11_01.in		non-cocompact
+7-Bugaenko.in 0			cocompact
+7-rk1999size_S7.in 0
+7-tum04_10_01.in 0		non-cocompact
+7-tum04_10_02.in 0		non-cocompact
+7-tum04_10_03.in 0		non-cocompact
+7-tum04_10_04.in 0		non-cocompact
+7-tum04_10_05.in 0		non-cocompact
+7-tum04_10_06.in 0		non-cocompact
+7-tum04_10_07.in 0		non-cocompact
+7-tum04_10_08.in 0		non-cocompact
+7-tum04_10_09.in 0		non-cocompact
+7-tum04_10_10.in 0		non-cocompact
+7-tum04_10_11.in 0		non-cocompact
+7-tum04_10_12.in 0		non-cocompact
+7-tum04_10_13.in 0		non-cocompact
+7-tum04_10_14.in 0		non-cocompact
+7-tum04_10_15.in 0		non-cocompact
+7-tum04_10_16.in 0		non-cocompact
+7-tum04_10_17.in 0		non-cocompact
+7-tum04_10_18.in 0		non-cocompact
+7-tum04_10_19.in 0		non-cocompact
+7-tum04_10_20.in 0		non-cocompact
+7-tum04_10_21-k=2.in 0		non-cocompact
+7-tum04_10_21-k=3.in 0		non-cocompact
+7-tum04_10_22-k=2.in 0		non-cocompact
+7-tum04_10_22-k=3.in 0		non-cocompact
+7-tum04_10_23-k=2.in 0		non-cocompact
+7-tum04_10_23-k=3.in 0		non-cocompact
+7-jkrt_351-01-T7.in		0	(8,28,56,70,56,28,8) 		arithmetic		non-cocompact	# Value: jkrt, commensurability
+7-jkrt_351-02-S7.in		0	(8,28,56,70,56,28,8) 		arithmetic		non-cocompact	# Value: jkrt, commensurability
+7-jkrt_351-03-Q7.in		0	(8,28,56,70,56,28,8) 		arithmetic		non-cocompact	# Value: jkrt, commensurability
+7-jkrt_351-04-P7.in		0	(8,28,56,70,56,28,8) 		arithmetic		non-cocompact	# Value: jkrt, commensurability
+6-Bugaenko.in			-67/576000	(23, 69, 95, 75, 35, 9)		cocompact
+6-per09-tumarkin-01.in		cocompact	# Thèse Geneviève Perren
+6-per09-tumarkin-02.in		cocompact	# Thèse Geneviève Perren
+6-per09-tumarkin-03.in		cocompact	# Thèse Geneviève Perren
+gbd/6-per09-tumarkin-03_0.coxiter	cocompact	# Same as 6-per09-tumarkin-03.in
+gbd/6-per09-tumarkin-03_1.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_2.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_3.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_4.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_5.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_6.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_7.coxiter	cocompact	# GBD
+gbd/6-per09-tumarkin-03_8.coxiter	cocompact	# GBD
+6-jkrt_351-01-S6.in 		-1/414720	(7, 21, 35, 35, 21, 7)		arithmetic		non-cocompact	# Value: jkrt, commensurability
+6-jkrt_351-02-Q6.in 		-1/207360	(7, 21, 35, 35, 21, 7)		arithmetic		non-cocompact	# Value: jkrt, commensurability
+6-jkrt_351-03-P6.in 		-13/725760	(7, 21, 35, 35, 21, 7)		arithmetic		non-cocompact	# Value: jkrt, commensurability
+6-PauperGamma5.in 		-1/34560
+6-tum04_09_01.in		non-cocompact
+6-tum04_09_02.in		non-cocompact
+6-tum04_09_03.in		non-cocompact
+6-tum04_09_04.in		non-cocompact
+6-tum04_09_05.in		non-cocompact
+6-tum04_09_06.in		non-cocompact
+6-tum04_09_07.in		non-cocompact
+6-tum04_09_08.in		non-cocompact
+6-tum04_09_09.in		non-cocompact
+6-tum04_09_10.in		non-cocompact
+6-tum04_09_11-k=2-l=3.in	non-cocompact
+6-tum04_09_11-k=3-l=3.in	non-cocompact
+6-tum04_09_11-k=4-l=3.in	non-cocompact
+6-tum04_09_11-k=2-l=4.in	non-cocompact
+6-tum04_09_11-k=3-l=4.in	non-cocompact
+6-tum04_09_11-k=4-l=4.in	non-cocompact
+6-tum04_09_12-k=2-l=3.in	non-cocompact
+6-tum04_09_12-k=3-l=3.in	non-cocompact
+6-tum04_09_12-k=4-l=3.in	non-cocompact
+6-tum04_09_12-k=2-l=4.in	non-cocompact
+6-tum04_09_12-k=3-l=4.in	non-cocompact
+6-tum04_09_12-k=4-l=4.in	non-cocompact
+6-tum04_09_13-k=2-l=3.in	non-cocompact
+6-tum04_09_13-k=3-l=3.in	non-cocompact
+6-tum04_09_13-k=4-l=3.in	non-cocompact
+6-tum04_09_13-k=2-l=4.in	non-cocompact
+6-tum04_09_13-k=3-l=4.in	non-cocompact
+6-tum04_09_13-k=4-l=4.in	non-cocompact
+6-tum04_09_14-k=2.in		non-cocompact
+6-tum04_09_14-k=3.in		non-cocompact
+5-per09-tumarkin-01.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-01_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-01.in
+gbd/5-per09-tumarkin-01_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_7.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-01_8.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-02.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-03.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-04.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-04_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-04.in
+gbd/5-per09-tumarkin-04_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_7.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_8.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-05.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-05_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-05.in
+gbd/5-per09-tumarkin-05_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_7.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-06.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-07.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-07_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-07.in
+gbd/5-per09-tumarkin-07_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_7.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-08.in		0	cocompact			# Thèse Geneviève Perren (erreur dans l'écriture du graphe)
+gbd/5-per09-tumarkin-08_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-08.in
+gbd/5-per09-tumarkin-08_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_7.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-09.in		0	cocompact			# Thèse Geneviève Perren (erreur dans l'écriture du graphe)
+5-per09-tumarkin-10.in		0	cocompact			# Thèse Geneviève Perren (erreur dans l'écriture du graphe)
+gbd/5-per09-tumarkin-10_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-10.in
+gbd/5-per09-tumarkin-10_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_7.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_8.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-11.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-12.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-13.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-13_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-13.in
+gbd/5-per09-tumarkin-13_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_7.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_8.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-14.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-14_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-14.in
+gbd/5-per09-tumarkin-14_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_7.coxiter	0	cocompact			# GBD
+5-per09-tumarkin-15.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-tumarkin-16.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-tumarkin-16_0.coxiter	0	cocompact			# Same as 5-per09-tumarkin-16.in
+gbd/5-per09-tumarkin-16_1.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_2.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_3.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_4.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_5.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_6.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_7.coxiter	0	cocompact			# GBD
+5-per09-kaplinskaya-01.in	0	cocompact			# Thèse Geneviève Perren
+5-per09-kaplinskaya-02.in	0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-kaplinskaya-02_0.coxiter	0	cocompact		# Same as 5-per09-kaplinskaya-02
+gbd/5-per09-kaplinskaya-02_1.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_2.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_3.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_4.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_5.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_6.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_7.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-02_8.coxiter	0	cocompact		# GBD
+5-per09-kaplinskaya-03.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-kaplinskaya-04.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-kaplinskaya-05.in		0	cocompact			# Thèse Geneviève Perren
+5-per09-kaplinskaya-06.in		0	cocompact			# Thèse Geneviève Perren
+gbd/5-per09-kaplinskaya-06_0.coxiter	0	cocompact		# Same as 5-per09-kaplinskaya-06
+gbd/5-per09-kaplinskaya-06_1.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_2.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_3.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_4.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_5.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_6.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_7.coxiter	0	cocompact		# GBD
+gbd/5-per09-kaplinskaya-06_8.coxiter	0	cocompact		# GBD
+5-birectified-5-simplex.in	(20, 90, 120, 60, 12)		# http://en.wikipedia.org/wiki/Rectified_5-simplexes
+5-tum04_08_01.in 	0		non-cocompact
+5-tum04_08_02.in 	0		non-cocompact
+5-tum04_08_03.in 	0		non-cocompact
+5-tum04_08_04.in 	0		non-cocompact
+5-tum04_08_05.in 	0		non-cocompact
+5-tum04_08_06.in 	0		non-cocompact
+5-tum04_08_07.in 	0		non-cocompact
+5-tum04_08_08.in 	0		non-cocompact
+5-tum04_08_09.in 	0		non-cocompact
+5-tum04_08_10.in 	0		non-cocompact
+5-tum04_08_11.in 	0		non-cocompact
+5-tum04_08_12.in 	0		non-cocompact
+5-tum04_08_13.in 	0		non-cocompact
+5-tum04_08_14.in 	0		non-cocompact
+5-tum04_08_15.in 	0		non-cocompact
+5-tum04_08_16.in 	0		non-cocompact
+5-tum04_08_17.in 	0		non-cocompact
+5-tum04_08_18.in 	0		non-cocompact
+5-tum04_08_19.in 	0		non-cocompact
+5-tum04_08_20-k=2.in	0	non-cocompact
+5-tum04_08_20-k=3.in	0	non-cocompact
+5-tum04_08_21-k=2.in	0	non-cocompact
+5-tum04_08_21-k=3.in	0	non-cocompact
+5-tum04_08_22-k=2.in	0	non-cocompact
+5-tum04_08_22-k=3.in	0	non-cocompact
+5-tum04_08_23-k=2-l=3.in	0	non-cocompact
+5-tum04_08_23-k=3-l=3.in	0	non-cocompact
+5-tum04_08_23-k=4-l=3.in	0	non-cocompact
+5-tum04_08_23-k=2-l=4.in	0	non-cocompact
+5-tum04_08_23-k=3-l=4.in	0	non-cocompact
+5-tum04_08_23-k=4-l=4.in	0	non-cocompact
+5-tum04_08_24-k=2-l=3.in	0	non-cocompact
+5-tum04_08_24-k=3-l=3.in	0	non-cocompact
+5-tum04_08_24-k=4-l=3.in	0	non-cocompact
+5-tum04_08_24-k=2-l=4.in	0	non-cocompact
+5-tum04_08_24-k=3-l=4.in	0	non-cocompact
+5-tum04_08_24-k=4-l=4.in	0	non-cocompact
+5-jkrt_350-01-U5.in 	0	(6,15,20,15,6)		non-cocompact
+5-jkrt_350-02-S5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-03-X5.in	0	(6,15,20,15,6)		non-cocompact 
+5-jkrt_350-04-Q5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-05-R5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-06-P5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-07-O5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-08-N5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-09-AU5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-10-M5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-11-L5.in	0	(6,15,20,15,6) 		non-cocompact
+5-jkrt_350-12-UR5.in	0	(6,15,20,15,6)		non-cocompact
+4-zehrt09_2290.in	1/192	non-cocompact		arithmetic
+4-ess96-230-01.in		cocompact
+4-ess96-230-02.in		cocompact
+4-ess96-230-03.in		cocompact
+4-ess96-230-04.in		cocompact
+4-ess96-230-05.in		cocompact
+4-ess96-230-06.in		cocompact
+4-ess96-230-07.in		cocompact
+4-ftz07_187_01.in 41/14400	cocompact
+4-ftz07_187_02.in 17/5760	cocompact
+4-ftz07_187_03.in 61/14400	cocompact
+4-ftz07_187_04.in 41/7200	cocompact
+4-ftz07_187_05.in 11/1920	cocompact
+4-ftz07_187_06.in 17/2880	cocompact
+4-ftz07_187_07.in 61/7200	cocompact
+4-ftz07_187_08.in 61/7200	cocompact
+4-ftz07_187_09.in 17/1800	cocompact
+4-ftz07_187_10.in 163/14400	cocompact
+4-ftz07_187_11.in 11/960	cocompact
+4-ftz07_187_12.in 61/3600	cocompact
+4-ftz07_187_13.in 17/900	cocompact
+4-felikson2007_5.2.1.in 11/2304
+4-felikson2007_5.2.2.in 221/28800
+4-felikson2007_5.2.3.in 11/1152
+4-felikson2007_5.2.7.in 221/7200
+4-tum04_07_01-k=2-l=3.in		non-cocompact
+4-tum04_07_01-k=3-l=3.in		non-cocompact
+4-tum04_07_01-k=4-l=3.in		non-cocompact
+4-tum04_07_01-k=2-l=4.in		non-cocompact
+4-tum04_07_01-k=3-l=4.in		non-cocompact
+4-tum04_07_01-k=4-l=4.in		non-cocompact
+4-tum04_07_02-k=2-l=3.in		non-cocompact
+4-tum04_07_02-k=3-l=3.in		non-cocompact
+4-tum04_07_02-k=4-l=3.in		non-cocompact
+4-tum04_07_02-k=2-l=4.in		non-cocompact
+4-tum04_07_02-k=3-l=4.in		non-cocompact
+4-tum04_07_02-k=4-l=4.in		non-cocompact
+4-tum04_07_03-k=2-l=3.in		non-cocompact
+4-tum04_07_03-k=3-l=3.in		non-cocompact
+4-tum04_07_03-k=4-l=3.in		non-cocompact
+4-tum04_07_03-k=2-l=4.in		non-cocompact
+4-tum04_07_03-k=3-l=4.in		non-cocompact
+4-tum04_07_03-k=4-l=4.in		non-cocompact
+4-tum04_07_04-k=2.in			non-cocompact
+4-tum04_07_04-k=3.in			non-cocompact
+4-tum04_07_05-k=2.in			non-cocompact
+4-tum04_07_05-k=3.in			non-cocompact
+4-tum04_07_06-k=2-l=3.in		non-cocompact
+4-tum04_07_06-k=3-l=3.in		non-cocompact
+4-tum04_07_06-k=4-l=3.in		non-cocompact
+4-tum04_07_06-k=5-l=3.in		non-cocompact
+4-tum04_07_06-k=2-l=4.in		non-cocompact
+4-tum04_07_06-k=3-l=4.in		non-cocompact
+4-tum04_07_06-k=4-l=4.in		non-cocompact
+4-tum04_07_06-k=5-l=4.in		non-cocompact
+4-tum04_07_06-k=2-l=5.in		non-cocompact
+4-tum04_07_06-k=3-l=5.in		non-cocompact
+4-tum04_07_06-k=4-l=5.in		non-cocompact
+4-tum04_07_06-k=5-l=5.in		non-cocompact
+4-tum04_07_07-k=2-l=3.in		non-cocompact
+4-tum04_07_07-k=3-l=3.in		non-cocompact
+4-tum04_07_07-k=4-l=3.in		non-cocompact
+4-tum04_07_07-k=5-l=3.in		non-cocompact
+4-tum04_07_07-k=2-l=4.in		non-cocompact
+4-tum04_07_07-k=3-l=4.in		non-cocompact
+4-tum04_07_07-k=4-l=4.in		non-cocompact
+4-tum04_07_07-k=5-l=4.in		non-cocompact
+4-tum04_07_07-k=2-l=5.in		non-cocompact
+4-tum04_07_07-k=3-l=5.in		non-cocompact
+4-tum04_07_07-k=4-l=5.in		non-cocompact
+4-tum04_07_07-k=5-l=5.in		non-cocompact
+4-tum04_05_01.in			non-cocompact		arithmetic
+4-PauperGamma1.in 1/14400
+4-PauperGamma2.in 13/7200
+4-PauperGamma3.in 41/14400
+4-PauperGamma4.in 91/14400
+4-jkrt_349-01-H4.in	1/14400	(5,10,10,5)	cocompact
+4-jkrt_349-02-BH4.in	17/28800	(5,10,10,5)	cocompact
+4-jkrt_349-03-DH4.in	17/14400	(5,10,10,5) 	cocompact
+4-jkrt_349-04-K4.in	13/7200	(5,10,10,5) 	cocompact
+4-jkrt_349-05-AF4.in	11/5760	(5,10,10,5) 	cocompact
+4-jkrt_349-06-S4.in	1/1920	(5,10,10,5) 	non-cocompact
+4-jkrt_349-07-R4.in	1/1152	(5,10,10,5)	non-cocompact
+4-jkrt_349-08-P4.in	1/960	(5,10,10,5)	non-cocompact
+4-jkrt_349-09-O4.in	1/576	(5,10,10,5)	non-cocompact 
+4-jkrt_349-10-N4.in	1/384	(5,10,10,5)	non-cocompact
+4-jkrt_349-11-M4.in	1/192	(5,10,10,5)	non-cocompact 
+4-jkrt_349-12-BP4.in	1/192	(5,10,10,5)	non-cocompact 
+4-jkrt_349-13-FR4.in	1/144	(5,10,10,5)	non-cocompact
+4-jkrt_349-14-DP4.in	1/96	(5,10,10,5)	non-cocompact
+4-Bugaenko.in					cocompact
+3-tum04_07_01-k=2-l=3-m=2-n=3.in 	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=2-n=3.in 	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=2-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=2-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=2-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=2-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=3-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=3-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=3-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=4-n=3.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=3-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=2-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=3-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=3-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=3-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=3-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=3-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=2-l=4-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=3-l=4-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_01-k=4-l=4-m=4-n=4.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=2-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=2-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=3-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=3-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=4-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=4-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=5-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=5-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=6-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=6-m=2.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=2-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=2-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=3-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=3-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=4-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=4-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=5-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=5-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=5-l=6-m=3.in	0	(5,8,5)
+3-tum04_07_02-k=6-l=6-m=3.in	0	(5,8,5)
+3-jkrt_347-01-BH3.in	0	(4,6,4)		cocompact
+3-jkrt_347-02-J3.in	0	(4,6,4)		cocompact
+3-jkrt_347-03-DH3.in	0	(4,6,4)		cocompact
+3-jkrt_347-04-AB3.in	0	(4,6,4)		cocompact
+3-jkrt_347-05-K3.in	0	(4,6,4)		cocompact
+3-jkrt_347-06-AH3.in	0	(4,6,4)		cocompact
+3-jkrt_347-07-BB3.in	0	(4,6,4)		cocompact
+3-jkrt_347-08-BH3.in	0	(4,6,4)		cocompact
+3-jkrt_347-09-HH3.in	0	(4,6,4)		cocompact
+3-jkrt_347-10-V3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-11-R3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-12-P3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-13-BV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-14-O3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-15-Y3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-16-HV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-17-BP3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-18-DV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-19-N3.in	0	(4,6,4)		non-cocompact
+3-jkrt_347-20-Z3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-21-BR3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-22-HP3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-23-AV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-24-DP3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-25-M3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-26-VP3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-27-BV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-28-CR3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-29-HV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-30-VV3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-31-RR3.in	0	(4,6,4)		non-cocompact
+3-jkrt_348-32-PP3.in	0	(4,6,4)		non-cocompact
+tumarkin_simplices/13-tum04_13_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_01-drop_14.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_01-drop_15.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_02-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_02-drop_14.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_02-drop_15.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_03-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_03-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_03-drop_14.in			non-cocompact	non-fv
+tumarkin_simplices/13-tum04_13_03-drop_15.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_01-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_01-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_01-drop_14.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/12-tum04_12_02-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_01-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_01-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_01-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_02-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_02-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_03-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_04-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_04-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_05-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_05-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/11-tum04_12_05-drop_13.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=3-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=3-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=3-l=3-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=4-l=3-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=4-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=2-l=4-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=3-l=4-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/10-tum04_12_01-k=4-l=4-drop_12.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_01-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_02-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_02-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_03-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_03-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_03-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_04-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_04-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_04-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_04-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_05-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_05-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_05-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_05-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_05-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_06-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_07-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_07-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_08-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_08-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_08-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_09-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_09-k=2-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_09-k=2-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_09-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/9-tum04_11_09-k=3-drop_11.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_13-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_13-k=3-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_13-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_13-k=2-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_13-k=2-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=3-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=3-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=2-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=2-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_12-k=2-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_11-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_11-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_11-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_11-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_10-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_10-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_10-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_09-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_09-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_09-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_08-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_08-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_07-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_06-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_06-k=2-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_06-k=2-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_06-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_06-k=3-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_05-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_05-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_05-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_04-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_04-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_03-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_03-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_03-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_03-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_02-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_02-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_02-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_01-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/8-tum04_11_01-drop_10.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_01-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_01-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_01-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_02-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_02-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_03-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_04-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_04-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_05-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_05-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_05-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_06-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_06-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_06-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_06-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_06-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_07-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_07-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_07-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_07-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_08-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_08-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_08-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_09-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_09-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_09-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_10-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_10-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_10-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_10-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_11-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_11-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_11-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_12-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_12-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_13-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_14-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_15-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_15-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_16-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_16-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_18-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_18-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_18-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_18-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_20-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_21-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_21-k=2-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_21-k=2-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_21-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_21-k=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=2-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=2-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_22-k=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/7-tum04_10_23-k=2-drop_9.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_01-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_01-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_01-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_02-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_02-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_03-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_04-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_04-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_05-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_05-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_05-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_06-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_06-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_07-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_10-drop_8.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=2-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=2-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_11-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=3-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=3-l=3-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=4-l=3-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=4-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=2-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=3-l=4-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_12-k=4-l=4-drop_2.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=2-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=3-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_13-k=4-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/6-tum04_09_14-k=2-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_01-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_01-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_02-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_03-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_04-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_04-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_07-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_08-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_08-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_09-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_09-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_10-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_11-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_11-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_11-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_11-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_12-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_12-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_12-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_13-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_13-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_14-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_14-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_15-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_15-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_15-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_17-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_18-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_20-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_20-k=2-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_20-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_21-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_21-k=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_21-k=2-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_21-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_21-k=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_22-k=2-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=3-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=4-l=3-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=4-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=2-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=3-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_23-k=4-l=4-drop_7.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_24-k=2-l=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/5-tum04_08_24-k=2-l=4-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=3-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=3-l=3-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=4-l=3-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=2-l=4-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=3-l=4-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_01-k=4-l=4-drop_6.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=2-l=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=2-l=4-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_02-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_03-k=2-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_03-k=2-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_04-k=2-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_05-k=2-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_05-k=2-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_05-k=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_06-k=2-l=3-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_06-k=2-l=4-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_06-k=2-l=5-drop_4.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=3-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=4-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=5-l=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=4-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=3-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=4-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=5-l=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=5-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=2-l=5-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=3-l=5-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=4-l=5-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/4-tum04_07_07-k=5-l=5-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=2-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=3-l=3-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=4-l=3-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=2-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=3-l=4-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=4-l=4-m=2-n=3-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=3-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=3-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=4-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=4-n=3-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=2-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=3-l=3-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=4-l=3-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=2-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=3-l=4-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=4-l=4-m=2-n=4-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=3-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=3-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=3-m=4-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_01-k=2-l=4-m=4-n=4-drop_1.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=2-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=2-m=2-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=2-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=2-m=2-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=3-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=3-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=4-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=4-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=5-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=5-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=6-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=6-m=2-drop_3.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=5-l=2-m=3-drop_5.in			non-cocompact	non-fv
+tumarkin_simplices/3-tum04_07_02-k=6-l=2-m=3-drop_5.in			non-cocompact	non-fv

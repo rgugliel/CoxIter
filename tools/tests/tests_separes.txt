@@ -1,0 +1,16 @@
+gbd/6-per09-tumarkin-03_9.coxiter	cocompact	# GBD
+gbd/5-per09-tumarkin-01_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-04_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_8.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-05_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_8.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-07_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_8.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-08_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-10_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-13_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_8.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-14_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_8.coxiter	0	cocompact			# GBD
+gbd/5-per09-tumarkin-16_9.coxiter	0	cocompact			# GBD
+gbd/5-per09-kaplinskaya-06_9.coxiter	0	cocompact		# GBD
