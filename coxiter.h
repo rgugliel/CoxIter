@@ -53,7 +53,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <unordered_set>
 
 #include <gmpxx.h> // GMPib
-#include <omp.h> // OpenMP
+
+#ifdef COMPILE_WITH_OPENMP
+#include <omp.h>
+#endif
 
 using namespace std;
 using namespace MathTools;

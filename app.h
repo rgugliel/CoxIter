@@ -41,8 +41,6 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "signature.h"
 #endif
 
-// cmake -DCOMPILE_WITH_PARI=1 ../ TODO
-
 using namespace std;
 
 #include "coxiter.h"
