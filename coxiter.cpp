@@ -125,10 +125,10 @@ bool CoxIter::bRunAllComputations()
 		return false;
 	
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	if( !bEulerCharacteristicFVector() )
 		return false;
@@ -586,7 +586,7 @@ bool CoxIter::bWriteGraphToDraw( const string& strOutFilenameBasis )
 	return true;
 }
 
-void CoxIter::ExploreGraph()
+void CoxIter::exploreGraph()
 {
 	vector<unsigned int> iVertices;
 	unsigned int i, j, k, l;
@@ -754,12 +754,12 @@ void CoxIter::DFS( unsigned int iRoot, unsigned int iFrom )
 	
 	// If DFS was not called, then the path is maximal
 	if( !bSubcall )
-		AddGraphsFromPath();
+		addGraphsFromPath();
 	
 	iPath.pop_back();
 }
 
-void CoxIter::AddGraphsFromPath()
+void CoxIter::addGraphsFromPath()
 {
 	// sommets que l'on ne peut pas lier au graphe (n sommets);
 	vector<bool> bVerticesLinkable( iVerticesCount, true );
@@ -1102,7 +1102,7 @@ void CoxIter::B3ToF4_B4ToTF4( const vector<bool> &bVerticesBeginLinkable, vector
 	}
 }
 
-void CoxIter::PrintPath()
+void CoxIter::printPath()
 {
 	if( iPath.size() == 1 )
 		return ;
@@ -1220,10 +1220,10 @@ string CoxIter::get_strGrowthSeries()
 	return strGrowth;
 }
 
-void CoxIter::PrintGrowthSeries()
+void CoxIter::printGrowthSeries()
 {
 	if( !bGrowthSeriesComputed )
-		GrowthSeries();
+		growthSeries();
 	
 	if( strOuputMathematicalFormat == "generic" )
 	{
@@ -1305,7 +1305,7 @@ int CoxIter::iIsGraphCocompact()
 		return iIsCocompact;
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
 	{
@@ -1342,7 +1342,7 @@ int CoxIter::isFiniteCovolume()
 		return iIsFiniteCovolume;
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	// ----------------------------------------------------
 	// some stupid tests
@@ -1543,13 +1543,13 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex )
 	return ( bExit ? 0 : 1 );
 }
 
-void CoxIter::ComputeGraphsProducts()
+void CoxIter::computeGraphsProducts()
 {
 	if( bGraphsProductsComputed )
 		return;
 	
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	if( bDebug )
 	{
@@ -1572,7 +1572,7 @@ void CoxIter::ComputeGraphsProducts()
 		{
 			#pragma omp task firstprivate(grIt_spherical, bGPVerticesNonLinkable, gp)
 			{
-				ComputeGraphsProducts( grIt_spherical, &graphsProductsCount_spherical, true, gp, bGPVerticesNonLinkable );
+				computeGraphsProducts( grIt_spherical, &graphsProductsCount_spherical, true, gp, bGPVerticesNonLinkable );
 			}
 			
 			++grIt_spherical;
@@ -1598,7 +1598,7 @@ void CoxIter::ComputeGraphsProducts()
 		{
 			#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
 			{
-				ComputeGraphsProducts( grIt_euclidean, &graphsProductsCount_euclidean, false, gp, bGPVerticesNonLinkable );
+				computeGraphsProducts( grIt_euclidean, &graphsProductsCount_euclidean, false, gp, bGPVerticesNonLinkable );
 			}
 			
 			++grIt_euclidean;
@@ -1608,7 +1608,7 @@ void CoxIter::ComputeGraphsProducts()
 	if( bDebug )
 	{
 		cout << "\nProduct of euclidean graphs" << endl;
-		PrintEuclideanGraphsProducts( &graphsProductsCount_euclidean );
+		printEuclideanGraphsProducts( &graphsProductsCount_euclidean );
 	}
 	
 	bGraphsProductsComputed = true;
@@ -1637,7 +1637,7 @@ void CoxIter::ComputeGraphsProducts()
 	}
 }
 
-void CoxIter::ComputeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
 {
 	vector< unsigned int >::iterator iIt;
 	vector< unsigned int > iVerticesFlagged;
@@ -1741,7 +1741,7 @@ void CoxIter::ComputeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 			}
 			
 			// récursion
-			ComputeGraphsProducts( ++grIt, graphsProductsCount, bSpherical, gp, bGPVerticesNonLinkable );
+			computeGraphsProducts( ++grIt, graphsProductsCount, bSpherical, gp, bGPVerticesNonLinkable );
 			
 			// -----------------------------------------------
 			// dé-initialisations
@@ -1771,7 +1771,7 @@ bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
 		throw( string( "CoxIter::bCanBeFiniteCovolume: Dimension not specified" ) );
 	
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	// -----------------------------------------------------------
 	// Initializations
@@ -1912,7 +1912,7 @@ vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 		throw( string( "CoxIter::bCanBeFiniteCovolume_complete: Dimension not specified" ) );
 	
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	// -----------------------------------------------------------
 	// Initializations
@@ -2141,7 +2141,7 @@ void CoxIter::growthSeries_mergeTerms( vector< mpz_class >& iPolynomial, vector<
 	
 }
 
-void CoxIter::GrowthSeries()
+void CoxIter::growthSeries()
 {
 	if( !bUseOpenMP || iVerticesCount < 10 )
 		growthSeries_sequential();
@@ -2155,10 +2155,10 @@ void CoxIter::GrowthSeries()
 void CoxIter::growthSeries_details()
 {
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 	
@@ -2199,10 +2199,10 @@ void CoxIter::growthSeries_details()
 void CoxIter::growthSeries_sequential()
 {
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 	
@@ -2331,10 +2331,10 @@ void CoxIter::growthSeries_sequential()
 void CoxIter::growthSeries_parallel() // TODO: ICI 
 {
 	if( !bGraphExplored )
-		ExploreGraph();
+		exploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		ComputeGraphsProducts();
+		computeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 
@@ -2426,7 +2426,7 @@ void CoxIter::growthSeries_parallel() // TODO: ICI
 void CoxIter::get_iGrowthSeries( vector< unsigned int >& iCyclotomicNumerator, vector< mpz_class >& iPolynomialDenominator, bool& bReduced )
 {
 	if( !bGrowthSeriesComputed )
-		GrowthSeries();
+		growthSeries();
 
 	iCyclotomicNumerator = growthSeries_iCyclotomicNumerator;
 	iPolynomialDenominator = growthSeries_iPolynomialDenominator;
@@ -2436,7 +2436,7 @@ void CoxIter::get_iGrowthSeries( vector< unsigned int >& iCyclotomicNumerator, v
 bool CoxIter::get_bGrowthSeriesReduced()
 {
 	if( !bGrowthSeriesComputed )
-		GrowthSeries();
+		growthSeries();
 
 	return growthSeries_bFractionReduced;
 }
@@ -2444,7 +2444,7 @@ bool CoxIter::get_bGrowthSeriesReduced()
 vector< mpz_class > CoxIter::get_iGrowthSeries_denominator()
 {
 	if( !bGrowthSeriesComputed )
-		GrowthSeries();
+		growthSeries();
 	
 	return growthSeries_iPolynomialDenominator;
 }
@@ -2726,7 +2726,7 @@ bool CoxIter::bEulerCharacteristicFVector()
 // ##################################################################################################################################3
 // Affichages
 
-void CoxIter::PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount )
+void CoxIter::printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount )
 {
 	// variables de boucles
 	size_t i, j, iMax;
@@ -2734,7 +2734,7 @@ void CoxIter::PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned
 	
 	// par taille de nombre de sommets
 	for( vector< map<vector< vector< unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount->begin() ); itMaps != graphsProductsCount->end(); ++itMaps )
-	{	
+	{
 		// on parcourt les produits pour la taille donnée
 		for( itMap = itMaps->begin(); itMap != itMaps->end(); ++itMap )
 		{
@@ -2757,7 +2757,7 @@ void CoxIter::PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned
 	}
 }
 
-void CoxIter::PrintCoxeterMatrix()
+void CoxIter::printCoxeterMatrix()
 {
 	cout << "Coxeter matrix" << endl;
 	
@@ -2778,14 +2778,14 @@ void CoxIter::PrintCoxeterMatrix()
 	}
 }
 
-void CoxIter::PrintGramMatrix()
+void CoxIter::printGramMatrix()
 {
 	if( strOuputMathematicalFormat == "latex" )
-		PrintGramMatrix_LaTeX();
+		printGramMatrix_LaTeX();
 	else if( strOuputMathematicalFormat == "mathematica" )
-		PrintGramMatrix_Mathematica();
+		printGramMatrix_Mathematica();
 	else if( strOuputMathematicalFormat == "pari" )
-		PrintGramMatrix_PARI();
+		printGramMatrix_PARI();
 	else
 		cout << "Gram matrix  \n\t" << get_strGramMatrix() << "\n" << endl;
 	
@@ -2804,23 +2804,23 @@ void CoxIter::PrintGramMatrix()
 	cout << endl;
 }
 
-void CoxIter::PrintGramMatrix_Mathematica()
+void CoxIter::printGramMatrix_Mathematica()
 {
 	cout << "Gram matrix (Mathematica): \n\t" << get_strGramMatrix_Mathematica() << "\n" << endl;
 }
 
-void CoxIter::PrintGramMatrix_PARI()
+void CoxIter::printGramMatrix_PARI()
 {
 	cout << "Gram matrix (PARI): \n\t" << get_strGramMatrix_PARI() << "\n" << endl;
 }
 
-void CoxIter::PrintGramMatrix_LaTeX()
+void CoxIter::printGramMatrix_LaTeX()
 {
 	cout << "Gram matrix (LaTeX): \n\t" << get_strGramMatrix_LaTeX() << "\n" << endl;
 }
 
 
-void CoxIter::PrintEdgesVisitedMatrix()
+void CoxIter::printEdgesVisitedMatrix()
 {
 	unsigned int i, j;
 	cout << "Matrix of visited edges" << endl;

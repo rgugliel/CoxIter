@@ -284,10 +284,10 @@ void App::run( )
 	}
 	
 	if( bPrintGramMatrix )
-		ci.PrintGramMatrix( );
+		ci.printGramMatrix( );
 	
 	if( bPrintCoxeterMatrix )
-		ci.PrintCoxeterMatrix( );
+		ci.printCoxeterMatrix( );
 	
 	if( bOutputGraph && !ci.bWriteGraph( strOutFilenameBasis ) )
 		cout << "Error while writing file: " << ci.get_strError( ) << endl;
@@ -299,7 +299,7 @@ void App::run( )
 	// composantes connexes sphériques et euclidiennes
 	cout << "Finding connected subgraphs......" << endl;
 	timeStart = chrono::system_clock::now();
-	ci.ExploreGraph( );
+	ci.exploreGraph( );
 	
 	try{
 		if( bCheckCanBeFiniteCovolume )
@@ -316,7 +316,7 @@ void App::run( )
 	if( bComputeEuler || bComputeGrowthSeries || bCheckCocompacity || bCheckFiniteCovolume )
 	{
 		cout << "Finding graphs products......" << endl;
-		ci.ComputeGraphsProducts( );
+		ci.computeGraphsProducts( );
 	}
 	
 	unsigned int iDimension( ci.get_iDimension( ) );
@@ -345,7 +345,7 @@ void App::run( )
 	
 	if( bComputeGrowthSeries )
 	{
-		ci.GrowthSeries();
+		ci.growthSeries();
 	}
 	
 	if( ci.get_iHasDottedLineWithoutWeight() != 0 )
@@ -460,7 +460,7 @@ void App::run( )
 	if( bComputeGrowthSeries )
 	{
 		cout << "\nGrowth series: " << endl;
-		ci.PrintGrowthSeries();
+		ci.printGrowthSeries();
 		cout << endl;
 		
 		#ifdef _COMPILE_WITH_PARI_

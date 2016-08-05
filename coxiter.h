@@ -213,32 +213,32 @@ class CoxIter
 		/*!	\fn printCoxeterMatrix
 		 * 	\brief Print Coxeter matric
 		 */
-		void PrintCoxeterMatrix( );
+		void printCoxeterMatrix( );
 		
 		/*!	\fn printGramMatrix
 		 * 	\brief Print the Gram matrix
 		 */
-		void PrintGramMatrix( );
+		void printGramMatrix( );
 		
 		/*!	\fn PrintGramMatrix_Mathematica
 		 * 	\brief Print the Gram matrix (format: Mathematica)
 		 */
-		void PrintGramMatrix_Mathematica( );
+		void printGramMatrix_Mathematica( );
 		
 		/*!	\fn PrintGramMatrix_PARI
 		 * 	\brief Print the Gram matrix (format: PARI)
 		 */
-		void PrintGramMatrix_PARI( );
+		void printGramMatrix_PARI( );
 		
 		/*!	\fn PrintGramMatrix_LaTeX
 		 * 	\brief Print the Gram matrix (format: LaTeX)
 		 */
-		void PrintGramMatrix_LaTeX();
+		void printGramMatrix_LaTeX();
 		
 		/*!	\fn PrintEdgesVisitedMatrix
 		 * 	\brief Affiche les arrêtes qui ont été visitées
 		 */
-		void PrintEdgesVisitedMatrix( );
+		void printEdgesVisitedMatrix( );
 
 		/*! \fn ReadGraphFromFile
 		 * 	\brief Read the graph from a file
@@ -271,7 +271,7 @@ class CoxIter
 		 * 
 		 * 	First, we find all the chains startings from every vertex. Then, we wxpand the chains to spherical and euclidean graphs
 		 */
-		void ExploreGraph();
+		void exploreGraph();
 
 		/*!	\fn bEulerCharacteristicFVector
 		 * 	\brief Conmpute the euler characteristic and f-vector
@@ -284,7 +284,7 @@ class CoxIter
 		 * 
 		 * 	\remark The only purpose of this function is to call growthSeries_parallel or growthSeries_sequential
 		 */
-		void GrowthSeries();
+		void growthSeries();
 
 		/*!	\fn iIsGraphCocompact
 		 * 	\brief Check whether the graph is cocompact or not
@@ -320,17 +320,17 @@ class CoxIter
 		 * \fn ComputeGraphsProducts
 		 * \brief Compute the possible products of the irreducible graphs
 		 */
-		void ComputeGraphsProducts( );
+		void computeGraphsProducts( );
 		
 		// TODO: doc
-		void PrintGrowthSeries( );
+		void printGrowthSeries( );
 		
 		/*! \fn PrintEuclideanGraphsProducts
 		 * 	\brief Affiche les produits de graphes trouvés
 		 * 
 		 * 	\param GraphsProductsCount( vector< map<vector< vector< unsigned int > >, unsigned int> >* ) Pointeur vers le vecteur de résultats (typiquement graphsProductsCount_spherical ou graphsProductsCount_euclidean)
 		 */
-		void PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount );
+		void printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount );
 		
 		/*! 	\fn bIsVertexValid
 		 * 	\brief Test if a vertex exists in the graph
@@ -658,14 +658,14 @@ class CoxIter
 		/*! 	\fn printPath
 		 * 	\brief Print the iPath vector
 		 */
-		void PrintPath( );
+		void printPath( );
 		
 		/*!	\fn AddGraphsFromPath
 		 * 	\brief Crée des graphes (An, Bn, Dn, En, Hn, F4) à partir d'un chemin
 		 * 
 		 * 	On se base sur le contenu de iPath 
 		 */
-		void AddGraphsFromPath( );
+		void addGraphsFromPath( );
 		
 		/*!
 		 * \fn AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable )
@@ -708,7 +708,7 @@ class CoxIter
 		 * 	\param gp( GraphsProduct& ) To store the product (for the cocompacity and finite covolume tests)
 		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
 		 */
-		void ComputeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		void computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		
 		void bCanBeFiniteCovolume_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		void bCanBeFiniteCovolume_complete_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
