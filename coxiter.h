@@ -586,7 +586,7 @@ class CoxIter
 		 * 	
 		 * 	\param iCyclotomicNumerator( vector< unsigned int >& ) Numerator (cyclotomic factors)
 		 * 	\param iPolynomialDenominator( vector< mpz_class >& ) Denominator
-		 * 	\param bReduced(bool 6) True if the fraction is reduced
+		 * 	\param bReduced( bool& ) True if the fraction is reduced
 		 */
 		void get_iGrowthSeries( vector< unsigned int >& iCyclotomicNumerator, vector< mpz_class >& iPolynomialDenominator, bool& bReduced );
 		
@@ -766,10 +766,17 @@ class CoxIter
 		 * 	
 		 * 	\param iProduct( const vector< vector< unsigned int > >& ) The product of graphs
 		 * 	\param iSymbol( vector< unsigned int >& ) [i] = j means [i, ..., i] j times (parameter by reference)
-		 * 	\param iExponent (unsigned int& ) The exponent
+		 * 	\param iExponent( unsigned int& ) The exponent
 		 */
 		void growthSeries_symbolExponentFromProduct( const vector< vector< unsigned int > >& iProduct, vector< unsigned int >& iSymbol, unsigned int& iExponent ) const;
 		
+		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector< unsigned int > >& iProduct, string& iSymbol, unsigned int& iExponent ) const
+		 * 	From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.
+		 * 	
+		 * 	\param iProduct( const vector< vector< unsigned int > >& ) The product of graphs
+		 * 	\param iSymbol( string& )
+		 * 	\param iExponent (u nsigned int& ) The exponent
+		 */
 		void growthSeries_symbolExponentFromProduct( const vector< vector< unsigned int > >& iProduct, string& strSymbol, unsigned int& iExponent ) const;
 		
 		/*!	\fn growthSeries_parallel
@@ -787,11 +794,11 @@ class CoxIter
 		/*!	\fn growthSeries_mergeTerms
 		 * 	Given the parameters, compute iPolynomial/iSymbol += iTemp_polynomial/iTemp_symbol
 		 * 
-		 * 	\param iPolynomial(vector< mpz_class >&) First polynomial (by reference)
-		 * 	\param iSymbol(vector< unsigned int >&) First symbol (by reference)
-		 * 	\param iTemp_polynomial(vector< mpz_class >) Second polynomial
-		 * 	\param iTemp_symbol(const vector< unsigned int >&) Second symbol
-		 * 	\param biTemp(mpz_class) Eventually, some coefficient for the second polynomial
+		 * 	\param iPolynomial( vector< mpz_class >& ) First polynomial (by reference)
+		 * 	\param iSymbol( vector< unsigned int >& ) First symbol (by reference)
+		 * 	\param iTemp_polynomial( vector< mpz_class > ) Second polynomial
+		 * 	\param iTemp_symbol( const vector< unsigned int >& ) Second symbol
+		 * 	\param biTemp( mpz_class ) Eventually, some coefficient for the second polynomial
 		 * 
 		 * 	\return Nothing but the first two parameters are modified
 		 */

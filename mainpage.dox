@@ -1,0 +1,362 @@
+/*!
+\mainpage Main page of the documentation
+
+\author Rafael Guglielmetti
+
+\section main_infosGens General information
+The aim of CoxIter is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:
+- compute the Euler characteristic (and thus the volume when the dimension is even)
+- compute f-vector
+- check whether the group is cocompact or not
+- check whether the group has finite volume
+- in some cases, check if the group is arithmetic.
+
+\tableofcontents
+
+\section sec_toc Table of contents
+- \ref pageInstall
+- \ref pageCoxIter
+*/
+
+/*! \page pageInstall Building CoxIter
+\tableofcontents
+
+The development and testing of CoxIter were carried out on Linux and I strongly recommend this system to use the program (also, the Windows version built with Visual Studio is slower than the one built on Linux). However, I also provide information below on how to compile it on Windows.
+
+This page is divided into the following sections:
+- \subpage main_compilation_gnu
+- \subpage main_compilation_win
+
+\section main_compilation_gnu Compilation with GNU/Linux
+The following steps were tested on Ubuntu, Linux Mint and Fedora. With other distributions the commands may vary slightly.
+
+\subsection main_compilation_gnu_gen Preliminaries
+First, install everything you will need to compile the program. 
+
+On Ubuntu, Linux Mint or any Debian-based distribution, type the following commands in a Shell:
+\code
+sudo apt-get install g++ cmake graphviz
+\endcode
+
+On Fedora, type the following commands in a Shell:
+\code
+sudo yum install g++ cmake graphviz
+\endcode
+
+\subsection main_compilation_gnu_pcre PCRE
+To install PCRE, get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.37 (do not use PCRE2). To do that, type the following commands in a shell:
+\code
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.37.tar.gz
+tar -xvzf pcre-8.37.tar.gz
+cd pcre-8.37/
+./configure
+make
+sudo make install
+\endcode
+Then, you can delete the temporary files:
+\code
+cd ..
+rm -rf pcre-8.37
+rm pcre-8.37.tar.gz
+\endcode
+
+\subsection main_compilation_gnu_compile Compilation
+With a shell, go to the directory /CoxIter/build<br />
+Then, enter the following commands:
+\code
+cmake -DCMAKE_BUILD_TYPE=Release ../
+make
+\endcode
+The compilation should be done withour error or warning. Now, CoxIter is usable.
+
+\subsection main_compilation_gnu_troubleshooting Troubleshooting
+If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command:
+\code
+sudo ldconfig
+\endcode
+
+\section main_compilation_win Compilation on Windows with Visual Studio
+You will need at least Visual Studio 2013 to compile CoxIter (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
+As explained above, the program will run slower than with other compilers.
+
+\subsection main_compilation_win_vcpp_sln Building with the existing project (easiest way)
+- Open the project: /CoxIter/vc++/CoxIter.sln
+
+\subsection main_compilation_win_vcpp_newsol Building with a new solution
+To create a project from scratch, please follow the following steps:
+- Create a new "Win32 Console Application" empty project
+- Add all the files (including the ones in tools/ and its sub-folders)
+- In: Project properties > Configuration properties > VC++ Directories > Library directories<br />
+Add: tools\pcre-windows
+- In: Project properties > Configuration properties > C++ > Linker > Input > Additional Dependencies<br />
+Add: pcre.lib
+- Compile
+- Copy tools\pcre-windows\pcre.dll to the same folder as CoxIter.exe
+
+\subsection main_exe Get the .exe file
+If you cannot build CoxIter, you can try to use the file I built on my computer.<br />
+Note that this file is given WITHOUT ANY WARRANTY<br />
+
+First, install the "Visual C++ Redistributable Packages for Visual Studio 2013" for x86 (the file is named 'vcredist_x86.exe').<br />
+You can find it here: <a href="http://www.microsoft.com/en-gb/download/details.aspx?id=40784" target="_blank">http://www.microsoft.com/en-gb/download/details.aspx?id=40784</a><br />
+Then, you can use the CoxIter.exe file which is located in "CoxIter/windows"
+*/
+
+/*! \page pageCoxIter Using CoxIter
+
+\tableofcontents
+
+This page is divided into the following sections:
+- \subpage CoxIter_graphFormat
+- \subpage CoxIter_params
+- \subpage CoxIter_examples
+
+\section CoxIter_graphFormat Encoding a Coxeter graph / encoding a Coxeter group
+The Coxeter group acting on a n-dimensional space is specified by giving its Coxeter graph or Coxeter diagram with d vertices. In order to name its vertices, you have the following two possibilities:
+- use integers between 1 and d
+- use custom labels: the name of each vertex can contain letters, digits, - and _ (but no space)
+
+The graph is written in a file as follows:
+- First line [mandatory]: d, n<br />
+	Where d is the number of vertices of the graph and n is the dimension.<br />
+	Remark: The dimension is optional (see remark below).
+- Second line [optional]: name of the vertices<br />
+	Remark: If this line is omitted, CoxIter will assume that the vertices are labelled with integers from 1 to d. If this line is specified, the format is the following:
+		vertices labels: label1 label2 label3 ...
+- Following lines: vertex1 vertex2 weight<br />
+		Remarks:
+		-# 0 is used to specifiy the weight infinity and 1 is used to specifiy a dotted edge
+		-# Only one line per edge is sufficient (in the below example, the line "2 1 3" is superfluous)
+		-# The weight 2 doesn't have to be specified.
+
+### Remark about the dimension ###
+If the dimension is not specified in the first line but is needed for the computations (for example for the compacity or finite volume tests), then CoxIter will determine the dimension by looking at the maximal spherical and euclidean graphs. In order to succeed, it is important that the associated polyhedron contains at least one vertex. Therefore, if you don't know this, try to specify the dimension.
+		
+### Example ###
+
+The group <a href="https://en.wikipedia.org/wiki/File:Finite_coxeter.svg" target="_blank">F<sub>4</sub></a> can be encoded as follows:
+\code{.txt}
+	4
+	1 2 3
+	2 3 4
+	3 4 3
+	2 1 3
+\endcode
+It can also be encoded as follows:
+\code{.txt}
+	4
+	vertices labels: t s1 s2 s3
+	t s1 3
+	s1 s2 4
+	s2 s3 3
+\endcode
+
+\section CoxIter_params Parameters of CoxIter
+
+\subsection CoxIter_paramsMand Mandatory parameters
+
+\param -i Path to the file which encodes the Coxeter graph.<br />
+Example: -i graphs/graph.coxiter
+
+\subsection CoxIter_paramsOpt Basic optional parameters
+
+\param -arithmeticity If specified, the arithmeticity is tested.<br />
+Alias: -a<br />
+Remarks:
+- The group has to be non-cocompact.
+- If the graph contains dotted lines, more tests might be needed (see \ref CoxIter_example2).
+
+\param -compactness If specified, CoxIter will test the cocompactness.<br />
+Aliases: -c, -compact, -compacity, -cocompact
+
+\param -debug If specified, the following information will be displayed
+- List of the connected euclidean graphs found
+- List of the connected spherical graphs found
+- List of the products of euclidean graphs (with their multiplicities)
+- List of the products of spherical graphs (with their multiplicities)<br />
+Remarks:<br />
+- If -compactness is given and if the group is not cocompact, the graph which cannot be extended correctly
+- If -fv is given and if the group is not of finite covolume, the graph which cannot be extended correctly<br />
+Since the output can be huge with this flag, it is suggested to also use -o and -of
+
+\param -full If specified, do almost all the possible computations (except the arithmeticity test):
+- Euler characteristic
+- f-vector
+- Finite volume test
+- Compacity test
+- Growth series
+
+\param -fv If specified, CoxIter will test whether the group is of finite covolume or not.<br />
+Alias: -fcv
+
+\subsection CoxIter_paramsAdv Advanced parameters
+
+\param -drawgraph If specified, the Coxeter graph will be written<br />
+Alias: -dg<br />
+Require: -o<br />
+Remark: does not work on Windows.<br />
+Remark: see example below.
+
+\param -drop Label(s) of the vertex(vertices) to drop.<br />
+With this option, CoxIter will work on a subgraph of the encoded graph.<br />
+Example: use "-drop 3 -drop s2" to discard vertices 3 and s2 (and all edges starting from these vertices).
+
+\param -o Base name for the output<br />
+Example: "-o graphs/graph" will create files "graphs/graph.output" and "graphs/graph.jpg"
+
+\param -of If specified, the output of the program is written in a file (the parameter -o must be given)<br />
+Alias: -cf<br />
+Example: by specifying "-cf -o graphs/graph" the output is written in "graphs/graph.output"
+
+\param -oformat Format for mathematical output<br />
+Possible values are: generic, mathematica
+Example: "-pgm -oformat mathematica" will print the Gram matrix in the Mathematica format<br />
+Alias: -outputformat
+
+\param -pgm If specified, the Gram matrix will be displayed<br />
+Remark: If the graph contains dotted edges, some variables will be added<br />
+See: -orformat
+
+\param -writegraph If specified, the graph will be written to be used in CoxIter<br />
+Alias: -wg<br />
+Require: -o<br />
+Example: by specifying "-wg -o graphs/graph" the output is written in "graphs/graph.coxiter"<br />
+Remark: You can combine this option with -drop and -drawgraph to draw a subgraph of an encoded graph.<br />
+
+\subsection CoxIter_paramsTec Technical parameters
+
+\param -nc If specified, some computations won't be done; they will be displayed to be given to a special software (Maxima, Mathematica, ...)<br />
+This parameter can be used in order to avoid the use of libraries BigInt and Rational_Numbers in CoxIter.
+
+\param -nopenmp If specified, OpenMP (parallel computations) is disabled<br />
+Alias: -nparallel<br />
+Use this if you call CoxIter from a parallelized program.
+
+\section CoxIter_examples Examples
+
+\subsection CoxIter_example1 Example 1
+We want to compute the invariants of the cocompact hyperbolic Coxeter group B<sub>8</sub> in H<sup>8</sup> found by Bugaenko.<br />
+We create in the folder /CoxIter/graphs/ a file named "8-Bugaenko.coxiter" which contains the description of the graph (the 1 is for the dotted line):
+\code
+	11 8
+	1 2 5
+	2 3 3
+	3 4 3
+	4 5 3
+	5 6 3
+	6 7 3
+	7 8 3
+	8 9 5
+	4 10 3
+	6 11 3
+	10 11 1
+\endcode
+We call CoxIter:
+\code
+	./coxiter -i ../graphs/8-Bugaenko.coxiter -full -o ../graphs/8-Bugaenko -dg
+\endcode
+The output is the following
+\code
+Reading file: ../graphs/cocompact/8-Bugaenko.coxiter
+	Number of vertices: 11
+	Dimension: 8
+	Vertices: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+	Removed vertices: 
+	Field generated by the entries of the Gram matrix: ?
+File read
+
+GraphViz command: 
+	dot -Tjpg -o"../graphs/8-Bugaenko.jpg" "../graphs/8-Bugaenko.graphviz"
+
+Finding connected subgraphs......
+Finding graphs products......
+Computations......
+	Computation time: 0.00451964s
+
+Information
+	Cocompact: yes
+	Finite covolume: yes
+	f-vector: (41, 164, 316, 374, 294, 156, 54, 11, 1)
+	Alternating sum of the components of the f-vector: 0
+	Euler characteristic: 24187/8709120000
+	Covolume: pi^4 * 24187/5715360000
+\endcode
+
+We copy the command 
+\code
+	dot -Tjpg -o"../graphs/8-Bugaenko.jpg" "../graphs/8-Bugaenko.graphviz"
+\endcode
+and we get the following image:
+\image html 8-Bugaenko.jpg
+
+\subsection CoxIter_example2 Example 2
+We want to check if the following subgroup of Isom H<sup>3</sup> is arithmetic:
+\image html 3-testArithmeticity.png
+We encode the graph as follows:
+\code
+7 3
+vertices labels: 1 2 3 4 5 6 7
+1 2 3
+2 3 4
+2 4 1
+3 5 1
+1 6 1
+4 6 0
+5 6 1
+1 7 1
+3 7 0
+\endcode
+
+We call CoxIter with options to test arithmeticity and print the Gram matrix:
+\code
+./coxiter -i ../graphs/3-testArithmeticity.coxiter -a -pgm
+\endcode
+The output is then the following:
+\code
+Reading file: ../graphs/3-testArithmeticity.coxiter
+    Number of vertices: 7
+    Dimension: 3
+    Vertices: 1, 2, 3, 4, 5, 6, 7
+    Removed vertices: 
+    Field generated by the entries of the Gram matrix: ?
+File read
+
+Gram matrix (Mathematica): 
+    {{ 1, -1/2, 0, 0, 0, l0m5, l0m6}, {-1/2, 1, -Sqrt[2]/2, l1m3, 0, 0, 0}, {0, -Sqrt[2]/2, 1, 0, l2m4, 0, -1}, {0, l1m3, 0, 1, 0, -1, 0}, {0, 0, l2m4, 0, 1, l4m5, 0}, {l0m5, 0, 0, -1, l4m5, 1, 0}, {l0m6, 0, -1, 0, 0, 0, 1}}
+
+l1m3: weight of the dotted line between hyperplanes 2 and 4
+l2m4: weight of the dotted line between hyperplanes 3 and 5
+l0m5: weight of the dotted line between hyperplanes 1 and 6
+l4m5: weight of the dotted line between hyperplanes 5 and 6
+l0m6: weight of the dotted line between hyperplanes 1 and 7
+
+Finding connected subgraphs......
+Finding graphs products......
+Computations......
+    Computation time: 0.000237657s
+
+Information
+    Cocompact: no
+    Finite covolume: ?
+    Arithmetic: ? (GRAPH HAS DOTTED EDGE)
+    f-vector: (9, 14, 7, 1)
+    Number of vertices at infinity: 1
+    Alternating sum of the components of the f-vector: 2
+    Euler characteristic: 0
+
+The group is arithmetic if and only if all the following values lie in Z: 
+4 * l1m3^2
+4 * l2m4^2
+4 * l0m5^2
+4 * l4m5^2
+4 * l0m6^2
+2^3 * Sqrt[2] * l2m4 * l4m5 * l0m5
+2^2 * Sqrt[2] * l0m6
+2^3 * l1m3 * l0m5
+2^6 * l1m3 * l4m5 * l2m4 * l0m6
+2^5 * Sqrt[2] * l0m5 * l1m3 * l0m6
+2^5 * l0m5 * l4m5 * l2m4 * l0m6
+2^4 * Sqrt[2] * l2m4 * l4m5 * l1m3
+\endcode
+With the values l1m3=-Sqrt[5]/2, l2m4=-Sqrt[2], l0m5=-Sqrt[5], l4m5=-Sqrt[5], l0m6=-Sqrt[2], we see that the group is arithmetic.
+*/

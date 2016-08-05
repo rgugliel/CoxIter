@@ -2559,7 +2559,7 @@ vector< mpz_class > CoxIter::get_iGrowthSeries_denominator()
 	return growthSeries_iPolynomialDenominator;
 }
 
-void CoxIter::growthSeries_symbolExponentFromProduct(const vector< std::vector< unsigned int > >& iProduct, string& strSymbol, unsigned int& iExponent) const
+void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsigned int > >& iProduct, string& strSymbol, unsigned int& iExponent) const
 {
 	unsigned int j, jMax, k;
 
@@ -2646,7 +2646,7 @@ void CoxIter::growthSeries_symbolExponentFromProduct(const vector< std::vector< 
 	strSymbol = implode( ",", iSymbol );
 }
 
-void CoxIter::growthSeries_symbolExponentFromProduct(const vector< std::vector< unsigned int > >& iProduct, std::vector< unsigned int >& iSymbol, unsigned int& iExponent) const
+void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsigned int > >& iProduct, vector< unsigned int >& iSymbol, unsigned int& iExponent) const
 {
 	unsigned int j, jMax, k;
 
