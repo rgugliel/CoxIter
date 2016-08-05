@@ -239,8 +239,17 @@ void App::run( )
 	
 	bool bEulerSuccess( true ), bCanBeFiniteCovolume( false ), bSignatureComputed( false );
 	
-	// Construction of the CoxIter object with the given parameters
-	CoxIter ci( strInFilename, true, strOutFilenameBasis, bCoutFile, bDoComputations, bCheckCocompacity, bCheckFiniteCovolume, bOpenMP, bDebug, strVertices, strVerticesRemove, strOuputMathematicalFormat );
+	CoxIter ci;
+	ci.set_bCheckCocompactness( bCheckCocompacity );
+	ci.set_bCheckCofiniteness( bCheckFiniteCovolume );
+	ci.set_bDebug( bDebug );
+	ci.set_bWriteInfo( true );
+	ci.set_strOuputMathematicalFormat( strOuputMathematicalFormat );
+	ci.set_strVerticesToConsider( strVertices );
+	ci.set_strVerticesToRemove( strVerticesRemove );
+	
+	if( bCoutFile )
+		ci.set_sdtoutToFile( strOutFilenameBasis + ".output" );
 	
 	Arithmeticity arithmeticity;
 	
@@ -255,7 +264,7 @@ void App::run( )
 	#endif
 	
 	// Reading of the graph
-	if( !ci.readGraph( ) )
+	if( !ci.bReadGraphFromFile( strInFilename ) )
 	{
 		cout << "Error while reading file: " << ci.get_strError( ) << endl;
 		return;
@@ -275,15 +284,15 @@ void App::run( )
 	}
 	
 	if( bPrintGramMatrix )
-		ci.printGramMatrix( );
+		ci.PrintGramMatrix( );
 	
 	if( bPrintCoxeterMatrix )
-		ci.printCoxeterMatrix( );
+		ci.PrintCoxeterMatrix( );
 	
-	if( bOutputGraph && !ci.writeGraph( strOutFilenameBasis ) )
+	if( bOutputGraph && !ci.bWriteGraph( strOutFilenameBasis ) )
 		cout << "Error while writing file: " << ci.get_strError( ) << endl;
 		
-	if( bOutputGraphToDraw && !ci.writeGraphToDraw( strOutFilenameBasis ) )
+	if( bOutputGraphToDraw && !ci.bWriteGraphToDraw( strOutFilenameBasis ) )
 		cout << "Error while writing file: " << ci.get_strError( ) << endl;
 	
 	// -----------------------------------------------------------------

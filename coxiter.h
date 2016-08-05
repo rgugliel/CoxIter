@@ -70,13 +70,11 @@ class CoxIter
 		string strError; ///< Error code
 		bool bDebug; ///< If true, prints additionnal information
 		
-		bool bOpenMP; ///< Use OpenMP
+		bool bUseOpenMP; ///< Use OpenMP
 		
 		// -----------------------------------------------------------
 		// I/O
-		string strInputFilename; ///< Path to the graph
 		bool bWriteInfo; ///< If we want to write informations (false if CoxIter is used "as a plugin")
-		bool bInputReaded; ///< If the input graph has been read
 		bool bWriteProgress; ///< If we want to display the progress // TODO: option
 		
 		// -----------------------------------------------------------
@@ -102,8 +100,8 @@ class CoxIter
 		bool bHasDottedLine; ///< True if the graph has a dotted line
 		int iHasDottedLineWithoutWeight; ///< If the graph dotted lines without weight (-1: maybe, 0: no, 1: yes)
 		bool bHasBoldLine; ///< True if the graph has a bold line
-		bool bCheckCocompacity; ///< True if we want to check the cocompacity
-		bool bCheckFiniteCovolume; ///< True if we want to check the finite covolume condition
+		bool bCheckCocompactness; ///< True if we want to check the cocompacity
+		bool bCheckCofiniteness; ///< True if we want to check the finite covolume condition
 		bool bCannotBeHyperbolic; ///< True if the graph cannot be hyperbolic
 		int iIsCocompact; ///< 1 If cocompact, 0 if not, -1 if don't know, -2 if not tested
 		int iIsArithmetic; ///< 1 If arithmetic, 0 if non-arithmetic, -1 if don't know
@@ -164,7 +162,6 @@ class CoxIter
 		vector< map<vector< vector< unsigned int > >, unsigned int> > graphsProductsCount_euclidean;
 		
 		vector< mpz_class > iFactorials, iPowersOf2; ///< Some factorials and powers of two
-		bool bDoComputations; ///< True if we do computations with the big integer (GMPlib) class. False if the computations are given to an external program (Maxima, Mathematicam ...)
 	
 		// ------------------------------------------------------------
 		// Results
@@ -183,37 +180,18 @@ class CoxIter
 		
 	public:
 		/*! \fn CoxIter( )
-		 * 	\brief Useless constructor. Don't use it.
+		 * 	\brief Default constructor. Initialize the default values.
 		 */
 		CoxIter( );
 		
-		/*! \fn CoxIter( const string& strInputFilename, const bool& bWriteInfo, const string& strOutFilenameBasis, const bool& bCoutFile, const bool& bDoComputations, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume, const bool& bOpenMP = true, const bool& bDebug = false, const vector< string >& strVerticesRemove_ = vector< string >( 0 ), const string& strOuputMathematicalFormat = "generic" )
-		 * 	\brief Normal constructor
-		 * 	\param strInputFilename ( const string& ) Path to the file containing the graph
-		 *	\param bWriteInfo ( const bool& ) If true, we write information during process (false if CoxIter is used as a library)
-		 * 	\param strOutFilenameBasis ( const string& ) Path to files for output
-		 * 	\param bCoutFile True if we redirect the outpout to a file (szOutputGraphFilename mandatory in this case)
-		 * 	\param bDoComputations ( const bool& ) True if we do the computations with fractions and BigInts. False if we want to computations to be written (to be given to Maxima/Mathematica/...)
-		 * 	\param bCheckCompacity ( const bool& ) True if we want to check whether the group is cocompact or not
-		 * 	\param bCheckFiniteCovolume( const bool& ) True if we want to check whether the group has finite covolume or not
-		 * 	\param bOpenMP (const bool& ) If true we use OpenMP
-		 * 	\param bDebug (consr bool& ) True si on veut afficher plus de détails sur le graphe (false par défaut)
-		 * 	\param strVertices_ ( const vector< string >& ) If we want to specify a subset of the vertices; default: empty
-		 * 	\param strVerticesRemove_ ( const vector< string >& ) Vertices we want to remove; default: empty
-		 * 	\param strOuputMathematicalFormat( const string& ) Format for mathematical output
-		*/
-		CoxIter( const string& strInputFilename, const bool& bWriteInfo, const string& strOutFilenameBasis, const bool& bCoutFile, const bool& bDoComputations, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume, const bool& bOpenMP = true, const bool& bDebug = false, const vector< string >& strVertices_ = vector< string >( 0 ), const vector< string >& strVerticesRemove_ = vector< string >( 0 ), const string& strOuputMathematicalFormat = "generic" );
-		
-		/*! \fn CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume )
+		/*! \fn CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension )
 		 * 	\brief Constructor
 		 * 	\param iMatrix( const vector< vector< unsigned int > >& ) Coxeter matrix
 		 * 	\param iDimension( const unsigned int & ) Dimension
-		 * 	\param bCheckCompacity( const bool& ) True if we want to check the compacity
-		 * 	\param bCheckFiniteCovolume( const bool& ) True if we want to check the finite volume condition
 		 * 
 		 * 	CoxIter does not verification on iMatrix. Especially, it is assumed that iMatrix is symmetric
 		*/
-		CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume );
+		CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension );
 		
 		~CoxIter( );
 		
@@ -230,45 +208,45 @@ class CoxIter
 				
 			\return True if success
 		 */
-		bool runAllComputations( );
+		bool bRunAllComputations( );
 		
 		/*!	\fn printCoxeterMatrix
 		 * 	\brief Print Coxeter matric
 		 */
-		void printCoxeterMatrix( );
+		void PrintCoxeterMatrix( );
 		
 		/*!	\fn printGramMatrix
 		 * 	\brief Print the Gram matrix
 		 */
-		void printGramMatrix( );
+		void PrintGramMatrix( );
 		
 		/*!	\fn printGramMatrix_Mathematica
 		 * 	\brief Print the Gram matrix (format: Mathematica)
 		 */
-		void printGramMatrix_Mathematica( );
+		void PrintGramMatrix_Mathematica( );
 		
 		/*!	\fn printGramMatrix_PARI
 		 * 	\brief Print the Gram matrix (format: PARI)
 		 */
-		void printGramMatrix_PARI( );
+		void PrintGramMatrix_PARI( );
 		
 		/*!	\fn printGramMatrix_LaTeX
 		 * 	\brief Print the Gram matrix (format: LaTeX)
 		 */
-		void printGramMatrix_LaTeX();
+		void PrintGramMatrix_LaTeX();
 		
 		/*!	\fn printEdgesVisitedMatrix
 		 * 	\brief Affiche les arrêtes qui ont été visitées
 		 */
-		void printEdgesVisitedMatrix( );
+		void PrintEdgesVisitedMatrix( );
 
-		/*! \fn readGraph
-		 * \brief Lis le graphe
+		/*! \fn ReadGraphFromFile
+		 * 	\brief Read the graph from a file
 		 * 
-		 * Le chemin du fichier est celui dans szInputFilename
-		 * \return True en cas de succès, false sinon
+		 * 	\param strInputFilename( const string& ) Path to the file
+		 * 	\return True if success
 		 */
-		bool readGraph( ); // lis le fichier du graphe
+		bool bReadGraphFromFile( const string& strInputFilename );
 		
 		/*!	\fn writeGraphToDraw
 		 * 	\brief Write the graph in a file for GraphViz
@@ -277,7 +255,7 @@ class CoxIter
 		 * 	\param strOutFilenameBasis( const string& ) Filename
 		 *	\return True if OK, false otherwise
 		 */
-		bool writeGraphToDraw( const string& strOutFilenameBasis );
+		bool bWriteGraphToDraw( const string& strOutFilenameBasis );
 		
 		/*! 	\fn writeGraph
 		 *	\brief Write the graph in a file (so that it can be read by CoxIter)
@@ -285,7 +263,7 @@ class CoxIter
 		 *	\param strFilename( const string & )
 		 * 	\return True if success, false otherwise
 		 */
-		bool writeGraph( const string& strFilename );
+		bool bWriteGraph( const string& strFilename );
 
 		/*!
 		 * 	\fn exploreGraph
@@ -429,14 +407,6 @@ class CoxIter
 		bool get_bWriteInfo( ) const;
 		
 		/*!
-		 * 	\fn set_bWriteInfo
-		 * 	\brief Set bWriteInfo
-		 * 	\param bNewValue( const bool& ) The new value
-		 * 	\return void
-		 */
-		void set_bWriteInfo( const bool& bNewValue );
-		
-		/*!
 		 * 	\fn get_bDebug
 		 * 	\brief Return get_bDebug
 		 * 	\return get_bDebug
@@ -563,8 +533,29 @@ class CoxIter
 		/*!
 		 * 	\fn set_iIsArithmetic
 		 * 	\brief Update the member iIsArithmetic
+		 * 	
+		 * 	This is used by the Arithmeticity class
 		 */
 		void set_iIsArithmetic( const unsigned int &iArithmetic );
+		
+		// TODO: doc
+		
+		void set_bCheckCocompactness( const bool& bValue );
+		void set_bCheckCofiniteness( const bool& bValue );
+		void set_bDebug( const bool& bValue );
+		void set_bUseOpenMP( const bool& bValue );
+		void set_strOutputFilename( const string& strValue );
+		void set_sdtoutToFile( const string& strFilename );
+		void set_strVerticesToRemove( const vector< string >& strVerticesRemove_ );
+		void set_strVerticesToConsider( const vector< string >& strVerticesToConsider );
+		
+		/*!
+		 * 	\fn set_bWriteInfo
+		 * 	\brief Set bWriteInfo
+		 * 	\param bNewValue( const bool& ) The new value
+		 * 	\return void
+		 */
+		void set_bWriteInfo( const bool& bNewValue );
 		
 		/*!
 		 * 	\fn set_iDimension

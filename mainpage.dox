@@ -35,15 +35,16 @@ First, install everything you will need to compile the program.
 
 On Ubuntu, Linux Mint or any Debian-based distribution, type the following commands in a Shell:
 \code
-sudo apt-get install g++ cmake graphviz
+sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev
 \endcode
 
 On Fedora, type the following commands in a Shell:
 \code
-sudo yum install g++ cmake graphviz
+sudo yum install g++ cmake graphviz TODO
 \endcode
 
 \subsection main_compilation_gnu_pcre PCRE
+TODO: create advanced section
 To install PCRE, get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.37 (do not use PCRE2). To do that, type the following commands in a shell:
 \code
 wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.37.tar.gz
@@ -64,7 +65,7 @@ rm pcre-8.37.tar.gz
 With a shell, go to the directory /CoxIter/build<br />
 Then, enter the following commands:
 \code
-cmake -DCMAKE_BUILD_TYPE=Release ../
+cmake ../
 make
 \endcode
 The compilation should be done withour error or warning. Now, CoxIter is usable.

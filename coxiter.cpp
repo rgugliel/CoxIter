@@ -23,9 +23,9 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "coxiter.h"
 
 CoxIter::CoxIter()
-: 	bCannotBeHyperbolic( false ),
-	bCheckCocompacity( false ),
-	bCheckFiniteCovolume( true ),
+: 	bCannotBeHyperbolic( false ), // TODO: vérifier cela
+	bCheckCocompactness( false ),
+	bCheckCofiniteness( false ),
 	bCoutFile( false ),
 	bDebug( false ),
 	bGramMatrixField( false ),
@@ -33,13 +33,11 @@ CoxIter::CoxIter()
 	bHasBoldLine( false ),
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
-	bInputReaded( false ),
-	bWriteInfo( false ), 
+	bWriteInfo( false ),  // TODO
 	bWriteProgress( false ),
-	bDoComputations( true ),
 	bGraphExplored( false ),
 	bGraphsProductsComputed( false ),
-	bOpenMP( true ),
+	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
 	graphsList_spherical( 0 ),
 	graphsList_euclidean( 0 ),
@@ -56,89 +54,17 @@ CoxIter::CoxIter()
 	outCout( 0 ),
 	sBufOld( 0 ),
 	strError( "" ),
-	strInputFilename( "" ),
 	strOuputMathematicalFormat( "generic" )
 { 
 	#ifndef _COMPILE_WITH_OPENMP_
-	this->bOpenMP = false;
+	this->bUseOpenMP = false;
 	#endif
 }
 
-CoxIter::CoxIter( const string& strInputFilename, const bool& bWriteInfo, const string& strOutputFilename, const bool& bCoutFile, const bool& bDoComputations, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume, const bool& bOpenMP, const bool& bDebug, const vector< string >& strVertices_, const vector< string >& strVerticesRemove_, const string& strOuputMathematicalFormat )
+CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension )
 :	bCannotBeHyperbolic( false ),
-	bCheckCocompacity( bCheckCompacity ),
-	bCheckFiniteCovolume( bCheckFiniteCovolume ),
-	bCoutFile( bCoutFile ),
-	bGramMatrixField( false ),
-	bGraphExplored( false ),
-	bGraphsProductsComputed( false ),
-	bGrowthSeriesComputed( false ),
-	bHasBoldLine( false ),
-	bHasDottedLine( false ),
-	iHasDottedLineWithoutWeight( 0 ),
-	bInputReaded( false ),
-	bWriteInfo( bWriteInfo ),
-	bWriteProgress( false ), // TODO: experimental
-	bDebug( bDebug ),
-	bDoComputations( bDoComputations ),
-	bOpenMP( bOpenMP ),
-	brEulerCaracteristic( 0 ),
-	graphsList_spherical( 0 ),
-	graphsList_euclidean( 0 ),
-	iDimension( 0 ),
-	iDimension_euclideanMaxRankFound( 0 ),
-	iDimension_sphericalMaxRankFound( 0 ),
-	bDimension_guessed( false ),
-	iFVectorAlternateSum( 0 ),
-	iIsArithmetic( -1 ),
-	iIsCocompact( -2 ),
-	iIsFiniteCovolume( -2 ),
-	iVerticesAtInfinityCount( 0 ),
-	iVerticesCount( 0 ),
-	outCout( 0 ),
-	sBufOld( 0 ),
-	strError( "" ),
-	strInputFilename( strInputFilename ),
-	strVerticesRemove( strVerticesRemove_ ),
-	strVertices( strVertices_ ),
-	strOuputMathematicalFormat( strOuputMathematicalFormat )
-{
-	// ------------------------------------------------------------------
-	// vertices we want to remove
-	// to detect duplicates
-	sort( strVerticesRemove.begin(), strVerticesRemove.end() );
-	strVerticesRemove = vector< string >( strVerticesRemove.begin(), unique( strVerticesRemove.begin(), strVerticesRemove.end() ) );
-	
-	// ------------------------------------------------------------------
-	// subset of the vertices?
-	sort( strVertices.begin(), strVertices.end() );
-	strVertices = vector< string >( strVertices.begin(), unique( strVertices.begin(), strVertices.end() ) );
-	
-	// ------------------------------------------------------------------
-	// if we want to redirect cout to a file
-	if( strOutputFilename == "" )
-		this->bCoutFile = false;
-	
-	if( this->bCoutFile )
-	{
-		string strOutputCoutFilename( strOutputFilename + ".output" );
-		outCout = new ofstream( strOutputCoutFilename.c_str() );
-		
-		if( !outCout->is_open() )
-			this->bCoutFile = false;
-		else
-			sBufOld = cout.rdbuf( outCout->rdbuf() );
-	}
-	
-	#ifndef _COMPILE_WITH_OPENMP_
-	this->bOpenMP = false;
-	#endif
-}
-
-CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume )
-:	bCannotBeHyperbolic( false ),
-	bCheckCocompacity( bCheckCompacity ),
-	bCheckFiniteCovolume( bCheckFiniteCovolume ),
+	bCheckCocompactness( false ),
+	bCheckCofiniteness( false ),
 	bCoutFile( false ),
 	bGramMatrixField( false ),
 	bGraphExplored( false ),
@@ -146,11 +72,9 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	bGrowthSeriesComputed( false ),
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
-	bInputReaded( false ),
 	bWriteInfo( false ), 
 	bDebug( false ),
-	bDoComputations( true ),
-	bOpenMP( true ),
+	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
 	graphsList_spherical( 0 ),
 	graphsList_euclidean( 0 ),
@@ -175,7 +99,7 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	iCoxeterMatrix = iMatrix;
 	
 	#ifndef _COMPILE_WITH_OPENMP_
-	this->bOpenMP = false;
+	this->bUseOpenMP = false;
 	#endif
 }
 
@@ -195,9 +119,9 @@ CoxIter::~CoxIter()
 	}
 }
 
-bool CoxIter::runAllComputations()
+bool CoxIter::bRunAllComputations()
 {
-	if( !iCoxeterMatrix.size() && !readGraph() )
+	if( !iCoxeterMatrix.size() )
 		return false;
 	
 	if( !bGraphExplored )
@@ -209,16 +133,16 @@ bool CoxIter::runAllComputations()
 	if( !euler() )
 		return false;
 	
-	if( bCheckFiniteCovolume )
+	if( bCheckCofiniteness )
 		isFiniteCovolume();
 	
-	if( bCheckCocompacity )
+	if( bCheckCocompactness )
 		iIsGraphCocompact();
 	
 	return true;
 }
 
-bool CoxIter::readGraph()
+bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 {
 	string szLine;
 	PCRERegexp regexp;
@@ -546,7 +470,7 @@ void CoxIter::initializations()
 	}
 }
 
-bool CoxIter::writeGraph( const string& strOutFilenameBasis )
+bool CoxIter::bWriteGraph( const string& strOutFilenameBasis )
 {
 	if( strOutFilenameBasis == "" )
 	{
@@ -609,7 +533,7 @@ void CoxIter::map_vertices_labels_reinitialize()
 }
 
 
-bool CoxIter::writeGraphToDraw( const string& strOutFilenameBasis )
+bool CoxIter::bWriteGraphToDraw( const string& strOutFilenameBasis )
 {
 	unsigned int i, j;
 	
@@ -1383,7 +1307,7 @@ int CoxIter::iIsGraphCocompact()
 	if( !bGraphsProductsComputed )
 		computeGraphsProducts();
 	
-	if( !bCheckCocompacity || !graphsProducts.size() || !graphsProducts[0].size() )
+	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
 	{
 		iIsCocompact = -1;
 		return -1;
@@ -1404,7 +1328,7 @@ int CoxIter::iIsGraphCocompact()
 	
 	// ----------------------------------------------------
 	// the test
-	if( bOpenMP && iVerticesCount >= 15 )
+	if( bUseOpenMP && iVerticesCount >= 15 )
 		iIsCocompact = b_isGraph_cocompact_finiteVolume_parallel( 1 ) ? 1 : 0;
 	else
 		iIsCocompact = b_isGraph_cocompact_finiteVolume_sequential( 1 ) ? 1 : 0;
@@ -1451,7 +1375,7 @@ int CoxIter::isFiniteCovolume()
 
 	// ----------------------------------------------------
 	// the test
-	if( bOpenMP && iVerticesCount >= 15 )
+	if( bUseOpenMP && iVerticesCount >= 15 )
 		iIsFiniteCovolume = b_isGraph_cocompact_finiteVolume_parallel( 2 ) ? 1 : 0;
 	else
 		iIsFiniteCovolume = b_isGraph_cocompact_finiteVolume_sequential( 2 ) ? 1 : 0;
@@ -1541,7 +1465,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex )
 	
 	bool bExtendable, bExit(false);
 	
-	#pragma omp parallel if( bOpenMP && iVerticesCount >= 15 )
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
 	{
 		#pragma omp single nowait
 		{
@@ -1641,7 +1565,7 @@ void CoxIter::computeGraphsProducts()
 	// produits de graphes sphériques
 	GraphsListIterator grIt_spherical( this->graphsList_spherical );
 	
-	#pragma omp parallel if( bOpenMP && iVerticesCount >= 15 )
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
 	{
 		#pragma omp single nowait
 		while( grIt_spherical.ptr )
@@ -1667,7 +1591,7 @@ void CoxIter::computeGraphsProducts()
 	}
 	
 	GraphsListIterator grIt_euclidean( this->graphsList_euclidean );
-	#pragma omp parallel if( bOpenMP && iVerticesCount >= 15 )
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
 	{
 		#pragma omp single nowait
 		while( grIt_euclidean.ptr )
@@ -1746,7 +1670,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 			
 			#pragma omp critical
 			{
-				if( bCheckCocompacity || bCheckFiniteCovolume )
+				if( bCheckCocompactness || bCheckCofiniteness )
 				{
 					if( iDimension ) // If we know the dimension, everything is easier
 					{
@@ -1758,7 +1682,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 						}
 						
 						// Euclidean subgraphs
-						if( !bSpherical && gp.iRank == ( iDimension - 1 ) && bCheckFiniteCovolume )
+						if( !bSpherical && gp.iRank == ( iDimension - 1 ) && bCheckCofiniteness )
 							graphsProducts[2].push_back( GraphsProductSet( gp ) );
 					}
 					else
@@ -1782,7 +1706,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 						}
 						else
 						{	
-							if( bCheckFiniteCovolume )
+							if( bCheckCofiniteness )
 							{
 								if( gp.iRank > iDimension_euclideanMaxRankFound )
 									graphsProducts[2].clear();
@@ -1859,7 +1783,7 @@ bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
 	
 	// -----------------------------------------------------------
 	// We find the products of euclidean graphs
-	#pragma omp parallel if( bOpenMP && iVerticesCount >= 15 )
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
 	{
 		#pragma omp single nowait
 		while( grIt_euclidean.ptr )
@@ -2000,7 +1924,7 @@ vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 	
 	// -----------------------------------------------------------
 	// We find the products of euclidean graphs
-	#pragma omp parallel if( bOpenMP && iVerticesCount >= 15 )
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
 	{
 		#pragma omp single nowait
 		while( grIt_euclidean.ptr )
@@ -2253,7 +2177,7 @@ void CoxIter::growthSeries_mergeTerms( vector< mpz_class >& iPolynomial, vector<
 
 void CoxIter::growthSeries()
 {
-	if( !bOpenMP || iVerticesCount < 10 )
+	if( !bUseOpenMP || iVerticesCount < 10 )
 		growthSeries_sequential();
 	else
 		growthSeries_parallel();
@@ -2742,7 +2666,6 @@ bool CoxIter::euler()
 	
 	mpz_class biTemp, biOrderTemp;
 	MPZ_rational brAlternateTemp;
-	string szBufferComputationTemp, szProductTemp, szOrderTemp;
 	
 	bool bPositive(true);
 	
@@ -2763,15 +2686,13 @@ bool CoxIter::euler()
 	// par taille de nombre de sommets
 	for( vector< map<vector< vector< unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount_spherical.begin() ); itMaps != graphsProductsCount_spherical.end(); ++itMaps )
 	{
-		szBufferComputationTemp = "(";
 		brAlternateTemp = 0;
 		
 		// on parcourt les produits pour la taille donnée
 		for( itMap = itMaps->begin(); itMap != itMaps->end(); ++itMap )
 		{
 			biTemp = 1;
-			szProductTemp = "";
-			
+
 			if( bDebug )
 				cout << "\t" << iCurrentVerticesCount << ": ";
 			
@@ -2788,31 +2709,14 @@ bool CoxIter::euler()
 						if( bDebug )
 							cout << (char)(i + 65) << "_" << ( j + 1 ) << "^" << itMap->first[i][j] << " | ";
 						
-						if( bDoComputations )
-						{
-							biOrderTemp = i_orderFiniteSubgraph( i, j + 1 );
-							for( k = 1; k <= itMap->first[i][j]; k++ )
-								biTemp *= biOrderTemp;
-						}
-						else
-						{
-							szOrderTemp = sz_orderFiniteSubgraph( i, j + 1 );
-							szProductTemp += ( szProductTemp == "" ? "" : " * " ) + szOrderTemp;
-							for( k = 1; k < itMap->first[i][j]; k++ )
-								szProductTemp += "*" + szOrderTemp;
-						}
+						biOrderTemp = i_orderFiniteSubgraph( i, j + 1 );
+						for( k = 1; k <= itMap->first[i][j]; k++ )
+							biTemp *= biOrderTemp;
 					}
 				}
 			}
 
-			if( bDoComputations )
-				brAlternateTemp += MPZ_rational( itMap->second, biTemp );
-			else
-			{
-				szBufferComputationTemp += " + " + to_string( static_cast<long long>( itMap->second ) );
-				szBufferComputationTemp += "/(" + szProductTemp + ")";
-				szBufferComputationTemp += " ";
-			}
+			brAlternateTemp += MPZ_rational( itMap->second, biTemp );
 			
 			if( iDimension )
 			{
@@ -2822,25 +2726,16 @@ bool CoxIter::euler()
 				iFVector[ iFVectorIndex ] += itMap->second;
 			}
 			if( bDebug )
-				cout << "N: " << itMap->second << " / Order: " << ( bDoComputations ?  biTemp.get_str() : szProductTemp ) << endl;
+				cout << "N: " << itMap->second << " / Order: " << biTemp.get_str() << endl;
 		}
 		
 		iCurrentVerticesCount++;
 		
-		if( bDoComputations )
-		{
-			if( bPositive )
-				brEulerCaracteristic += brAlternateTemp;
-			else
-				brEulerCaracteristic -= brAlternateTemp;
-		}
+		if( bPositive )
+			brEulerCaracteristic += brAlternateTemp;
 		else
-		{
-			szBufferComputationTemp += ")";
-				
-			if( szBufferComputationTemp != "()" )
-				strEulerCharacteristic_computations += ( bPositive ? "+" : "-" ) + szBufferComputationTemp;
-		}
+			brEulerCaracteristic -= brAlternateTemp;
+		
 
 		bPositive = !bPositive;
 		iFVectorIndex--;
@@ -2896,7 +2791,7 @@ void CoxIter::printEuclideanGraphsProducts( vector< map<vector< vector< unsigned
 	}
 }
 
-void CoxIter::printCoxeterMatrix()
+void CoxIter::PrintCoxeterMatrix()
 {
 	cout << "Coxeter matrix" << endl;
 	
@@ -2917,14 +2812,14 @@ void CoxIter::printCoxeterMatrix()
 	}
 }
 
-void CoxIter::printGramMatrix()
+void CoxIter::PrintGramMatrix()
 {
 	if( strOuputMathematicalFormat == "latex" )
-		printGramMatrix_LaTeX();
+		PrintGramMatrix_LaTeX();
 	else if( strOuputMathematicalFormat == "mathematica" )
-		printGramMatrix_Mathematica();
+		PrintGramMatrix_Mathematica();
 	else if( strOuputMathematicalFormat == "pari" )
-		printGramMatrix_PARI();
+		PrintGramMatrix_PARI();
 	else
 		cout << "Gram matrix  \n\t" << get_strGramMatrix() << "\n" << endl;
 	
@@ -2943,23 +2838,23 @@ void CoxIter::printGramMatrix()
 	cout << endl;
 }
 
-void CoxIter::printGramMatrix_Mathematica()
+void CoxIter::PrintGramMatrix_Mathematica()
 {
 	cout << "Gram matrix (Mathematica): \n\t" << get_strGramMatrix_Mathematica() << "\n" << endl;
 }
 
-void CoxIter::printGramMatrix_PARI()
+void CoxIter::PrintGramMatrix_PARI()
 {
 	cout << "Gram matrix (PARI): \n\t" << get_strGramMatrix_PARI() << "\n" << endl;
 }
 
-void CoxIter::printGramMatrix_LaTeX()
+void CoxIter::PrintGramMatrix_LaTeX()
 {
 	cout << "Gram matrix (LaTeX): \n\t" << get_strGramMatrix_LaTeX() << "\n" << endl;
 }
 
 
-void CoxIter::printEdgesVisitedMatrix()
+void CoxIter::PrintEdgesVisitedMatrix()
 {
 	unsigned int i, j;
 	cout << "Matrix of visited edges" << endl;
@@ -3327,7 +3222,7 @@ unsigned int CoxIter::get_iVerticesAtInfinityCount() const
 
 int CoxIter::get_iIsCocompact()
 {
-	if( iIsCocompact == -2 && bCheckCocompacity )
+	if( iIsCocompact == -2 && bCheckCocompactness )
 		return iIsGraphCocompact();
 	
 	return iIsCocompact;
@@ -3335,7 +3230,7 @@ int CoxIter::get_iIsCocompact()
 
 int CoxIter::get_iIsFiniteCovolume()
 {
-	if( iIsFiniteCovolume == -2 && bCheckFiniteCovolume )
+	if( iIsFiniteCovolume == -2 && bCheckCofiniteness )
 		return isFiniteCovolume();
 	
 	return iIsFiniteCovolume;
@@ -3412,6 +3307,41 @@ void CoxIter::set_iIsArithmetic( const unsigned int& iArithmetic )
 	iIsArithmetic = iArithmetic; // Hope that the value given in paramater is correct
 }
 
+void CoxIter::set_bCheckCocompactness(const bool& bValue)
+{
+	bCheckCocompactness = bValue;
+}
+
+void CoxIter::set_bCheckCofiniteness(const bool& bValue)
+{
+	bCheckCofiniteness = bValue;
+}
+
+void CoxIter::set_bDebug(const bool& bValue)
+{
+	bDebug = bValue;
+}
+
+void CoxIter::set_bUseOpenMP(const bool& bValue)
+{
+	#ifdef _COMPILE_WITH_OPENMP_
+	bUseOpenMP = bValue;
+	#endif
+}
+
+void CoxIter::set_sdtoutToFile( const string& strFilename )
+{
+	string strOutputCoutFilename( strFilename );
+	outCout = new ofstream( strOutputCoutFilename.c_str() );
+	
+	if( outCout->is_open() )
+	{
+		sBufOld = cout.rdbuf( outCout->rdbuf() );
+		bCoutFile = true;
+	}
+}
+
+
 void CoxIter::set_iDimension(const unsigned int& iDimension_)
 {
 	iDimension = iDimension_;
@@ -3439,3 +3369,19 @@ void CoxIter::set_strOuputMathematicalFormat(const string& strO)
 {
 	strOuputMathematicalFormat = strO;
 }
+
+void CoxIter::set_strVerticesToConsider( const vector< string >& strVerticesToConsider )
+{
+	strVertices = strVerticesToConsider;
+	sort( strVertices.begin(), strVertices.end() );
+	strVertices = vector< string >( strVertices.begin(), unique( strVertices.begin(), strVertices.end() ) );
+	
+}
+
+void CoxIter::set_strVerticesToRemove(const vector< string >& strVerticesRemove_)
+{
+	strVerticesRemove = strVerticesRemove_;
+	sort( strVerticesRemove.begin(), strVerticesRemove.end() );
+	strVerticesRemove = vector< string >( strVerticesRemove.begin(), unique( strVerticesRemove.begin(), strVerticesRemove.end() ) );
+}
+
