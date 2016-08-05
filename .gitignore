@@ -1,1 +1,14 @@
+.kdev4/
+CoxIter.kdev4
+documentation
+build/
 doc/
+documents/
+graphs/
+images/
+php/
+tools/
+vc++/
+website/
+win32_compilation.txt
+windows/
