@@ -88,13 +88,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li class="level2"><a href="#CoxIter_paramsTec">Technical parameters</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#CoxIter_example">Example</a></li>
+<li class="level1"><a href="#CoxIter_examples">Examples</a><ul><li class="level2"><a href="#CoxIter_example1">Example 1</a></li>
+<li class="level2"><a href="#CoxIter_example2">Example 2</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="textblock"><p>This page is divided into the following sections:</p><ul>
 <li><a class="el" href="page_cox_iter.html#CoxIter_graphFormat">Encoding a Coxeter graph / encoding a Coxeter group</a></li>
 <li><a class="el" href="page_cox_iter.html#CoxIter_params">Parameters of CoxIter</a></li>
-<li><a class="el" href="page_cox_iter.html#CoxIter_example">Example</a></li>
+<li><a class="el" href="page_cox_iter.html#CoxIter_examples">Examples</a></li>
 </ul>
 <h1><a class="anchor" id="CoxIter_graphFormat"></a>
 Encoding a Coxeter graph / encoding a Coxeter group</h1>
@@ -105,7 +108,7 @@ Encoding a Coxeter graph / encoding a Coxeter group</h1>
 <p>The graph is written in a file as follows:</p><ul>
 <li>First line [mandatory]: d, n<br />
  Where d is the number of vertices of the graph and n is the dimension.<br />
- Remark: The dimension is optional (but must be given for the cocompactness and finite volume tests).</li>
+ Remark: The dimension is optional (see remark below).</li>
 <li>Second line [optional]: name of the vertices<br />
  Remark: If this line is omitted, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will assume that the vertices are labelled with integers from 1 to d. If this line is specified, the format is the following: vertices labels: label1 label2 label3 ...</li>
 <li>Following lines: vertex1 vertex2 weight<br />
@@ -116,7 +119,10 @@ Encoding a Coxeter graph / encoding a Coxeter group</h1>
 </ol>
 </li>
 </ul>
-<p>Examples: The group <a href="https://en.wikipedia.org/wiki/File:Finite_coxeter.svg" target="_blank">F<sub>4</sub></a> can be encoded as follows: </p><div class="fragment"><div class="line">4</div>
+<h3>Remark about the dimension</h3>
+<p>If the dimension is not specified in the first line but is needed for the computations (for example for the compacity or finite volume tests), then <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will determine the dimension by looking at the maximal spherical and euclidean graphs. In order to succeed, it is important that the associated polyhedron contains at least one vertex. Therefore, if you don't know this, try to specify the dimension.</p>
+<h3>Example</h3>
+<p>The group <a href="https://en.wikipedia.org/wiki/File:Finite_coxeter.svg" target="_blank">F<sub>4</sub></a> can be encoded as follows: </p><div class="fragment"><div class="line">4</div>
 <div class="line">1 2 3</div>
 <div class="line">2 3 4</div>
 <div class="line">3 4 3</div>
@@ -144,9 +150,8 @@ Basic optional parameters</h2>
     <tr><td class="paramname">-arithmeticity</td><td>If specified, the arithmeticity is tested.<br />
  Alias: -a<br />
  Remarks:<ul>
-<li>The graph should not contain any dotted edge and must be non-cocompact.</li>
-<li>Must be used together with parameter -compactness<br />
-</li>
+<li>The group has to be non-cocompact.</li>
+<li>If the graph contains dotted lines, more tests might be needed (see <a class="el" href="page_cox_iter.html#CoxIter_example2">Example 2</a>).</li>
 </ul>
 </td></tr>
     <tr><td class="paramname">-compactness</td><td>If specified, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will test the cocompactness.<br />
@@ -161,6 +166,14 @@ Basic optional parameters</h2>
 <li>If -compactness is given and if the group is not cocompact, the graph which cannot be extended correctly</li>
 <li>If -fv is given and if the group is not of finite covolume, the graph which cannot be extended correctly<br />
  Since the output can be huge with this flag, it is suggested to also use -o and -of</li>
+</ul>
+</td></tr>
+    <tr><td class="paramname">-full</td><td>If specified, do almost all the possible computations (except the arithmeticity test):<ul>
+<li>Euler characteristic</li>
+<li>f-vector</li>
+<li>Finite volume test</li>
+<li>Compacity test</li>
+<li>Growth series</li>
 </ul>
 </td></tr>
     <tr><td class="paramname">-fv</td><td>If specified, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will test whether the group is of finite covolume or not.<br />
@@ -212,8 +225,10 @@ Technical parameters</h2>
   </table>
   </dd>
 </dl>
-<h1><a class="anchor" id="CoxIter_example"></a>
-Example</h1>
+<h1><a class="anchor" id="CoxIter_examples"></a>
+Examples</h1>
+<h2><a class="anchor" id="CoxIter_example1"></a>
+Example 1</h2>
 <p>We want to compute the invariants of the cocompact hyperbolic Coxeter group B<sub>8</sub> in H<sup>8</sup> found by Bugaenko.<br />
  We create in the folder /CoxIter/graphs/ a file named "8-Bugaenko.coxiter" which contains the description of the graph (the 1 is for the dotted line): </p><div class="fragment"><div class="line">11 8</div>
 <div class="line">1 2 5</div>
@@ -227,7 +242,7 @@ Example</h1>
 <div class="line">4 10 3</div>
 <div class="line">6 11 3</div>
 <div class="line">10 11 1</div>
-</div><!-- fragment --><p> We call <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a>: </p><div class="fragment"><div class="line">./coxiter -i ../graphs/8-Bugaenko.coxiter -fv -c -o ../graphs/8-Bugaenko -dg</div>
+</div><!-- fragment --><p> We call <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a>: </p><div class="fragment"><div class="line">./coxiter -i ../graphs/8-Bugaenko.coxiter -full -o ../graphs/8-Bugaenko -dg</div>
 </div><!-- fragment --><p> The output is the following </p><div class="fragment"><div class="line">Reading file: ../graphs/cocompact/8-Bugaenko.coxiter</div>
 <div class="line">    Number of vertices: 11</div>
 <div class="line">    Dimension: 8</div>
@@ -255,10 +270,72 @@ Example</h1>
 </div><!-- fragment --><p> and we get the following image: </p><div class="image">
 <img src="8-Bugaenko.jpg" alt="8-Bugaenko.jpg"/>
 </div>
- </div></div><!-- contents -->
+<h2><a class="anchor" id="CoxIter_example2"></a>
+Example 2</h2>
+<p>We want to check if the following subgroup of Isom H<sup>3</sup> is arithmetic: </p><div class="image">
+<img src="3-testArithmeticity.png" alt="3-testArithmeticity.png"/>
+</div>
+<p> We encode the graph as follows: </p><div class="fragment"><div class="line">7 3</div>
+<div class="line">vertices labels: 1 2 3 4 5 6 7</div>
+<div class="line">1 2 3</div>
+<div class="line">2 3 4</div>
+<div class="line">2 4 1</div>
+<div class="line">3 5 1</div>
+<div class="line">1 6 1</div>
+<div class="line">4 6 0</div>
+<div class="line">5 6 1</div>
+<div class="line">1 7 1</div>
+<div class="line">3 7 0</div>
+</div><!-- fragment --><p>We call <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> with options to test arithmeticity and print the Gram matrix: </p><div class="fragment"><div class="line">./coxiter -i ../graphs/3-testArithmeticity.coxiter -a -pgm</div>
+</div><!-- fragment --><p> The output is then the following: </p><div class="fragment"><div class="line">Reading file: ../graphs/3-testArithmeticity.coxiter</div>
+<div class="line">    Number of vertices: 7</div>
+<div class="line">    Dimension: 3</div>
+<div class="line">    Vertices: 1, 2, 3, 4, 5, 6, 7</div>
+<div class="line">    Removed vertices: </div>
+<div class="line">    Field generated by the entries of the Gram matrix: ?</div>
+<div class="line">File read</div>
+<div class="line"></div>
+<div class="line">Gram matrix (Mathematica): </div>
+<div class="line">    {{ 1, -1/2, 0, 0, 0, l0m5, l0m6}, {-1/2, 1, -Sqrt[2]/2, l1m3, 0, 0, 0}, {0, -Sqrt[2]/2, 1, 0, l2m4, 0, -1}, {0, l1m3, 0, 1, 0, -1, 0}, {0, 0, l2m4, 0, 1, l4m5, 0}, {l0m5, 0, 0, -1, l4m5, 1, 0}, {l0m6, 0, -1, 0, 0, 0, 1}}</div>
+<div class="line"></div>
+<div class="line">l1m3: weight of the dotted line between hyperplanes 2 and 4</div>
+<div class="line">l2m4: weight of the dotted line between hyperplanes 3 and 5</div>
+<div class="line">l0m5: weight of the dotted line between hyperplanes 1 and 6</div>
+<div class="line">l4m5: weight of the dotted line between hyperplanes 5 and 6</div>
+<div class="line">l0m6: weight of the dotted line between hyperplanes 1 and 7</div>
+<div class="line"></div>
+<div class="line">Finding connected subgraphs......</div>
+<div class="line">Finding graphs products......</div>
+<div class="line">Computations......</div>
+<div class="line">    Computation time: 0.000237657s</div>
+<div class="line"></div>
+<div class="line">Information</div>
+<div class="line">    Cocompact: no</div>
+<div class="line">    Finite covolume: ?</div>
+<div class="line">    Arithmetic: ? (GRAPH HAS DOTTED EDGE)</div>
+<div class="line">    f-vector: (9, 14, 7, 1)</div>
+<div class="line">    Number of vertices at infinity: 1</div>
+<div class="line">    Alternating sum of the components of the f-vector: 2</div>
+<div class="line">    Euler characteristic: 0</div>
+<div class="line"></div>
+<div class="line">The group is arithmetic <span class="keywordflow">if</span> and only <span class="keywordflow">if</span> all the following values lie in Z: </div>
+<div class="line">4 * l1m3^2</div>
+<div class="line">4 * l2m4^2</div>
+<div class="line">4 * l0m5^2</div>
+<div class="line">4 * l4m5^2</div>
+<div class="line">4 * l0m6^2</div>
+<div class="line">2^3 * Sqrt[2] * l2m4 * l4m5 * l0m5</div>
+<div class="line">2^2 * Sqrt[2] * l0m6</div>
+<div class="line">2^3 * l1m3 * l0m5</div>
+<div class="line">2^6 * l1m3 * l4m5 * l2m4 * l0m6</div>
+<div class="line">2^5 * Sqrt[2] * l0m5 * l1m3 * l0m6</div>
+<div class="line">2^5 * l0m5 * l4m5 * l2m4 * l0m6</div>
+<div class="line">2^4 * Sqrt[2] * l2m4 * l4m5 * l1m3</div>
+</div><!-- fragment --><p> With the values l1m3=-Sqrt[5]/2, l2m4=-Sqrt[2], l0m5=-Sqrt[5], l4m5=-Sqrt[5], l0m6=-Sqrt[2], we see that the group is arithmetic. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 5 2016 13:43:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 5 2016 13:57:46 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

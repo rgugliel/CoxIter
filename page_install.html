@@ -84,10 +84,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <ul><li class="level1"><a href="#main_compilation_gnu">Compilation with GNU/Linux</a><ul><li class="level2"><a href="#main_compilation_gnu_gen">Preliminaries</a></li>
 <li class="level2"><a href="#main_compilation_gnu_pcre">PCRE</a></li>
 <li class="level2"><a href="#main_compilation_gnu_compile">Compilation</a></li>
-<li class="level2"><a href="#main_compilation_win">Compilation on Windows with Visual Studio</a><ul><li class="level3"><a href="#main_compilation_win_vcpp_sln">Building with the existing project (easiest way)</a></li>
-<li class="level3"><a href="#main_compilation_win_vcpp_newsol">Building with a new solution</a></li>
+<li class="level2"><a href="#main_compilation_gnu_troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
+<li class="level1"><a href="#main_compilation_win">Compilation on Windows with Visual Studio</a><ul><li class="level2"><a href="#main_compilation_win_vcpp_sln">Building with the existing project (easiest way)</a></li>
+<li class="level2"><a href="#main_compilation_win_vcpp_newsol">Building with a new solution</a></li>
 <li class="level2"><a href="#main_exe">Get the .exe file</a></li>
 </ul>
 </li>
@@ -123,17 +124,20 @@ Compilation</h2>
  Then, enter the following commands: </p><div class="fragment"><div class="line">cmake -DCMAKE_BUILD_TYPE=Release ../</div>
 <div class="line">make</div>
 </div><!-- fragment --><p> The compilation should be done withour error or warning. Now, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> is usable.</p>
-<h2><a class="anchor" id="main_compilation_win"></a>
-Compilation on Windows with Visual Studio</h2>
+<h2><a class="anchor" id="main_compilation_gnu_troubleshooting"></a>
+Troubleshooting</h2>
+<p>If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command: </p><div class="fragment"><div class="line">sudo ldconfig</div>
+</div><!-- fragment --><h1><a class="anchor" id="main_compilation_win"></a>
+Compilation on Windows with Visual Studio</h1>
 <p>You will need at least Visual Studio 2013 to compile <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
  As explained above, the program will run slower than with other compilers.</p>
-<h3><a class="anchor" id="main_compilation_win_vcpp_sln"></a>
-Building with the existing project (easiest way)</h3>
+<h2><a class="anchor" id="main_compilation_win_vcpp_sln"></a>
+Building with the existing project (easiest way)</h2>
 <ul>
 <li>Open the project: /CoxIter/vc++/CoxIter.sln</li>
 </ul>
-<h3><a class="anchor" id="main_compilation_win_vcpp_newsol"></a>
-Building with a new solution</h3>
+<h2><a class="anchor" id="main_compilation_win_vcpp_newsol"></a>
+Building with a new solution</h2>
 <p>To create a project from scratch, please follow the following steps:</p><ul>
 <li>Create a new "Win32 Console Application" empty project</li>
 <li>Add all the files (including the ones in tools/ and its sub-folders)</li>
@@ -155,7 +159,7 @@ Get the .exe file</h2>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 5 2016 13:43:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 5 2016 13:57:46 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

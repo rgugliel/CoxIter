@@ -365,8 +365,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:af87bc051c88cf4f1a56c98656dcc01f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4a6bea12c7b953261032095375b6119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#af4a6bea12c7b953261032095375b6119">growthSeries_symbolExponentFromProduct</a> (const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;iProduct, vector&lt; unsigned int &gt; &amp;iSymbol, unsigned int &amp;iExponent) const </td></tr>
 <tr class="separator:af4a6bea12c7b953261032095375b6119"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf5e84525636ce339c7986332dc242f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#aaf5e84525636ce339c7986332dc242f8">growthSeries_symbolExponentFromProduct</a> (const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;iProduct, string &amp;strSymbol, unsigned int &amp;iExponent) const </td></tr>
-<tr class="separator:aaf5e84525636ce339c7986332dc242f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70217eb3497f4f7afa31c64cac5ce48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#ae70217eb3497f4f7afa31c64cac5ce48">growthSeries_symbolExponentFromProduct</a> (const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;iProduct, string &amp;strSymbol, unsigned int &amp;iExponent) const </td></tr>
+<tr class="separator:ae70217eb3497f4f7afa31c64cac5ce48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52b8bf7f6fcfd923cb31efd3c6835375"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a52b8bf7f6fcfd923cb31efd3c6835375">growthSeries_parallel</a> ()</td></tr>
 <tr class="separator:a52b8bf7f6fcfd923cb31efd3c6835375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a822d1e4b8cf4250aae6631c30ce567d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a822d1e4b8cf4250aae6631c30ce567d9">growthSeries_sequential</a> ()</td></tr>
@@ -1617,7 +1617,7 @@ Weights of the dotted lines </dd></dl>
   <table class="params">
     <tr><td class="paramname">iCyclotomicNumerator(</td><td>vector&lt; unsigned int &gt;&amp; ) Numerator (cyclotomic factors) </td></tr>
     <tr><td class="paramname">iPolynomialDenominator(</td><td>vector&lt; mpz_class &gt;&amp; ) Denominator </td></tr>
-    <tr><td class="paramname">bReduced(bool</td><td>6) True if the fraction is reduced </td></tr>
+    <tr><td class="paramname">bReduced(</td><td>bool&amp; ) True if the fraction is reduced </td></tr>
   </table>
   </dd>
 </dl>
@@ -2132,11 +2132,11 @@ Weights of the dotted lines </dd></dl>
 <p>Given the parameters, compute iPolynomial/iSymbol += iTemp_polynomial/iTemp_symbol</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iPolynomial(vector&lt;</td><td>mpz_class &gt;&amp;) First polynomial (by reference) </td></tr>
-    <tr><td class="paramname">iSymbol(vector&lt;</td><td>unsigned int &gt;&amp;) First symbol (by reference) </td></tr>
-    <tr><td class="paramname">iTemp_polynomial(vector&lt;</td><td>mpz_class &gt;) Second polynomial </td></tr>
-    <tr><td class="paramname">iTemp_symbol(const</td><td>vector&lt; unsigned int &gt;&amp;) Second symbol </td></tr>
-    <tr><td class="paramname">biTemp(mpz_class)</td><td>Eventually, some coefficient for the second polynomial</td></tr>
+    <tr><td class="paramname">iPolynomial(</td><td>vector&lt; mpz_class &gt;&amp; ) First polynomial (by reference) </td></tr>
+    <tr><td class="paramname">iSymbol(</td><td>vector&lt; unsigned int &gt;&amp; ) First symbol (by reference) </td></tr>
+    <tr><td class="paramname">iTemp_polynomial(</td><td>vector&lt; mpz_class &gt; ) Second polynomial </td></tr>
+    <tr><td class="paramname">iTemp_symbol(</td><td>const vector&lt; unsigned int &gt;&amp; ) Second symbol </td></tr>
+    <tr><td class="paramname">biTemp(</td><td>mpz_class ) Eventually, some coefficient for the second polynomial</td></tr>
   </table>
   </dd>
 </dl>
@@ -2234,14 +2234,14 @@ Weights of the dotted lines </dd></dl>
   <table class="params">
     <tr><td class="paramname">iProduct(</td><td>const vector&lt; vector&lt; unsigned int &gt; &gt;&amp; ) The product of graphs </td></tr>
     <tr><td class="paramname">iSymbol(</td><td>vector&lt; unsigned int &gt;&amp; ) [i] = j means [i, ..., i] j times (parameter by reference) </td></tr>
-    <tr><td class="paramname">iExponent</td><td>(unsigned int&amp; ) The exponent </td></tr>
+    <tr><td class="paramname">iExponent(</td><td>unsigned int&amp; ) The exponent </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="aaf5e84525636ce339c7986332dc242f8"></a>
+<a class="anchor" id="ae70217eb3497f4f7afa31c64cac5ce48"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2249,7 +2249,7 @@ Weights of the dotted lines </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CoxIter::growthSeries_symbolExponentFromProduct </td>
+          <td class="memname">CoxIter::growthSeries_symbolExponentFromProduct </td>
           <td>(</td>
           <td class="paramtype">const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;&#160;</td>
           <td class="paramname"><em>iProduct</em>, </td>
@@ -2258,7 +2258,7 @@ Weights of the dotted lines </dd></dl>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">string &amp;&#160;</td>
-          <td class="paramname"><em>strSymbol</em>, </td>
+          <td class="paramname"><em>iSymbol</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2278,6 +2278,15 @@ Weights of the dotted lines </dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iProduct(</td><td>const vector&lt; vector&lt; unsigned int &gt; &gt;&amp; ) The product of graphs </td></tr>
+    <tr><td class="paramname">iSymbol(</td><td>string&amp; ) </td></tr>
+    <tr><td class="paramname">iExponent</td><td>(u nsigned int&amp; ) The exponent </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -4175,7 +4184,7 @@ Weights of the dotted lines </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 5 2016 13:43:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 5 2016 13:57:46 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
