@@ -220,22 +220,22 @@ class CoxIter
 		 */
 		void PrintGramMatrix( );
 		
-		/*!	\fn printGramMatrix_Mathematica
+		/*!	\fn PrintGramMatrix_Mathematica
 		 * 	\brief Print the Gram matrix (format: Mathematica)
 		 */
 		void PrintGramMatrix_Mathematica( );
 		
-		/*!	\fn printGramMatrix_PARI
+		/*!	\fn PrintGramMatrix_PARI
 		 * 	\brief Print the Gram matrix (format: PARI)
 		 */
 		void PrintGramMatrix_PARI( );
 		
-		/*!	\fn printGramMatrix_LaTeX
+		/*!	\fn PrintGramMatrix_LaTeX
 		 * 	\brief Print the Gram matrix (format: LaTeX)
 		 */
 		void PrintGramMatrix_LaTeX();
 		
-		/*!	\fn printEdgesVisitedMatrix
+		/*!	\fn PrintEdgesVisitedMatrix
 		 * 	\brief Affiche les arrêtes qui ont été visitées
 		 */
 		void PrintEdgesVisitedMatrix( );
@@ -271,20 +271,20 @@ class CoxIter
 		 * 
 		 * 	First, we find all the chains startings from every vertex. Then, we wxpand the chains to spherical and euclidean graphs
 		 */
-		void exploreGraph();
+		void ExploreGraph();
 
-		/*!	\fn euler
-		 * 	\brief Calcule la caractéristique d'Euler et le f-vecteur
-		 * 	\return True si OK, false si erreur
+		/*!	\fn bEulerCharacteristicFVector
+		 * 	\brief Conmpute the euler characteristic and f-vector
+		 * 	\return True if success
 		 */
-		bool euler();
+		bool bEulerCharacteristicFVector();
 		
 		/*!	\fn growthSeries
 		 * 	Compute the growth series
 		 * 
 		 * 	\remark The only purpose of this function is to call growthSeries_parallel or growthSeries_sequential
 		 */
-		void growthSeries();
+		void GrowthSeries();
 
 		/*!	\fn iIsGraphCocompact
 		 * 	\brief Check whether the graph is cocompact or not
@@ -317,20 +317,20 @@ class CoxIter
 		bool get_bCannotBeHyperbolic( ) const;
 		
 		/*!
-		 * \fn computeGraphsProducts
-		 * \brief Cherche à créer les produits à partir des listes de graphes
+		 * \fn ComputeGraphsProducts
+		 * \brief Compute the possible products of the irreducible graphs
 		 */
-		void computeGraphsProducts( );
+		void ComputeGraphsProducts( );
 		
 		// TODO: doc
-		void printGrowthSeries( );
+		void PrintGrowthSeries( );
 		
-		/*! \fn printEuclideanGraphsProducts
+		/*! \fn PrintEuclideanGraphsProducts
 		 * 	\brief Affiche les produits de graphes trouvés
 		 * 
-		 * 	\param graphsProductsCount( vector< map<vector< vector< unsigned int > >, unsigned int> >* ) Pointeur vers le vecteur de résultats (typiquement graphsProductsCount_spherical ou graphsProductsCount_euclidean)
+		 * 	\param GraphsProductsCount( vector< map<vector< vector< unsigned int > >, unsigned int> >* ) Pointeur vers le vecteur de résultats (typiquement graphsProductsCount_spherical ou graphsProductsCount_euclidean)
 		 */
-		void printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount );
+		void PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount );
 		
 		/*! 	\fn bIsVertexValid
 		 * 	\brief Test if a vertex exists in the graph
@@ -658,14 +658,14 @@ class CoxIter
 		/*! 	\fn printPath
 		 * 	\brief Print the iPath vector
 		 */
-		void printPath( );
+		void PrintPath( );
 		
-		/*!	\fn addGraphsFromPath
+		/*!	\fn AddGraphsFromPath
 		 * 	\brief Crée des graphes (An, Bn, Dn, En, Hn, F4) à partir d'un chemin
 		 * 
 		 * 	On se base sur le contenu de iPath 
 		 */
-		void addGraphsFromPath( );
+		void AddGraphsFromPath( );
 		
 		/*!
 		 * \fn AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable )
@@ -708,7 +708,7 @@ class CoxIter
 		 * 	\param gp( GraphsProduct& ) To store the product (for the cocompacity and finite covolume tests)
 		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
 		 */
-		void computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		void ComputeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		
 		void bCanBeFiniteCovolume_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		void bCanBeFiniteCovolume_complete_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
@@ -722,19 +722,6 @@ class CoxIter
 		 * 	\return Ordre (unsigned long int)
 		 */
 		mpz_class i_orderFiniteSubgraph( const unsigned int &iType, const unsigned int &iDataSupp );
-		
-		/*!
-		 * 	\fn sz_orderFiniteSubgraph
-		 * 	\brief Calcule l'ordre du stabilisateur associé à un sous-graphe
-		 * 
-		 * 	L'intérêt d'avoir une deuxième fonction est que l'on dépasse vite la capacité des entiers de C++ (par exemple avec l'ordre de B17). Avec ça, on va laisser un programme externe s'en charger
-		 * 
-		 * 	\param iType Type du graphe (0 = An, 1=Bn, ...)
-		 * 	\param iDataSupp Valeur du n pour presque tous les graphes, poids pour un G_2^n
-		 * 
-		 * 	\return Calcul à faire pour trouver l'ordre (string)
-		 */
-		string sz_orderFiniteSubgraph( const unsigned int &iType, const unsigned int &iDataSupp );
 		
 		/*!	\fn b_isGraph_cocompact_finiteVolume_parallel
 		 * 	\brief Check whether the graph is cocompact or not or has finite covolume or not

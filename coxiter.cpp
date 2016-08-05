@@ -125,12 +125,12 @@ bool CoxIter::bRunAllComputations()
 		return false;
 	
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
-	if( !euler() )
+	if( !bEulerCharacteristicFVector() )
 		return false;
 	
 	if( bCheckCofiniteness )
@@ -586,7 +586,7 @@ bool CoxIter::bWriteGraphToDraw( const string& strOutFilenameBasis )
 	return true;
 }
 
-void CoxIter::exploreGraph()
+void CoxIter::ExploreGraph()
 {
 	vector<unsigned int> iVertices;
 	unsigned int i, j, k, l;
@@ -754,12 +754,12 @@ void CoxIter::DFS( unsigned int iRoot, unsigned int iFrom )
 	
 	// If DFS was not called, then the path is maximal
 	if( !bSubcall )
-		addGraphsFromPath();
+		AddGraphsFromPath();
 	
 	iPath.pop_back();
 }
 
-void CoxIter::addGraphsFromPath()
+void CoxIter::AddGraphsFromPath()
 {
 	// sommets que l'on ne peut pas lier au graphe (n sommets);
 	vector<bool> bVerticesLinkable( iVerticesCount, true );
@@ -1102,7 +1102,7 @@ void CoxIter::B3ToF4_B4ToTF4( const vector<bool> &bVerticesBeginLinkable, vector
 	}
 }
 
-void CoxIter::printPath()
+void CoxIter::PrintPath()
 {
 	if( iPath.size() == 1 )
 		return ;
@@ -1220,10 +1220,10 @@ string CoxIter::get_strGrowthSeries()
 	return strGrowth;
 }
 
-void CoxIter::printGrowthSeries()
+void CoxIter::PrintGrowthSeries()
 {
 	if( !bGrowthSeriesComputed )
-		growthSeries();
+		GrowthSeries();
 	
 	if( strOuputMathematicalFormat == "generic" )
 	{
@@ -1305,7 +1305,7 @@ int CoxIter::iIsGraphCocompact()
 		return iIsCocompact;
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
 	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
 	{
@@ -1342,7 +1342,7 @@ int CoxIter::isFiniteCovolume()
 		return iIsFiniteCovolume;
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
 	// ----------------------------------------------------
 	// some stupid tests
@@ -1543,13 +1543,13 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex )
 	return ( bExit ? 0 : 1 );
 }
 
-void CoxIter::computeGraphsProducts()
+void CoxIter::ComputeGraphsProducts()
 {
 	if( bGraphsProductsComputed )
 		return;
 	
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	if( bDebug )
 	{
@@ -1572,7 +1572,7 @@ void CoxIter::computeGraphsProducts()
 		{
 			#pragma omp task firstprivate(grIt_spherical, bGPVerticesNonLinkable, gp)
 			{
-				computeGraphsProducts( grIt_spherical, &graphsProductsCount_spherical, true, gp, bGPVerticesNonLinkable );
+				ComputeGraphsProducts( grIt_spherical, &graphsProductsCount_spherical, true, gp, bGPVerticesNonLinkable );
 			}
 			
 			++grIt_spherical;
@@ -1598,7 +1598,7 @@ void CoxIter::computeGraphsProducts()
 		{
 			#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
 			{
-				computeGraphsProducts( grIt_euclidean, &graphsProductsCount_euclidean, false, gp, bGPVerticesNonLinkable );
+				ComputeGraphsProducts( grIt_euclidean, &graphsProductsCount_euclidean, false, gp, bGPVerticesNonLinkable );
 			}
 			
 			++grIt_euclidean;
@@ -1608,7 +1608,7 @@ void CoxIter::computeGraphsProducts()
 	if( bDebug )
 	{
 		cout << "\nProduct of euclidean graphs" << endl;
-		printEuclideanGraphsProducts( &graphsProductsCount_euclidean );
+		PrintEuclideanGraphsProducts( &graphsProductsCount_euclidean );
 	}
 	
 	bGraphsProductsComputed = true;
@@ -1637,7 +1637,7 @@ void CoxIter::computeGraphsProducts()
 	}
 }
 
-void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+void CoxIter::ComputeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
 {
 	vector< unsigned int >::iterator iIt;
 	vector< unsigned int > iVerticesFlagged;
@@ -1741,7 +1741,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 			}
 			
 			// récursion
-			computeGraphsProducts( ++grIt, graphsProductsCount, bSpherical, gp, bGPVerticesNonLinkable );
+			ComputeGraphsProducts( ++grIt, graphsProductsCount, bSpherical, gp, bGPVerticesNonLinkable );
 			
 			// -----------------------------------------------
 			// dé-initialisations
@@ -1771,7 +1771,7 @@ bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
 		throw( string( "CoxIter::bCanBeFiniteCovolume: Dimension not specified" ) );
 	
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	// -----------------------------------------------------------
 	// Initializations
@@ -1912,7 +1912,7 @@ vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 		throw( string( "CoxIter::bCanBeFiniteCovolume_complete: Dimension not specified" ) );
 	
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	// -----------------------------------------------------------
 	// Initializations
@@ -2094,40 +2094,6 @@ mpz_class CoxIter::i_orderFiniteSubgraph(const unsigned int& iType, const unsign
 	return 0;
 }
 
-string CoxIter::sz_orderFiniteSubgraph( const unsigned int& iType, const unsigned int& iDataSupp )
-{
-	// tous les static_cast sont là pour VC++ qui n'a pas de version to_string( unsigned int )
-
-	if( iType == 0 ) // A_n
-		return ( to_string( static_cast<long long>( iDataSupp + 1 ) ) + "!" );
-	else if( iType == 1 ) // Bn
-		return ( to_string( static_cast<long long>( iDataSupp ) )  + "! * 2^" + to_string( static_cast<long long>( iDataSupp ) ) );
-	else if( iType == 3 ) // Dn
-		return ( to_string( static_cast<long long>( iDataSupp ) ) + "! * 2^" + to_string( static_cast<long long>( iDataSupp - 1 ) ) );
-	else  if( iType == 4 )
-	{
-		if( iDataSupp == 6 )
-			return "51840";
-		else if( iDataSupp == 7 )
-			return "2903040";
-		else if( iDataSupp == 8 )
-			return "696729600";
-	}
-	else if( iType == 5 ) // F4
-		return "1152";
-	else if( iType == 6 ) // G_2^n
-		return to_string( static_cast<long long>( 2 * iDataSupp ) );
-	else if( iType == 7 )
-	{
-		if( iDataSupp == 3 )
-			return "120";
-		else if( iDataSupp )
-			return "14400";
-	}
-	
-	return "0";
-}
-
 void CoxIter::growthSeries_mergeTerms( vector< mpz_class >& iPolynomial, vector< unsigned int >& iSymbol, vector< mpz_class > iTemp_polynomial, const vector< unsigned int >& iTemp_symbol, mpz_class biTemp )
 {
 	unsigned int iSymbol_max( iSymbol.size() ? iSymbol.size() - 1 : 0 );
@@ -2175,7 +2141,7 @@ void CoxIter::growthSeries_mergeTerms( vector< mpz_class >& iPolynomial, vector<
 	
 }
 
-void CoxIter::growthSeries()
+void CoxIter::GrowthSeries()
 {
 	if( !bUseOpenMP || iVerticesCount < 10 )
 		growthSeries_sequential();
@@ -2189,10 +2155,10 @@ void CoxIter::growthSeries()
 void CoxIter::growthSeries_details()
 {
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 	
@@ -2233,10 +2199,10 @@ void CoxIter::growthSeries_details()
 void CoxIter::growthSeries_sequential()
 {
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 	
@@ -2365,10 +2331,10 @@ void CoxIter::growthSeries_sequential()
 void CoxIter::growthSeries_parallel() // TODO: ICI 
 {
 	if( !bGraphExplored )
-		exploreGraph();
+		ExploreGraph();
 	
 	if( !bGraphsProductsComputed )
-		computeGraphsProducts();
+		ComputeGraphsProducts();
 	
 	unsigned int iSizeMax( graphsProductsCount_spherical.size() );
 
@@ -2460,7 +2426,7 @@ void CoxIter::growthSeries_parallel() // TODO: ICI
 void CoxIter::get_iGrowthSeries( vector< unsigned int >& iCyclotomicNumerator, vector< mpz_class >& iPolynomialDenominator, bool& bReduced )
 {
 	if( !bGrowthSeriesComputed )
-		growthSeries();
+		GrowthSeries();
 
 	iCyclotomicNumerator = growthSeries_iCyclotomicNumerator;
 	iPolynomialDenominator = growthSeries_iPolynomialDenominator;
@@ -2470,7 +2436,7 @@ void CoxIter::get_iGrowthSeries( vector< unsigned int >& iCyclotomicNumerator, v
 bool CoxIter::get_bGrowthSeriesReduced()
 {
 	if( !bGrowthSeriesComputed )
-		growthSeries();
+		GrowthSeries();
 
 	return growthSeries_bFractionReduced;
 }
@@ -2478,7 +2444,7 @@ bool CoxIter::get_bGrowthSeriesReduced()
 vector< mpz_class > CoxIter::get_iGrowthSeries_denominator()
 {
 	if( !bGrowthSeriesComputed )
-		growthSeries();
+		GrowthSeries();
 	
 	return growthSeries_iPolynomialDenominator;
 }
@@ -2658,7 +2624,7 @@ void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsig
 	}
 }
 
-bool CoxIter::euler()
+bool CoxIter::bEulerCharacteristicFVector()
 {
 	// variables de boucles
 	size_t i, j, k, iMax;
@@ -2760,7 +2726,7 @@ bool CoxIter::euler()
 // ##################################################################################################################################3
 // Affichages
 
-void CoxIter::printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount )
+void CoxIter::PrintEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount )
 {
 	// variables de boucles
 	size_t i, j, iMax;

@@ -299,7 +299,7 @@ void App::run( )
 	// composantes connexes sphériques et euclidiennes
 	cout << "Finding connected subgraphs......" << endl;
 	timeStart = chrono::system_clock::now();
-	ci.exploreGraph( );
+	ci.ExploreGraph( );
 	
 	try{
 		if( bCheckCanBeFiniteCovolume )
@@ -316,7 +316,7 @@ void App::run( )
 	if( bComputeEuler || bComputeGrowthSeries || bCheckCocompacity || bCheckFiniteCovolume )
 	{
 		cout << "Finding graphs products......" << endl;
-		ci.computeGraphsProducts( );
+		ci.ComputeGraphsProducts( );
 	}
 	
 	unsigned int iDimension( ci.get_iDimension( ) );
@@ -327,7 +327,7 @@ void App::run( )
 	// -----------------------------------------------------------------
 	// calcul de la caractéristique d'Euler, f-vecteur et compacité
 	cout << "Computations......" << endl; 
-	if( bComputeEuler && !ci.euler( ) )
+	if( bComputeEuler && !ci.bEulerCharacteristicFVector( ) )
 	{
 		bEulerSuccess = false;
 		cout << "\n\n######################################################################" << endl;
@@ -345,7 +345,7 @@ void App::run( )
 	
 	if( bComputeGrowthSeries )
 	{
-		ci.growthSeries();
+		ci.GrowthSeries();
 	}
 	
 	if( ci.get_iHasDottedLineWithoutWeight() != 0 )
@@ -460,7 +460,7 @@ void App::run( )
 	if( bComputeGrowthSeries )
 	{
 		cout << "\nGrowth series: " << endl;
-		ci.printGrowthSeries();
+		ci.PrintGrowthSeries();
 		cout << endl;
 		
 		#ifdef _COMPILE_WITH_PARI_
