@@ -5,6 +5,7 @@ project(coxiter)
 add_definitions("-std=c++11")
 add_definitions("-Wall")
 add_definitions("-Wno-reorder")
+add_definitions("-Wno-unknown-pragmas")
 
 set( CMAKE_BUILD_TYPE Release )
 
