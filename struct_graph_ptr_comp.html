@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.7"/>
-<title>CoxIter: Main page of the documentation</title>
+<title>CoxIter: GraphPtrComp Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -38,9 +38,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -60,7 +60,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-</div><!-- top -->
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
+      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
+    </ul>
+  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -75,33 +81,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_graph_ptr_comp-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Main page of the documentation </div>  </div>
+<div class="title">GraphPtrComp Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#main_infosGens">General information</a></li>
-<li class="level1"><a href="#sec_toc">Table of contents</a></li>
-</ul>
+
+<p><code>#include &lt;<a class="el" href="graph_8h_source.html">graph.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aac5f7c600d1f6bc97f281335eb315e0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graph_ptr_comp.html#aac5f7c600d1f6bc97f281335eb315e0a">operator()</a> (const <a class="el" href="class_graph.html">Graph</a> *g1, const <a class="el" href="class_graph.html">Graph</a> *g2) const </td></tr>
+<tr class="separator:aac5f7c600d1f6bc97f281335eb315e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aac5f7c600d1f6bc97f281335eb315e0a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GraphPtrComp::operator() </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a> *&#160;</td>
+          <td class="paramname"><em>g1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_graph.html">Graph</a> *&#160;</td>
+          <td class="paramname"><em>g2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 </div>
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Rafael Guglielmetti</dd></dl>
-<h1><a class="anchor" id="main_infosGens"></a>
-General information</h1>
-<p>The aim of <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:</p><ul>
-<li>compute the Euler characteristic (and thus the volume when the dimension is even)</li>
-<li>compute f-vector</li>
-<li>check whether the group is cocompact or not</li>
-<li>check whether the group has finite volume</li>
-<li>in some cases, check if the group is arithmetic.</li>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="graph_8h_source.html">graph.h</a></li>
 </ul>
-<h1><a class="anchor" id="sec_toc"></a>
-Table of contents</h1>
-<ul>
-<li><a class="el" href="page_install.html">Building CoxIter</a></li>
-<li><a class="el" href="page_cox_iter.html">Using CoxIter</a> </li>
-</ul>
-</div></div><!-- contents -->
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Fri Aug 5 2016 13:43:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
