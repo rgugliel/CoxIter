@@ -58,7 +58,11 @@ CoxIter::CoxIter()
 	strError( "" ),
 	strInputFilename( "" ),
 	strOuputMathematicalFormat( "generic" )
-{ }
+{ 
+	#ifndef _COMPILE_WITH_OPENMP_
+	this->bOpenMP = false;
+	#endif
+}
 
 CoxIter::CoxIter( const string& strInputFilename, const bool& bWriteInfo, const string& strOutputFilename, const bool& bCoutFile, const bool& bDoComputations, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume, const bool& bOpenMP, const bool& bDebug, const vector< string >& strVertices_, const vector< string >& strVerticesRemove_, const string& strOuputMathematicalFormat )
 :	bCannotBeHyperbolic( false ),
@@ -125,6 +129,10 @@ CoxIter::CoxIter( const string& strInputFilename, const bool& bWriteInfo, const 
 		else
 			sBufOld = cout.rdbuf( outCout->rdbuf() );
 	}
+	
+	#ifndef _COMPILE_WITH_OPENMP_
+	this->bOpenMP = false;
+	#endif
 }
 
 CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension, const bool& bCheckCompacity, const bool& bCheckFiniteCovolume )
@@ -165,6 +173,10 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	initializations();
 	
 	iCoxeterMatrix = iMatrix;
+	
+	#ifndef _COMPILE_WITH_OPENMP_
+	this->bOpenMP = false;
+	#endif
 }
 
 CoxIter::~CoxIter()
@@ -2426,7 +2438,7 @@ void CoxIter::growthSeries_sequential()
 }
 
 
-void CoxIter::growthSeries_parallel()
+void CoxIter::growthSeries_parallel() // TODO: ICI 
 {
 	if( !bGraphExplored )
 		exploreGraph();
@@ -2449,7 +2461,8 @@ void CoxIter::growthSeries_parallel()
 	
 	// -----------------------------------------------------------------
 	// Shared and local variables
-	int iOMPMaxThreads( omp_get_max_threads() );
+	int iOMPMaxThreads( omp_get_max_threads() ); // TODO
+	
 	vector< vector< mpz_class > > gs_iPolynomialDenominator( iOMPMaxThreads, vector< mpz_class >( {0} ) );
 	vector< vector< unsigned int > > gs_iSymbolNumerator( iOMPMaxThreads, vector< unsigned int >( 0 ) );
 	

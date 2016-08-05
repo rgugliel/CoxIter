@@ -54,8 +54,11 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include <gmpxx.h> // GMPib
 
-#ifdef COMPILE_WITH_OPENMP
+#ifdef _COMPILE_WITH_OPENMP_
 #include <omp.h>
+#else
+inline unsigned int omp_get_thread_num() { return 0; }
+inline unsigned int omp_get_max_threads() { return 1; }
 #endif
 
 using namespace std;
