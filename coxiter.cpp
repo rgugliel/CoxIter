@@ -23,8 +23,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "coxiter.h"
 
 CoxIter::CoxIter()
-: 	bCannotBeHyperbolic( false ), // TODO: vérifier cela
-	bCheckCocompactness( false ),
+:	bCheckCocompactness( false ),
 	bCheckCofiniteness( false ),
 	bCoutFile( false ),
 	bDebug( false ),
@@ -33,7 +32,7 @@ CoxIter::CoxIter()
 	bHasBoldLine( false ),
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
-	bWriteInfo( false ),  // TODO
+	bWriteInfo( false ),
 	bWriteProgress( false ),
 	bGraphExplored( false ),
 	bGraphsProductsComputed( false ),
@@ -62,8 +61,7 @@ CoxIter::CoxIter()
 }
 
 CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigned int& iDimension )
-:	bCannotBeHyperbolic( false ),
-	bCheckCocompactness( false ),
+:	bCheckCocompactness( false ),
 	bCheckCofiniteness( false ),
 	bCoutFile( false ),
 	bGramMatrixField( false ),
@@ -1311,7 +1309,6 @@ int CoxIter::iIsGraphCocompact()
 		return 0;
 	}
 	
-	// TODO: ajouter message?
 	if( bHasBoldLine )
 	{
 		iIsCocompact = 0;
@@ -2320,7 +2317,7 @@ void CoxIter::growthSeries_sequential()
 }
 
 
-void CoxIter::growthSeries_parallel() // TODO: ICI 
+void CoxIter::growthSeries_parallel()
 {
 	if( !bGraphExplored )
 		exploreGraph();
@@ -2343,7 +2340,7 @@ void CoxIter::growthSeries_parallel() // TODO: ICI
 	
 	// -----------------------------------------------------------------
 	// Shared and local variables
-	int iOMPMaxThreads( omp_get_max_threads() ); // TODO
+	int iOMPMaxThreads( omp_get_max_threads() );
 	
 	vector< vector< mpz_class > > gs_iPolynomialDenominator( iOMPMaxThreads, vector< mpz_class >( {0} ) );
 	vector< vector< unsigned int > > gs_iSymbolNumerator( iOMPMaxThreads, vector< unsigned int >( 0 ) );
@@ -2894,11 +2891,6 @@ string CoxIter::get_strCoxeterMatrix() const
 	return strCox;
 }
 
-bool CoxIter::get_bCannotBeHyperbolic() const
-{
-	return bCannotBeHyperbolic;
-}
-
 vector< vector< string > > CoxIter::get_array_str_2_GramMatrix() const
 {
 	size_t i, j;
@@ -3252,7 +3244,7 @@ bool CoxIter::get_b_hasSphericalGraphsOfRank( const unsigned int& iRank ) const
 	return ( graphsProductsCount_spherical[iRank].size() != 0 );
 }
 
-bool CoxIter::get_b_hasEuclideanGraphsOfRank( const unsigned int& iRank ) const // TODO: changer nom?
+bool CoxIter::get_b_hasEuclideanGraphsOfRank( const unsigned int& iRank ) const
 {
 	if( iRank > iVerticesCount )
 		return false;

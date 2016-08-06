@@ -20,12 +20,15 @@ You should have received a copy of the GNU General Public License
 along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+
 /*!
  * \file gbd.h
  * \author Rafael Guglielmetti
  * 
  * \class GBD
  * \brief Gal, Bonnafé-Dyer
+ * This part is still experimental!
 */
 
 #ifndef GBD_H

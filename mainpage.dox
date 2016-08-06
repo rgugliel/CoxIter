@@ -40,25 +40,7 @@ sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev
 
 On Fedora, type the following commands in a Shell:
 \code
-sudo yum install g++ cmake graphviz TODO
-\endcode
-
-\subsection main_compilation_gnu_pcre PCRE
-TODO: create advanced section
-To install PCRE, get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.37 (do not use PCRE2). To do that, type the following commands in a shell:
-\code
-wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.37.tar.gz
-tar -xvzf pcre-8.37.tar.gz
-cd pcre-8.37/
-./configure
-make
-sudo make install
-\endcode
-Then, you can delete the temporary files:
-\code
-cd ..
-rm -rf pcre-8.37
-rm pcre-8.37.tar.gz
+sudo yum install g++ cmake graphviz pcre-devel pari-devel
 \endcode
 
 \subsection main_compilation_gnu_compile Compilation
@@ -74,6 +56,24 @@ The compilation should be done withour error or warning. Now, CoxIter is usable.
 If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command:
 \code
 sudo ldconfig
+\endcode
+
+\subsection main_compilation_gnu_advanced Advanced information
+If you want to manually install PCRE, you cna do as follows:
+Get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.39 (do not use PCRE2). To do that, type the following commands in a shell:
+\code
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz
+tar -xvzf pcre-8.39.tar.gz
+cd pcre-8.39/
+./configure
+make
+sudo make install
+\endcode
+Then, you can delete the temporary files:
+\code
+cd ..
+rm -rf pcre-8.39
+rm pcre-8.39.tar.gz
 \endcode
 
 \section main_compilation_win Compilation on Windows with Visual Studio
@@ -127,7 +127,7 @@ The graph is written in a file as follows:
 - Following lines: vertex1 vertex2 weight<br />
 		Remarks:
 		-# 0 is used to specifiy the weight infinity and 1 is used to specifiy a dotted edge
-		-# Only one line per edge is sufficient (in the below example, the line "2 1 3" is superfluous)
+		-# Only one line per edge is sufficient
 		-# The weight 2 doesn't have to be specified.
 
 ### Remark about the dimension ###
@@ -141,7 +141,6 @@ The group <a href="https://en.wikipedia.org/wiki/File:Finite_coxeter.svg" target
 	1 2 3
 	2 3 4
 	3 4 3
-	2 1 3
 \endcode
 It can also be encoded as follows:
 \code{.txt}
@@ -160,6 +159,14 @@ It can also be encoded as follows:
 Example: -i graphs/graph.coxiter
 
 \subsection CoxIter_paramsOpt Basic optional parameters
+
+\param -full If specified, do almost all the possible computations (except the arithmeticity test):
+- Euler characteristic
+- f-vector
+- Finite volume test
+- Compacity test
+- Growth series
+- Growth rate (if the PARI library is avaliable)
 
 \param -arithmeticity If specified, the arithmeticity is tested.<br />
 Alias: -a<br />
@@ -180,15 +187,13 @@ Remarks:<br />
 - If -fv is given and if the group is not of finite covolume, the graph which cannot be extended correctly<br />
 Since the output can be huge with this flag, it is suggested to also use -o and -of
 
-\param -full If specified, do almost all the possible computations (except the arithmeticity test):
-- Euler characteristic
-- f-vector
-- Finite volume test
-- Compacity test
-- Growth series
-
 \param -fv If specified, CoxIter will test whether the group is of finite covolume or not.<br />
 Alias: -fcv
+
+\param -g If specified, CoxIter will compute the growth series.<br />
+Aliases: -growth, -poincarre
+
+\param -growthrate If specified and if the PARI library is avaliable, CoxIter will compute the growth rate.<br />
 
 \subsection CoxIter_paramsAdv Advanced parameters
 

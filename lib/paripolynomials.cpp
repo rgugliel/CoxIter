@@ -4,7 +4,7 @@ Rafael Guglielmetti, rafael.guglielmetti@unifr.ch
 */
 
 /*
-This file is part of CoxIter or VINO or the meta package CIVA.
+This file is part of CoxIter and AlVin.
 
 These are free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as

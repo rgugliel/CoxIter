@@ -4,7 +4,7 @@ Rafael Guglielmetti, rafael.guglielmetti@unifr.ch
 */
 
 /*
-This file is part of CoxIter.
+This file is part of CoxIter and AlVin.
 
 CoxIter is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as
@@ -21,10 +21,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*!
- * \file maths_tools.h
+ * \file polynomials.h
  * \author Rafael Guglielmetti
  * 
- * \brief Some mathematical functions
+ * \brief Some mathematical functions regarding polynomials
 */
 
 #ifndef __POLYNOMIALS_H__

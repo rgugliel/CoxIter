@@ -1,10 +1,10 @@
 /*
-Copyright (C) 2013, 2014, 2015
+Copyright (C) 2013, 2014, 2015, 2016
 Rafael Guglielmetti, rafael.guglielmetti@unifr.ch
 */
 
 /*
-This file is part of CoxIter.
+This file is part of CoxIter and AlVin.
 
 CoxIter is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as
@@ -21,14 +21,14 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*!
- * \file maths_tools.h
+ * \file math_tools.h
  * \author Rafael Guglielmetti
  * 
  * \brief Some mathematical functions
 */
 
-#ifndef __MATHS_TOOLS_H__
-#define __MATHS_TOOLS_H__
+#ifndef __MATH_TOOLS_H__
+#define __MATH_TOOLS_H__
 
 #include <string>
 #include <vector>
@@ -113,7 +113,7 @@ namespace MathTools
 		return (root+1);  
 	}
 
-	/*! 	\fn iDivisors
+	/*! 	\fn iListDivisors
 	* 	\brief Return the list of the divisors of a (small) number
 	* 	Rermark: this function could/should be optimized
 	* 	\param iN( const Type& ) Integer

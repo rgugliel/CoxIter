@@ -45,8 +45,6 @@ strOuputMathematicalFormat( "generic" )
 
 }
 
-// TODO: ajouter growth series dans la doc
-
 bool App::bReadMainParameters( int argc, char **argv )
 {
 	string szTemp, szPrevType, strComplete;

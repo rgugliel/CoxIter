@@ -44,7 +44,6 @@ GrowthRate::~GrowthRate()
 	pari_close();
 }
 
-// TODO: résultat Salem
 GrowthRate_Result GrowthRate::grrComputations( vector< mpz_class > iPolynomial, const bool& bOnlyGrowthRate )
 {
 	irreducibleFactors( iPolynomial );

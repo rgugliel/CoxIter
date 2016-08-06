@@ -102,7 +102,6 @@ class CoxIter
 		bool bHasBoldLine; ///< True if the graph has a bold line
 		bool bCheckCocompactness; ///< True if we want to check the cocompacity
 		bool bCheckCofiniteness; ///< True if we want to check the finite covolume condition
-		bool bCannotBeHyperbolic; ///< True if the graph cannot be hyperbolic
 		int iIsCocompact; ///< 1 If cocompact, 0 if not, -1 if don't know, -2 if not tested
 		int iIsArithmetic; ///< 1 If arithmetic, 0 if non-arithmetic, -1 if don't know
 		int iIsFiniteCovolume; ///< 1 If finite covolume, 0 if not, -1 if don't know (or cannot know), -2 if not tested
@@ -195,7 +194,7 @@ class CoxIter
 		
 		~CoxIter( );
 		
-		/*!	\fn runAllComputations
+		/*!	\fn bRunAllComputations
 		 * 	\brief Do all the computations
 		 * 
 		 * 	Call the followings functions:<br />
@@ -220,27 +219,27 @@ class CoxIter
 		 */
 		void printGramMatrix( );
 		
-		/*!	\fn PrintGramMatrix_Mathematica
+		/*!	\fn printGramMatrix_Mathematica
 		 * 	\brief Print the Gram matrix (format: Mathematica)
 		 */
 		void printGramMatrix_Mathematica( );
 		
-		/*!	\fn PrintGramMatrix_PARI
+		/*!	\fn printGramMatrix_PARI
 		 * 	\brief Print the Gram matrix (format: PARI)
 		 */
 		void printGramMatrix_PARI( );
 		
-		/*!	\fn PrintGramMatrix_LaTeX
+		/*!	\fn printGramMatrix_LaTeX
 		 * 	\brief Print the Gram matrix (format: LaTeX)
 		 */
 		void printGramMatrix_LaTeX();
 		
-		/*!	\fn PrintEdgesVisitedMatrix
+		/*!	\fn printEdgesVisitedMatrix
 		 * 	\brief Affiche les arrêtes qui ont été visitées
 		 */
 		void printEdgesVisitedMatrix( );
 
-		/*! \fn ReadGraphFromFile
+		/*! \fn bReadGraphFromFile
 		 * 	\brief Read the graph from a file
 		 * 
 		 * 	\param strInputFilename( const string& ) Path to the file
@@ -248,7 +247,7 @@ class CoxIter
 		 */
 		bool bReadGraphFromFile( const string& strInputFilename );
 		
-		/*!	\fn writeGraphToDraw
+		/*!	\fn bWriteGraphToDraw
 		 * 	\brief Write the graph in a file for GraphViz
 		 * 
 		 * 	The graph is written in szOutputGraphFilename + ".graphviz"
@@ -257,7 +256,7 @@ class CoxIter
 		 */
 		bool bWriteGraphToDraw( const string& strOutFilenameBasis );
 		
-		/*! 	\fn writeGraph
+		/*! 	\fn bWriteGraph
 		 *	\brief Write the graph in a file (so that it can be read by CoxIter)
 		 * 
 		 *	\param strFilename( const string & )
@@ -313,22 +312,23 @@ class CoxIter
 		 * 	\return The list of affine graphs which cannot be extended to an affine graph of rank n-1. If the list is empty, then it is possible that the group has finite covolume.
 		 */
 		vector< vector< unsigned int > > bCanBeFiniteCovolume_complete( );
-		
-		bool get_bCannotBeHyperbolic( ) const;
-		
+
 		/*!
-		 * \fn ComputeGraphsProducts
+		 * \fn computeGraphsProducts
 		 * \brief Compute the possible products of the irreducible graphs
 		 */
 		void computeGraphsProducts( );
 		
-		// TODO: doc
+		/*!
+		 * \fn printGrowthSeries
+		 * \brief Display the growth series
+		 */
 		void printGrowthSeries( );
 		
-		/*! \fn PrintEuclideanGraphsProducts
+		/*! \fn printEuclideanGraphsProducts
 		 * 	\brief Affiche les produits de graphes trouvés
 		 * 
-		 * 	\param GraphsProductsCount( vector< map<vector< vector< unsigned int > >, unsigned int> >* ) Pointeur vers le vecteur de résultats (typiquement graphsProductsCount_spherical ou graphsProductsCount_euclidean)
+		 * 	\param graphsProductsCount( vector< map<vector< vector< unsigned int > >, unsigned int> >* ) Pointeur vers le vecteur de résultats (typiquement graphsProductsCount_spherical ou graphsProductsCount_euclidean)
 		 */
 		void printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount );
 		
@@ -538,8 +538,6 @@ class CoxIter
 		 */
 		void set_iIsArithmetic( const unsigned int &iArithmetic );
 		
-		// TODO: doc
-		
 		void set_bCheckCocompactness( const bool& bValue );
 		void set_bCheckCofiniteness( const bool& bValue );
 		void set_bDebug( const bool& bValue );
@@ -660,7 +658,7 @@ class CoxIter
 		 */
 		void printPath( );
 		
-		/*!	\fn AddGraphsFromPath
+		/*!	\fn addGraphsFromPath
 		 * 	\brief Crée des graphes (An, Bn, Dn, En, Hn, F4) à partir d'un chemin
 		 * 
 		 * 	On se base sur le contenu de iPath 
