@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['signature',['Signature',['../class_signature.html',1,'']]]
+  ['pcreregexp',['PCRERegexp',['../class_p_c_r_e_regexp.html',1,'']]]
 ];

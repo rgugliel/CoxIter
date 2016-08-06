@@ -40,6 +40,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -65,7 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,7 +115,7 @@ Encoding a Coxeter graph / encoding a Coxeter group</h1>
 <li>Following lines: vertex1 vertex2 weight<br />
  Remarks:<ol type="1">
 <li>0 is used to specifiy the weight infinity and 1 is used to specifiy a dotted edge</li>
-<li>Only one line per edge is sufficient (in the below example, the line "2 1 3" is superfluous)</li>
+<li>Only one line per edge is sufficient</li>
 <li>The weight 2 doesn't have to be specified.</li>
 </ol>
 </li>
@@ -126,7 +127,6 @@ Encoding a Coxeter graph / encoding a Coxeter group</h1>
 <div class="line">1 2 3</div>
 <div class="line">2 3 4</div>
 <div class="line">3 4 3</div>
-<div class="line">2 1 3</div>
 </div><!-- fragment --><p> It can also be encoded as follows: </p><div class="fragment"><div class="line">4</div>
 <div class="line">vertices labels: t s1 s2 s3</div>
 <div class="line">t s1 3</div>
@@ -147,6 +147,15 @@ Mandatory parameters</h2>
 Basic optional parameters</h2>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">-full</td><td>If specified, do almost all the possible computations (except the arithmeticity test):<ul>
+<li>Euler characteristic</li>
+<li>f-vector</li>
+<li>Finite volume test</li>
+<li>Compacity test</li>
+<li>Growth series</li>
+<li>Growth rate (if the PARI library is avaliable)</li>
+</ul>
+</td></tr>
     <tr><td class="paramname">-arithmeticity</td><td>If specified, the arithmeticity is tested.<br />
  Alias: -a<br />
  Remarks:<ul>
@@ -168,16 +177,12 @@ Basic optional parameters</h2>
  Since the output can be huge with this flag, it is suggested to also use -o and -of</li>
 </ul>
 </td></tr>
-    <tr><td class="paramname">-full</td><td>If specified, do almost all the possible computations (except the arithmeticity test):<ul>
-<li>Euler characteristic</li>
-<li>f-vector</li>
-<li>Finite volume test</li>
-<li>Compacity test</li>
-<li>Growth series</li>
-</ul>
-</td></tr>
     <tr><td class="paramname">-fv</td><td>If specified, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will test whether the group is of finite covolume or not.<br />
  Alias: -fcv</td></tr>
+    <tr><td class="paramname">-g</td><td>If specified, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will compute the growth series.<br />
+ Aliases: -growth, -poincarre</td></tr>
+    <tr><td class="paramname">-growthrate</td><td>If specified and if the PARI library is avaliable, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> will compute the growth rate.<br />
+</td></tr>
   </table>
   </dd>
 </dl>
@@ -335,7 +340,7 @@ Example 2</h2>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 5 2016 13:57:46 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 6 2016 10:10:34 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

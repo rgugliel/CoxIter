@@ -10,9 +10,15 @@ var searchData=
   ['bcanbefinitecovolume_5fcomplete_5fcomputegraphsproducts',['bCanBeFiniteCovolume_complete_computeGraphsProducts',['../class_cox_iter.html#abaec736f4a12d25fc0e10b5ce45e86d9',1,'CoxIter']]],
   ['bcanbefinitecovolume_5fcomputegraphsproducts',['bCanBeFiniteCovolume_computeGraphsProducts',['../class_cox_iter.html#ae4d7abd53f49a41baf2796c416a75dd5',1,'CoxIter']]],
   ['begin',['begin',['../class_graphs_list.html#a6adcd89f242486640ca6b21226711945',1,'GraphsList::begin()'],['../class_graphs_list_n.html#a6a84dec7eada01a57052bf7709bf6de6',1,'GraphsListN::begin()']]],
+  ['beulercharacteristicfvector',['bEulerCharacteristicFVector',['../class_cox_iter.html#accb4ceba4add94cf237a27a1a33e289f',1,'CoxIter']]],
+  ['bisprime',['bIsPrime',['../namespace_math_tools.html#acc2503e1c47d2383c563c983c98cfa8f',1,'MathTools']]],
   ['bissubgraphof',['bIsSubgraphOf',['../class_graph.html#aa2ec710575b76fda9263efbbc1ee81d9',1,'Graph']]],
   ['bissubgraphof_5fspherical_5feuclidean',['bIsSubgraphOf_spherical_euclidean',['../class_graph.html#a98b960e57973088db5774f76682fdf06',1,'Graph']]],
   ['bissubgraphof_5fspherical_5fspherical',['bIsSubgraphOf_spherical_spherical',['../class_graph.html#aa6b7ca7a31f90cb6c8baf9020c0aeadc',1,'Graph']]],
   ['bisvertexvalid',['bIsVertexValid',['../class_cox_iter.html#a953d7468acc0b52cb4d77d49831ef93d',1,'CoxIter']]],
-  ['breadmainparameters',['bReadMainParameters',['../class_app.html#a57f4f2ed98d7359fe4d883f8b224627d',1,'App']]]
+  ['breadgraphfromfile',['bReadGraphFromFile',['../class_cox_iter.html#af6c3264f810401353fe3b4652e4ed247',1,'CoxIter']]],
+  ['breadmainparameters',['bReadMainParameters',['../class_app.html#a57f4f2ed98d7359fe4d883f8b224627d',1,'App']]],
+  ['brunallcomputations',['bRunAllComputations',['../class_cox_iter.html#a4918c01a91ed54a75be1062011ce9abc',1,'CoxIter']]],
+  ['bwritegraph',['bWriteGraph',['../class_cox_iter.html#a0cd4c18a14648d3f3b9f2232708681f2',1,'CoxIter']]],
+  ['bwritegraphtodraw',['bWriteGraphToDraw',['../class_cox_iter.html#a42c041344c1107dc073e1a47a7590abe',1,'CoxIter']]]
 ];
