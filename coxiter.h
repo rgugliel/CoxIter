@@ -89,8 +89,8 @@ class CoxIter
 		// Graph
 		unsigned int iVerticesCount; ///< Number of vertices
 		unsigned int iDimension; ///< Dimension (or 0)
-		unsigned int iDimension_sphericalMaxRankFound; ///< Maximal rank for a spherical graph
-		unsigned int iDimension_euclideanMaxRankFound; ///< Maximal rank for an euclidean graph
+		unsigned int iSphericalMaxRankFound; ///< Maximal rank for a spherical graph
+		unsigned int iEuclideanMaxRankFound; ///< Maximal rank for an euclidean graph
 		bool bDimension_guessed; ///< If the dimension was not specified but guessed
 		
 		bool bGraphExplored; ///< True if we looked for connected subgraphs (affine and spherical)

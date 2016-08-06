@@ -42,8 +42,8 @@ CoxIter::CoxIter()
 	graphsList_spherical( 0 ),
 	graphsList_euclidean( 0 ),
 	iDimension( 0 ),
-	iDimension_euclideanMaxRankFound( 0 ),
-	iDimension_sphericalMaxRankFound( 0 ),
+	iEuclideanMaxRankFound( 0 ),
+	iSphericalMaxRankFound( 0 ),
 	bDimension_guessed( false ),
 	iFVectorAlternateSum( 0 ),
 	iIsArithmetic( -1 ),
@@ -73,14 +73,15 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
 	bWriteInfo( false ), 
+	bWriteProgress( false ),
 	bDebug( false ),
 	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
 	graphsList_spherical( 0 ),
 	graphsList_euclidean( 0 ),
 	iDimension( iDimension ),
-	iDimension_euclideanMaxRankFound( 0 ),
-	iDimension_sphericalMaxRankFound( 0 ),
+	iEuclideanMaxRankFound( 0 ),
+	iSphericalMaxRankFound( 0 ),
 	bDimension_guessed( false ),
 	iFVectorAlternateSum( 0 ),
 	iIsCocompact( -1 ),
@@ -379,15 +380,6 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 		for( vector< string >::const_iterator itStr( map_vertices_indexToLabel.begin() ); itStr != map_vertices_indexToLabel.end(); ++itStr )
 			cout << ( itStr != map_vertices_indexToLabel.begin() ? ", " : "" ) << *itStr;
 		cout << endl;
-		
-		/*
-		if( strVerticesRemove.size() )
-		{
-			cout << "\tRemoved vertices: "; 
-			for( vector< string >::const_iterator itStr( strVerticesRemove.begin() ); itStr != strVerticesRemove.end(); ++itStr )
-				cout << ( itStr != strVerticesRemove.begin() ? ", " : "" ) << *itStr;
-			cout << endl;
-		}*/
 	}
 	
 	// ---------------------------------------------------------------------------
@@ -1617,20 +1609,20 @@ void CoxIter::computeGraphsProducts()
 	// We guess the dimension
 	if( !iDimension )
 	{
-		iDimension = max( iDimension_euclideanMaxRankFound + 1, iDimension_sphericalMaxRankFound );
+		iDimension = max( iEuclideanMaxRankFound + 1, iSphericalMaxRankFound );
 		bDimension_guessed = true;
 		
-		if( iDimension_euclideanMaxRankFound == iDimension_sphericalMaxRankFound )
+		if( iEuclideanMaxRankFound == iSphericalMaxRankFound )
 		{
 			graphsProducts[0] = graphsProducts[1];
 			graphsProducts[1].clear();
 		}
-		else if( iDimension_euclideanMaxRankFound > iDimension_sphericalMaxRankFound )
+		else if( iEuclideanMaxRankFound > iSphericalMaxRankFound )
 		{
 			graphsProducts[0].clear();
 			graphsProducts[1].clear();
 		}
-		else if( iDimension_sphericalMaxRankFound > iDimension_euclideanMaxRankFound + 1 )
+		else if( iSphericalMaxRankFound > iEuclideanMaxRankFound + 1 )
 		{
 			graphsProducts[2].clear();
 		}
@@ -1689,40 +1681,40 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 					{
 						if( bSpherical )
 						{
-							if( gp.iRank == iDimension_sphericalMaxRankFound + 1 )
+							if( gp.iRank == iSphericalMaxRankFound + 1 )
 							{
 								graphsProducts[0] = graphsProducts[1];
 								graphsProducts[1].clear();
 								graphsProducts[1].push_back( GraphsProductSet( gp ) );
 							}
-							else if( gp.iRank > iDimension_sphericalMaxRankFound + 1 )
+							else if( gp.iRank > iSphericalMaxRankFound + 1 )
 							{
 								graphsProducts[0].clear();
 								graphsProducts[1].clear();
 								graphsProducts[1].push_back( GraphsProductSet( gp ) );
 							}
-							else if( gp.iRank + 1 >= iDimension_sphericalMaxRankFound )
-								graphsProducts[ gp.iRank + 1 - iDimension_sphericalMaxRankFound ].push_back( GraphsProductSet( gp ) );
+							else if( gp.iRank + 1 >= iSphericalMaxRankFound )
+								graphsProducts[ gp.iRank + 1 - iSphericalMaxRankFound ].push_back( GraphsProductSet( gp ) );
 						}
 						else
 						{	
 							if( bCheckCofiniteness )
 							{
-								if( gp.iRank > iDimension_euclideanMaxRankFound )
+								if( gp.iRank > iEuclideanMaxRankFound )
 									graphsProducts[2].clear();
 								
-								if( gp.iRank >= iDimension_euclideanMaxRankFound )
+								if( gp.iRank >= iEuclideanMaxRankFound )
 									graphsProducts[2].push_back( GraphsProductSet( gp ) );
 							}
 						}
 					}
 				}
 				
-				if( bSpherical && gp.iRank >= iDimension_sphericalMaxRankFound )
-					iDimension_sphericalMaxRankFound = gp.iRank;
+				if( bSpherical && gp.iRank >= iSphericalMaxRankFound )
+					iSphericalMaxRankFound = gp.iRank;
 				
-				if( !bSpherical && gp.iRank >= iDimension_euclideanMaxRankFound )
-					iDimension_euclideanMaxRankFound = gp.iRank;
+				if( !bSpherical && gp.iRank >= iEuclideanMaxRankFound )
+					iEuclideanMaxRankFound = gp.iRank;
 				
 				if( (*graphsProductsCount)[ gp.iRank ].find( vFootPrintTest ) == (*graphsProductsCount)[ gp.iRank ].end() )
 					(*graphsProductsCount)[ gp.iRank ][ vFootPrintTest ] = 1;
@@ -3325,8 +3317,8 @@ void CoxIter::set_iCoxeterMatrix( const vector< vector< unsigned int > >& iMat )
 	bGraphsProductsComputed = false;
 	bGrowthSeriesComputed = false;
 	
-	iDimension_euclideanMaxRankFound = 0;
-	iDimension_sphericalMaxRankFound = 0;
+	iEuclideanMaxRankFound = 0;
+	iSphericalMaxRankFound = 0;
 	bDimension_guessed = false;
 	iHasDottedLineWithoutWeight = -1;
 }
