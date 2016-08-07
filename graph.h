@@ -42,7 +42,7 @@ using namespace std;
 class Graph
 {
 	public:
-		vector< unsigned int > iVertices; ///< Vertices of the graph
+		vector< short unsigned int > iVertices; ///< Vertices of the graph
 		vector< bool > bVerticesLinkable; ///< A quels sommets on peut lier le graphe { sommets } \ { sommets du graphes et leurs voisins )
 		
 		unsigned int iGraphType; ///< Type of the graph: A=0, B=1, ...
@@ -58,14 +58,14 @@ class Graph
 	public:
 		/*! \fn Graph
 		 * 	\brief Constructeur
-		 * 	\param iVertices( const vector< unsigned int >& ) Sommets composant le graphe
+		 * 	\param iVertices( const vector<short unsigned int>& ) Sommets composant le graphe
 		 * 	\param ptr_map_vertices_indexToLabel( vector< string > * ) Pointeur vers la correspondance index --> label des sommets
 		 * 	\param bVerticesLinkable( const vector< bool >& ) Ce à quoi le graphe est liable
 		 * 	\param iType ( const unsigned int & ) Type du graphe: A=0, B=1, ...
 		 * 	\param bSpherical( const bool&  ) True si sphérique, false si euclidien
 		 * 	\param iDataSupp( const unsigned int & ) Eventuelle information supplémentaire, par exemple poids pour le G2
 		 */
-		Graph( const vector< unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp = 0 );
+		Graph( const vector< short unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp = 0 );
 		
 		/*! \fn bIsSubgraphOf
 		 * 	\brief Test if a graph (spherical) is a subgraph of another graph (spherical or euclidean)
@@ -95,7 +95,7 @@ class Graph
 		friend bool operator<( const Graph &g1, const Graph &g2 );
 		
 	private:
-		static bool bAnSubAm( const vector< unsigned int >& iSubV, const vector< unsigned int >& iBigV );
+		static bool bAnSubAm( const vector<short unsigned int>& iSubV, const vector<short unsigned int>& iBigV );
 		
 	public:
 		friend ostream& operator<<( ostream& , Graph const & );

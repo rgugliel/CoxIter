@@ -51,13 +51,13 @@ class GBD
 {
 	private:
 		CoxIter* ci;
-		vector< vector< unsigned int > > iCox; ///< Coxeter matrix
+		vector< vector<unsigned int> > iCox; ///< Coxeter matrix
 		unsigned int iVerticesCount; ///< Number of vertices of the starting graph
 		
 		unsigned int iVertex; ///< Index of the vertex
 		
 		vector< NewVertex > newVertices;
-		vector< vector< unsigned int > > iNewCox; ///< New Coxeter matrix
+		vector< vector<unsigned int> > iNewCox; ///< New Coxeter matrix
 		unsigned int iNewVerticesCount;
 		
 		string strError;

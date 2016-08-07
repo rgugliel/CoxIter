@@ -446,8 +446,8 @@ void CoxIter::initializations()
 	graphsList_spherical = new GraphsList( iVerticesCount, &map_vertices_indexToLabel );
 	graphsList_euclidean = new GraphsList( iVerticesCount, &map_vertices_indexToLabel );
 	
-	graphsProductsCount_euclidean = vector< map<vector< vector< unsigned int > >, unsigned int> >( iVerticesCount + 1, map<vector< vector< unsigned int > >, unsigned int>() );
-	graphsProductsCount_spherical = vector< map<vector< vector< unsigned int > >, unsigned int> >( iVerticesCount + 1, map<vector< vector< unsigned int > >, unsigned int>() );
+	graphsProductsCount_euclidean = vector< map<vector< vector< short unsigned int > >, unsigned int> >( iVerticesCount + 1, map<vector< vector< short unsigned int > >, unsigned int>() );
+	graphsProductsCount_spherical = vector< map<vector< vector< short unsigned int > >, unsigned int> >( iVerticesCount + 1, map<vector< vector< short unsigned int > >, unsigned int>() );
 	
 	// ------------------------------------------------------------
 	// sauvegarde de quelques calculs
@@ -578,8 +578,8 @@ bool CoxIter::bWriteGraphToDraw( const string& strOutFilenameBasis )
 
 void CoxIter::exploreGraph()
 {
-	vector<unsigned int> iVertices;
-	unsigned int i, j, k, l;
+	vector<short unsigned int> iVertices;
+	short unsigned int i, j, k, l;
 	
 	if( !iVerticesCount )
 		throw( string( "CoxIter::exploreGraph: No graph given" ) );
@@ -625,7 +625,7 @@ void CoxIter::exploreGraph()
 		
 		// ajout du sommet (A_1)
 		bVerticesLinkable[i] = false;
-		graphsList_spherical->addGraph( vector<unsigned int>(1, i), bVerticesLinkable, 0, true );
+		graphsList_spherical->addGraph( vector<short unsigned int>(1, i), bVerticesLinkable, 0, true );
 		
 		// on regarde si on trouve avec ce sommet: Gn, TA1 ,TC2
 		for( j = 0; j < iVerticesCount; j++ )
@@ -670,7 +670,7 @@ void CoxIter::exploreGraph()
 									bVerticesLinkableTemp[l] = false;
 							}
 							
-							graphsList_euclidean->addGraph( vector< unsigned int >( 1, j ), bVerticesLinkableTemp, 2, false, i, k );
+							graphsList_euclidean->addGraph( vector<short unsigned int>( 1, j ), bVerticesLinkableTemp, 2, false, i, k );
 						}
 					}
 				}
@@ -764,10 +764,10 @@ void CoxIter::addGraphsFromPath()
 	vector<bool> bVerticesLinkableTemp, bVerticesLinkableTempTemp;
 	
 	// chemin en cours de construction
-	vector<unsigned int> iPathTemp;
+	vector<short unsigned int> iPathTemp;
 	
 	// i, j, k, l: variables de boucles
-	unsigned int i, j, k, l, iMax( iPath.size() ), iOrder;
+	short unsigned int i, j, k, l, iMax( iPath.size() ), iOrder;
 	
 	for( i = 0; i < iMax; i++ )
 	{
@@ -967,7 +967,7 @@ void CoxIter::addGraphsFromPath()
 	}
 }
 
-void CoxIter::AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable )
+void CoxIter::AnToEn_AnToTEn( const vector< short unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable )
 {
 	unsigned int iPathLength( iPathTemp.size() );
 	
@@ -986,7 +986,7 @@ void CoxIter::AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vec
 		AnToEn_AnToTEn( iPathTemp, bVerticesLinkable, false, 3 );
 }
 
-void CoxIter::AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const unsigned int& iStart )
+void CoxIter::AnToEn_AnToTEn( const vector< short unsigned int >& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart )
 {
 	unsigned int iPathLength( iPathTemp.size() ), j, k, l;
 	vector<bool> bVerticesLinkableTemp, bVerticesLinkableTempTemp;
@@ -1060,7 +1060,7 @@ void CoxIter::AnToEn_AnToTEn( const vector< unsigned int >& iPathTemp, const vec
  * 			iPathTemp: deux(trois) premiers sommets
  * 			iVEnd: 3ème(4ème) sommet
  * */
-void CoxIter::B3ToF4_B4ToTF4( const vector<bool> &bVerticesBeginLinkable, vector<unsigned int> iPathTemp, const unsigned int &iVEnd )
+void CoxIter::B3ToF4_B4ToTF4( const vector<bool> &bVerticesBeginLinkable, vector<short unsigned int> iPathTemp, const short unsigned int &iVEnd )
 {
 	bool bSpherical( iPathTemp.size() == 2 ? true : false ); // true si sphérique (on cherche F4), false si euclidien (on cherche TF4)
 	unsigned int i, j, iV2( iPathTemp[1] );
@@ -1626,13 +1626,13 @@ void CoxIter::computeGraphsProducts()
 	}
 }
 
-void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector< short unsigned int > >, unsigned int> > *graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
 {
-	vector< unsigned int >::iterator iIt;
-	vector< unsigned int > iVerticesFlagged;
+	vector< short unsigned int >::iterator iIt;
+	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
 	
-	vector< vector< unsigned int > > vFootPrintTest;
+	vector< vector< short unsigned int > > vFootPrintTest;
 	
 	while( grIt.ptr && ( gp.iRank + iGraphRank <= iVerticesCount ) )
 	{
@@ -1830,8 +1830,8 @@ bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
 
 void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable)
 {
-	vector< unsigned int >::iterator iIt;
-	vector< unsigned int > iVerticesFlagged;
+	vector< short unsigned int >::iterator iIt;
+	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
 	
 	while( grIt.ptr && ( gp.iRank + iGraphRank <= iVerticesCount ) )
@@ -1893,7 +1893,7 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(GraphsListIterator grIt
 	}
 }
 
-vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
+vector< vector< short unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 {
 	// -----------------------------------------------------------
 	// Some verifications
@@ -1928,7 +1928,7 @@ vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 		}
 	}
 	
-	vector< vector< unsigned int > > iGraphsNotExtendable( 0 );
+	vector< vector< short unsigned int > > iGraphsNotExtendable( 0 );
 	
 	// -----------------------------------------------------------
 	// Check the condition: every connected affine graph of rank at least 2 is a subgraph of an affine graph of rank n-1
@@ -1986,8 +1986,8 @@ vector< vector< unsigned int > > CoxIter::bCanBeFiniteCovolume_complete()
 
 void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable)
 {
-	vector< unsigned int >::iterator iIt;
-	vector< unsigned int > iVerticesFlagged;
+	vector< short unsigned int >::iterator iIt;
+	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
 	
 	while( grIt.ptr && ( gp.iRank + iGraphRank <= iVerticesCount ) )
@@ -2438,10 +2438,10 @@ vector< mpz_class > CoxIter::get_iGrowthSeries_denominator()
 	return growthSeries_iPolynomialDenominator;
 }
 
-void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsigned int > >& iProduct, string& strSymbol, unsigned int& iExponent) const
+void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< short unsigned int > >& iProduct, string& strSymbol, unsigned int& iExponent) const
 {
-	unsigned int j, jMax, k;
-
+	short unsigned int j, jMax, k;
+	
 	vector< unsigned int > iSymbol;
 	iExponent = 0;
 	
@@ -2525,7 +2525,7 @@ void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsig
 	strSymbol = implode( ",", iSymbol );
 }
 
-void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< unsigned int > >& iProduct, vector< unsigned int >& iSymbol, unsigned int& iExponent) const
+void CoxIter::growthSeries_symbolExponentFromProduct(const vector< vector< short unsigned int > >& iProduct, vector< unsigned int >& iSymbol, unsigned int& iExponent) const
 {
 	unsigned int j, jMax, k;
 
@@ -2617,7 +2617,7 @@ bool CoxIter::bEulerCharacteristicFVector()
 {
 	// variables de boucles
 	size_t i, j, k, iMax;
-	map<vector< vector< unsigned int > >, unsigned int>::iterator itMap;
+	map<vector< vector< short unsigned int > >, unsigned int>::iterator itMap;
 	
 	mpz_class biTemp, biOrderTemp;
 	MPZ_rational brAlternateTemp;
@@ -2639,7 +2639,7 @@ bool CoxIter::bEulerCharacteristicFVector()
 	iFVector[ iDimension ] = 1;
 	
 	// par taille de nombre de sommets
-	for( vector< map<vector< vector< unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount_spherical.begin() ); itMaps != graphsProductsCount_spherical.end(); ++itMaps )
+	for( vector< map<vector< vector< short unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount_spherical.begin() ); itMaps != graphsProductsCount_spherical.end(); ++itMaps )
 	{
 		brAlternateTemp = 0;
 		
@@ -2715,14 +2715,14 @@ bool CoxIter::bEulerCharacteristicFVector()
 // ##################################################################################################################################3
 // Affichages
 
-void CoxIter::printEuclideanGraphsProducts( vector< map<vector< vector< unsigned int > >, unsigned int> >* graphsProductsCount )
+void CoxIter::printEuclideanGraphsProducts( vector< map<vector< vector< short unsigned int > >, unsigned int> >* graphsProductsCount )
 {
 	// variables de boucles
 	size_t i, j, iMax;
-	map<vector< vector< unsigned int > >, unsigned int>::iterator itMap;
+	map<vector< vector< short unsigned int > >, unsigned int>::iterator itMap;
 	
 	// par taille de nombre de sommets
-	for( vector< map<vector< vector< unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount->begin() ); itMaps != graphsProductsCount->end(); ++itMaps )
+	for( vector< map<vector< vector< short unsigned int > >, unsigned int> >::iterator itMaps( graphsProductsCount->begin() ); itMaps != graphsProductsCount->end(); ++itMaps )
 	{
 		// on parcourt les produits pour la taille donnée
 		for( itMap = itMaps->begin(); itMap != itMaps->end(); ++itMap )

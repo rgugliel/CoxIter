@@ -55,7 +55,7 @@ class GraphsProduct
 		 * 	\brief Pour un graphe, crée le "footprint", c'est-à-dire la clé utilisée dans la map CoxIter.graphsProductsCount
 		 * 	\return Clé pour la map
 		 */
-		vector< vector< unsigned int > > createFootPrint( );
+		vector< vector< short unsigned int > > createFootPrint( );
 		
 		friend ostream& operator<<( ostream &o, const GraphsProduct &gp );
 };

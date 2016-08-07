@@ -22,7 +22,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graph.h"
 
-Graph::Graph( const vector< unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp )
+Graph::Graph( const vector< short unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp )
 : iGraphType( iType ), iVertices( iVertices ), bVerticesLinkable( bVerticesLinkable ), iDataSupp( iDataSupp ), bSpherical( bSpherical ), ptr_map_vertices_indexToLabel( ptr_map_vertices_indexToLabel ), b_map_vertices_indexToLabelIsEmpty( !ptr_map_vertices_indexToLabel || ptr_map_vertices_indexToLabel->size( ) == 0 )
 {
 }
@@ -79,7 +79,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// A_n < TA_m
 	if( iGraphType == 0 && grBig->iGraphType == 0 && iVerticesBigCount > 2 )
 	{
-		vector< unsigned int >::const_iterator itBig( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
+		vector< short unsigned int >::const_iterator itBig( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
 		if( itBig == grBig->iVertices.end( ) )
 			return false;
 		
@@ -96,7 +96,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		else
 			return false;
 		
-		for( vector< unsigned int >::const_iterator itSub( iVertices.begin( ) ); itSub != iVertices.end( ); ++itSub )
+		for( vector< short unsigned int >::const_iterator itSub( iVertices.begin( ) ); itSub != iVertices.end( ); ++itSub )
 		{
 			if( *itSub != *itBig )
 				return false;
@@ -118,7 +118,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		if( iVerticesBigCount == 4 )
 		{
 			/* In this case, if we remove the first edge, the obtained A3 is not correct */
-			vector< unsigned int > iVTemp;
+			vector<short unsigned int> iVTemp;
 			iVTemp.push_back( grBig->iVertices[2] );
 			iVTemp.push_back( grBig->iVertices[1] );
 			iVTemp.push_back( grBig->iVertices[3] );
@@ -127,7 +127,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		}
 		else
 		{
-			Graph g( vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( 0 ), 3, true, 0 );
+			Graph g( vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( 0 ), 3, true, 0 );
 			
 			return bIsSubgraphOf_spherical_spherical( &g );
 		}
@@ -137,7 +137,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// A_n < TC_m
 	if( iGraphType == 0 && grBig->iGraphType == 2 )
 	{
-		return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) - 1 ) );
+		return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) - 1 ) );
 	}
 	
 	// ---------------------------------------------------------------------
@@ -146,7 +146,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	{
 		if( iVerticesCount <= 3 ) // could be in one of the ends
 		{
-			vector< unsigned int > iVTemp;
+			vector<short unsigned int> iVTemp;
 			
 			// left hand side
 			iVTemp.push_back( grBig->iVertices[0] );
@@ -164,10 +164,10 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 				return true;
 		}
 		
-		vector< unsigned int >::const_iterator itStart( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
-		vector< unsigned int >::const_iterator itEnd( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[ iVerticesCount - 1 ] ) );
+		vector<short unsigned int>::const_iterator itStart( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
+		vector<short unsigned int>::const_iterator itEnd( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[ iVerticesCount - 1 ] ) );
 		
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 2 ); // basis (middle)
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 2 ); // basis (middle)
 		
 		if( itStart == grBig->iVertices.begin( ) )
 			iVTemp.insert( iVTemp.begin( ), grBig->iVertices[0] );
@@ -186,14 +186,14 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// A_n < TE_6
 	if( iGraphType == 0 && grBig->iGraphType == 4 && iVerticesBigCount == 7 )
 	{
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
 		iVTemp.push_back( grBig->iVertices[6] );
 		iVTemp.push_back( grBig->iVertices[4] );
 		iVTemp.push_back( grBig->iVertices[5] );
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
 		
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
 		iVTemp.push_back( grBig->iVertices[6] );
 		iVTemp.push_back( grBig->iVertices[2] );
 		iVTemp.push_back( grBig->iVertices[3] );
@@ -214,11 +214,11 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// A_n < TE_m
 	if( iGraphType == 0 && grBig->iGraphType == 4 )
 	{
-		vector< unsigned int > iVTemp;
+		vector<short unsigned int> iVTemp;
 		
 		//-------------------------------------
 		// basis
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
 		
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
@@ -229,13 +229,13 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		// left & queue or right & queue
 		if( iVerticesBigCount == 8 ) // TE7
 		{
-			iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 4 );
+			iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 4 );
 			iVTemp.push_back( grBig->iVertices[7] );
 			if( bAnSubAm( iVertices, iVTemp ) )
 				return true;
 			
 			iVTemp.clear( );
-			iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + 3, grBig->iVertices.end( ) - 1 );
+			iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + 3, grBig->iVertices.end( ) - 1 );
 			iVTemp.insert( iVTemp.begin( ), grBig->iVertices[7] );
 			
 			
@@ -244,13 +244,13 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		}
 		else if( iVerticesBigCount == 9 ) // TE8
 		{
-			iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
+			iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
 			iVTemp.push_back( grBig->iVertices[8] );
 			if( bAnSubAm( iVertices, iVTemp ) )
 				return true;
 			
 			iVTemp.clear( );
-			iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
+			iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
 			iVTemp.insert( iVTemp.begin( ), grBig->iVertices[8] );
 			return bAnSubAm( iVertices, iVTemp );
 		}
@@ -263,11 +263,11 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		if( iVerticesCount > 3 )
 			return false;
 		
-		if( bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 ) ) )
+		if( bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 ) ) )
 			return true;
 		
 		if( iVerticesCount == 2 )
-			return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.end( ) - 2, grBig->iVertices.end( ) ) );
+			return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.end( ) - 2, grBig->iVertices.end( ) ) );
 		
 		return false;
 	}
@@ -279,28 +279,28 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		if( iVerticesCount > 2 )
 			return false;
 		
-		return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 ) );
+		return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 ) );
 	}
 	
 	// ---------------------------------------------------------------------
 	// B_n < TB_m
 	if( iGraphType == 1 && grBig->iGraphType == 1 )
 	{
-		vector< unsigned int > iVTemp( iVertices );
+		vector<short unsigned int> iVTemp( iVertices );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
 		
-		vector< unsigned int >::const_iterator itSearch( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
+		vector<short unsigned int>::const_iterator itSearch( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
 		
 		if( itSearch == grBig->iVertices.end( ) )
 			return false;
 		
 		// if we don't use any of the two ends (right ends)
 		if( itSearch + 1 != grBig->iVertices.end( ) && itSearch + 2 != grBig->iVertices.end( ) )
-			return ( iVTemp == vector< unsigned int >( grBig->iVertices.begin( ), itSearch + 1 ) );
+			return ( iVTemp == vector<short unsigned int>( grBig->iVertices.begin( ), itSearch + 1 ) );
 		else if( itSearch + 1 == grBig->iVertices.end( ) )
 		{
 			
-			vector< unsigned int > iVTemp2( vector< unsigned int >( grBig->iVertices.begin( ), itSearch - 1 ) );
+			vector<short unsigned int> iVTemp2( vector<short unsigned int>( grBig->iVertices.begin( ), itSearch - 1 ) );
 			iVTemp2.push_back( grBig->iVertices[ iVerticesBigCount - 1 ] );
 			
 			return ( iVTemp == iVTemp2 );
@@ -308,7 +308,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		}
 		else // itSearch + 2 == grBig->iVertices.end( )
 		{
-			vector< unsigned int > iVTemp2( vector< unsigned int >( grBig->iVertices.begin( ), itSearch ) );
+			vector<short unsigned int> iVTemp2( vector<short unsigned int>( grBig->iVertices.begin( ), itSearch ) );
 			iVTemp2.push_back( grBig->iVertices[ iVerticesBigCount - 2 ] );
 			
 			return ( iVTemp == iVTemp2 );
@@ -321,19 +321,19 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// B_n < TC_m
 	if( iGraphType == 1 && grBig->iGraphType == 2 )
 	{
-		vector< unsigned int >::const_iterator itSearch( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
+		vector<short unsigned int>::const_iterator itSearch( find( grBig->iVertices.begin( ), grBig->iVertices.end( ), iVertices[0] ) );
 		
 		if( itSearch == grBig->iVertices.end( ) )
 			return false;
 		
 		// [3, ..., 3, 4] < [3, ..., 3, 4]
 		if( iVertices[ iVerticesCount - 1 ] == grBig->iVertices[ iVerticesBigCount - 1 ] )
-			return ( iVertices == vector< unsigned int >( itSearch, grBig->iVertices.end( ) ) );
+			return ( iVertices == vector<short unsigned int>( itSearch, grBig->iVertices.end( ) ) );
 		
 		// [3, ..., 3, 4] < [4, 3, ..., 3]
 		if( iVertices[ iVerticesCount - 1 ] == grBig->iVertices[0] )
 		{
-			vector< unsigned int > iVTemp( grBig->iVertices.begin( ), itSearch + 1 );
+			vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), itSearch + 1 );
 			reverse( iVTemp.begin( ), iVTemp.end( ) );
 			
 			return ( iVTemp == iVertices );
@@ -349,13 +349,13 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		
 		// ----------------------------------------
 		// ( [4,3] OR [4,3,3] ) < ( [3,3,4] )
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ) + ( iVerticesCount == 4 ? 0 : 1 ), grBig->iVertices.end( ) - 1 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ) + ( iVerticesCount == 4 ? 0 : 1 ), grBig->iVertices.end( ) - 1 );
 		if( iVertices == iVTemp )
 			return true;
 		
 		// ----------------------------------------
 		// [4,3] < ( [4,3] )
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
 		return ( iVertices == iVTemp );
 	}
@@ -367,7 +367,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		if( iVerticesBigCount < 5 )
 			return false;
 		
-		Graph g( vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( false ), 3, true, 0 );
+		Graph g( vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( false ), 3, true, 0 );
 		
 		return bIsSubgraphOf_spherical_spherical( &g );
 	}
@@ -400,19 +400,19 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	if( iGraphType == 3 && grBig->iGraphType == 3 )
 	{
 		// Test 1
-		Graph g( vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( false ), 3, true, 0 );
+		Graph g( vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ), 0, vector< bool >( false ), 3, true, 0 );
 		if( bIsSubgraphOf_spherical_spherical( &g ) )
 			return true;
 		
 		// Test 2
-		vector< unsigned int > iVTemp( vector< unsigned int >( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) ) );
+		vector<short unsigned int> iVTemp( vector<short unsigned int>( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) ) );
 		iVTemp.insert( iVTemp.begin( ), grBig->iVertices[0] );
 		g = Graph( iVTemp, 0, vector< bool >( false ), 3, true, 0 );
 		if( bIsSubgraphOf_spherical_spherical( &g ) )
 			return true;
 		
 		// Test 3
-		iVTemp = vector< unsigned int >( vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
+		iVTemp = vector<short unsigned int>( vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
 		iVTemp[0] = max( grBig->iVertices[0], grBig->iVertices[1] );
 		iVTemp[1] = min( grBig->iVertices[0], grBig->iVertices[1] );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
@@ -421,7 +421,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 			return true;
 		
 		// Test 4
-		iVTemp = vector< unsigned int >( vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 2 ) );
+		iVTemp = vector<short unsigned int>( vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 2 ) );
 		iVTemp[0] = max( grBig->iVertices[0], grBig->iVertices[1] );
 		iVTemp[1] = min( grBig->iVertices[0], grBig->iVertices[1] );
 		iVTemp.push_back( grBig->iVertices[ iVerticesBigCount - 1 ] );
@@ -437,7 +437,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	{
 		// -------------------------------------------------
 		// first test
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 2 );
 		iVTemp.push_back( grBig->iVertices[6] );
 		iVTemp.push_back( min( grBig->iVertices[2], grBig->iVertices[4] ) );
 		iVTemp.push_back( max( grBig->iVertices[2], grBig->iVertices[4] ) );
@@ -485,7 +485,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		
 		// -------------------------------------------------
 		// first test
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iBigQueueIndex + 1 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iBigQueueIndex + 1 );
 		iVTemp.push_back( min( grBig->iVertices[ iBigQueueIndex + 1 ], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		iVTemp.push_back( max( grBig->iVertices[ iBigQueueIndex + 1 ], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		Graph g( iVTemp, 0, vector< bool >( false ), 3, true, 0 );
@@ -495,7 +495,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		
 		// -------------------------------------------------
 		// second test
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + iBigQueueIndex, grBig->iVertices.end( ) - 1 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + iBigQueueIndex, grBig->iVertices.end( ) - 1 );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
 		iVTemp.push_back( min( grBig->iVertices[ iBigQueueIndex - 1 ], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		iVTemp.push_back( max( grBig->iVertices[ iBigQueueIndex - 1 ], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
@@ -511,7 +511,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// E_6 < TE_6
 	if( iGraphType == 4 && iVerticesCount == 6 && grBig->iGraphType == 4 && iVerticesBigCount == 7 )
 	{
-		vector< unsigned int > iVBigBasis;
+		vector<short unsigned int> iVBigBasis;
 		
 		// We must find out what the base is
 		if( iVertices[5] == grBig->iVertices[4] )
@@ -544,7 +544,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		if( iVBigBasis[0] > iVBigBasis[4] )
 			reverse( iVBigBasis.begin( ), iVBigBasis.end( ) );
 		
-		return ( iVBigBasis == vector< unsigned int >( iVertices.begin( ), iVertices.end( ) - 1 ) );
+		return ( iVBigBasis == vector<short unsigned int>( iVertices.begin( ), iVertices.end( ) - 1 ) );
 	}
 	
 	// ---------------------------------------------------------------------
@@ -557,32 +557,32 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 		// E_6, E_7 < TE7
 		if( iVerticesCount <= 7 && iVerticesBigCount == 8 )
 		{
-			vector< unsigned int > iVBigBasis( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + iVerticesCount );
-			if( bAnSubAm( vector< unsigned int >( iVertices.begin( ), iVertices.end( ) - 1 ), iVBigBasis ) )
+			vector<short unsigned int> iVBigBasis( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + iVerticesCount );
+			if( bAnSubAm( vector<short unsigned int>( iVertices.begin( ), iVertices.end( ) - 1 ), iVBigBasis ) )
 				return true;
 			
 			if( iVerticesCount == 7 && iVerticesBigCount == 8 ) // E_7 < TE_7
 			{
-				iVBigBasis = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 6 );
+				iVBigBasis = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 6 );
 				reverse( iVBigBasis.begin( ), iVBigBasis.end( ) );
 				
-				return (  vector< unsigned int >( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis );
+				return (  vector<short unsigned int>( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis );
 			}
 			
 			return false;
 		}
 		else if( iVerticesBigCount == 9 ) // < TE_8
 		{
-			vector< unsigned int > iVBigBasis( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iVerticesCount - 1 );
+			vector<short unsigned int> iVBigBasis( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iVerticesCount - 1 );
 			
-			if( vector< unsigned int >( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis )
+			if( vector<short unsigned int>( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis )
 				return true;
 			
 			if( iVerticesCount == 6 ) // E_5 is symmetric
 			{
 				reverse( iVBigBasis.begin( ), iVBigBasis.end( ) );
 				
-				return ( ( vector< unsigned int >( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis ) );
+				return ( ( vector<short unsigned int>( iVertices.begin( ), iVertices.end( ) - 1 ) == iVBigBasis ) );
 			}
 			
 			return false;
@@ -595,7 +595,7 @@ bool Graph::bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const
 	// F_4 < TF_4
 	if( iGraphType == 5 && grBig->iGraphType == 5 )
 	{
-		return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ) );
+		return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.end( ) ) );
 	}
 	
 	// ---------------------------------------------------------------------
@@ -653,7 +653,7 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	// A_n < B_m
 	if( iGraphType == 0 && grBig->iGraphType == 1 )
 	{
-		return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
+		return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
 	}
 	
 	// ---------------------------------------------------------------------
@@ -661,12 +661,12 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	if( iGraphType == 0 && grBig->iGraphType == 3 )
 	{
 		// base plus une des deux extrémités
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
 		
 		// base plus l'autre extrémité
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 2 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 2 );
 		iVTemp.push_back( grBig->iVertices[ iVerticesBigCount - 1 ] );
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
@@ -690,18 +690,18 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	if( iGraphType == 0 && grBig->iGraphType == 4 )
 	{	
 		// A_n dans la base du E_n
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 );
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
 		
 		// A_n contient la queue du E_m (début)
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
 		iVTemp.push_back( grBig->iVertices[ iVerticesBigCount - 1 ] );
 		if( bAnSubAm( iVertices, iVTemp ) )
 			return true;
 		
 		// A_n contient la queue du E_m (fin)
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
 		iVTemp.insert( iVTemp.begin( ), grBig->iVertices[ iVerticesBigCount - 1 ] );
 		
 		return bAnSubAm( iVertices, iVTemp );
@@ -722,7 +722,7 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	// A_n < H_m
 	if( iGraphType == 0 && grBig->iGraphType == 7 )
 	{
-		return bAnSubAm( iVertices, vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
+		return bAnSubAm( iVertices, vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.end( ) - 1 ) );
 	}
 	
 	// ---------------------------------------------------------------------
@@ -736,10 +736,10 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	// B_3 < F_4
 	if( iGraphType == 1 && grBig->iGraphType == 5 && iVerticesCount == 3 )
 	{
-		if( iVertices == vector< unsigned int >( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 ) )
+		if( iVertices == vector<short unsigned int>( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 ) )
 			return true;
 		
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + 4 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + 4 );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
 		
 		return ( iVertices == iVTemp );	
@@ -751,12 +751,12 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	{
 		if( iVerticesCount == 4 ) // D_4 est très symétrique
 		{	
-			vector< unsigned int > iVTemp1;
+			vector<short unsigned int> iVTemp1;
 			iVTemp1.push_back( iVertices[0] );
 			iVTemp1.push_back( iVertices[2] );
 			iVTemp1.push_back( iVertices[3] );
 			
-			vector< unsigned int > iVTemp2;
+			vector<short unsigned int> iVTemp2;
 			iVTemp2.push_back( grBig->iVertices[ iVerticesBigCount - 1 ] );
 			iVTemp2.push_back( grBig->iVertices[ iVerticesBigCount - 2 ] );
 			iVTemp2.push_back( grBig->iVertices[ iVerticesBigCount - 4 ] );
@@ -771,8 +771,8 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 		if( iVertices[ iVerticesCount - 2 ] != grBig->iVertices[ iVerticesBigCount - 2 ] || iVertices[ iVerticesCount - 1 ] != grBig->iVertices[ iVerticesBigCount - 1 ] )
 			return false;
 		
-		vector< unsigned int > iVTemp1( iVertices.begin( ), iVertices.begin( ) + iVerticesCount - 2 );
-		vector< unsigned int > iVTemp2( grBig->iVertices.begin( ) + iVerticesBigCount - iVerticesCount, grBig->iVertices.begin( ) + iVerticesBigCount - 2  );
+		vector<short unsigned int> iVTemp1( iVertices.begin( ), iVertices.begin( ) + iVerticesCount - 2 );
+		vector<short unsigned int> iVTemp2( grBig->iVertices.begin( ) + iVerticesBigCount - iVerticesCount, grBig->iVertices.begin( ) + iVerticesBigCount - 2  );
 		
 		return ( iVTemp1 == iVTemp2 );
 	}
@@ -783,7 +783,7 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	{
 		// -------------------------------------------------
 		// first test
-		vector< unsigned int > iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
+		vector<short unsigned int> iVTemp( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + 3 );
 		iVTemp.push_back( min( grBig->iVertices[3], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		iVTemp.push_back( max( grBig->iVertices[3], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		Graph g( iVTemp, 0, vector< bool >( false ), 3, true, 0 );
@@ -793,7 +793,7 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 		
 		// -------------------------------------------------
 		// second test
-		iVTemp = vector< unsigned int >( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
+		iVTemp = vector<short unsigned int>( grBig->iVertices.begin( ) + 2, grBig->iVertices.end( ) - 1 );
 		reverse( iVTemp.begin( ), iVTemp.end( ) );
 		iVTemp.push_back( min( grBig->iVertices[1], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
 		iVTemp.push_back( max( grBig->iVertices[1], grBig->iVertices[ iVerticesBigCount - 1 ] ) );
@@ -812,8 +812,8 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 		if( iVertices[ iVerticesCount - 1 ] != grBig->iVertices[ iVerticesBigCount - 1 ] )
 			return false;
 		
-		vector< unsigned int > iVTemp1( iVertices.begin( ), iVertices.end( ) - 1 );
-		vector< unsigned int > iVTemp2( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iVerticesCount - 1 );
+		vector<short unsigned int> iVTemp1( iVertices.begin( ), iVertices.end( ) - 1 );
+		vector<short unsigned int> iVTemp2( grBig->iVertices.begin( ), grBig->iVertices.begin( ) + iVerticesCount - 1 );
 		
 		if( iVTemp1 == iVTemp2 )
 			return true;
@@ -846,15 +846,15 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	// H_3 < H_4
 	if( iGraphType == 7 && grBig->iGraphType == 7 )
 	{
-		return ( vector< unsigned int >( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + iVerticesCount + 1 ) == iVertices );
+		return ( vector<short unsigned int>( grBig->iVertices.begin( ) + 1, grBig->iVertices.begin( ) + iVerticesCount + 1 ) == iVertices );
 	}
 	
 	return false;
 }
 
-bool Graph::bAnSubAm( const vector< unsigned int >& iSubV, const vector< unsigned int >& iBigV )
+bool Graph::bAnSubAm( const vector<short unsigned int>& iSubV, const vector<short unsigned int>& iBigV )
 {
-	vector< unsigned int >::const_iterator itBig, itSub, it( find( iBigV.begin( ), iBigV.end( ), iSubV[0] ) );
+	vector<short unsigned int>::const_iterator itBig, itSub, it( find( iBigV.begin( ), iBigV.end( ), iSubV[0] ) );
 	
 	if( it == iBigV.end( ) )
 		return false;

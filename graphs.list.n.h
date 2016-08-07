@@ -59,7 +59,7 @@ class GraphsListN
 		 *	\param iVertexSupp2 Second sommet supplémentaire (par exemple pour les B)
 		 * 	\param iDataSupp( const unsigned int & ): donnée supplémentaire (par exemple, pour le G_2, le poids)
 		 */
-		void addGraph( vector< unsigned int > iVertices, const vector< bool > &bVerticesLinkable, const unsigned &iType, bool bSpherical, const unsigned int &iVertexSupp1 = 0, const unsigned int &iVertexSupp2 = 0, const unsigned int &iDataSupp = 0 );
+		void addGraph( vector< short unsigned int > iVertices, const vector< bool > &bVerticesLinkable, const unsigned &iType, bool bSpherical, const short unsigned int &iVertexSupp1 = 0, const short unsigned int &iVertexSupp2 = 0, const unsigned int &iDataSupp = 0 );
 		
 		/*!	\fn addGraphsList
 		 * 	\brief Concatenate another list to the current list

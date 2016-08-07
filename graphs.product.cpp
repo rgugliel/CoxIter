@@ -27,9 +27,9 @@ GraphsProduct::GraphsProduct( )
 {
 }
 
-vector< vector< unsigned int > > GraphsProduct::createFootPrint( )
+vector< vector< short unsigned int > > GraphsProduct::createFootPrint( )
 {
-	vector< vector< unsigned int > > iGraphsCountByType( 8 );
+	vector< vector< short unsigned int > > iGraphsCountByType( 8 );
 	
 	size_t i, j, iMax, iIndex, iGraphsCount( graphs.size( ) );
 

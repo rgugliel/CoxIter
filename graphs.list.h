@@ -59,7 +59,7 @@ class GraphsList
 		 * 	\param iVertexSupp2( const unsigned int & ): éventuellement, deuxième sommet supplémentaire (dans le cas du Dn, par exemple)
 		 * 	\param iDataSupp( const unsigned int & ): donnée supplémentaire (par exemple, pour le G_2, le poids)
 		 */
-		void addGraph( const vector< unsigned int > &iVertices, const vector< bool > &bVerticesLinkable, const unsigned int &iType, bool bSpherical, const unsigned int &iVertexSupp1 = 0, const unsigned int &iVertexSupp2 = 0, const unsigned int &iDataSupp = 0 );
+		void addGraph( const vector<short unsigned int> &iVertices, const vector< bool > &bVerticesLinkable, const unsigned int &iType, bool bSpherical, const unsigned int &iVertexSupp1 = 0, const unsigned int &iVertexSupp2 = 0, const unsigned int &iDataSupp = 0 );
 		
 		/*!	\fn begin
 		 * 	\brief Retourne un pointeur sur le premier graphe de la liste 

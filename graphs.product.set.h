@@ -57,7 +57,7 @@ class GraphsProductSet
 		 * 
 		 * 	\return vertices( vector< unsigned int > )
 		 */
-		vector< unsigned int > get_iVertices( ) const;
+		vector< short unsigned int > get_iVertices( ) const;
 		
 		/*!	\fn b_areVerticesSubsetOf
 		 * 	\brief Test if the vertices appear in another Product

@@ -45,9 +45,9 @@ Graph* GraphsListN::begin( )
 	return &graphs[0];
 }
 
-void GraphsListN::addGraph( vector< unsigned int > iVertices, const vector< bool > &bVerticesLinkable, const unsigned int &iType, bool bSpherical, const unsigned int &iVertexSupp1, const unsigned int &iVertexSupp2, const unsigned int &iDataSupp )
+void GraphsListN::addGraph( vector< short unsigned int > iVertices, const vector< bool > &bVerticesLinkable, const unsigned int &iType, bool bSpherical, const short unsigned int &iVertexSupp1, const short unsigned int &iVertexSupp2, const unsigned int &iDataSupp )
 {
-	unsigned int iTemp, i;
+	unsigned int short iTemp, i;
 	
 	if( bSpherical )
 	{
@@ -122,7 +122,7 @@ void GraphsListN::addGraph( vector< unsigned int > iVertices, const vector< bool
 			unsigned int iMinValue( iVertices[0] );
 			
 			iVertices.push_back( iVertexSupp1 );
-			vector< unsigned int > iVerticesTemp( iVertices );
+			vector< short unsigned int > iVerticesTemp( iVertices );
 			
 			// on répère le sommet avec l'indice le plus petit
 			for( i = 1; i < iVerticesCount; i++ )
@@ -184,12 +184,12 @@ void GraphsListN::addGraph( vector< unsigned int > iVertices, const vector< bool
 			{
 				// le vecteur iVerticesBase contient la base (i.e. sans les 4 extrémités)
 				#ifdef WIN32 // TODO: utile?
-					vector< unsigned int > iVerticesBase;
+					vector< short unsigned int > iVerticesBase;
 					iTemp = iVerticesCount - 3;
 					for( i = 1; i < iTemp; i++ )
 						iVerticesBase.push_back( iVertices[i] );
 				#else
-					vector< unsigned int > iVerticesBase( iVertices.begin( ) + 1, iVertices.begin( ) + iVerticesCount - 3 ); // ne marche pas sous Visual Studio 2010 & 2012 malheureusement
+					vector< short unsigned int > iVerticesBase( iVertices.begin( ) + 1, iVertices.begin( ) + iVerticesCount - 3 ); // ne marche pas sous Visual Studio 2010 & 2012 malheureusement
 				#endif
 
 				// on regarde si on doit modifier l'ordre
@@ -216,7 +216,7 @@ void GraphsListN::addGraph( vector< unsigned int > iVertices, const vector< bool
 			}
 			else // le TD4, "+" est traité différemment
 			{
-				vector<unsigned int> iVerticesTemp( 4, 0 );
+				vector<short unsigned int> iVerticesTemp( 4, 0 );
 				iVerticesTemp[0] = iVertices[0];
 				iVerticesTemp[1] = iVertices[2];
 				iVerticesTemp[2] = iVertexSupp1;
@@ -231,7 +231,7 @@ void GraphsListN::addGraph( vector< unsigned int > iVertices, const vector< bool
 			if( iVerticesCount == 7 ) // TE6
 			{
 				// TODO: refaire l'encodage de ce graphe et modifer la fonction bIsSubgraphOf_spherical_euclidean?
-				vector< unsigned int > iVerticesTemp;
+				vector< short unsigned int > iVerticesTemp;
 				unsigned int iMin( min( min( iVertices[1], iVertices[3] ), iVertexSupp1 ) );
 				
 				if( iMin == iVertices[1] )

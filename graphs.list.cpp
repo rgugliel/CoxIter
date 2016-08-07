@@ -31,7 +31,7 @@ GraphsList::GraphsList( size_t iVerticesCount, vector< string > *ptr_map_vertice
 	iGraphsCount = 0;
 }
 
-void GraphsList::addGraph( const std::vector< unsigned int >& iVertices, const std::vector< bool >& bVerticesLinkable, const unsigned int& iType, bool bSpherical, const unsigned int &iVertexSupp1, const unsigned int &iVertexSupp2, const unsigned int &iDataSupp )
+void GraphsList::addGraph( const std::vector< short unsigned int >& iVertices, const std::vector< bool >& bVerticesLinkable, const unsigned int& iType, bool bSpherical, const unsigned int &iVertexSupp1, const unsigned int &iVertexSupp2, const unsigned int &iDataSupp )
 {
 	size_t sizeTemp, iVCount( iVertices.size( ) );
 	
