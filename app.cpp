@@ -303,7 +303,7 @@ void App::run( )
 		if( bCheckCanBeFiniteCovolume )
 			bCanBeFiniteCovolume = ci.bCanBeFiniteCovolume( );
 	}
-	catch( string strE )
+	catch( const string& strE )
 	{
 		bCheckCanBeFiniteCovolume = false;
 		cout << "\nError:\n\t" << strE << "\n" << endl;
@@ -357,7 +357,7 @@ void App::run( )
 			iSignature = s.iComputeSignature( ci.get_strGramMatrix_PARI() );
 			bSignatureComputed = true;
 		}
-		catch( string strE )
+		catch( const string& strE )
 		{
 			cout << "\n---------------------------------------------------------" << endl;
 			cout << "Error while computing the signature:\n\t" << strE << endl;
@@ -373,7 +373,7 @@ void App::run( )
 			GrowthRate gr;
 			grr = gr.grrComputations( ci.get_iGrowthSeries_denominator() );
 		}
-		catch( string strE )
+		catch( const string& strE )
 		{
 			cout << "\n---------------------------------------------------------" << endl;
 			cout << "Error while computing the growth rate:\n\t" << strE << endl;

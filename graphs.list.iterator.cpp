@@ -24,9 +24,9 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 GraphsListIterator::GraphsListIterator( GraphsList *gl )
 : bLimitVerticesMax( false ), 
-iVerticesCountMax( 0 ) // The value 0 has no effect because of bLimitVerticesMax( false )
+  graphsList( gl ),
+  iVerticesCountMax( 0 ) // The value 0 has no effect because of bLimitVerticesMax( false )
 {
-	graphsList = gl;
 	ptr = graphsList->begin( );
 	if( ptr )
 	{
