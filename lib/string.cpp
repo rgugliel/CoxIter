@@ -125,21 +125,3 @@ string implode( const string& strSeparator, const vector< string >& strVector )
 	strRes = oStr.str( );
 	return strRes.substr( 0, strRes.size( ) - strSeparator.size( ) );
 }
-
-string implode( const string& strSeparator, const vector< unsigned int >& iVector )
-{
-	vector< string > strVector;
-	for( vector< unsigned int >::const_iterator it( iVector.begin( ) ); it != iVector.end( ); ++it )
-		strVector.push_back( to_string( *it ) );
-	
-	return implode( strSeparator, strVector );
-}
-
-string implode( const string& strSeparator, const vector< int >& iVector )
-{
-	vector< string > strVector;
-	for( vector< int >::const_iterator it( iVector.begin( ) ); it != iVector.end( ); ++it )
-		strVector.push_back( to_string( *it ) );
-	
-	return implode( strSeparator, strVector );
-}

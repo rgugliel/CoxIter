@@ -907,16 +907,35 @@ bool operator<( const Graph &g1, const Graph &g2 )
 	if( g1 == g2 )
 		return false;
 	
+	if( g1.bSpherical && !g2.bSpherical )
+		return true;
 	if( !g1.bSpherical && g2.bSpherical )
+		return false;
+	
+	if( g1.iVertices.size() < g2.iVertices.size() )
 		return true;
-	if( g1.iVertices.size( ) < g2.iVertices.size( ) )
-		return true;
+	if( g1.iVertices.size() > g2.iVertices.size() )
+		return false;
+	
 	if( g1.iGraphType < g2.iGraphType )
 		return true;
-	if( g1.iGraphType == 6 && g2.iGraphType == 6 && g1.iDataSupp < g2.iDataSupp )
+	if( g1.iGraphType > g2.iGraphType )
+		return false;
+	
+	if( g1.iGraphType == 6 && g2.iGraphType == 6 )
+	{
+		if( g1.iDataSupp < g2.iDataSupp )
+			return true;
+		if( g1.iDataSupp > g2.iDataSupp )
+			return false;
+	}
+	
+	if( g1.iVertices < g2.iVertices )
 		return true;
-	if( g1.iVertices.size( ) <= g2.iVertices.size( ) && g1.iVertices < g2.iVertices )
-		return true;
+	if( g1.iVertices > g2.iVertices )
+		return false;
+	
+	throw( string( "Error" ) ); // TODO
 	
 	return false;
 }

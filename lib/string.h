@@ -26,6 +26,9 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \author Rafael Guglielmetti
 */
 
+#ifndef __STRING_H__
+#define __STRING_H__ 1
+
 #include <string>
 #include <sstream>
 #include <cstdlib>
@@ -101,10 +104,10 @@ void explode( const string &separator, string source, vector<unsigned int> &resu
  * 	\brief Implode function (as in the PHP language)
  * 
  * 	\param strSeparator( const string & ) Separator
- * 	\param iVector( const vector< unsigned int >& ) Vector to implode
+ * 	\param strVector( const vector< string >& ) Vector to implode
  * 	\return Imploded string
  */
-string implode( const string& strSeparator, const vector< unsigned int >& iVector );
+string implode( const string& strSeparator, const vector< string >& strVector );
 
 /*!
  * 	\fn implode
@@ -114,17 +117,17 @@ string implode( const string& strSeparator, const vector< unsigned int >& iVecto
  * 	\param iVector( const vector< int >& ) Vector to implode
  * 	\return Imploded string
  */
-string implode( const string& strSeparator, const vector< int >& iVector );
-
-/*!
- * 	\fn implode
- * 	\brief Implode function (as in the PHP language)
- * 
- * 	\param strSeparator( const string & ) Separator
- * 	\param strVector( const vector< string >& ) Vector to implode
- * 	\return Imploded string
- */
-string implode( const string& strSeparator, const vector< string >& strVector );
+template <typename T>
+typename std::enable_if<std::is_arithmetic<T>::value, string>::type implode( const string& strSeparator, const vector< T >& iVector )
+{
+	vector< string > strVector;
+	for( typename vector< T >::const_iterator it( iVector.begin( ) ); it != iVector.end( ); ++it )
+		strVector.push_back( to_string( *it ) );
+	
+	return implode( strSeparator, strVector );
+}
 
 int string_to_int( const string &strNumber );
 double string_to_double( const string &strNumber );
+
+#endif
