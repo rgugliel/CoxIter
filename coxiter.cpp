@@ -1740,7 +1740,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	}
 }
 
-bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
+bool CoxIter::bCanBeFiniteCovolume()
 {
 	// -----------------------------------------------------------
 	// Some verifications

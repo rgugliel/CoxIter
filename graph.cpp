@@ -945,7 +945,7 @@ bool operator<( const Graph &g1, const Graph &g2 )
 	if( g1.iVertices > g2.iVertices )
 		return false;
 	
-	throw( string( "Error" ) ); // TODO
+	throw( string( "Graph::operator<: One missed case" ) );
 	
 	return false;
 }

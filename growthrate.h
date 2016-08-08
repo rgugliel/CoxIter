@@ -57,7 +57,7 @@ class GrowthRate
 		
 		GEN gGrowthRate; ///< Maximal positive root of the polynomial
 		GEN gMaximalRoots; ///< Roots of the polynomial which has the maximal root
-		long int iIndexMaximalRoot; ///< Factor which contains the minimal root // TODO: utile?
+		long int iIndexMaximalRoot; ///< Factor which contains the minimal root
 		
 		GEN gEpsilon; ///< Some small number (typically 10^-50)
 		long int iPariPrecision; ///< Given as prec (typically 8)
