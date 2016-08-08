@@ -1618,10 +1618,11 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	vector< short unsigned int >::iterator iIt;
 	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
+	static unsigned int iMaxRank( iDimension ? iDimension : iVerticesCount );
 	
 	vector< vector< short unsigned int > > vFootPrintTest;
 	
-	while( grIt.ptr && ( gp.iRank + iGraphRank <= iVerticesCount ) )
+	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaxRank ) )
 	{
 		// ---------------------------------------------------
 		// est ce que le graphe est admissible?
