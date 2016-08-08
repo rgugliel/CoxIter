@@ -1398,14 +1398,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_sequential( unsigned int iIndex )
 			{
 				for( itGBig = vDiffBigNotSub.begin(); itGBig != vDiffBigNotSub.end(); ++itGBig )
 				{
-					/*
-					*  BUG FIXME
-					* La condition == ci-dessous devrait pouvoir être enlevée et le résultat rester correct
-					* Il y a un problème avec set (tester avec le G2 de graphs/4-jkrt_349-01-H4.in
-					* Ce n'est pas réellement gênant mais c'est pas très propre
-					*/
-					
-					if( (*itGSub)->bIsSubgraphOf( *itGBig ) || **itGSub == **itGBig )
+					if( (*itGSub)->bIsSubgraphOf( *itGBig ) )
 						break;
 				}
 				
@@ -1476,13 +1469,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex )
 						{
 							for( itGBig = vDiffBigNotSub.begin(); itGBig != vDiffBigNotSub.end(); ++itGBig )
 							{
-								/*
-								*  BUG FIXME
-								* La condition == ci-dessous devrait pouvoir être enlevée et le résultat rester correct
-								* Il y a un problème avec set (tester avec le G2 de graphs/4-jkrt_349-01-H4.in
-								* Ce n'est pas réellement gênant mais c'est pas très propre
-								*/
-								if( (*itGSub)->bIsSubgraphOf( *itGBig ) || **itGSub == **itGBig )
+								if( (*itGSub)->bIsSubgraphOf( *itGBig ) )
 									break;
 							}
 							

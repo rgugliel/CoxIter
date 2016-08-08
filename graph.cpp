@@ -60,6 +60,9 @@ ostream& operator<<( ostream &o, const Graph &g )
 
 bool Graph::bIsSubgraphOf( const Graph* grBig ) const
 {
+	if( *this == *grBig )
+		return true;
+	
 	if( bSpherical && grBig->bSpherical )
 		return bIsSubgraphOf_spherical_spherical( grBig );
 	else if( bSpherical && !grBig->bSpherical )
@@ -831,6 +834,13 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	// ---------------------------------------------------------------------
 	// G_4 < B_n
 	if( iGraphType == 6 && iDataSupp == 4 && grBig->iGraphType == 1 )
+	{
+		return ( ( iVertices[0] == grBig->iVertices[iVerticesBigCount-2] && iVertices[1] == grBig->iVertices[iVerticesBigCount-1] ) || ( iVertices[0] == grBig->iVertices[iVerticesBigCount-1] && iVertices[1] == grBig->iVertices[iVerticesBigCount-2] ) );
+	}
+	
+	// ---------------------------------------------------------------------
+	// G_m < G_m
+	if( iGraphType == 6 && grBig->iGraphType == 6 && iDataSupp == grBig->iDataSupp && iVertices == grBig->iVertices )
 	{
 		return ( ( iVertices[0] == grBig->iVertices[iVerticesBigCount-2] && iVertices[1] == grBig->iVertices[iVerticesBigCount-1] ) || ( iVertices[0] == grBig->iVertices[iVerticesBigCount-1] && iVertices[1] == grBig->iVertices[iVerticesBigCount-2] ) );
 	}
