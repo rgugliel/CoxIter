@@ -683,7 +683,7 @@ class CoxIter
 		void AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable );
 		
 		/*!
-		 * \fn AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const unsigned int& iStart )
+		 * \fn AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart )
 		 * \brief Try to foind an En from an An
 		 * 
 		 * \param iPathTemp ( const vector<unsigned int>& ) Vertices of the An
@@ -743,7 +743,7 @@ class CoxIter
 		 */
 		bool b_isGraph_cocompact_finiteVolume_sequential( unsigned int iIndex );
 		
-		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, vector<short unsigned int>& iSymbol, unsigned int& iExponent ) const
+		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent ) const
 		 * 	From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.
 		 * 	
 		 * 	\param iProduct( const vector< vector<short unsigned int> >& ) The product of graphs
@@ -752,11 +752,11 @@ class CoxIter
 		 */
 		void growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent ) const;
 		
-		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<unsigned int> >& iProduct, string& iSymbol, unsigned int& iExponent ) const
+		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent ) const
 		 * 	From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.
 		 * 	
 		 * 	\param iProduct( const vector< vector<unsigned int> >& ) The product of graphs
-		 * 	\param iSymbol( string& )
+		 * 	\param strSymbol( string& )
 		 * 	\param iExponent (u nsigned int& ) The exponent
 		 */
 		void growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent ) const;
