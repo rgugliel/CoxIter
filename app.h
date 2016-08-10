@@ -60,10 +60,11 @@ class App
 		bool bComputeSignature; ///< If we want to compute the signature
 		bool bDoComputations; ///< If we use the big integers GMPlib) library or not
 		bool bDebug; ///< Display additional information
-		bool bGBD;
+		bool bGBD; ///< Doing GBD?
 		bool bOpenMP; ///< Use OpenMP
 		bool bPrintCoxeterMatrix; ///< Print the Coxeter matrix?
 		bool bPrintGramMatrix; ///< Print the Gram matrix?
+		bool bPrintHelp; ///< If we want to print help (option or by default depending on the error)
 		string strOuputMathematicalFormat; ///< Format of output: generic, mathematica, pari
 		vector< string > strVerticesRemove; ///< The vertices we want to remove
 		vector< string > strVertices; ///< If we specify the vertices
@@ -81,6 +82,7 @@ class App
 		
 		bool bReadMainParameters( int argc, char **argv );
 		void run( );
+		void printHelp( ) const;
 };
 
 #endif // APP_H

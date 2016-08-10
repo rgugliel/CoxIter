@@ -40,6 +40,7 @@ bGBD( false ),
 bOpenMP( true ),
 bPrintCoxeterMatrix( false ), 
 bPrintGramMatrix( false ),
+bPrintHelp( false ),
 strOuputMathematicalFormat( "generic" )
 {
 
@@ -58,7 +59,6 @@ bool App::bReadMainParameters( int argc, char **argv )
 			bComputeGrowthRate = true;
 			bComputeSignature = true;
 #endif
-			
 		return true;
 	}
 	
@@ -129,7 +129,7 @@ bool App::bReadMainParameters( int argc, char **argv )
 			bComputeGrowthSeries = true;
 			szPrevType = "growth";
 		}
-		else if( szTemp == "-growthrate" )
+		else if( szTemp == "-growthrate" || szTemp == "-gr" )
 		{
 #ifdef _COMPILE_WITH_PARI_
 			bComputeGrowthSeries = true;
@@ -141,6 +141,11 @@ bool App::bReadMainParameters( int argc, char **argv )
 		{
 			bGBD = true;
 			szPrevType = "gbd";
+		}
+		else if( szTemp == "-help" )
+		{
+			bPrintHelp = true;
+			szPrevType = "help";
 		}
 		else if( szTemp == "-nc" ) // don't do the computations using BigNumbers
 		{
@@ -246,6 +251,13 @@ bool App::bReadMainParameters( int argc, char **argv )
 
 void App::run( )
 {
+	if( bPrintHelp )
+	{
+		printHelp();
+		return;
+	}
+	
+	
 	chrono::time_point< std::chrono::system_clock > timeStart, timeEnd;
 	
 	bool bEulerSuccess( true ), bCanBeFiniteCovolume( false ), bSignatureComputed( false );
@@ -293,8 +305,10 @@ void App::run( )
 	}
 	else
 	{
-		cout << "No input file given" << endl;
-		return; // TODO
+		cout << "No input file given\n" << endl;
+		
+		printHelp();
+		return;
 	}
 
 	if( bGBD )
@@ -518,4 +532,26 @@ void App::run( )
 	}
 	
 	cout << endl;
+}
+
+void App::printHelp() const
+{
+	cout << "  _____          _____ _            \n"
+" / ____|        |_   _| |\n"           
+"| |     _____  __ | | | |_ ___ _ __ \n"
+"| |    / _ \\ \\/ / | | | __/ _ \\ '__|\n"
+"| |___| (_) >  < _| |_| ||  __/ |\n"   
+" \\_____\\___/_/\\_\\_____|\\__\\___|_|   \n" << endl;
+
+	cout << "CoxIter is a program to compute invariants of hyperbolic Coxeter groups\n\n"
+	"The basis usage is as follows:\n\t./coxiter < file-describing-the-graph\n\n"
+	"For example, you could do\n\t./coxiter < ../graphs/8-Bugaenko.coxiter\n\n"
+	"You can also choose to compute/test only some of the invariants:\n"
+	"\t-a  : test whether the group is arithmetic\n"
+	"\t-c  : test whether the group is cocompact\n"
+	"\t-fv : test whether the group has finite covolume\n"
+	"\t-g  : growth series\n"
+	"\t-gr : growth rate\n"
+	"\t-s  : signature\n\n"
+	"There is many more options regarding the format of the output and the possible computations.\nThe full documentation is available here:\n\thttp://coxiter.rgug.ch/" << endl;
 }
