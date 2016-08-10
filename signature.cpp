@@ -29,7 +29,7 @@ Signature::Signature()
 	/* 
 	 * Note: gEpsilon must be BIG compared to the precision up to which we compute the eigenvalues
 	 * */
-	gEpsilon = dbltor( 1e-40 ); // TODO
+	gEpsilon = dbltor( 1e-40 );
 }
 
 Signature::~Signature()
@@ -43,7 +43,7 @@ std::array< unsigned int, int(3) > Signature::iComputeSignature( string strMatri
 	GEN gMatrix;
 	
 	long prec;
-	setrealprecision( 57, &prec ); // increase precision for the gp_read_str // TODO
+	setrealprecision( 57, &prec ); // increase precision for the gp_read_str
 	
 	pari_CATCH( CATCH_ALL ) 
 	{
