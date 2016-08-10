@@ -60,6 +60,9 @@ ostream& operator<<( ostream &o, const Graph &g )
 
 bool Graph::bIsSubgraphOf( const Graph* grBig ) const
 {
+	if( *this == *grBig )
+		return true;
+	
 	if( bSpherical && grBig->bSpherical )
 		return bIsSubgraphOf_spherical_spherical( grBig );
 	else if( bSpherical && !grBig->bSpherical )
@@ -836,6 +839,13 @@ bool Graph::bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const
 	}
 	
 	// ---------------------------------------------------------------------
+	// G_m < G_m
+	if( iGraphType == 6 && grBig->iGraphType == 6 && iDataSupp == grBig->iDataSupp && iVertices == grBig->iVertices )
+	{
+		return ( ( iVertices[0] == grBig->iVertices[iVerticesBigCount-2] && iVertices[1] == grBig->iVertices[iVerticesBigCount-1] ) || ( iVertices[0] == grBig->iVertices[iVerticesBigCount-1] && iVertices[1] == grBig->iVertices[iVerticesBigCount-2] ) );
+	}
+	
+	// ---------------------------------------------------------------------
 	// G_5 < H_m
 	if( ( iGraphType == 6 && iDataSupp == 5 ) && grBig->iGraphType == 7 )
 	{
@@ -907,16 +917,35 @@ bool operator<( const Graph &g1, const Graph &g2 )
 	if( g1 == g2 )
 		return false;
 	
+	if( g1.bSpherical && !g2.bSpherical )
+		return true;
 	if( !g1.bSpherical && g2.bSpherical )
+		return false;
+	
+	if( g1.iVertices.size() < g2.iVertices.size() )
 		return true;
-	if( g1.iVertices.size( ) < g2.iVertices.size( ) )
-		return true;
+	if( g1.iVertices.size() > g2.iVertices.size() )
+		return false;
+	
 	if( g1.iGraphType < g2.iGraphType )
 		return true;
-	if( g1.iGraphType == 6 && g2.iGraphType == 6 && g1.iDataSupp < g2.iDataSupp )
+	if( g1.iGraphType > g2.iGraphType )
+		return false;
+	
+	if( g1.iGraphType == 6 && g2.iGraphType == 6 )
+	{
+		if( g1.iDataSupp < g2.iDataSupp )
+			return true;
+		if( g1.iDataSupp > g2.iDataSupp )
+			return false;
+	}
+	
+	if( g1.iVertices < g2.iVertices )
 		return true;
-	if( g1.iVertices.size( ) <= g2.iVertices.size( ) && g1.iVertices < g2.iVertices )
-		return true;
+	if( g1.iVertices > g2.iVertices )
+		return false;
+	
+	throw( string( "Graph::operator<: One missed case" ) );
 	
 	return false;
 }

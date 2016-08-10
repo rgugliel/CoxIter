@@ -321,14 +321,18 @@ void GraphsListN::addGraph( vector< short unsigned int > iVertices, const vector
 	}
 	
 	Graph g( iVertices, ptr_map_vertices_indexToLabel, bVerticesLinkable, iType, bSpherical, iDataSupp );
+	
+	/*
 	unsigned int iMax( graphs.size( ) );
 	for( unsigned int i(0); i < iMax; i++ )
 	{
 		if( g == graphs[i] )
 			return;
-	}
-	
-	graphs.push_back( g );
+	} TODO*/
+
+	auto it( lower_bound( graphs.begin(), graphs.end(), g ) );
+	if( it == graphs.end() || !(*it == g) )
+		graphs.insert( it, g );
 }
 
 bool GraphsListN::addGraphsList( const GraphsListN& gln )
