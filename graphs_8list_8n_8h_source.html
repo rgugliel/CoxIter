@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.1</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -40,7 +40,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -72,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -135,7 +134,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_graphs_list_n.html">GraphsListN</a>( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> iVerticesCount, vector&lt; string &gt; *ptr_map_vertices_indexToLabel );</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> addGraph( vector&lt; unsigned int &gt; iVertices, <span class="keyword">const</span> vector&lt; bool &gt; &amp;bVerticesLinkable, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;iType, <span class="keywordtype">bool</span> bSpherical, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iVertexSupp1 = 0, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iVertexSupp2 = 0, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iDataSupp = 0 );</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">void</span> addGraph( vector&lt; short unsigned int &gt; iVertices, <span class="keyword">const</span> vector&lt; bool &gt; &amp;bVerticesLinkable, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> &amp;iType, <span class="keywordtype">bool</span> bSpherical, <span class="keyword">const</span> <span class="keywordtype">short</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iVertexSupp1 = 0, <span class="keyword">const</span> <span class="keywordtype">short</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iVertexSupp2 = 0, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iDataSupp = 0 );</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">bool</span> addGraphsList( <span class="keyword">const</span> <a class="code" href="class_graphs_list_n.html">GraphsListN</a>&amp; gln );</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        </div>
@@ -160,11 +159,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_graphs_list_n_html_af68083075138be92b77043f7aef00892"><div class="ttname"><a href="class_graphs_list_n.html#af68083075138be92b77043f7aef00892">GraphsListN::graphs</a></div><div class="ttdeci">vector&lt; Graph &gt; graphs</div><div class="ttdoc">Liste des graphes trouvés. </div><div class="ttdef"><b>Definition:</b> graphs.list.n.h:44</div></div>
 <div class="ttc" id="graph_8h_html"><div class="ttname"><a href="graph_8h.html">graph.h</a></div></div>
 <div class="ttc" id="class_graphs_list_n_html_a87d417c7535c9bfff28988c5f1e7f0bf"><div class="ttname"><a href="class_graphs_list_n.html#a87d417c7535c9bfff28988c5f1e7f0bf">GraphsListN::iVerticesCount</a></div><div class="ttdeci">unsigned int iVerticesCount</div><div class="ttdoc">Nombre de sommets des graphes de la liste. </div><div class="ttdef"><b>Definition:</b> graphs.list.n.h:45</div></div>
-<div class="ttc" id="coxiter_8cpp_html_afbc0b4139b5bc12279e82d43cb9f54e1"><div class="ttname"><a href="coxiter_8cpp.html#afbc0b4139b5bc12279e82d43cb9f54e1">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const CoxIter &amp;g)</div><div class="ttdef"><b>Definition:</b> coxiter.cpp:1281</div></div>
+<div class="ttc" id="coxiter_8cpp_html_afbc0b4139b5bc12279e82d43cb9f54e1"><div class="ttname"><a href="coxiter_8cpp.html#afbc0b4139b5bc12279e82d43cb9f54e1">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const CoxIter &amp;g)</div><div class="ttdef"><b>Definition:</b> coxiter.cpp:1289</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 6 2016 10:10:34 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 10 2016 16:23:08 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

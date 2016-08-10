@@ -8,8 +8,5 @@ var searchData=
   ['map_5fvertices_5flabels_5freinitialize',['map_vertices_labels_reinitialize',['../class_cox_iter.html#a924025e477ebc718ff37be3d7744e327',1,'CoxIter']]],
   ['map_5fvertices_5flabels_5fremovereference',['map_vertices_labels_removeReference',['../class_cox_iter.html#a3a3c34e50601a693003381fdbf7857f6',1,'CoxIter']]],
   ['map_5fvertices_5flabeltoindex',['map_vertices_labelToIndex',['../class_cox_iter.html#a0f7128c49a6765938601a88070d9b7f1',1,'CoxIter']]],
-  ['math_5ftools_2ecpp',['math_tools.cpp',['../math__tools_8cpp.html',1,'']]],
-  ['math_5ftools_2eh',['math_tools.h',['../math__tools_8h.html',1,'']]],
-  ['mathtools',['MathTools',['../namespace_math_tools.html',1,'']]],
   ['minimalroot',['minimalRoot',['../class_growth_rate.html#ab2f58399a530ed3677c461260b3e56df',1,'GrowthRate']]]
 ];

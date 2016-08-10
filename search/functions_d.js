@@ -14,9 +14,5 @@ var searchData=
   ['set_5fstrverticestoconsider',['set_strVerticesToConsider',['../class_cox_iter.html#aa506b6cf41f8bc8dfb44894eff243d53',1,'CoxIter']]],
   ['set_5fstrverticestoremove',['set_strVerticesToRemove',['../class_cox_iter.html#a93af1ac453d04f1ccd4b2be5d6be9d17',1,'CoxIter']]],
   ['signature',['Signature',['../class_signature.html#aacfc092d01d1efd7008c027caaa9203c',1,'Signature']]],
-  ['size',['size',['../class_graphs_list_n.html#a897dd20e06a0094b5f81500e382918a5',1,'GraphsListN']]],
-  ['str_5freplace',['str_replace',['../string_8cpp.html#a59e97473f5ff50f48050142219004cee',1,'str_replace(string &amp;str, const string &amp;from, const string &amp;to):&#160;string.cpp'],['../string_8h.html#a59e97473f5ff50f48050142219004cee',1,'str_replace(string &amp;str, const string &amp;from, const string &amp;to):&#160;string.cpp']]],
-  ['string_5fto_5fdouble',['string_to_double',['../string_8h.html#a7f1d2b89dd423a67e9d78f8bee202604',1,'string.h']]],
-  ['string_5fto_5fint',['string_to_int',['../string_8h.html#a1bed6776e744849ee9c92ee93f389ed4',1,'string.h']]],
-  ['symboldisplay',['symbolDisplay',['../namespace_polynomials.html#adf9b49394b6221149a877bdcb379eb43',1,'Polynomials']]]
+  ['size',['size',['../class_graphs_list_n.html#a897dd20e06a0094b5f81500e382918a5',1,'GraphsListN']]]
 ];

@@ -30,7 +30,7 @@ var searchData=
   ['get_5fptr_5fgraphsproducts',['get_ptr_graphsProducts',['../class_cox_iter.html#ab8030b69a137dc857333be62548085b3',1,'CoxIter']]],
   ['get_5fstr_5fmap_5fvertices_5findextolabel',['get_str_map_vertices_indexToLabel',['../class_cox_iter.html#af8d7541cd3d89efc295ce4d7a444e1e7',1,'CoxIter']]],
   ['get_5fstrcoxetermatrix',['get_strCoxeterMatrix',['../class_cox_iter.html#a22a8b15dcd3b75d2d4bf500df4cfbe03',1,'CoxIter']]],
-  ['get_5fstrerror',['get_strError',['../class_arithmeticity.html#aeaf5b99fe87638b33a0ed97f78fa156a',1,'Arithmeticity::get_strError()'],['../class_cox_iter.html#a4995ed17522a64b6f55bc835171c9090',1,'CoxIter::get_strError()'],['../class_g_b_d.html#a98f4a2b8937f27f5c7422faf4b978752',1,'GBD::get_strError()'],['../class_p_c_r_e_regexp.html#af46ed9f3d1a58d36496896aeab291898',1,'PCRERegexp::get_strError()']]],
+  ['get_5fstrerror',['get_strError',['../class_arithmeticity.html#aeaf5b99fe87638b33a0ed97f78fa156a',1,'Arithmeticity::get_strError()'],['../class_cox_iter.html#a4995ed17522a64b6f55bc835171c9090',1,'CoxIter::get_strError()'],['../class_g_b_d.html#a98f4a2b8937f27f5c7422faf4b978752',1,'GBD::get_strError()']]],
   ['get_5fstreulercaracteristic',['get_strEulerCaracteristic',['../class_cox_iter.html#a4c7bacfb15aed9b156373bed45efea8c',1,'CoxIter']]],
   ['get_5fstreulercharacteristic_5fcomputations',['get_strEulerCharacteristic_computations',['../class_cox_iter.html#a7b3b1a3266f7b2d2b788203018eae4f1',1,'CoxIter']]],
   ['get_5fstrgrammatrix',['get_strGramMatrix',['../class_cox_iter.html#a6def28e6eae0cee2a714b7d30153a5da',1,'CoxIter']]],
@@ -43,7 +43,7 @@ var searchData=
   ['get_5fstrlistcycles',['get_strListCycles',['../class_arithmeticity.html#ab0b3da3ffdcb4efd18dc71cd4cd45ab7',1,'Arithmeticity']]],
   ['get_5fstrvertexlabel',['get_strVertexLabel',['../class_cox_iter.html#aa8b98ff20fadc78882df4edc7fca9107',1,'CoxIter']]],
   ['get_5fstrweights',['get_strWeights',['../class_cox_iter.html#a35e08981140e29bc8fb95f188e894da0',1,'CoxIter']]],
-  ['graph',['Graph',['../class_graph.html#a8a25d1b0ec32e8a38408311430fc26a2',1,'Graph']]],
+  ['graph',['Graph',['../class_graph.html#a5e97f6571847e20ce8086985132f0c4a',1,'Graph']]],
   ['graphslist',['GraphsList',['../class_graphs_list.html#a409c275caac7b0b4b0f49761fd848322',1,'GraphsList']]],
   ['graphslistiterator',['GraphsListIterator',['../class_graphs_list_iterator.html#acf3fdeb6b73020380f941cf9254c9e46',1,'GraphsListIterator::GraphsListIterator(GraphsList *gl)'],['../class_graphs_list_iterator.html#a2352e54c6429ed8733d48e2f2f9bd724',1,'GraphsListIterator::GraphsListIterator(GraphsList *gl, const unsigned int &amp;iVerticesCountMin, const unsigned int &amp;iVerticesCountMax=0)'],['../class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004',1,'GraphsListIterator::GraphsListIterator()']]],
   ['graphslistn',['GraphsListN',['../class_graphs_list_n.html#a0a60b7b578c06fa113edefa8bb7f3ae0',1,'GraphsListN']]],
@@ -55,6 +55,6 @@ var searchData=
   ['growthseries_5fmergeterms',['growthSeries_mergeTerms',['../class_cox_iter.html#ae939fd5ba9743a4516559a1b12f87270',1,'CoxIter']]],
   ['growthseries_5fparallel',['growthSeries_parallel',['../class_cox_iter.html#a52b8bf7f6fcfd923cb31efd3c6835375',1,'CoxIter']]],
   ['growthseries_5fsequential',['growthSeries_sequential',['../class_cox_iter.html#a822d1e4b8cf4250aae6631c30ce567d9',1,'CoxIter']]],
-  ['growthseries_5fsymbolexponentfromproduct',['growthSeries_symbolExponentFromProduct',['../class_cox_iter.html#af4a6bea12c7b953261032095375b6119',1,'CoxIter::growthSeries_symbolExponentFromProduct(const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;iProduct, vector&lt; unsigned int &gt; &amp;iSymbol, unsigned int &amp;iExponent) const '],['../class_cox_iter.html#ae70217eb3497f4f7afa31c64cac5ce48',1,'CoxIter::growthSeries_symbolExponentFromProduct(const vector&lt; vector&lt; unsigned int &gt; &gt; &amp;iProduct, string &amp;strSymbol, unsigned int &amp;iExponent) const ']]],
+  ['growthseries_5fsymbolexponentfromproduct',['growthSeries_symbolExponentFromProduct',['../class_cox_iter.html#ad1a81ab17613bdd20a27462626e9eb73',1,'CoxIter::growthSeries_symbolExponentFromProduct(const vector&lt; vector&lt; short unsigned int &gt; &gt; &amp;iProduct, vector&lt; unsigned int &gt; &amp;iSymbol, unsigned int &amp;iExponent) const '],['../class_cox_iter.html#af7ba4de9164cc125f32271fd105747a3',1,'CoxIter::growthSeries_symbolExponentFromProduct(const vector&lt; vector&lt; short unsigned int &gt; &gt; &amp;iProduct, string &amp;strSymbol, unsigned int &amp;iExponent) const ']]],
   ['grrcomputations',['grrComputations',['../class_growth_rate.html#ac5ed4738df1c9bcc098106c7fd03c1e6',1,'GrowthRate']]]
 ];

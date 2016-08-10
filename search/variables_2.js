@@ -13,7 +13,7 @@ var searchData=
   ['graphsproductscount_5feuclidean',['graphsProductsCount_euclidean',['../class_cox_iter.html#a0bca775a6f1e2ab64189cafdc1a03e5e',1,'CoxIter']]],
   ['graphsproductscount_5fspherical',['graphsProductsCount_spherical',['../class_cox_iter.html#a4de8f0a5d3a2246d54cbf0816a419792',1,'CoxIter']]],
   ['growthseries_5fbfractionreduced',['growthSeries_bFractionReduced',['../class_cox_iter.html#aafea54f5809b49185c788ef69f67ac5c',1,'CoxIter']]],
-  ['growthseries_5ficyclotomicnumerator',['growthSeries_iCyclotomicNumerator',['../class_cox_iter.html#aac26ed9e35e58df2e22eb4ace3ac1018',1,'CoxIter']]],
+  ['growthseries_5ficyclotomicnumerator',['growthSeries_iCyclotomicNumerator',['../class_cox_iter.html#aaefd0fce0430a8ce937d3720aa89661c',1,'CoxIter']]],
   ['growthseries_5fipolynomialdenominator',['growthSeries_iPolynomialDenominator',['../class_cox_iter.html#a88339a997cfe13eb939959a8f8f969f6',1,'CoxIter']]],
   ['growthseries_5fraw',['growthSeries_raw',['../class_cox_iter.html#acc0e7ca0ce43dcc26f25b842ef02854a',1,'CoxIter']]]
 ];

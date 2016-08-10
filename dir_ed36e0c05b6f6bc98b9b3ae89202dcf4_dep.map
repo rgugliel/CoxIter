@@ -1,6 +1,4 @@
 <map id="CoxIter" name="CoxIter">
-<area shape="rect" id="node2" href="dir_3727e4a0ed8dcaf1ec485d1a7d410315.html" title="lib" alt="" coords="37,159,109,207"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000006_000007.html" title="4" alt="" coords="78,133,86,148"/>
-<area shape="rect" id="clust2" href="dir_ed36e0c05b6f6bc98b9b3ae89202dcf4.html" alt="" coords="27,52,120,217"/>
-<area shape="rect" id="clust1" href="dir_142165f00b74730dd9380689e5d89e3a.html" title="C++" alt="" coords="16,16,131,228"/>
+<area shape="rect" id="node1" href="dir_ed36e0c05b6f6bc98b9b3ae89202dcf4.html" title="CoxIter" alt="" coords="27,52,99,100"/>
+<area shape="rect" id="clust1" href="dir_142165f00b74730dd9380689e5d89e3a.html" title="C++" alt="" coords="16,16,109,111"/>
 </map>
