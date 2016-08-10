@@ -20,12 +20,6 @@ int main( int argc, char **argv )
 	if( app.bCoutFile )
 		cout << "Output is redirected to " << app.strOutFilenameBasis << ".output" << endl;
 	
-	if( app.strInFilename == "" )
-	{
-		cout << "No input file given" << endl;
-		return 0;
-	}
-	
 	app.run( );
 	
 	return 0;

@@ -141,9 +141,9 @@ bool CoxIter::bRunAllComputations()
 	return true;
 }
 
-bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
+bool CoxIter::parseGraph( istream& streamIn )
 {
-	string szLine;
+	string strLine;
 	PCRERegexp regexp;
 	PCREResult regexpRes;
 	
@@ -155,19 +155,10 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 	vector< unsigned int > iOrders; // orders found
 	
 	// ---------------------------------------------------------------------------
-	// try to open the file
-	ifstream fileIn( strInputFilename.c_str() );
-	if( fileIn.fail() )
-	{
-		strError = "Cannot open file";
-		return false;
-	}
-	
-	// ---------------------------------------------------------------------------
 	// Reading the number of vertices and, eventually, dimension
-	if( getline( fileIn, szLine ) )
+	if( getline( streamIn, strLine ) )
 	{
-		if( regexp.preg_match_all( "([[:digit:]]+)[[:space:]]?([[:digit:]]*)", szLine, regexpRes ) == 1 )
+		if( regexp.preg_match_all( "([[:digit:]]+)[[:space:]]?([[:digit:]]*)", strLine, regexpRes ) == 1 )
 		{
 			iVerticesFileCount = iVerticesCount = stoi( regexpRes[1][0] );
 			iDimension = regexpRes[2][0] != "" ? stoi( regexpRes[2][0] ) : 0;
@@ -186,14 +177,14 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 	
 	// ---------------------------------------------------------------------------
 	// first line
-	if( !getline( fileIn, szLine ) )
+	if( !getline( streamIn, strLine ) )
 	{
 		strError = "EMPTY_FILE";
 		return false;
 	}
 	
 	// names of the vertices
-	if( regexp.preg_match_all( "^vertices labels:[[:space:]]?([[:alnum:]-_ ]+)$", szLine, regexpRes ) )
+	if( regexp.preg_match_all( "^vertices labels:[[:space:]]?([[:alnum:]-_ ]+)$", strLine, regexpRes ) )
 	{
 		vector< string > strVL( explode( " ", regexpRes[1][0] ) );
 		if( strVL.size() != iVerticesFileCount )
@@ -214,7 +205,7 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 			return false;
 		}
 		
-		if( !getline( fileIn, szLine ) )
+		if( !getline( streamIn, strLine ) )
 		{
 			strError = "EMPTY_FILE";
 			return false;
@@ -277,7 +268,7 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 		regexpRes.clear();
 		
 		// Usual row: "first vertice" "second vertice" "weight"
-		if( regexp.preg_match_all( "([[:alnum:]_-]+)[[:space:]]([[:alnum:]_-]+)[[:space:]]([[:digit:]]+)([[:space:]]+#[[:space:]]*([^\n]+))?", szLine, regexpRes ) )
+		if( regexp.preg_match_all( "([[:alnum:]_-]+)[[:space:]]([[:alnum:]_-]+)[[:space:]]([[:digit:]]+)([[:space:]]+#[[:space:]]*([^\n]+))?", strLine, regexpRes ) )
 		{
 			if( map_vertices_labelToIndex.find( regexpRes[1][0] ) == map_vertices_labelToIndex.end() )
 			{
@@ -338,17 +329,15 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 			else if( i3 == 0 )
 				bHasBoldLine = true;
 		}
-		else if( szLine != "" )
+		else if( strLine != "" )
 		{
 			if( bWriteInfo )
-				cout << "Unread line (incorrect format): " << "#" << szLine << "#" << iRowIndex << endl;
+				cout << "Unread line (incorrect format): " << "#" << strLine << "#" << iRowIndex << endl;
 			
 			iRowIndex ++;
 			continue;
 		}
-	}while( getline( fileIn, szLine ) );
-	
-	fileIn.close();
+	}while( getline( streamIn, strLine ) );
 	
 	// ---------------------------------------------------------------------------
 	// Labels and co
@@ -370,7 +359,7 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 	// some information
 	if( bWriteInfo )
 	{
-		cout << "Reading file: " << strInputFilename << endl;
+		cout << "Reading graph: " << endl;
 		cout << "\tNumber of vertices: " << iVerticesCount << endl;
 		cout << "\tDimension: " << ( iDimension ? to_string( iDimension ) : "?" ) << endl;
 		
@@ -412,6 +401,25 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 	
 	if( bWriteInfo )
 		cout << "File read\n" << endl;
+	
+	return true;
+}
+
+bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
+{
+	// ---------------------------------------------------------------------------
+	// try to open the file
+	ifstream fileIn( strInputFilename.c_str() );
+	if( fileIn.fail() )
+	{
+		strError = "Cannot open file";
+		return false;
+	}
+	
+	if( !parseGraph( fileIn ) )
+		return false;
+	
+	fileIn.close();
 	
 	return true;
 }
@@ -1398,14 +1406,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_sequential( unsigned int iIndex )
 			{
 				for( itGBig = vDiffBigNotSub.begin(); itGBig != vDiffBigNotSub.end(); ++itGBig )
 				{
-					/*
-					*  BUG FIXME
-					* La condition == ci-dessous devrait pouvoir être enlevée et le résultat rester correct
-					* Il y a un problème avec set (tester avec le G2 de graphs/4-jkrt_349-01-H4.in
-					* Ce n'est pas réellement gênant mais c'est pas très propre
-					*/
-					
-					if( (*itGSub)->bIsSubgraphOf( *itGBig ) || **itGSub == **itGBig )
+					if( (*itGSub)->bIsSubgraphOf( *itGBig ) )
 						break;
 				}
 				
@@ -1476,13 +1477,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex )
 						{
 							for( itGBig = vDiffBigNotSub.begin(); itGBig != vDiffBigNotSub.end(); ++itGBig )
 							{
-								/*
-								*  BUG FIXME
-								* La condition == ci-dessous devrait pouvoir être enlevée et le résultat rester correct
-								* Il y a un problème avec set (tester avec le G2 de graphs/4-jkrt_349-01-H4.in
-								* Ce n'est pas réellement gênant mais c'est pas très propre
-								*/
-								if( (*itGSub)->bIsSubgraphOf( *itGBig ) || **itGSub == **itGBig )
+								if( (*itGSub)->bIsSubgraphOf( *itGBig ) )
 									break;
 							}
 							
@@ -1631,10 +1626,11 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	vector< short unsigned int >::iterator iIt;
 	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
+	static unsigned int iMaxRank( iDimension ? iDimension : iVerticesCount );
 	
 	vector< vector< short unsigned int > > vFootPrintTest;
 	
-	while( grIt.ptr && ( gp.iRank + iGraphRank <= iVerticesCount ) )
+	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaxRank ) )
 	{
 		// ---------------------------------------------------
 		// est ce que le graphe est admissible?
@@ -1752,7 +1748,7 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	}
 }
 
-bool CoxIter::bCanBeFiniteCovolume() // TODO: remove
+bool CoxIter::bCanBeFiniteCovolume()
 {
 	// -----------------------------------------------------------
 	// Some verifications

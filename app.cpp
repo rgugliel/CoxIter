@@ -49,6 +49,19 @@ bool App::bReadMainParameters( int argc, char **argv )
 {
 	string szTemp, szPrevType, strComplete;
 	
+	if( argc == 1 && isatty(fileno(stdin)) == 0 ) // If no parameter was given but a file was passed via stdin
+	{
+		bCheckCocompacity = true;
+		bCheckFiniteCovolume = true;
+		bComputeGrowthSeries = true;
+#ifdef _COMPILE_WITH_PARI_
+			bComputeGrowthRate = true;
+			bComputeSignature = true;
+#endif
+			
+		return true;
+	}
+	
 	for( int i = 0; i < argc; ++i ) 
 	{
 		szTemp = std::string( argv[i] );
@@ -261,13 +274,29 @@ void App::run( )
 	array< unsigned int, 3 > iSignature;
 	#endif
 	
-	// Reading of the graph
-	if( !ci.bReadGraphFromFile( strInFilename ) )
+	if( isatty( fileno(stdin) ) == 0 )
 	{
-		cout << "Error while reading file: " << ci.get_strError( ) << endl;
-		return;
+		if( !ci.parseGraph( std::cin ) )
+		{
+			cout << "Error while reading graph: " << ci.get_strError( ) << endl;
+			return;
+		}	
 	}
-	
+	else if( strInFilename != "" )
+	{
+		// Reading of the graph
+		if( !ci.bReadGraphFromFile( strInFilename ) )
+		{
+			cout << "Error while reading file: " << ci.get_strError( ) << endl;
+			return;
+		}
+	}
+	else
+	{
+		cout << "No input file given" << endl;
+		return; // TODO
+	}
+
 	if( bGBD )
 	{
 		cout << "GBD" << endl;
@@ -303,7 +332,7 @@ void App::run( )
 		if( bCheckCanBeFiniteCovolume )
 			bCanBeFiniteCovolume = ci.bCanBeFiniteCovolume( );
 	}
-	catch( string strE )
+	catch( const string& strE )
 	{
 		bCheckCanBeFiniteCovolume = false;
 		cout << "\nError:\n\t" << strE << "\n" << endl;
@@ -357,7 +386,7 @@ void App::run( )
 			iSignature = s.iComputeSignature( ci.get_strGramMatrix_PARI() );
 			bSignatureComputed = true;
 		}
-		catch( string strE )
+		catch( const string& strE )
 		{
 			cout << "\n---------------------------------------------------------" << endl;
 			cout << "Error while computing the signature:\n\t" << strE << endl;
@@ -373,7 +402,7 @@ void App::run( )
 			GrowthRate gr;
 			grr = gr.grrComputations( ci.get_iGrowthSeries_denominator() );
 		}
-		catch( string strE )
+		catch( const string& strE )
 		{
 			cout << "\n---------------------------------------------------------" << endl;
 			cout << "Error while computing the growth rate:\n\t" << strE << endl;
