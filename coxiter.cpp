@@ -1202,7 +1202,7 @@ string CoxIter::get_strGrowthSeries()
 		unsigned int iCycloSize( growthSeries_iCyclotomicNumerator.size() );
 		unsigned int iDenominatorSize( growthSeries_iPolynomialDenominator.size() );
 		
-		strGrowth += "f(x) = Product( [";
+		strGrowth += "f := Product( [";
 		for( unsigned int i(0); i < iCycloSize; i++ )
 			strGrowth += ( i ? "," : "" ) + to_string( growthSeries_iCyclotomicNumerator[i] );
 		strGrowth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol( [";
