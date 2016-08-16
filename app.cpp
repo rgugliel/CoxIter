@@ -257,7 +257,6 @@ void App::run( )
 		return;
 	}
 	
-	
 	chrono::time_point< std::chrono::system_clock > timeStart, timeEnd;
 	
 	bool bEulerSuccess( true ), bCanBeFiniteCovolume( false ), bSignatureComputed( false );

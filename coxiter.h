@@ -52,7 +52,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include <unordered_set>
 
-#include <gmpxx.h> // GMPib
+#include <gmpxx.h>
 
 #ifdef _COMPILE_WITH_OPENMP_
 #include <omp.h>
