@@ -141,6 +141,7 @@ bool CoxIter::bRunAllComputations()
 	return true;
 }
 
+#ifndef _COMPILE_WITHOUT_REGEXP_
 bool CoxIter::parseGraph( istream& streamIn )
 {
 	string strLine;
@@ -405,6 +406,7 @@ bool CoxIter::parseGraph( istream& streamIn )
 	return true;
 }
 
+
 bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 {
 	// ---------------------------------------------------------------------------
@@ -423,6 +425,7 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 	
 	return true;
 }
+#endif
 
 void CoxIter::initializations()
 {

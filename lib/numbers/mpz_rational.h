@@ -37,8 +37,9 @@ using namespace std;
 
 #include "number_template.h"
 #include "../string.h"
+#ifndef _COMPILE_WITHOUT_REGEXP_
 #include "../regexp.h"
-
+#endif
 #include <gmpxx.h>
 
 class MPZ_rational : public Number_template
@@ -60,8 +61,9 @@ class MPZ_rational : public Number_template
 		MPZ_rational( mpz_class a );
 		
 		MPZ_rational( const int& i );
+		#ifndef _COMPILE_WITHOUT_REGEXP_
 		MPZ_rational( string szRational );
-
+		#endif
 		bool isInteger( ) const;
 		bool isCOInteger( ) const;
 

@@ -37,7 +37,9 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "graphs.list.iterator.h"
 #include "graphs.product.h"
 #include "graphs.product.set.h"
+#ifndef _COMPILE_WITHOUT_REGEXP_
 #include "lib/regexp.h"
+#endif
 #include "lib/math_tools.h"
 #include "lib/polynomials.h"
 #include "lib/numbers/mpz_rational.h"
@@ -245,7 +247,9 @@ class CoxIter
 		 * 	\param strInputFilename( const string& ) Path to the file
 		 * 	\return True if success
 		 */
+		#ifndef _COMPILE_WITHOUT_REGEXP_
 		bool bReadGraphFromFile( const string& strInputFilename );
+		#endif
 		
 		/*!	\fn bWriteGraphToDraw
 		 * 	\brief Write the graph in a file for GraphViz
@@ -270,8 +274,10 @@ class CoxIter
 		 * 	\param streamIn( const ifstream& ) Stream to the content (file or std::cin)
 		 * 	\return True if success
 		 */
+		#ifndef _COMPILE_WITHOUT_REGEXP_
 		bool parseGraph( istream& streamIn );
-
+		#endif
+		
 		/*!
 		 * 	\fn exploreGraph
 		 * 	\brief Explore the graph (via iCoxeterMatrix) to gind subgraphs

@@ -58,6 +58,7 @@ MPZ_rational::MPZ_rational( mpz_class a, mpz_class b )
 	update( );
 }
 
+#ifndef _COMPILE_WITHOUT_REGEXP_
 MPZ_rational::MPZ_rational( string szRational )
 {
 	str_replace( szRational, " ", "" );
@@ -107,6 +108,7 @@ MPZ_rational::MPZ_rational( string szRational )
 
 	throw( 0 ); // raté
 }
+#endif
 
 void MPZ_rational::update( )
 {
