@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "app.h"
 #include "coxiter.h"
 
 using namespace std;
