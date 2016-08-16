@@ -35,7 +35,7 @@ First, install everything you will need to compile the program.
 
 On Ubuntu, Linux Mint or any Debian-based distribution, type the following commands in a Shell:
 \code
-sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev
+sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev
 \endcode
 
 On Fedora, type the following commands in a Shell:
@@ -215,9 +215,10 @@ Alias: -cf<br />
 Example: by specifying "-cf -o graphs/graph" the output is written in "graphs/graph.output"
 
 \param -oformat Format for mathematical output<br />
-Possible values are: generic, mathematica
+Possible values are: generic, gap, latex, mathematica, pari
 Example: "-pgm -oformat mathematica" will print the Gram matrix in the Mathematica format<br />
-Alias: -outputformat
+Alias: -outputformat<br />
+Default: generic
 
 \param -pgm If specified, the Gram matrix will be displayed<br />
 Remark: If the graph contains dotted edges, some variables will be added<br />
