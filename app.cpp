@@ -205,12 +205,8 @@ bool App::bReadMainParameters( int argc, char **argv )
 			else if( szPrevType == "oformat" )
 			{
 				transform(szTemp.begin(), szTemp.end(), szTemp.begin(), ::tolower);
-				if( szTemp == "latex" )
-					strOuputMathematicalFormat = "latex";
-				else if( szTemp == "mathematica" )
-					strOuputMathematicalFormat = "mathematica";
-				else if( szTemp == "pari" )
-					strOuputMathematicalFormat = "pari";
+				if( szTemp == "gap" || szTemp == "latex" || szTemp == "mathematica" || szTemp == "pari" )
+					strOuputMathematicalFormat = szTemp;
 			}
 			
 			szPrevType = "";

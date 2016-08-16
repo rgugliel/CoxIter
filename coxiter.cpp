@@ -1197,6 +1197,19 @@ string CoxIter::get_strGrowthSeries()
 		
 		strGrowth += "/(" + vector2str( growthSeries_iPolynomialDenominator ) + ")";
 	}
+	else if( strOuputMathematicalFormat == "gap" )
+	{
+		unsigned int iCycloSize( growthSeries_iCyclotomicNumerator.size() );
+		unsigned int iDenominatorSize( growthSeries_iPolynomialDenominator.size() );
+		
+		strGrowth += "f(x) = Product( [";
+		for( unsigned int i(0); i < iCycloSize; i++ )
+			strGrowth += ( i ? "," : "" ) + to_string( growthSeries_iCyclotomicNumerator[i] );
+		strGrowth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol( [";
+		for( unsigned int i(0); i < iDenominatorSize; i++ )
+			cout << ( i ? "," : "" ) << growthSeries_iPolynomialDenominator[i];
+		cout << "], X(Rationals));";
+	}
 	else if( strOuputMathematicalFormat == "mathematica" )
 	{
 		unsigned int iCycloSize( growthSeries_iCyclotomicNumerator.size() );
@@ -1245,6 +1258,23 @@ void CoxIter::printGrowthSeries()
 		if( bDebug )
 			cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
 	}
+	else if( strOuputMathematicalFormat == "gap" )
+	{
+		unsigned int iCycloSize( growthSeries_iCyclotomicNumerator.size() );
+		unsigned int iDenominatorSize( growthSeries_iPolynomialDenominator.size() );
+		
+		cout << "f := Product( [";
+		for( unsigned int i(0); i < iCycloSize; i++ )
+			cout << ( i ? "," : "" ) << growthSeries_iCyclotomicNumerator[i];
+		cout << "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol( [";
+		for( unsigned int i(0); i < iDenominatorSize; i++ )
+			cout << ( i ? "," : "" ) << growthSeries_iPolynomialDenominator[i];
+		cout << "], X(Rationals));";
+		
+		
+		if( bDebug )
+			cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
+	}
 	else if( strOuputMathematicalFormat == "mathematica" )
 	{
 		unsigned int iCycloSize( growthSeries_iCyclotomicNumerator.size() );
@@ -1277,12 +1307,9 @@ void CoxIter::printGrowthSeries()
 		cout << "f(x) = Cyclo( [";
 		for( unsigned int i(0); i < iCycloSize; i++ )
 			cout << ( i ? "," : "" ) << growthSeries_iCyclotomicNumerator[i];
-		cout << "],x)";
-		
-		cout << "/(";
+		cout << "],x)/(";
 		Polynomials::polynomialDisplay( growthSeries_iPolynomialDenominator );
 		cout << ");";
-		
 		
 		if( bDebug )
 			cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
@@ -2768,7 +2795,9 @@ void CoxIter::printCoxeterMatrix()
 
 void CoxIter::printGramMatrix()
 {
-	if( strOuputMathematicalFormat == "latex" )
+	if( strOuputMathematicalFormat == "gap" )
+		printGramMatrix_GAP();
+	else if( strOuputMathematicalFormat == "latex" )
 		printGramMatrix_LaTeX();
 	else if( strOuputMathematicalFormat == "mathematica" )
 		printGramMatrix_Mathematica();
@@ -2790,6 +2819,11 @@ void CoxIter::printGramMatrix()
 	}
 	
 	cout << endl;
+}
+
+void CoxIter::printGramMatrix_GAP()
+{
+	cout << "Gram matrix (GAP): \n\t" << get_strGramMatrix_GAP() << "\n" << endl;
 }
 
 void CoxIter::printGramMatrix_Mathematica()
@@ -3116,6 +3150,53 @@ string CoxIter::get_strGramMatrix_PARI() const
 	}
 	
 	return ( strGramMatrix + "];" );
+}
+
+string CoxIter::get_strGramMatrix_GAP() const
+{
+	size_t i, j;
+	string strGramMatrix( "G := [ [" );
+	
+	for( i = 0; i < iVerticesCount; i++ )
+	{
+		strGramMatrix += ( i ? "], [" : " " );
+		for( j = 0; j < iVerticesCount; j++ )
+		{
+			if( j > 0 )
+				strGramMatrix += ", ";
+			
+			if( i == j )
+				strGramMatrix += "1" ;
+			else if( iCoxeterMatrix[i][j] == 0 )
+				strGramMatrix += "-1" ;
+			else if( iCoxeterMatrix[i][j] == 1 )
+			{
+				map< unsigned int, string >::const_iterator itF( strWeights.find( iLinearizationMatrix_index( min(i,j), max(i,j), iVerticesCount ) ) );
+				
+				if( itF != strWeights.end() )
+					strGramMatrix += itF->second;
+				else
+					strGramMatrix += "l" + to_string( static_cast<long long>( min( i, j ) ) ) + "m" + to_string( static_cast<long long>( max( i, j ) ) );
+			}
+			else
+			{
+				if( iCoxeterMatrix[i][j] == 2 )
+					strGramMatrix += "0";
+				else if( iCoxeterMatrix[i][j] == 3 )
+					strGramMatrix += "-1/2";
+				else if( iCoxeterMatrix[i][j] == 4 )
+					strGramMatrix += "-Sqrt(2)/2";
+				else if( iCoxeterMatrix[i][j] == 5 )
+					strGramMatrix += "-(1+Sqrt(5))/4";
+				else if( iCoxeterMatrix[i][j] == 6 )
+					strGramMatrix += "-Sqrt(3)/2";
+				else
+					strGramMatrix += "-Cos(FLOAT.PI/" + to_string( static_cast<long long>( iCoxeterMatrix[i][j] ) ) + ")";
+			}
+		}
+	}
+	
+	return ( strGramMatrix + "] ];" );
 }
 
 string CoxIter::get_strGramMatrixField() const

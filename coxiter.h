@@ -221,6 +221,11 @@ class CoxIter
 		 */
 		void printGramMatrix( );
 		
+		/*!	\fn printGramMatrix_GAP
+		 * 	\brief Print the Gram matrix (format: GAP)
+		 */
+		void printGramMatrix_GAP( );
+		
 		/*!	\fn printGramMatrix_Mathematica
 		 * 	\brief Print the Gram matrix (format: Mathematica)
 		 */
@@ -495,6 +500,12 @@ class CoxIter
 		 * 	\return Gram matrix (string)
 		 */
 		string get_strGramMatrix( ) const;
+		
+		/*!	\fn get_strGramMatrix_GAP
+		 * 	\brief Returns the Gram matrix (format GAP)
+		 * 	\return Gram matrix (string)
+		 */
+		string get_strGramMatrix_GAP( ) const;
 		
 		/*!	\fn get_strGramMatrix_LaTeX
 		 * 	\brief Returns the Gram matrix (format LaTeX)
