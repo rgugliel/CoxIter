@@ -55,7 +55,7 @@ CoxIter::CoxIter()
 	strError( "" ),
 	strOuputMathematicalFormat( "generic" )
 { 
-	#ifndef _COMPILE_WITH_OPENMP_
+	#ifndef _OPENMP
 	this->bUseOpenMP = false;
 	#endif
 }
@@ -97,7 +97,7 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	
 	iCoxeterMatrix = iMatrix;
 	
-	#ifndef _COMPILE_WITH_OPENMP_
+	#ifndef _OPENMP
 	this->bUseOpenMP = false;
 	#endif
 }
@@ -3401,7 +3401,7 @@ void CoxIter::set_bDebug(const bool& bValue)
 
 void CoxIter::set_bUseOpenMP(const bool& bValue)
 {
-	#ifdef _COMPILE_WITH_OPENMP_
+	#ifdef _OPENMP
 	bUseOpenMP = bValue;
 	#endif
 }

@@ -56,7 +56,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include <gmpxx.h>
 
-#ifdef _COMPILE_WITH_OPENMP_
+#ifdef _OPENMP
 #include <omp.h>
 #else
 inline unsigned int omp_get_thread_num() { return 0; }
