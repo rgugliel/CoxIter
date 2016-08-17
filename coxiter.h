@@ -212,9 +212,14 @@ class CoxIter
 		bool bRunAllComputations( );
 		
 		/*!	\fn printCoxeterMatrix
-		 * 	\brief Print Coxeter matric
+		 * 	\brief Print Coxeter matrix
 		 */
 		void printCoxeterMatrix( );
+		
+		/*!	\fn printCoxeterGraph
+		 * 	\brief Print Coxeter graph
+		 */
+		void printCoxeterGraph( );
 		
 		/*!	\fn printGramMatrix
 		 * 	\brief Print the Gram matrix
@@ -500,6 +505,12 @@ class CoxIter
 		 * 	\return Gram matrix (string)
 		 */
 		string get_strGramMatrix( ) const;
+		
+		/*!	\fn get_strCoxeterGraph
+		 * 	\brief Returns the Coxeter graph
+		 * 	\return Gram graph (string)
+		 */
+		string get_strCoxeterGraph( ) const;
 		
 		/*!	\fn get_strGramMatrix_GAP
 		 * 	\brief Returns the Gram matrix (format GAP)

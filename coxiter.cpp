@@ -2793,6 +2793,11 @@ void CoxIter::printCoxeterMatrix()
 	}
 }
 
+void CoxIter::printCoxeterGraph()
+{
+	cout << "Coxeter graph:\n\t[" << get_strCoxeterGraph() << "]\n" << endl;
+}
+
 void CoxIter::printGramMatrix()
 {
 	if( strOuputMathematicalFormat == "gap" )
@@ -2960,6 +2965,48 @@ vector< vector< string > > CoxIter::get_array_str_2_GramMatrix() const
 	}
 	
 	return strGramMatrix;
+}
+
+string CoxIter::get_strCoxeterGraph() const 
+{
+	unsigned int i, j;
+	vector< unsigned int > iUsedVertices;
+	
+	string strCoxeterGraph( "" ), strTemp;
+	
+	for( i = 0; i < iVerticesCount; i++ )
+	{
+		strTemp = "";
+		for( j = i + 1; j < iVerticesCount; j++ )
+		{
+			if( iCoxeterMatrix[i][j] != 2 )
+			{
+				strTemp += ( strTemp == "" ? "[" : ",[" ) + to_string( j + 1 ) + "," + to_string( iCoxeterMatrix[i][j] ) + "]";
+				
+				auto it( lower_bound( iUsedVertices.begin(), iUsedVertices.end(), j ) );
+				if( it == iUsedVertices.end() || !(*it == j) )
+					iUsedVertices.insert( it, j );
+			}
+		}
+		
+		if( strTemp != "" )
+		{
+			auto it( lower_bound( iUsedVertices.begin(), iUsedVertices.end(), i ) );
+			if( it == iUsedVertices.end() || !(*it == i) )
+				iUsedVertices.insert( it, i );
+				
+			strCoxeterGraph += ( strCoxeterGraph == "" ? "[" : ",[" ) + to_string( i + 1 ) + "," + strTemp + "]";
+		}
+	}
+	
+	for( i = 0; i < iVerticesCount; i++ ) // We display the non-used (i.e. disconnected) vertices
+	{
+		auto it( lower_bound( iUsedVertices.begin(), iUsedVertices.end(), i ) );
+		if( it == iUsedVertices.end() || !(*it == i) )
+			strCoxeterGraph += ",[" + to_string( i + 1 ) + "]";
+	}
+	
+	return strCoxeterGraph;
 }
 
 string CoxIter::get_strGramMatrix() const
