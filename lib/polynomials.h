@@ -37,7 +37,11 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <iterator>
 #include <map>
 
+#ifdef _USE_LOCAL_GMP_
+#include "gmpxx.h"
+#else
 #include <gmpxx.h>
+#endif
 
 using namespace std;
 

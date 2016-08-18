@@ -54,7 +54,11 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include <unordered_set>
 
+#ifdef _USE_LOCAL_GMP_
+#include "gmpxx.h"
+#else
 #include <gmpxx.h>
+#endif
 
 #ifdef _COMPILE_WITH_OPENMP_
 #include <omp.h>

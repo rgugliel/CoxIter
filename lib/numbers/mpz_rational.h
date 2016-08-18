@@ -40,7 +40,11 @@ using namespace std;
 #ifndef _COMPILE_WITHOUT_REGEXP_
 #include "../regexp.h"
 #endif
+#ifdef _USE_LOCAL_GMP_
+#include "gmpxx.h"
+#else
 #include <gmpxx.h>
+#endif
 
 class MPZ_rational : public Number_template
 {
