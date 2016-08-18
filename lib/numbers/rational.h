@@ -21,11 +21,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*!
- * TODO
- * \file number_rational.h
- * \brief Nombres rationnels (un int en haut, un int en bas). Surcharge des opérateurs classiques.
+ * \file rational.h
+ * \brief Rational numbers (template)
  * \author Rafael Guglielmetti
- * \class Rational number_rational.h
+ * \class Rational rational.h
 */
 
 #ifndef __RATIONAL_GENERIC_H__

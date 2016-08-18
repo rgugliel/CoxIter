@@ -21,10 +21,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*!
- * \file number_rational.h
- * \brief Nombres rationnels (un int en haut, un int en bas). Surcharge des opérateurs classiques.
+ * \file mpz_rational.h
+ * \brief Rational number
  * \author Rafael Guglielmetti
- * \class Number_rational number_rational.h
+ * \class MPZ_rational mpz_rational.h
 */
 
 #ifndef __NUMBER_RATIONAL_H__

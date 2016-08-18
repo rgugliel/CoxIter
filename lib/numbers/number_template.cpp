@@ -21,8 +21,8 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
 /*!
- * \file number_rational.cpp
- * \brief Tout ceci ne sert pas vraiment puisque tout est virtuel (mais on peut pas faire du virtuel pur)
+ * \file number_template.cpp
+ * \brief Not really useful
  * \author Rafael Guglielmetti
 */
 
