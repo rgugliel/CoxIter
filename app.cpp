@@ -38,6 +38,7 @@ bDoComputations( true ),
 bDebug( false ), 
 bGBD( false ), 
 bOpenMP( true ),
+bPrintCoxeterGraph( false ),
 bPrintCoxeterMatrix( false ), 
 bPrintGramMatrix( false ),
 bPrintHelp( false ),
@@ -165,6 +166,11 @@ bool App::bReadMainParameters( int argc, char **argv )
 		else if( szTemp == "-o" ) // Files for the output
 		{
 			szPrevType = "o";
+		}
+		else if( szTemp == "-pcg" ) // print Coxeter matrix
+		{
+			bPrintCoxeterGraph = true;
+			szPrevType = "pcg";
 		}
 		else if( szTemp == "-pcm" ) // print Coxeter matrix
 		{
@@ -324,6 +330,9 @@ void App::run( )
 	
 	if( bPrintCoxeterMatrix )
 		ci.printCoxeterMatrix( );
+		
+	if( bPrintCoxeterGraph )
+		ci.printCoxeterGraph( );
 	
 	if( bOutputGraph && !ci.bWriteGraph( strOutFilenameBasis ) )
 		cout << "Error while writing file: " << ci.get_strError( ) << endl;

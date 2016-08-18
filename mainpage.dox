@@ -220,6 +220,9 @@ Example: "-pgm -oformat mathematica" will print the Gram matrix in the Mathemati
 Alias: -outputformat<br />
 Default: generic
 
+\param -pcg If specified, the Coxeter graph will be printed<br />
+For each vertex, a list of its neighbours is displayed
+
 \param -pgm If specified, the Gram matrix will be displayed<br />
 Remark: If the graph contains dotted edges, some variables will be added<br />
 See: -orformat

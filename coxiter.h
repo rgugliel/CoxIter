@@ -60,7 +60,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <gmpxx.h>
 #endif
 
-#ifdef _COMPILE_WITH_OPENMP_
+#ifdef _OPENMP
 #include <omp.h>
 #else
 inline unsigned int omp_get_thread_num() { return 0; }
@@ -216,9 +216,14 @@ class CoxIter
 		bool bRunAllComputations( );
 		
 		/*!	\fn printCoxeterMatrix
-		 * 	\brief Print Coxeter matric
+		 * 	\brief Print Coxeter matrix
 		 */
 		void printCoxeterMatrix( );
+		
+		/*!	\fn printCoxeterGraph
+		 * 	\brief Print Coxeter graph
+		 */
+		void printCoxeterGraph( );
 		
 		/*!	\fn printGramMatrix
 		 * 	\brief Print the Gram matrix
@@ -504,6 +509,12 @@ class CoxIter
 		 * 	\return Gram matrix (string)
 		 */
 		string get_strGramMatrix( ) const;
+		
+		/*!	\fn get_strCoxeterGraph
+		 * 	\brief Returns the Coxeter graph
+		 * 	\return Gram graph (string)
+		 */
+		string get_strCoxeterGraph( ) const;
 		
 		/*!	\fn get_strGramMatrix_GAP
 		 * 	\brief Returns the Gram matrix (format GAP)

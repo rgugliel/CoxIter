@@ -62,6 +62,7 @@ class App
 		bool bDebug; ///< Display additional information
 		bool bGBD; ///< Doing GBD?
 		bool bOpenMP; ///< Use OpenMP
+		bool bPrintCoxeterGraph; ///< Print the Coxeter graph?
 		bool bPrintCoxeterMatrix; ///< Print the Coxeter matrix?
 		bool bPrintGramMatrix; ///< Print the Gram matrix?
 		bool bPrintHelp; ///< If we want to print help (option or by default depending on the error)

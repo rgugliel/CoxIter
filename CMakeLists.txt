@@ -29,7 +29,6 @@ if( OPENMP_FOUND )
 	
 	add_definitions("-fopenmp")
 	add_definitions("-lomp")
-	add_definitions(-D_COMPILE_WITH_OPENMP_)
 endif()
 
 find_library( PCRE_LIBRARY pcre )
