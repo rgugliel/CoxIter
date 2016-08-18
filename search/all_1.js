@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['b',['b',['../class_m_p_z__rational.html#a43e650b04447b046e140b5f335ca5245',1,'MPZ_rational::b()'],['../class_rational.html#a539d29b31693d4b9db082ffd1b3fd304',1,'Rational::b()']]],
   ['b3tof4_5fb4totf4',['B3ToF4_B4ToTF4',['../class_cox_iter.html#a70cf7a67910088adaa0420c34cf08373',1,'CoxIter']]],
   ['b_5fareverticessubsetof',['b_areVerticesSubsetOf',['../class_graphs_product_set.html#af88c34da708cc28ed4b5b1d90b23c009',1,'GraphsProductSet']]],
   ['b_5fisgraph_5fcocompact_5ffinitevolume_5fparallel',['b_isGraph_cocompact_finiteVolume_parallel',['../class_cox_iter.html#a25cce75962fae1d999e5b03ba677a6e8',1,'CoxIter']]],
@@ -16,6 +17,7 @@ var searchData=
   ['bcheckcocompactness',['bCheckCocompactness',['../class_cox_iter.html#a4d9b00e0b828998e3578a91c621850ae',1,'CoxIter']]],
   ['bcheckcofiniteness',['bCheckCofiniteness',['../class_cox_iter.html#aa1c0bc8ae470bd0f8146f2d6152c2693',1,'CoxIter']]],
   ['bcheckfinitecovolume',['bCheckFiniteCovolume',['../class_app.html#aa8396cd70a3c03c02e4e0e0a33a3182f',1,'App']]],
+  ['bclassused',['bClassUsed',['../class_p_c_r_e_regexp.html#a256185b2a7b7f29d5bd4e4ccce07b855',1,'PCRERegexp']]],
   ['bcomputed',['bComputed',['../struct_growth_rate___result.html#ae8ea438a4aa8595b2088afaa7c78dff8',1,'GrowthRate_Result']]],
   ['bcomputeeuler',['bComputeEuler',['../class_app.html#a1218bef87c81ddf84491bce94f5d1f75',1,'App']]],
   ['bcomputegrowthrate',['bComputeGrowthRate',['../class_app.html#afc3f2d23f6f49f1a0dbbecbea77eef67',1,'App']]],
@@ -35,6 +37,7 @@ var searchData=
   ['bgrowthseriescomputed',['bGrowthSeriesComputed',['../class_cox_iter.html#a8fad8afaf1fa56f015c8dfb59a041693',1,'CoxIter']]],
   ['bhasboldline',['bHasBoldLine',['../class_cox_iter.html#a1b3f146843b649acfe9f537652cafa64',1,'CoxIter']]],
   ['bhasdottedline',['bHasDottedLine',['../class_cox_iter.html#a4b11601532727ba7b97bc13540e210d1',1,'CoxIter']]],
+  ['bisprime',['bIsPrime',['../namespace_math_tools.html#acc2503e1c47d2383c563c983c98cfa8f',1,'MathTools']]],
   ['bissubgraphof',['bIsSubgraphOf',['../class_graph.html#aa2ec710575b76fda9263efbbc1ee81d9',1,'Graph']]],
   ['bissubgraphof_5fspherical_5feuclidean',['bIsSubgraphOf_spherical_euclidean',['../class_graph.html#a98b960e57973088db5774f76682fdf06',1,'Graph']]],
   ['bissubgraphof_5fspherical_5fspherical',['bIsSubgraphOf_spherical_spherical',['../class_graph.html#aa6b7ca7a31f90cb6c8baf9020c0aeadc',1,'Graph']]],
@@ -45,6 +48,7 @@ var searchData=
   ['bopenmp',['bOpenMP',['../class_app.html#a8d9a4871fbc1a6894587285b91241833',1,'App']]],
   ['boutputgraph',['bOutputGraph',['../class_app.html#af755ddd68f5efe52bd96dfbdff50581b',1,'App']]],
   ['boutputgraphtodraw',['bOutputGraphToDraw',['../class_app.html#a0230f2539ae1f606746509f7f69fafe1',1,'App']]],
+  ['bprintcoxetergraph',['bPrintCoxeterGraph',['../class_app.html#ab50ebf1946937b0dc7c645a604569780',1,'App']]],
   ['bprintcoxetermatrix',['bPrintCoxeterMatrix',['../class_app.html#a89ec06ae7099d4726a2b76e823750113',1,'App']]],
   ['bprintgrammatrix',['bPrintGramMatrix',['../class_app.html#af50170d7c421988f20b708906ceb782e',1,'App']]],
   ['bprinthelp',['bPrintHelp',['../class_app.html#ae3f983a09815c27eb4b2d40f0f2bc4c9',1,'App']]],
@@ -60,5 +64,5 @@ var searchData=
   ['bwritegraphtodraw',['bWriteGraphToDraw',['../class_cox_iter.html#a42c041344c1107dc073e1a47a7590abe',1,'CoxIter']]],
   ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]],
   ['bwriteprogress',['bWriteProgress',['../class_cox_iter.html#af5c6a89796309eab098dd052c0c1e238',1,'CoxIter']]],
-  ['building_20coxiter',['Building CoxIter',['../page_install.html',1,'']]]
+  ['building_20coxiter',['Building CoxIter',['../pageInstall.html',1,'']]]
 ];

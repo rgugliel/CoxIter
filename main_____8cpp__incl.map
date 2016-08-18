@@ -1,0 +1,23 @@
+<map id="main__.cpp" name="main__.cpp">
+<area shape="rect" id="node5" href="$arithmeticity_8h.html" title="../../arithmeticity.h" alt="" coords="1300,155,1428,181"/>
+<area shape="rect" id="node42" href="$gbd_8h.html" title="../../gbd.h" alt="" coords="82,155,161,181"/>
+<area shape="rect" id="node45" href="$temp_8h.html" title="temp.h" alt="" coords="1535,80,1598,107"/>
+<area shape="rect" id="node6" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="923,229,995,256"/>
+<area shape="rect" id="node7" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1033,379,1127,405"/>
+<area shape="rect" id="node14" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1047,304,1185,331"/>
+<area shape="rect" id="node15" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="351,453,470,480"/>
+<area shape="rect" id="node16" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="287,379,428,405"/>
+<area shape="rect" id="node18" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="1505,528,1594,555"/>
+<area shape="rect" id="node22" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="1020,453,1135,480"/>
+<area shape="rect" id="node24" href="$gmpxx_8h.html" title="gmpxx.h" alt="" coords="2029,528,2101,555"/>
+<area shape="rect" id="node33" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="877,453,995,480"/>
+<area shape="rect" id="node35" href="$mpz__rational_8h.html" title="lib/numbers/mpz_rational.h" alt="" coords="1513,453,1692,480"/>
+<area shape="rect" id="node8" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="596,453,700,480"/>
+<area shape="rect" id="node9" href="$graph_8h.html" title="graph.h" alt="" coords="499,528,565,555"/>
+<area shape="rect" id="node19" href="$pcre_8h.html" title="pcre.h" alt="" coords="1520,603,1579,629"/>
+<area shape="rect" id="node31" href="$mpir_8h.html" title="mpir.h" alt="" coords="2325,603,2384,629"/>
+<area shape="rect" id="node36" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="1669,528,1803,555"/>
+<area shape="rect" id="node37" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="1352,528,1429,555"/>
+<area shape="rect" id="node46" href="$growthrate_8h.html" title="../../growthrate.h" alt="" coords="1821,379,1939,405"/>
+<area shape="rect" id="node48" href="$paripolynomials_8h.html" title="lib/paripolynomials.h" alt="" coords="1919,453,2059,480"/>
+</map>

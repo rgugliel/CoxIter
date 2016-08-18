@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['abs',['abs',['../rational_8h.html#ad2757e2e02b80d888e530ac18faaff9a',1,'rational.h']]],
   ['addgraph',['addGraph',['../class_graphs_list.html#a05793c8a64b8f1bcf851ad53452c48e3',1,'GraphsList::addGraph()'],['../class_graphs_list_n.html#a695111d55e8df4f04ba9b85bfd88e10c',1,'GraphsListN::addGraph()']]],
   ['addgraphsfrompath',['addGraphsFromPath',['../class_cox_iter.html#a772f646bf15ee60a2596c2723d820bb0',1,'CoxIter']]],
   ['addgraphslist',['addGraphsList',['../class_graphs_list_n.html#a458c3565e3c972024cd34121d5dd62f6',1,'GraphsListN']]],

@@ -11,6 +11,7 @@ var searchData=
   ['bcanbefinitecovolume_5fcomputegraphsproducts',['bCanBeFiniteCovolume_computeGraphsProducts',['../class_cox_iter.html#ae4d7abd53f49a41baf2796c416a75dd5',1,'CoxIter']]],
   ['begin',['begin',['../class_graphs_list.html#a6adcd89f242486640ca6b21226711945',1,'GraphsList::begin()'],['../class_graphs_list_n.html#a6a84dec7eada01a57052bf7709bf6de6',1,'GraphsListN::begin()']]],
   ['beulercharacteristicfvector',['bEulerCharacteristicFVector',['../class_cox_iter.html#accb4ceba4add94cf237a27a1a33e289f',1,'CoxIter']]],
+  ['bisprime',['bIsPrime',['../namespace_math_tools.html#acc2503e1c47d2383c563c983c98cfa8f',1,'MathTools']]],
   ['bissubgraphof',['bIsSubgraphOf',['../class_graph.html#aa2ec710575b76fda9263efbbc1ee81d9',1,'Graph']]],
   ['bissubgraphof_5fspherical_5feuclidean',['bIsSubgraphOf_spherical_euclidean',['../class_graph.html#a98b960e57973088db5774f76682fdf06',1,'Graph']]],
   ['bissubgraphof_5fspherical_5fspherical',['bIsSubgraphOf_spherical_spherical',['../class_graph.html#aa6b7ca7a31f90cb6c8baf9020c0aeadc',1,'Graph']]],
