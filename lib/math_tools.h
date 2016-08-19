@@ -127,7 +127,7 @@ namespace MathTools
 	template <typename Type>
 	vector< typename std::enable_if<std::is_unsigned<Type>::value, Type>::type > iListDivisors( const Type& iN, const bool& bNonTrivialOnly = false )
 	{
-		#ifdef WIN32
+		#ifdef _MSC_VER
 		static vector< vector< Type > > iDivisors_( vector< vector< Type > >( 60, vector< Type >( 0 ) ) );
 		static vector< vector< Type > > iDivisors_bNonTrivialOnly_( vector< vector< Type > >( 60, vector< Type >( 0 ) ) );
 		
@@ -172,7 +172,7 @@ namespace MathTools
 			}
 		}
 		
-		#ifdef WIN32
+		#ifdef _MSC_VER
 		if( bNonTrivialOnly )
 			iDivisors_bNonTrivialOnly_[ iN - 1 ] = iDivisors;
 		else

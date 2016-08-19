@@ -183,7 +183,7 @@ void GraphsListN::addGraph( vector< short unsigned int > iVertices, const vector
 			if( iVerticesCount >= 6 )
 			{
 				// le vecteur iVerticesBase contient la base (i.e. sans les 4 extrémités)
-				#ifdef WIN32 // TODO: utile?
+				#ifdef _MSC_VER
 					vector< short unsigned int > iVerticesBase;
 					iTemp = iVerticesCount - 3;
 					for( i = 1; i < iTemp; i++ )
@@ -321,14 +321,6 @@ void GraphsListN::addGraph( vector< short unsigned int > iVertices, const vector
 	}
 	
 	Graph g( iVertices, ptr_map_vertices_indexToLabel, bVerticesLinkable, iType, bSpherical, iDataSupp );
-	
-	/*
-	unsigned int iMax( graphs.size( ) );
-	for( unsigned int i(0); i < iMax; i++ )
-	{
-		if( g == graphs[i] )
-			return;
-	} TODO*/
 
 	auto it( lower_bound( graphs.begin(), graphs.end(), g ) );
 	if( it == graphs.end() || !(*it == g) )
