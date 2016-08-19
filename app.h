@@ -36,6 +36,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include <chrono>
 #include <algorithm>
 
+#ifdef WIN32
+#include <io.h>
+#endif
+
 #ifdef _COMPILE_WITH_PARI_
 #include "growthrate.h"
 #include "signature.h"

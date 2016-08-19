@@ -159,7 +159,7 @@ mpz_class iSQRTQuotient( const mpz_class& iNumerator, const mpz_class& iDenomina
 
 mpz_class iSQRTsupQuotient( const mpz_class& iNumerator, const mpz_class& iDenominator ) // TODO: tester
 {
-	if( !iNumerator )
+	if( iNumerator == 0 )
 		return 0;
 	
 	mpz_class tRes( (iNumerator % iDenominator) != 0 ? mpz_class( iNumerator / iDenominator ) : mpz_class( iNumerator / iDenominator - 1 ) );
