@@ -427,6 +427,12 @@ class CoxIter
 		 */
 		unsigned int get_iVerticesAtInfinityCount( ) const;
 		
+		/*! \fn get_iSphericalGraphsCount
+		 * 	\brief Return the number of irreducible spherical graphs
+		 * 	\return Return the number of irreducible spherical graphs
+		 */
+		unsigned int get_iIrreducibleSphericalGraphsCount() const;
+		
 		/*!
 		 * 	\fn get_bWriteInfo
 		 * 	\brief Return bWriteInfo

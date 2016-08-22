@@ -3297,6 +3297,11 @@ unsigned int CoxIter::get_iVerticesAtInfinityCount() const
 	return iVerticesAtInfinityCount;
 }
 
+unsigned int CoxIter::get_iIrreducibleSphericalGraphsCount() const
+{
+	return graphsList_spherical->iGraphsCount;
+}
+
 int CoxIter::get_iIsCocompact()
 {
 	if( iIsCocompact == -2 && bCheckCocompactness )

@@ -71,16 +71,8 @@ bool GBD::removeVertex( const string& strVertexName )
 			iNewVerticesCount++;
 		}
 	}
-	
-	// TODO: mettre des dotted si on est dans le cas compact?
-	
+
 	ci->map_vertices_labels_removeReference( iVertex );
-	
-	if( ci->get_bWriteInfo( ) )
-	{
-		cout << "\tNumber of new vertices: " << ( iNewVerticesCount - 1 ) << endl;
-		cout << "\tRemark: For each edge starting from a new vertex, it is not possible to distiguish a dotted edge from a weight infinite" << endl;
-	}
 	
 	// -------------------------------------------------------
 	// new adjacency matrix
@@ -118,12 +110,17 @@ bool GBD::removeVertex( const string& strVertexName )
 				iWeight = iCox[ iVertex ][ i ] == 0 || iCox[ iVertex ][ i ] == 1 ? iCox[ iVertex ][ i ] : iCox[ iVertex ][ i ] / 2;
 			else
 			{
-				if( iCox[ i ][ iVertex ] == 2 ) // If si commutes with t0, then m( t0 * sj * t0, si ) = m( sj, si )
-					iWeight = iCox[ (*itNew).iOriginVertex ][ i ];  // TODO: préciser le 0
-				else if( iCox[ (*itNew).iOriginVertex ][ iVertex ] != 2 ) 
-					iWeight = 0; // TODO: préciser le 0
+				if( iCox[i][ iVertex ] == 2 ) // If si commutes with t0, then m( t0 * sj * t0, si ) = m( sj, si )
+					iWeight = iCox[ (*itNew).iOriginVertex ][ i ];
+				else if( iCox[ (*itNew).iOriginVertex ][iVertex] != 2 )
+				{
+					if( iCox[iVertex][i] == 4 && iCox[iVertex][ (*itNew).iOriginVertex ] == 4 && iCox[i][ (*itNew).iOriginVertex ] == 2 )
+						iWeight = 0;
+					else
+						iWeight = 1;
+				}
 				else
-					throw( 0 ); // TODO: idem
+					throw( string( "GBD::removeVertex: Error" ) ); // TODO: idem
 			}
 			
 			iNewCox[ i > iVertex ? i - 1 : i ][ (*itNew).iIndex ] = iWeight;

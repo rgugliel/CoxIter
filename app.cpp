@@ -262,6 +262,7 @@ void App::run( )
 	chrono::time_point< std::chrono::system_clock > timeStart, timeEnd;
 	
 	bool bEulerSuccess( true ), bCanBeFiniteCovolume( false ), bSignatureComputed( false );
+	unsigned int iVerticesCountStart;
 	
 	CoxIter ci;
 	ci.set_bCheckCocompactness( bCheckCocompacity );
@@ -311,16 +312,22 @@ void App::run( )
 		printHelp();
 		return;
 	}
+	
+	iVerticesCountStart = ci.get_iVerticesCount();
 
 	if( bGBD )
 	{
-		cout << "GBD" << endl;
+		cout << "Index two subgroup:" << endl;
 		if( strGBDvertex == "" )
-			cout << "\tERROR: A vertex must be given" << endl;
-		
-		GBD gbd( &ci );
-		if( !gbd.removeVertex( strGBDvertex ) )
-			cout << "\tERROR: " << gbd.get_strError( ) << endl;
+			cout << "\tError: A vertex must be given" << endl;
+		else
+		{
+			GBD gbd( &ci );
+			if( !gbd.removeVertex( strGBDvertex ) )
+				cout << "\tError: " << gbd.get_strError( ) << endl;	
+			else
+				cout << "\tNumber of new hyperplanes: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
+		}
 		
 		cout << endl;
 	}
