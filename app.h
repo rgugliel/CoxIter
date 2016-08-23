@@ -38,6 +38,8 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef WIN32
 #include <io.h>
+#else
+#include <unistd.h>
 #endif
 
 #ifdef _COMPILE_WITH_PARI_

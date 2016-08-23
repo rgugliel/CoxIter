@@ -2226,7 +2226,7 @@ void CoxIter::growthSeries_sequential()
 	unsigned int iExponent; // Temporary exponent
 	
 	vector< unsigned int > growthSeries_iSymbolNumerator;
-	growthSeries_iPolynomialDenominator = vector< mpz_class >( { 1 } );
+	growthSeries_iPolynomialDenominator = vector< mpz_class >( 1,1 );
 	growthSeries_iCyclotomicNumerator.clear();
 	growthSeries_bFractionReduced = true;
 	
@@ -2368,7 +2368,7 @@ void CoxIter::growthSeries_parallel()
 	// Shared and local variables
 	int iOMPMaxThreads( omp_get_max_threads() );
 	
-	vector< vector< mpz_class > > gs_iPolynomialDenominator( iOMPMaxThreads, vector< mpz_class >( {0} ) );
+	vector< vector< mpz_class > > gs_iPolynomialDenominator( iOMPMaxThreads, vector< mpz_class >( 1,0 ) );
 	vector< vector< unsigned int > > gs_iSymbolNumerator( iOMPMaxThreads, vector< unsigned int >( 0 ) );
 	
 	gs_iPolynomialDenominator[0][0] = 1; // Master thread, empty set --> trivial subgroup
