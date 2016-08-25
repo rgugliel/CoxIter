@@ -1,18 +1,18 @@
 <map id="app.cpp" name="app.cpp">
-<area shape="rect" id="node2" href="$app_8h.html" title="app.h" alt="" coords="1294,80,1349,107"/>
-<area shape="rect" id="node7" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="1144,229,1216,256"/>
-<area shape="rect" id="node32" href="$gbd_8h.html" title="gbd.h" alt="" coords="1101,155,1155,181"/>
-<area shape="rect" id="node33" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="1180,155,1284,181"/>
-<area shape="rect" id="node8" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1581,379,1675,405"/>
-<area shape="rect" id="node13" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1589,304,1726,331"/>
-<area shape="rect" id="node14" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="1269,453,1387,480"/>
-<area shape="rect" id="node15" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="1315,379,1456,405"/>
-<area shape="rect" id="node17" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="37,528,126,555"/>
-<area shape="rect" id="node20" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="783,453,897,480"/>
-<area shape="rect" id="node23" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="973,453,1091,480"/>
-<area shape="rect" id="node25" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="435,453,613,480"/>
-<area shape="rect" id="node9" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1643,453,1747,480"/>
-<area shape="rect" id="node10" href="$graph_8h.html" title="graph.h" alt="" coords="1421,528,1486,555"/>
-<area shape="rect" id="node26" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="303,528,436,555"/>
-<area shape="rect" id="node27" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="561,528,639,555"/>
+<area shape="rect" id="node2" href="$app_8h.html" title="app.h" alt="" coords="1775,80,1830,107"/>
+<area shape="rect" id="node8" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="1171,229,1243,256"/>
+<area shape="rect" id="node33" href="$gbd_8h.html" title="gbd.h" alt="" coords="1179,155,1234,181"/>
+<area shape="rect" id="node34" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="1649,155,1753,181"/>
+<area shape="rect" id="node9" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1583,379,1676,405"/>
+<area shape="rect" id="node14" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1590,304,1727,331"/>
+<area shape="rect" id="node15" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="1270,453,1389,480"/>
+<area shape="rect" id="node16" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="1316,379,1457,405"/>
+<area shape="rect" id="node18" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="37,528,126,555"/>
+<area shape="rect" id="node21" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="784,453,899,480"/>
+<area shape="rect" id="node24" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="974,453,1093,480"/>
+<area shape="rect" id="node26" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="435,453,613,480"/>
+<area shape="rect" id="node10" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1643,453,1747,480"/>
+<area shape="rect" id="node11" href="$graph_8h.html" title="graph.h" alt="" coords="1421,528,1486,555"/>
+<area shape="rect" id="node27" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="303,528,436,555"/>
+<area shape="rect" id="node28" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="561,528,639,555"/>
 </map>

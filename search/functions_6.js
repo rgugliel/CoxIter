@@ -21,6 +21,7 @@ var searchData=
   ['get_5figrowthseries',['get_iGrowthSeries',['../class_cox_iter.html#a9d1c259769afbb9938e7ab5f7f5296a4',1,'CoxIter']]],
   ['get_5figrowthseries_5fdenominator',['get_iGrowthSeries_denominator',['../class_cox_iter.html#acc9e09332fc4659a3824a9222f0915c5',1,'CoxIter']]],
   ['get_5fihasdottedlinewithoutweight',['get_iHasDottedLineWithoutWeight',['../class_cox_iter.html#a3db93f1ab89e9b7c9ff3086269a20f98',1,'CoxIter']]],
+  ['get_5fiirreduciblesphericalgraphscount',['get_iIrreducibleSphericalGraphsCount',['../class_cox_iter.html#a55146848c2f99f6ed7a5c0eb23a2e30a',1,'CoxIter']]],
   ['get_5fiisarithmetic',['get_iIsArithmetic',['../class_cox_iter.html#a33d49d1b8330516ea99158e3e1a0b4a3',1,'CoxIter']]],
   ['get_5fiiscocompact',['get_iIsCocompact',['../class_cox_iter.html#a17d174440bad282c2e9894dbe8c11168',1,'CoxIter']]],
   ['get_5fiisfinitecovolume',['get_iIsFiniteCovolume',['../class_cox_iter.html#a4941bcbeaecefb4697d6e7e973310579',1,'CoxIter']]],

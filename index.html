@@ -84,18 +84,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#main_infosGens">General information</a></li>
+<li class="level1"><a href="#main_infosInstall">Installing CoxIter</a></li>
 <li class="level1"><a href="#sec_toc">Table of contents</a></li>
 </ul>
 </div>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Rafael Guglielmetti</dd></dl>
 <h1><a class="anchor" id="main_infosGens"></a>
 General information</h1>
-<p>The aim of <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:</p><ul>
+<p>The aim of CoxIter is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:</p><ul>
 <li>compute the Euler characteristic (and thus the volume when the dimension is even)</li>
 <li>compute f-vector</li>
 <li>check whether the group is cocompact or not</li>
 <li>check whether the group has finite volume</li>
+<li>compute the growth series and the growth rate</li>
 <li>in some cases, check if the group is arithmetic.</li>
+</ul>
+<h1><a class="anchor" id="main_infosInstall"></a>
+Installing CoxIter</h1>
+<ul>
+<li>On Linux It is easy to build CoxIter. See information there: <a class="el" href="pageInstall.html#main_compilation_gnu">Compilation with GNU/Linux</a></li>
+<li>On OSX It is easy to build CoxIter. See information there: <a class="el" href="pageInstall.html#main_compilation_osx">Compilation on OSX</a> Note that the OSX version si currently slower (approximatively 4 times) than the Linux and Windows version.</li>
+<li>On Windows You basically have three choices:<ul>
+<li>Easy: Use the compiled file in the windows/ folder <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">the latest version</a> This should be the preferred choice.</li>
+<li>Build CoxIter with Visual Studio (it will be easy but the program will be slower and some options won't be available) Information here: <a class="el" href="pageInstall.html#main_compilation_win_vcpp">Compilation on Windows with Visual Studio</a></li>
+<li>Build CoxIter with GCC (more work but the result will be as faster as the Linux version and with all options) Information here: <a class="el" href="pageInstall.html#main_compilation_win_mingw">Compilation on Windows with MinGW/MSys</a></li>
+</ul>
+</li>
 </ul>
 <h1><a class="anchor" id="sec_toc"></a>
 Table of contents</h1>
@@ -106,7 +120,7 @@ Table of contents</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 18 2016 12:16:53 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 25 2016 13:11:31 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

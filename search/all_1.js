@@ -64,5 +64,5 @@ var searchData=
   ['bwritegraphtodraw',['bWriteGraphToDraw',['../class_cox_iter.html#a42c041344c1107dc073e1a47a7590abe',1,'CoxIter']]],
   ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]],
   ['bwriteprogress',['bWriteProgress',['../class_cox_iter.html#af5c6a89796309eab098dd052c0c1e238',1,'CoxIter']]],
-  ['building_20coxiter',['Building CoxIter',['../pageInstall.html',1,'']]]
+  ['building_20_25coxiter',['Building %CoxIter',['../pageInstall.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['using_20coxiter',['Using CoxIter',['../pageCoxIter.html',1,'']]]
+  ['using_20_25coxiter',['Using %CoxIter',['../pageCoxIter.html',1,'']]]
 ];

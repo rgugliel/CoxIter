@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Building <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> </div>  </div>
+<div class="title">Building CoxIter </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
@@ -89,17 +89,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li class="level2"><a href="#main_compilation_gnu_advanced">Advanced information</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#main_compilation_win">Compilation on Windows with Visual Studio</a><ul><li class="level2"><a href="#main_compilation_win_vcpp_sln">Building with the existing project (easiest way)</a></li>
+<li class="level1"><a href="#main_compilation_osx">Compilation on OSX</a></li>
+<li class="level1"><a href="#main_compilation_win_mingw">Compilation on Windows with MinGW/MSys</a></li>
+<li class="level1"><a href="#main_compilation_win_vcpp">Compilation on Windows with Visual Studio</a><ul><li class="level2"><a href="#main_compilation_win_vcpp_sln">Building with the existing project (easiest way)</a></li>
 <li class="level2"><a href="#main_compilation_win_vcpp_newsol">Building with a new solution</a></li>
 <li class="level2"><a href="#main_exe">Get the .exe file</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="textblock"><p>The development and testing of <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> were carried out on Linux and I strongly recommend this system to use the program (also, the Windows version built with Visual Studio is slower than the one built on Linux). However, I also provide information below on how to compile it on Windows.</p>
+<div class="textblock"><p>The development and testing of CoxIter were carried out on Linux and I strongly recommend this system to use the program (also, the OSX version and the Windows version built with Visual Studio are slower than the one built on Linux).</p>
 <p>This page is divided into the following sections:</p><ul>
 <li><a class="el" href="pageInstall.html#main_compilation_gnu">Compilation with GNU/Linux</a></li>
-<li><a class="el" href="pageInstall.html#main_compilation_win">Compilation on Windows with Visual Studio</a></li>
+<li><a class="el" href="pageInstall.html#main_compilation_osx">Compilation on OSX</a></li>
+<li><a class="el" href="pageInstall.html#main_compilation_win_mingw">Compilation on Windows with MinGW/MSys</a></li>
+<li><a class="el" href="pageInstall.html#main_compilation_win_vcpp">Compilation on Windows with Visual Studio</a></li>
 </ul>
 <h1><a class="anchor" id="main_compilation_gnu"></a>
 Compilation with GNU/Linux</h1>
@@ -109,15 +113,30 @@ Preliminaries</h2>
 <p>First, install everything you will need to compile the program.</p>
 <p>On Ubuntu, Linux Mint or any Debian-based distribution, type the following commands in a Shell: </p><div class="fragment"><div class="line">sudo apt-<span class="keyword">get</span> install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev</div></div><!-- fragment --><p>On Fedora, type the following commands in a Shell: </p><div class="fragment"><div class="line">sudo yum install g++ cmake graphviz pcre-devel pari-devel</div></div><!-- fragment --><h2><a class="anchor" id="main_compilation_gnu_compile"></a>
 Compilation</h2>
-<p>With a shell, go to the directory /CoxIter/build<br />
- Then, enter the following commands: </p><div class="fragment"><div class="line">cmake ../</div><div class="line">make</div></div><!-- fragment --><p> The compilation should be done withour error or warning. Now, <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> is usable.</p>
+<p>With a shell, go to the directory where you want to install CoxIter and type the following: </p><div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/rgugliel/CoxIter</span></div><div class="line">cd <a class="code" href="class_cox_iter.html">CoxIter</a>/build</div><div class="line">cmake ../</div><div class="line">make</div></div><!-- fragment --><p> The compilation should be done withour error or warning. Now, CoxIter is usable.</p>
+<p>Remark: If you don't have Git, you can simply download CoxIter here: <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">https://github.com/rgugliel/CoxIter/archive/master.zip</a></p>
 <h2><a class="anchor" id="main_compilation_gnu_troubleshooting"></a>
 Troubleshooting</h2>
 <p>If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command: </p><div class="fragment"><div class="line">sudo ldconfig</div></div><!-- fragment --><h2><a class="anchor" id="main_compilation_gnu_advanced"></a>
 Advanced information</h2>
-<p>If you want to manually install PCRE, you cna do as follows: Get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.39 (do not use PCRE2). To do that, type the following commands in a shell: </p><div class="fragment"><div class="line">wget ftp:<span class="comment">//ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz</span></div><div class="line">tar -xvzf pcre-8.39.tar.gz</div><div class="line">cd pcre-8.39/</div><div class="line">./configure</div><div class="line">make</div><div class="line">sudo make install</div></div><!-- fragment --><p> Then, you can delete the temporary files: </p><div class="fragment"><div class="line">cd ..</div><div class="line">rm -rf pcre-8.39</div><div class="line">rm pcre-8.39.tar.gz</div></div><!-- fragment --><h1><a class="anchor" id="main_compilation_win"></a>
+<p>If you want to manually install PCRE, you can do as follows: Get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.39 (do not use PCRE2). To do that, type the following commands in a shell: </p><div class="fragment"><div class="line">wget ftp:<span class="comment">//ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz</span></div><div class="line">tar -xvzf pcre-8.39.tar.gz</div><div class="line">cd pcre-8.39/</div><div class="line">./configure</div><div class="line">make</div><div class="line">sudo make install</div></div><!-- fragment --><p> Then, you can delete the temporary files: </p><div class="fragment"><div class="line">cd ..</div><div class="line">rm -rf pcre-8.39</div><div class="line">rm pcre-8.39.tar.gz</div></div><!-- fragment --><h1><a class="anchor" id="main_compilation_osx"></a>
+Compilation on OSX</h1>
+<p>First, open a terminal and enter the following command to install the prerequisites: </p><div class="fragment"><div class="line">/usr/bin/ruby -e <span class="stringliteral">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span></div><div class="line">brew install cmake graphviz pcre++</div><div class="line">brew install Caskroom/cask/xquartz</div><div class="line">brew install homebrew/x11/pari</div></div><!-- fragment --><p>Now, download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
+ Extract the downloaded file and open a terminal in GMP folder. Then, use the following commands: </p><div class="fragment"><div class="line">./configure</div><div class="line">make</div><div class="line">make check</div><div class="line">sudo make install</div></div><!-- fragment --><p>Once this is done, we will be able to download and install CoxIter. Open a terminal in the folder where you want to install CoxIter and type the following commands: </p><div class="fragment"><div class="line">git clone https:<span class="comment">//github.com/rgugliel/CoxIter</span></div><div class="line">cd <a class="code" href="class_cox_iter.html">CoxIter</a>/build</div><div class="line">cmake ../</div><div class="line">make</div></div><!-- fragment --><p>That's it. CoxIter should be ready to use.</p>
+<h1><a class="anchor" id="main_compilation_win_mingw"></a>
+Compilation on Windows with MinGW/MSys</h1>
+<p>First, we need to download MinGW and MSys which will be used to build CoxIter.</p>
+<p>Download and install MinGW (for example, you can use the "mingw-w64-install.exe" here: <a href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/">https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/</a>).<br />
+ Note: it is important to choose an installation path without space. The easiest way is to choose "c:/mingw"</p>
+<p>Download MSys: <a href="https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download">MSys</a><br />
+ Extract the file and execute the "msys/postinstall/pi.bat" file. You will be asked to give the path to MinGW.<br />
+ Once this is done, you can open the MSys console (the "msys.bat" file in the MSys folder).</p>
+<p>Now, you can download PCRE here: <a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.zip">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.zip</a><br />
+ Extract the file. With the MSys console, browse to the PCRE folder and type the following commands: </p><div class="fragment"><div class="line">./configure --prefix=c:/pcre/</div><div class="line">make</div><div class="line">make install</div></div><!-- fragment --><p>Download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
+ Again, extract the file and use MSys console to browse to the extracted folder. Type the following commands: </p><div class="fragment"><div class="line">./configure --prefix=c:/gmp/ --enable-cxx</div><div class="line">make</div><div class="line">make check</div><div class="line">make install</div></div><!-- fragment --><p>You can browse now to the folder "CoxIter/Windows" and type the following: </p><div class="fragment"><div class="line">make</div></div><!-- fragment --><p>You can now use CoxIter.</p>
+<h1><a class="anchor" id="main_compilation_win_vcpp"></a>
 Compilation on Windows with Visual Studio</h1>
-<p>You will need at least Visual Studio 2013 to compile <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
+<p>You will need at least Visual Studio 2013 to compile CoxIter (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
  As explained above, the program will run slower than with other compilers.</p>
 <h2><a class="anchor" id="main_compilation_win_vcpp_sln"></a>
 Building with the existing project (easiest way)</h2>
@@ -138,7 +157,7 @@ Building with a new solution</h2>
 </ul>
 <h2><a class="anchor" id="main_exe"></a>
 Get the .exe file</h2>
-<p>If you cannot build <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a>, you can try to use the file I built on my computer.<br />
+<p>If you cannot build CoxIter, you can try to use the file I built on my computer.<br />
  Note that this file is given WITHOUT ANY WARRANTY<br />
 </p>
 <p>First, install the "Visual C++ Redistributable Packages for Visual Studio 2013" for x86 (the file is named 'vcredist_x86.exe').<br />
@@ -147,7 +166,7 @@ Get the .exe file</h2>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 18 2016 12:16:53 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 25 2016 13:11:31 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>
