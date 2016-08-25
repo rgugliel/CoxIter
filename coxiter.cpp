@@ -429,8 +429,6 @@ bool CoxIter::bReadGraphFromFile( const string& strInputFilename )
 
 void CoxIter::initializations()
 {
-	size_t i;
-	
 	// ------------------------------------------------------
 	// de initializations
 	if( graphsList_spherical )
@@ -464,9 +462,9 @@ void CoxIter::initializations()
 	// sauvegarde de quelques calculs
 	iFactorials = vector< mpz_class > ( iVerticesCount + 2, 1 );
 	iPowersOf2 = vector< mpz_class > ( iVerticesCount + 2, 1 );
-	for( i = 1; i <= iVerticesCount + 1; i++ )
+	for( unsigned int i(1); i <= iVerticesCount + 1; i++ )
 	{
-		iFactorials[i] = iFactorials[i-1] * i;
+		iFactorials[i] = iFactorials[i-1] * (long int)i;
 		iPowersOf2[i] = mpz_class(2) * iPowersOf2[i-1];
 	}
 }
