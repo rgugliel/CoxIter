@@ -4,12 +4,30 @@
 \author Rafael Guglielmetti
 
 \section main_infosGens General information
-The aim of CoxIter is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:
+The aim of %CoxIter is to provide tools to compute some invariants of hyperbolic Coxeter groups. For a given hyperbolic Coxeter group, the program can:
 - compute the Euler characteristic (and thus the volume when the dimension is even)
 - compute f-vector
 - check whether the group is cocompact or not
 - check whether the group has finite volume
+- compute the growth series and the growth rate
 - in some cases, check if the group is arithmetic.
+
+\section main_infosInstall Installing CoxIter
+- On Linux
+	It is easy to build %CoxIter. See information there: \ref main_compilation_gnu
+- On OSX
+	It is easy to build %CoxIter. See information there: \ref main_compilation_osx
+	Note that the OSX version si currently slower (approximatively 4 times) than the Linux and Windows version.
+- On Windows
+	You basically have four choices; the first two are preferred:
+	- Easiest: Use the compiled file in the windows/ folder <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">the latest version</a><br />
+		This is the easiest way but you won't be able to compute the growth rate with this version.
+	- Easy: Build %CoxIter with CygWin. You will have all the features of %CoxIter.<br />
+		Information here: \ref main_compilation_win_cygwin
+	- Build %CoxIter with Visual Studio (it will be easy but the program will be slower and some options won't be available)<br />
+		Information here: \ref main_compilation_win_vcpp
+	- Build %CoxIter with GCC (more work but the result will be as faster as the Linux version and with all options)<br />
+		Information here: \ref main_compilation_win_mingw
 
 \tableofcontents
 
@@ -18,14 +36,17 @@ The aim of CoxIter is to provide tools to compute some invariants of hyperbolic 
 - \ref pageCoxIter
 */
 
-/*! \page pageInstall Building CoxIter
+/*! \page pageInstall Building %CoxIter
 \tableofcontents
 
-The development and testing of CoxIter were carried out on Linux and I strongly recommend this system to use the program (also, the Windows version built with Visual Studio is slower than the one built on Linux). However, I also provide information below on how to compile it on Windows.
+The development and testing of %CoxIter were carried out on Linux and I strongly recommend this system to use the program (also, the OSX version and the Windows version built with Visual Studio are slower than the one built on Linux).
 
 This page is divided into the following sections:
 - \subpage main_compilation_gnu
-- \subpage main_compilation_win
+- \subpage main_compilation_osx
+- \subpage main_compilation_win_cygwin
+- \subpage main_compilation_win_mingw
+- \subpage main_compilation_win_vcpp
 
 \section main_compilation_gnu Compilation with GNU/Linux
 The following steps were tested on Ubuntu, Linux Mint and Fedora. With other distributions the commands may vary slightly.
@@ -44,13 +65,16 @@ sudo yum install g++ cmake graphviz pcre-devel pari-devel
 \endcode
 
 \subsection main_compilation_gnu_compile Compilation
-With a shell, go to the directory /CoxIter/build<br />
-Then, enter the following commands:
+With a shell, go to the directory where you want to install %CoxIter and type the following: 
 \code
+git clone https://github.com/rgugliel/CoxIter
+cd CoxIter/build
 cmake ../
 make
 \endcode
-The compilation should be done withour error or warning. Now, CoxIter is usable.
+The compilation should be done withour error or warning. Now, %CoxIter is usable.
+
+Remark: If you don't have Git, you can simply download %CoxIter here: <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">https://github.com/rgugliel/CoxIter/archive/master.zip</a>
 
 \subsection main_compilation_gnu_troubleshooting Troubleshooting
 If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command:
@@ -59,7 +83,7 @@ sudo ldconfig
 \endcode
 
 \subsection main_compilation_gnu_advanced Advanced information
-If you want to manually install PCRE, you cna do as follows:
+If you want to manually install PCRE, you can do as follows:
 Get the latest 8.x version on <a href="http://www.pcre.org/" target="_blank">the officiel website</a> or use version 8.39 (do not use PCRE2). To do that, type the following commands in a shell:
 \code
 wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz
@@ -76,12 +100,108 @@ rm -rf pcre-8.39
 rm pcre-8.39.tar.gz
 \endcode
 
-\section main_compilation_win Compilation on Windows with Visual Studio
-You will need at least Visual Studio 2013 to compile CoxIter (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
+\section main_compilation_osx Compilation on OSX
+First, open a terminal and enter the following command to install the prerequisites:
+\code
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install cmake graphviz pcre++
+brew install Caskroom/cask/xquartz
+brew install homebrew/x11/pari
+\endcode
+
+Now, download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
+Extract the downloaded file and open a terminal in GMP folder. Then, use the following commands:
+\code
+./configure
+make
+make check
+sudo make install
+\endcode
+
+Once this is done, we will be able to download and install %CoxIter. Open a terminal in the folder where you want to install %CoxIter and type the following commands: 
+\code
+git clone https://github.com/rgugliel/CoxIter
+cd CoxIter/build
+cmake ../
+make
+\endcode
+
+That's it. %CoxIter should be ready to use.
+
+\section main_compilation_win_cygwin Compilation on Windows with CygWin
+First, we need to download CygWin: <a href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>
+
+Then, we need to install CygWin together with the following packages:
+- Devel > cmake
+- Devel > gcc-g++
+- Devel > git
+- Devel > make
+- Libs > libpcre-devel
+- Libs > libgmp-devel
+
+We will suppose that CygWin was installed in "c:/cygwin/". You can choose any path you want but be sure not to include any space.
+
+Once this is done, download PARI (<a href="http://pari.math.u-bordeaux.fr/">http://pari.math.u-bordeaux.fr/</a>) into your CygWin folder (c:/cygwin/home/YOURNAME/) and extract it.
+Then, to install PARI, open the CgyWin terminal, and type the following:
+\code
+cd pari
+./configure
+make install
+\endcode
+
+Copy the file "c:/cygwin/usr/local/lib/libpari-gmp.dll" to "c:/cygwin/bin/libpari-gmp.dll"
+
+Now, download and install %CoxIter
+\code
+cd ~
+git clone https://github.com/rgugliel/CoxIter
+cd CoxIter/build
+cmake ../
+make
+\endcode
+
+That's it. %CoxIter should be ready to use.
+
+\section main_compilation_win_mingw Compilation on Windows with MinGW/MSys
+First, we need to download MinGW and MSys which will be used to build %CoxIter.
+
+Download and install MinGW (for example, you can use the "mingw-w64-install.exe" here: https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/).<br />
+Note: it is important to choose an installation path without space. The easiest way is to choose "c:/mingw"
+
+Download MSys: <a href="https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download">MSys</a><br />
+Extract the file and execute the "msys/postinstall/pi.bat" file. You will be asked to give the path to MinGW.<br />
+Once this is done, you can open the MSys console (the "msys.bat" file in the MSys folder).
+
+Now, you can download PCRE here: <a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.zip">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.zip</a><br />
+Extract the file. With the MSys console, browse to the PCRE folder and type the following commands:
+\code
+./configure --prefix=c:/pcre/
+make
+make install
+\endcode
+
+Download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
+Again, extract the file and use MSys console to browse to the extracted folder. Type the following commands:
+\code
+./configure --prefix=c:/gmp/ --enable-cxx
+make
+make check
+make install
+\endcode
+
+You can browse now to the folder "CoxIter/Windows" and type the following:
+\code
+make
+\endcode
+
+You can now use %CoxIter.
+
+\section main_compilation_win_vcpp Compilation on Windows with Visual Studio
+You will need at least Visual Studio 2013 to compile %CoxIter (see here for a free version: <a href="https://www.visualstudio.com/" target="_blank">Visual Studio Community</a>).<br />
 As explained above, the program will run slower than with other compilers.
 
 \subsection main_compilation_win_vcpp_sln Building with the existing project (easiest way)
-- Open the project: /CoxIter/vc++/CoxIter.sln
+- Open the project: /%CoxIter/vc++/%CoxIter.sln
 
 \subsection main_compilation_win_vcpp_newsol Building with a new solution
 To create a project from scratch, please follow the following steps:
@@ -92,18 +212,18 @@ Add: tools\pcre-windows
 - In: Project properties > Configuration properties > C++ > Linker > Input > Additional Dependencies<br />
 Add: pcre.lib
 - Compile
-- Copy tools\pcre-windows\pcre.dll to the same folder as CoxIter.exe
+- Copy tools\pcre-windows\pcre.dll to the same folder as %CoxIter.exe
 
 \subsection main_exe Get the .exe file
-If you cannot build CoxIter, you can try to use the file I built on my computer.<br />
+If you cannot build %CoxIter, you can try to use the file I built on my computer.<br />
 Note that this file is given WITHOUT ANY WARRANTY<br />
 
 First, install the "Visual C++ Redistributable Packages for Visual Studio 2013" for x86 (the file is named 'vcredist_x86.exe').<br />
 You can find it here: <a href="http://www.microsoft.com/en-gb/download/details.aspx?id=40784" target="_blank">http://www.microsoft.com/en-gb/download/details.aspx?id=40784</a><br />
-Then, you can use the CoxIter.exe file which is located in "CoxIter/windows"
+Then, you can use the %CoxIter.exe file which is located in "CoxIter/windows"
 */
 
-/*! \page pageCoxIter Using CoxIter
+/*! \page pageCoxIter Using %CoxIter
 
 \tableofcontents
 
@@ -122,7 +242,7 @@ The graph is written in a file as follows:
 	Where d is the number of vertices of the graph and n is the dimension.<br />
 	Remark: The dimension is optional (see remark below).
 - Second line [optional]: name of the vertices<br />
-	Remark: If this line is omitted, CoxIter will assume that the vertices are labelled with integers from 1 to d. If this line is specified, the format is the following:
+	Remark: If this line is omitted, %CoxIter will assume that the vertices are labelled with integers from 1 to d. If this line is specified, the format is the following:
 		vertices labels: label1 label2 label3 ...
 - Following lines: vertex1 vertex2 weight<br />
 		Remarks:
@@ -131,7 +251,7 @@ The graph is written in a file as follows:
 		-# The weight 2 doesn't have to be specified.
 
 ### Remark about the dimension ###
-If the dimension is not specified in the first line but is needed for the computations (for example for the compacity or finite volume tests), then CoxIter will determine the dimension by looking at the maximal spherical and euclidean graphs. In order to succeed, it is important that the associated polyhedron contains at least one vertex. Therefore, if you don't know this, try to specify the dimension.
+If the dimension is not specified in the first line but is needed for the computations (for example for the compacity or finite volume tests), then %CoxIter will determine the dimension by looking at the maximal spherical and euclidean graphs. In order to succeed, it is important that the associated polyhedron contains at least one vertex. Therefore, if you don't know this, try to specify the dimension.
 		
 ### Example ###
 
@@ -174,7 +294,7 @@ Remarks:
 - The group has to be non-cocompact.
 - If the graph contains dotted lines, more tests might be needed (see \ref CoxIter_example2).
 
-\param -compactness If specified, CoxIter will test the cocompactness.<br />
+\param -compactness If specified, %CoxIter will test the cocompactness.<br />
 Aliases: -c, -compact, -compacity, -cocompact
 
 \param -debug If specified, the following information will be displayed
@@ -187,13 +307,13 @@ Remarks:<br />
 - If -fv is given and if the group is not of finite covolume, the graph which cannot be extended correctly<br />
 Since the output can be huge with this flag, it is suggested to also use -o and -of
 
-\param -fv If specified, CoxIter will test whether the group is of finite covolume or not.<br />
+\param -fv If specified, %CoxIter will test whether the group is of finite covolume or not.<br />
 Alias: -fcv
 
-\param -g If specified, CoxIter will compute the growth series.<br />
+\param -g If specified, %CoxIter will compute the growth series.<br />
 Aliases: -growth, -poincarre
 
-\param -growthrate If specified and if the PARI library is avaliable, CoxIter will compute the growth rate.<br />
+\param -growthrate If specified and if the PARI library is avaliable, %CoxIter will compute the growth rate.<br />
 
 \subsection CoxIter_paramsAdv Advanced parameters
 
@@ -204,7 +324,7 @@ Remark: does not work on Windows.<br />
 Remark: see example below.
 
 \param -drop Label(s) of the vertex(vertices) to drop.<br />
-With this option, CoxIter will work on a subgraph of the encoded graph.<br />
+With this option, %CoxIter will work on a subgraph of the encoded graph.<br />
 Example: use "-drop 3 -drop s2" to discard vertices 3 and s2 (and all edges starting from these vertices).
 
 \param -o Base name for the output<br />
@@ -215,7 +335,7 @@ Alias: -cf<br />
 Example: by specifying "-cf -o graphs/graph" the output is written in "graphs/graph.output"
 
 \param -oformat Format for mathematical output<br />
-Possible values are: generic, gap, latex, mathematica, pari
+Possible values are: generic, gap, latex, mathematica, pari<br />
 Example: "-pgm -oformat mathematica" will print the Gram matrix in the Mathematica format<br />
 Alias: -outputformat<br />
 Default: generic
@@ -227,7 +347,7 @@ For each vertex, a list of its neighbours is displayed
 Remark: If the graph contains dotted edges, some variables will be added<br />
 See: -orformat
 
-\param -writegraph If specified, the graph will be written to be used in CoxIter<br />
+\param -writegraph If specified, the graph will be written to be used in %CoxIter<br />
 Alias: -wg<br />
 Require: -o<br />
 Example: by specifying "-wg -o graphs/graph" the output is written in "graphs/graph.coxiter"<br />
@@ -236,17 +356,17 @@ Remark: You can combine this option with -drop and -drawgraph to draw a subgraph
 \subsection CoxIter_paramsTec Technical parameters
 
 \param -nc If specified, some computations won't be done; they will be displayed to be given to a special software (Maxima, Mathematica, ...)<br />
-This parameter can be used in order to avoid the use of libraries BigInt and Rational_Numbers in CoxIter.
+This parameter can be used in order to avoid the use of libraries BigInt and Rational_Numbers in %CoxIter.
 
 \param -nopenmp If specified, OpenMP (parallel computations) is disabled<br />
 Alias: -nparallel<br />
-Use this if you call CoxIter from a parallelized program.
+Use this if you call %CoxIter from a parallelized program.
 
 \section CoxIter_examples Examples
 
 \subsection CoxIter_example1 Example 1
 We want to compute the invariants of the cocompact hyperbolic Coxeter group B<sub>8</sub> in H<sup>8</sup> found by Bugaenko.<br />
-We create in the folder /CoxIter/graphs/ a file named "8-Bugaenko.coxiter" which contains the description of the graph (the 1 is for the dotted line):
+We create in the folder "/CoxIter/graphs/" a file named "8-Bugaenko.coxiter" which contains the description of the graph (the 1 is for the dotted line):
 \code
 	11 8
 	1 2 5
@@ -261,7 +381,7 @@ We create in the folder /CoxIter/graphs/ a file named "8-Bugaenko.coxiter" which
 	6 11 3
 	10 11 1
 \endcode
-We call CoxIter:
+We call %CoxIter:
 \code
 	./coxiter -i ../graphs/8-Bugaenko.coxiter -full -o ../graphs/8-Bugaenko -dg
 \endcode
@@ -283,13 +403,21 @@ Finding graphs products......
 Computations......
 	Computation time: 0.00451964s
 
-Information
 	Cocompact: yes
 	Finite covolume: yes
 	f-vector: (41, 164, 316, 374, 294, 156, 54, 11, 1)
+	Number of vertices at infinity: 0
 	Alternating sum of the components of the f-vector: 0
 	Euler characteristic: 24187/8709120000
-	Covolume: pi^4 * 24187/5715360000
+	Covolume: pi^4 * 24187/57153600000
+
+Growth series: 
+f(x) = C(2,2,2,2,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,8,8,9,10,10,10,10,12,12,14,15,15,18,20,20,24,30,30)/(1 - 3 * x + 2 * x^2 - 3 * x^3 + 5 * x^4 - 5 * x^5 + 7 * x^6 - 11 * x^7 + 16 * x^8 - 16 * x^9 + 29 * x^10 - 31 * x^11 + 45 * x^12 - 53 * x^13 + 77 * x^14 - 80 * x^15 + 112 * x^16 - 132 * x^17 + 167 * x^18 - 200 * x^19 + 251 * x^20 - 303 * x^21 + 352 * x^22 - 445 * x^23 + 497 * x^24 - 630 * x^25 + 685 * x^26 - 884 * x^27 + 925 * x^28 - 1205 * x^29 + 1247 * x^30 - 1616 * x^31 + 1643 * x^32 - 2131 * x^33 + 2142 * x^34 - 2741 * x^35 + 2755 * x^36 - 3493 * x^37 + 3494 * x^38 - 4366 * x^39 + 4392 * x^40 - 5378 * x^41 + 5433 * x^42 - 6551 * x^43 + 6652 * x^44 - 7840 * x^45 + 8047 * x^46 - 9289 * x^47 + 9600 * x^48 - 10872 * x^49 + 11356 * x^50 - 12552 * x^51 + 13248 * x^52 - 14367 * x^53 + 15285 * x^54 - 16228 * x^55 + 17462 * x^56 - 18147 * x^57 + 19683 * x^58 - 20106 * x^59 + 21992 * x^60 - 22015 * x^61 + 24289 * x^62 - 23906 * x^63 + 26514 * x^64 - 25698 * x^65 + 28690 * x^66 - 27344 * x^67 + 30666 * x^68 - 28872 * x^69 + 32452 * x^70 - 30168 * x^71 + 34028 * x^72 - 31253 * x^73 + 35235 * x^74 - 32110 * x^75 + 36174 * x^76 - 32655 * x^77 + 36748 * x^78 - 32961 * x^79 + 36898 * x^80 - 32961 * x^81 + 36748 * x^82 - 32655 * x^83 + 36174 * x^84 - 32110 * x^85 + 35235 * x^86 - 31253 * x^87 + 34028 * x^88 - 30168 * x^89 + 32452 * x^90 - 28872 * x^91 + 30666 * x^92 - 27344 * x^93 + 28690 * x^94 - 25698 * x^95 + 26514 * x^96 - 23906 * x^97 + 24289 * x^98 - 22015 * x^99 + 21992 * x^100 - 20106 * x^101 + 19683 * x^102 - 18147 * x^103 + 17462 * x^104 - 16228 * x^105 + 15285 * x^106 - 14367 * x^107 + 13248 * x^108 - 12552 * x^109 + 11356 * x^110 - 10872 * x^111 + 9600 * x^112 - 9289 * x^113 + 8047 * x^114 - 7840 * x^115 + 6652 * x^116 - 6551 * x^117 + 5433 * x^118 - 5378 * x^119 + 4392 * x^120 - 4366 * x^121 + 3494 * x^122 - 3493 * x^123 + 2755 * x^124 - 2741 * x^125 + 2142 * x^126 - 2131 * x^127 + 1643 * x^128 - 1616 * x^129 + 1247 * x^130 - 1205 * x^131 + 925 * x^132 - 884 * x^133 + 685 * x^134 - 630 * x^135 + 497 * x^136 - 445 * x^137 + 352 * x^138 - 303 * x^139 + 251 * x^140 - 200 * x^141 + 167 * x^142 - 132 * x^143 + 112 * x^144 - 80 * x^145 + 77 * x^146 - 53 * x^147 + 45 * x^148 - 31 * x^149 + 29 * x^150 - 16 * x^151 + 16 * x^152 - 11 * x^153 + 7 * x^154 - 5 * x^155 + 5 * x^156 - 3 * x^157 + 2 * x^158 - 3 * x^159 + x^160)
+
+Growth rate: 2.4229344350859443603937743378406416319
+	Perron number: yes
+	Pisot number: no
+	Salem number: no
 \endcode
 
 We copy the command 
@@ -317,7 +445,7 @@ vertices labels: 1 2 3 4 5 6 7
 3 7 0
 \endcode
 
-We call CoxIter with options to test arithmeticity and print the Gram matrix:
+We call %CoxIter with options to test arithmeticity and print the Gram matrix:
 \code
 ./coxiter -i ../graphs/3-testArithmeticity.coxiter -a -pgm
 \endcode
