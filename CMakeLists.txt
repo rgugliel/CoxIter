@@ -57,4 +57,11 @@ else()
 	message( WARNING "Warning: PARI library was not found. CoxIter won't be able to compute growth rate and signature." )
 endif()
 
+# ------------------------------------------------------------------
+# If the dot program is present, we will be able to create images
+find_program( PROGRAM_DOT dot )
+if( PROGRAM_DOT )
+	add_definitions(-D_DOT_PROGRAM_FOUND_)
+endif()
+
 install(TARGETS coxiter RUNTIME DESTINATION bin)

@@ -578,10 +578,6 @@ bool CoxIter::bWriteGraphToDraw( const string& strOutFilenameBasis )
 	out << "}";
 	out.close();
 	
-	// indique la commande GraphViz (l'image générée aide à vérifier que le graphe a été correctement encodé)
-	if( bWriteInfo )
-		cout << "GraphViz command: \n\t" <<  "dot -Tjpg -o\"" << strOutFilenameBasis << ".jpg\" \"" << strFilename << "\"\n" <<  endl;
-	
 	return true;
 }
 

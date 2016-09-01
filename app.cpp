@@ -344,8 +344,28 @@ void App::run( )
 	if( bOutputGraph && !ci.bWriteGraph( strOutFilenameBasis ) )
 		cout << "Error while writing file: " << ci.get_strError( ) << endl;
 		
-	if( bOutputGraphToDraw && !ci.bWriteGraphToDraw( strOutFilenameBasis ) )
-		cout << "Error while writing file: " << ci.get_strError( ) << endl;
+	if( bOutputGraphToDraw )
+	{
+		if( ci.bWriteGraphToDraw( strOutFilenameBasis ) )
+		{
+			string strCommand( "dot -Tjpg -o\"" + strOutFilenameBasis + ".jpg\" \"" + strOutFilenameBasis + ".graphviz\"" );
+			#ifdef _DOT_PROGRAM_FOUND_
+				FILE *fin;
+				if( ( fin = popen( strCommand.c_str(), "r" ) ) )
+				{
+					cout << "Image created: \n\t" <<  strOutFilenameBasis << ".jpg\n" << endl;
+					pclose( fin );
+				}
+				else
+					cout << "GraphViz command: \n\t" << strCommand << "\n" <<  endl;
+			#else
+				cout << "GraphViz command: \n\t" << strCommand << "\n" <<  endl;
+			#endif
+		}
+		else
+			cout << "Error while writing file: " << ci.get_strError( ) << endl;
+	}
+	
 	
 	// -----------------------------------------------------------------
 	// composantes connexes sphériques et euclidiennes
