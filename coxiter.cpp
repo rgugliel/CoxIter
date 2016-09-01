@@ -2888,17 +2888,23 @@ unsigned int CoxIter::get_iVertexIndex( const string& strVertexLabel ) const
 	map< string, unsigned int >::const_iterator it( map_vertices_labelToIndex.find( strVertexLabel ) );
 	
 	if( it == map_vertices_labelToIndex.end() )
-		throw( string( "INVALID_VERTEX_NAME" ) );
+		throw( string( "CoxIter::get_iVertexIndex: Invalid vertex name: " + strVertexLabel ) );
 	
 	return it->second;
 }
 
+// TODO: les deux sont les mêmes?
 string CoxIter::get_strVertexLabel( const unsigned int& iVertex ) const
 {
 	if( iVertex >= iVerticesCount )
 		throw( 0 );
 	
 	return map_vertices_indexToLabel[ iVertex ];
+}
+
+vector< string > CoxIter::get_str_map_vertices_indexToLabel() const
+{
+	return map_vertices_indexToLabel;
 }
 
 vector< vector< unsigned int > > CoxIter::get_iCoxeterMatrix() const
@@ -3349,11 +3355,6 @@ bool CoxIter::get_bHasDottedLine() const
 int CoxIter::get_iHasDottedLineWithoutWeight() const
 {
 	return iHasDottedLineWithoutWeight;
-}
-
-string CoxIter::get_str_map_vertices_indexToLabel( const size_t& i ) const
-{
-	return map_vertices_indexToLabel[i];
 }
 
 GraphsList* CoxIter::get_gl_graphsList_spherical() const

@@ -427,7 +427,7 @@ class CoxIter
 		 */
 		unsigned int get_iVerticesAtInfinityCount( ) const;
 		
-		/*! \fn get_iSphericalGraphsCount
+		/*! \fn get_iIrreducibleSphericalGraphsCount
 		 * 	\brief Return the number of irreducible spherical graphs
 		 * 	\return Return the number of irreducible spherical graphs
 		 */
@@ -571,10 +571,10 @@ class CoxIter
 		int get_iHasDottedLineWithoutWeight() const;
 		
 		/*!	\fn get_str_map_vertices_indexToLabel
-		 * 	\brief Return the label of a vertex (specified by its index)
-		 * 	\return The label of a vertex (specified by its index)
+		 * 	\brief Return the label of the vertices
+		 * 	\return The labels of the vertices
 		 */
-		string get_str_map_vertices_indexToLabel( const size_t& ) const;
+		vector< string > get_str_map_vertices_indexToLabel() const;
 		
 		/*!
 		 * 	\fn set_iIsArithmetic

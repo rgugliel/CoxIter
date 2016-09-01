@@ -45,7 +45,7 @@ bool GBD::removeVertex( const string& strVertexName )
 	{
 		if( iCox[ iVertex ][ i ] != 0 && iCox[ iVertex ][ i ] != 1 && ( iCox[ iVertex ][ i ] % 2 ) )
 		{
-			strError = "m(" + strVertexName + "," + ci->get_str_map_vertices_indexToLabel( i ) + ") is not even";
+			strError = "m(" + strVertexName + "," + ci->get_strVertexLabel( i ) + ") is not even";
 			return false;
 		}
 	}
@@ -63,7 +63,7 @@ bool GBD::removeVertex( const string& strVertexName )
 			nv.iIndex = iVerticesCount + iNewVerticesCount - 1;
 
 			nv.iOriginVertex = i;
-			nv.strLabel = ci->get_str_map_vertices_indexToLabel( iVertex ) + "_" + ci->get_str_map_vertices_indexToLabel( i );
+			nv.strLabel = ci->get_strVertexLabel( iVertex ) + "_" + ci->get_strVertexLabel( i );
 			
 			newVertices.push_back( nv );
 			ci->map_vertices_labels_addReference( nv.strLabel );

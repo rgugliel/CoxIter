@@ -67,7 +67,7 @@ void Arithmeticity::test( CoxIter& ci_, const bool& bListCycles_ )
 			if( iCoxeterMatrix[i][j] != 1 && iCoxeterMatrix[i][j] != 0 && iCoxeterMatrix[i][j] != 2 && iCoxeterMatrix[i][j] != 3 &&  iCoxeterMatrix[i][j] != 4 && iCoxeterMatrix[i][j] != 6 )
 			{
 				if( ci->get_bDebug( ) )
-					cout << "\tNot arithmetic: 2*G(" << ci->get_str_map_vertices_indexToLabel( i ) << "," << ci->get_str_map_vertices_indexToLabel( j ) << ") = pi/" << iCoxeterMatrix[i][j] << endl;
+					cout << "\tNot arithmetic: 2*G(" << ci->get_strVertexLabel( i ) << "," << ci->get_strVertexLabel( j ) << ") = pi/" << iCoxeterMatrix[i][j] << endl;
 				
 				ci->set_iIsArithmetic( 0 );
 				return;
@@ -244,7 +244,7 @@ void Arithmeticity::findCycles( const unsigned int& iRoot, const unsigned int& i
 					{
 						cout << "\tNot arithmetic\n\t\tCycle: ";
 						for( vector< unsigned int >::const_iterator it( iPath.begin( ) ); it != iPath.end( ); ++it ) // We display the components of the cycle
-							cout << ( it ==  iPath.begin( ) ? "" : ", " ) << ci->get_str_map_vertices_indexToLabel( iReferencesToLabels[ *it ] );
+							cout << ( it ==  iPath.begin( ) ? "" : ", " ) << ci->get_strVertexLabel( iReferencesToLabels[ *it ] );
 						cout << endl;
 					}
 					
