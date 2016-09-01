@@ -1,2 +1,2 @@
 # CoxIter
-The full documentation is available here: https://coxiter.rgug.ch/
+The full documentation is available here: https://rgugliel.github.io/CoxIter/
