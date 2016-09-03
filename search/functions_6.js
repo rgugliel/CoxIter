@@ -30,7 +30,7 @@ var searchData=
   ['get_5fiverticesatinfinitycount',['get_iVerticesAtInfinityCount',['../class_cox_iter.html#a9856e47fc3c10310a5513e6c2d9d74a4',1,'CoxIter']]],
   ['get_5fiverticescount',['get_iVerticesCount',['../class_cox_iter.html#a6cc3daa90ba12ec48694fee48fbba66d',1,'CoxIter::get_iVerticesCount()'],['../class_graphs_list_n.html#a8037ba4c0dd096ee7a8bbd65a2124e39',1,'GraphsListN::get_iVerticesCount()']]],
   ['get_5fptr_5fgraphsproducts',['get_ptr_graphsProducts',['../class_cox_iter.html#ab8030b69a137dc857333be62548085b3',1,'CoxIter']]],
-  ['get_5fstr_5fmap_5fvertices_5findextolabel',['get_str_map_vertices_indexToLabel',['../class_cox_iter.html#af8d7541cd3d89efc295ce4d7a444e1e7',1,'CoxIter']]],
+  ['get_5fstr_5fmap_5fvertices_5findextolabel',['get_str_map_vertices_indexToLabel',['../class_cox_iter.html#a020ebacb6b8fa76e3c7a6cc7e70cd315',1,'CoxIter']]],
   ['get_5fstrcoxetergraph',['get_strCoxeterGraph',['../class_cox_iter.html#a15f68b5a06abb02790cac49a22edd8c1',1,'CoxIter']]],
   ['get_5fstrcoxetermatrix',['get_strCoxeterMatrix',['../class_cox_iter.html#a22a8b15dcd3b75d2d4bf500df4cfbe03',1,'CoxIter']]],
   ['get_5fstrerror',['get_strError',['../class_arithmeticity.html#aeaf5b99fe87638b33a0ed97f78fa156a',1,'Arithmeticity::get_strError()'],['../class_cox_iter.html#a4995ed17522a64b6f55bc835171c9090',1,'CoxIter::get_strError()'],['../class_g_b_d.html#a98f4a2b8937f27f5c7422faf4b978752',1,'GBD::get_strError()'],['../class_p_c_r_e_regexp.html#af46ed9f3d1a58d36496896aeab291898',1,'PCRERegexp::get_strError()']]],
