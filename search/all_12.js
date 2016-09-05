@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vector2str',['vector2str',['../coxiter_8cpp.html#a8767dc9d3a253f92284e89fda15bf474',1,'coxiter.cpp']]],
-  ['vector2t_5fpol',['vector2t_POL',['../namespace_pari_polynomials.html#a970d282741051333b7926a940de09517',1,'PariPolynomials::vector2t_POL(const vector&lt; int &gt; &amp;iCoefficients)'],['../namespace_pari_polynomials.html#a72dee2164a14483726040fadd0b35d05',1,'PariPolynomials::vector2t_POL(const vector&lt; mpz_class &gt; &amp;iCoefficients)']]]
+  ['using_20_25coxiter',['Using %CoxIter',['../pageCoxIter.html',1,'']]],
+  ['ugcd',['ugcd',['../namespace_math_tools.html#ac486d4ac30f930ff522194b59c7d363b',1,'MathTools::ugcd()'],['../mpz__rational_8cpp.html#a0169081ce7766fcd7da250bd8355f24b',1,'ugcd():&#160;mpz_rational.cpp']]],
+  ['update',['update',['../class_m_p_z__rational.html#a1799fefc602af411e6ca28f974cf23ff',1,'MPZ_rational::update()'],['../class_rational.html#aab76e08eb07563d7227a355323abb1d8',1,'Rational::update()']]]
 ];
