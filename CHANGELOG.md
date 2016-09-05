@@ -5,7 +5,6 @@
 # 1.1.1
 Mostly some interface updates and preparing interface for GAP (see https://github.com/rgugliel/CoxIterGAP)
 
-## Added
 * Ability to read a file directly
 * Ability to export the graph (see also CoxIterGAP)
 * Output formats: GAP added
@@ -16,7 +15,6 @@ Mostly some interface updates and preparing interface for GAP (see https://githu
 
 This version added a lot of new features.
 
-## Added
 * Growth series and growth rate
 * Test for the growth rate (Perron, Pisot, Salem)
 * Numerical computation of the signature
