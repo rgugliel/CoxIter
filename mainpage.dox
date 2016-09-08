@@ -55,12 +55,12 @@ First, install everything you will need to compile the program.
 
 On Ubuntu, Linux Mint or any Debian-based distribution, type the following commands in a Shell:
 \code
-sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev
+sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev git
 \endcode
 
 On Fedora, type the following commands in a Shell:
 \code
-sudo yum install g++ cmake graphviz pcre-devel pari-devel
+sudo yum install g++ cmake graphviz pcre-devel pari-devel git
 \endcode
 
 \subsection main_compilation_gnu_compile Compilation
