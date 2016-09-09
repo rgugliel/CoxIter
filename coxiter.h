@@ -130,6 +130,12 @@ class CoxIter
 		GraphsList *graphsList_spherical; ///< Pointer to the list of spherical graphs
 		GraphsList *graphsList_euclidean; ///< Pointer to the list of euclidean graphs
 		
+		// Computations relative to the infinite sequence
+		unsigned int iISt0; ///< First reflecting hyperplane
+		unsigned int iISs0; /// (ultra)parallel hyperplane, will be conjugate
+		vector< unsigned int > iISFVectorsUnits; ///< Components of the f-vector
+		vector< unsigned int > iISFVectorsPowers; ///< Components of the f-vector
+		
 		// -----------------------------------------------------------
 		// Graphs products
 		/*! \var graphsProducts( vector< vector< GraphsProductSet > > )
@@ -299,6 +305,16 @@ class CoxIter
 		 * 	First, we find all the chains startings from every vertex. Then, we wxpand the chains to spherical and euclidean graphs
 		 */
 		void exploreGraph();
+		
+		/*!
+		 * 	\fn IS_computations
+		 * 	\brief Do some computations related to the infinite sequence
+		 * 	Remark: It is suppose that both t0, s0 are admissible vertices whose corresponding hyperplanes are (ultra)parallel
+		 * 
+		 * \param t0( const string& ) t0 Reflecting hyperplane
+		 * \param t0( const string& ) s0 Other hyperplane
+		 */
+		void IS_computations( const string& t0, const string& s0 );
 
 		/*!	\fn bEulerCharacteristicFVector
 		 * 	\brief Conmpute the euler characteristic and f-vector
@@ -420,6 +436,18 @@ class CoxIter
 		 * 	\return f-vector
 		 */
 		vector< unsigned int> get_iFVector() const;
+		
+		/*! \fn get_iISFVectorsUnits
+		 * 	\brief Return the units of the f-vector after n-doubling
+		 * 	\return Units
+		 */
+		vector< unsigned int > get_iISFVectorsUnits() const;
+		
+		/*! \fn get_iISFVectorsUnits
+		 * 	\brief Return the powers of 2^{n-1} of the f-vector after n-doubling
+		 * 	\return Units
+		 */
+		vector< unsigned int > get_iISFVectorsPowers() const;
 		
 		/*! \fn get_iVerticesAtInfinityCount
 		 * 	\brief Return the number of vertices at infinity
@@ -652,7 +680,6 @@ class CoxIter
 		 */
 		const vector< vector< GraphsProductSet > >* get_ptr_graphsProducts() const;
 		  
-		
 		/*!
 		 * 	\fn set_iCoxeterMatrix
 		 * 	\brief Set the Coxeter matrix
@@ -758,6 +785,16 @@ class CoxIter
 		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
 		 */
 		void computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		
+		/*!	\fn computeGraphsProducts_IS( GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+		 * 	\brief Compute the FVector for the infinite sequence
+		 * 
+		 * 	\param grIt( GraphsListIterator ): Iterator on the list
+		 * 	\param bSpherical( const bool& ): True if spherical, false if euclidean
+		 * 	\param gp( GraphsProduct& ) To store the product (for the cocompacity and finite covolume tests)
+		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
+		 */
+		void computeGraphsProducts_IS( GraphsListIterator grIt, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		
 		void bCanBeFiniteCovolume_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
 		void bCanBeFiniteCovolume_complete_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );

@@ -1772,6 +1772,178 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	}
 }
 
+void CoxIter::IS_computations( const string& t0, const string& s0 )
+{
+	iISt0 = get_iVertexIndex( t0 );
+	iISs0 = get_iVertexIndex( s0 );
+	
+	iISFVectorsUnits = vector< unsigned int >( iDimension, 0 );
+	iISFVectorsPowers = vector< unsigned int >( iDimension, 0 );
+	
+	if( !iCoxeterMatrix.size() )
+		return;
+	
+	if( !bGraphExplored )
+		exploreGraph();
+	
+	if( !bGraphsProductsComputed )
+		computeGraphsProducts();
+		
+	vector< bool > bGPVerticesNonLinkable( vector< bool >( iVerticesCount, false ) );
+	GraphsProduct gp; ///< Current graphs product
+	
+	// --------------------------------------------------------------
+	// produits de graphes sphériques
+	GraphsListIterator grIt_spherical( this->graphsList_spherical );
+	
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
+	{
+		#pragma omp single nowait
+		while( grIt_spherical.ptr )
+		{
+			#pragma omp task firstprivate(grIt_spherical, bGPVerticesNonLinkable, gp)
+			{
+				computeGraphsProducts_IS( grIt_spherical, true, gp, bGPVerticesNonLinkable );
+			}
+			
+			++grIt_spherical;
+		}
+	}
+	
+	// --------------------------------------------------------------
+	// produits de graphes euclidiens
+	GraphsListIterator grIt_euclidean( this->graphsList_euclidean );
+	#pragma omp parallel if( bUseOpenMP && iVerticesCount >= 15 )
+	{
+		#pragma omp single nowait
+		while( grIt_euclidean.ptr )
+		{
+			#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
+			{
+				computeGraphsProducts_IS( grIt_euclidean, false, gp, bGPVerticesNonLinkable );
+			}
+			
+			++grIt_euclidean;
+		}
+	}
+}
+
+void CoxIter::computeGraphsProducts_IS( GraphsListIterator grIt, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+{
+	vector< short unsigned int >::iterator iIt;
+	vector< short unsigned int > iVerticesFlagged;
+	unsigned int iGraphRank(0);
+	static unsigned int iMaxRank( iDimension ? iDimension : iVerticesCount );
+	
+	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaxRank ) )
+	{
+		// ---------------------------------------------------
+		// est ce que le graphe est admissible?
+		for( iIt = grIt.ptr->iVertices.begin(); iIt != grIt.ptr->iVertices.end(); ++iIt )
+		{
+			if( bGPVerticesNonLinkable[ *iIt ] ) // si pas linkable
+				break;
+		}
+		
+		// si le graphe est admissible
+		if( iIt == grIt.ptr->iVertices.end() )
+		{
+			// le graphe est ajouté au produit
+			gp.graphs.push_back( grIt.ptr );
+
+			// taille du graphe courant
+			iGraphRank = bSpherical ? grIt.ptr->iVertices.size() : ( grIt.ptr->iVertices.size() - 1 );
+			gp.iRank += iGraphRank;
+			
+			#pragma omp critical
+			{
+				if( bSpherical || gp.iRank == ( iDimension - 1 ) )
+				{
+					bool bSpecialIn_t0( false ), bSpecialIn_s0( false );
+					unsigned int iNonCommute_t0(0), iNonCommute_s0(0);
+					for( auto g : gp.graphs )
+					{
+						for( auto v : g->iVertices )
+						{
+							if( v == iISt0 )
+								bSpecialIn_t0 = true;
+							else if( iCoxeterMatrix[v][iISt0] != 2 )
+								iNonCommute_t0++;
+								
+							if( v == iISs0 )
+								bSpecialIn_s0 = true;
+							else if( iCoxeterMatrix[v][iISs0] != 2 )
+								iNonCommute_s0++;	
+						}
+					}
+					
+					if( !bSpecialIn_t0 && !bSpecialIn_s0 )
+					{
+						if( !iNonCommute_t0 && !iNonCommute_s0 )
+							iISFVectorsUnits[bSpherical ? iDimension - gp.iRank : 0]++;
+						else if( iNonCommute_t0 && iNonCommute_s0 )
+							iISFVectorsPowers[bSpherical ? iDimension - gp.iRank : 0] += 2;
+						else if( iNonCommute_t0 && !iNonCommute_s0 )
+						{
+							iISFVectorsUnits[bSpherical ? iDimension - gp.iRank : 0]++;
+							iISFVectorsPowers[bSpherical ? iDimension - gp.iRank : 0]++;
+						}
+						else
+							iISFVectorsPowers[bSpherical ? iDimension - gp.iRank : 0]++;
+					}
+					else if( !bSpecialIn_t0 && bSpecialIn_s0 )
+					{
+						if( !iNonCommute_s0 )
+							iISFVectorsUnits[bSpherical ? iDimension - gp.iRank : 0] += 2;
+						else
+						{
+							iISFVectorsUnits[bSpherical ? iDimension - gp.iRank : 0]++;
+							iISFVectorsPowers[bSpherical ? iDimension - gp.iRank : 0]++;
+						}
+					}
+					else if( bSpecialIn_t0 && !bSpecialIn_s0 )
+					{
+						if( iNonCommute_t0 )
+							iISFVectorsPowers[bSpherical ? iDimension - gp.iRank : 0]++;
+					}
+					else
+						iISFVectorsUnits[bSpherical ? iDimension - gp.iRank : 0]++;
+				}
+			}
+			
+			// mise à jour des sommets que l'on ne peut plus prendre
+			for( unsigned int i = 0; i < iVerticesCount; i++ )
+			{
+				if( !grIt.ptr->bVerticesLinkable[i] && !bGPVerticesNonLinkable[i] )
+				{
+					iVerticesFlagged.push_back( i );
+					bGPVerticesNonLinkable[i] = true;		
+				}
+			}
+			
+			// récursion
+			computeGraphsProducts_IS( ++grIt, bSpherical, gp, bGPVerticesNonLinkable );
+			
+			// -----------------------------------------------
+			// dé-initialisations
+			
+			// on remet la liste à son état d'avant la récursion	
+			for( iIt = iVerticesFlagged.begin(); iIt != iVerticesFlagged.end(); ++ iIt )
+				bGPVerticesNonLinkable[ *iIt ] = false;
+			
+			gp.iRank -= iGraphRank;
+			
+			// le graphe est enlevé
+			gp.graphs.pop_back();
+			
+			if( !gp.graphs.size() )
+				break;
+		}
+		else
+			++grIt;
+	}
+}
+
 bool CoxIter::bCanBeFiniteCovolume()
 {
 	// -----------------------------------------------------------
@@ -3298,6 +3470,16 @@ bool CoxIter::get_bDebug() const
 vector< unsigned int > CoxIter::get_iFVector() const
 {
 	return iFVector;
+}
+
+vector< unsigned int > CoxIter::get_iISFVectorsUnits() const
+{
+	return iISFVectorsUnits;
+}
+
+vector< unsigned int > CoxIter::get_iISFVectorsPowers() const
+{
+	return iISFVectorsPowers;
 }
 
 unsigned int CoxIter::get_iVerticesAtInfinityCount() const

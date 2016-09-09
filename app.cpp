@@ -246,10 +246,8 @@ bool App::bReadMainParameters( int argc, char **argv )
 	
 	// --------------------------------------------------
 	// GBD
-	if( ( iRegexpCount = regexp.preg_match_all( "-gbd=([[:alnum:],_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
+	if( ( iRegexpCount = regexp.preg_match_all( "-is=([[:alnum:],_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
 	{
-		cout << "GBD: " << regexpRes[0][0] << endl;
-		
 		str_replace( regexpRes[1][0], " ", "" );
 		vector< string> strV( explode( ",", regexpRes[1][0] ) );
 		strGBDvertex_t0 = strV[0];
@@ -274,19 +272,61 @@ bool App::bReadMainParameters( int argc, char **argv )
 void App::doGBD( CoxIter& ci )
 {
 	unsigned int iVerticesCountStart( ci.get_iVerticesCount() );
-	cout << "Index two subgroup:" << endl;
-		
+	
 	if( strGBDvertex_t0 == "" )
 	{
-		cout << "\tError: A vertex must be given" << endl;
+		cout << "Error: A vertex must be given" << endl;
 		return;
 	}
 	
 	GBD gbd( &ci );
+	
+	if( strGBDvertex_s0 != "" )
+	{
+		cout << "This is an experimental feature (to be properly tested)" << endl;
+		cout << "------------------------------------------------------\n" << endl;
+		
+		cout << "Infinite sequence:" << endl;
+		
+		if( !gbd.bIsVertexAdmissible( strGBDvertex_t0 ) )
+		{
+			cout << "\tError: " << gbd.get_strError( ) << endl;
+			return ;		
+		}
+		
+		if( !gbd.bIsVertexAdmissible( strGBDvertex_s0 ) )
+		{
+			cout << "\tError: " << gbd.get_strError( ) << endl;
+			return ;		
+		}
+		
+		if( !ci.get_iDimension() )
+		{
+			cout << "\tError: The dimension must be specified" << endl;
+			return ;		
+		}
+		
+		if( ci.get_iCoxeterMatrixEntry( ci.get_iVertexIndex( strGBDvertex_t0 ), ci.get_iVertexIndex( strGBDvertex_s0 ) ) >= 2 )
+		{
+			cout << "\tError: The two hyperplanes must be (ultra)parallel " << endl;
+			return ;
+		}
+		
+		ci.IS_computations( strGBDvertex_t0, strGBDvertex_s0 );
+		
+		auto iFVUnits( ci.get_iISFVectorsUnits() ), iFVPowers( ci.get_iISFVectorsPowers() );
+		
+		cout << "\tf-vector after n doubling:\n\t(" << implode(", ", iFVUnits) << ", 1) + 2^(n-1)*(" << implode(", ", iFVPowers) << ", 0)" << endl;
+	}
+	else
+		cout << "Index two subgroup:" << endl;
+	
+	// -----------------------------------------
+	// Doing the GBD
 	if( !gbd.removeVertex( strGBDvertex_t0 ) )
 		cout << "\tError: " << gbd.get_strError( ) << endl;	
 	else
-		cout << "\tNumber of new hyperplanes: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
+		cout << "\tNumber of new hyperplanes after first doubling: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
 	
 	cout << endl;
 }
