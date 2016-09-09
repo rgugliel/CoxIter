@@ -27,28 +27,39 @@ GBD::GBD( CoxIter* ci )
 {
 }
 
-bool GBD::removeVertex( const string& strVertexName )
+bool GBD::bIsVertexAdmissible( const string& strVertexName )
 {
-	unsigned int iWeight;
 	
-	// -------------------------------------------------------
-	// some verifications, firsts constructions
 	if( !ci->bIsVertexValid( strVertexName ) )
 	{
 		strError = "Invalid vertex name: " + strVertexName;
 		return false;
 	}
 	
-	iVertex = ci->get_iVertexIndex( strVertexName );
+	unsigned int iV( ci->get_iVertexIndex( strVertexName ) );
 	
 	for( unsigned int i( 0 ); i < iVerticesCount; i++ )
 	{
-		if( iCox[ iVertex ][ i ] != 0 && iCox[ iVertex ][ i ] != 1 && ( iCox[ iVertex ][ i ] % 2 ) )
+		if( iCox[ iV ][ i ] != 0 && iCox[ iV ][ i ] != 1 && ( iCox[ iV ][ i ] % 2 ) )
 		{
 			strError = "m(" + strVertexName + "," + ci->get_strVertexLabel( i ) + ") is not even";
 			return false;
 		}
 	}
+	
+	return true;
+}
+
+bool GBD::removeVertex( const string& strVertexName )
+{
+	unsigned int iWeight;
+	
+	// -------------------------------------------------------
+	// some verifications, firsts constructions
+	if( !bIsVertexAdmissible( strVertexName ) )
+		return false;
+	
+	iVertex = ci->get_iVertexIndex( strVertexName );
 	
 	// Remark: we don't merge the previous and the next loop. Thus, if there is a problem, we do not change the CoxIter object.
 	

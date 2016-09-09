@@ -65,6 +65,7 @@ class GBD
 	public:
 		GBD( CoxIter* ci );
 		
+		bool bIsVertexAdmissible( const string& strVertexName );
 		bool removeVertex( const string& strVertexName );
 		void printMatrix( vector< vector< unsigned int > >* iMatrix );
 		
