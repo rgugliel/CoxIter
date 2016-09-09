@@ -204,8 +204,6 @@ bool App::bReadMainParameters( int argc, char **argv )
 				strInFilename = szTemp;
 			else if( szPrevType == "drop" )
 				strVerticesRemove.push_back( szTemp );
-			else if( szPrevType == "gbd" )
-				strGBDvertex = szTemp;
 			else if( szPrevType == "o" )
 				strOutFilenameBasis = szTemp;
 			else if( szPrevType == "oformat" )
@@ -218,7 +216,7 @@ bool App::bReadMainParameters( int argc, char **argv )
 			szPrevType = "";
 		}
 	}
-	
+
 	// --------------------------------------------------
 	// Complete parameters
 	string strParams;
@@ -246,10 +244,52 @@ bool App::bReadMainParameters( int argc, char **argv )
 			strVertices.push_back( regexpRes[1][i] );
 	}
 	
+	// --------------------------------------------------
+	// GBD
+	if( ( iRegexpCount = regexp.preg_match_all( "-gbd=([[:alnum:],_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
+	{
+		cout << "GBD: " << regexpRes[0][0] << endl;
+		
+		str_replace( regexpRes[1][0], " ", "" );
+		vector< string> strV( explode( ",", regexpRes[1][0] ) );
+		strGBDvertex_t0 = strV[0];
+		if( strV.size() > 1 )
+			strGBDvertex_s0 = strV[1];
+			
+		str_replace( strParams, regexpRes[0][0], "" );
+		bGBD = true;
+	}
+	else if( ( iRegexpCount = regexp.preg_match_all( "-gbd ([[:alnum:]_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
+	{
+		strGBDvertex_t0 = regexpRes[1][0];
+		str_replace( strParams, regexpRes[0][0], "" );
+		bGBD = true;
+	}
+	
 	return true;
 }
 
 // TODO: si exposant > 50, afficher erreur pour growth rate (car facteurs pas forcément premiers entre eux)
+
+void App::doGBD( CoxIter& ci )
+{
+	unsigned int iVerticesCountStart( ci.get_iVerticesCount() );
+	cout << "Index two subgroup:" << endl;
+		
+	if( strGBDvertex_t0 == "" )
+	{
+		cout << "\tError: A vertex must be given" << endl;
+		return;
+	}
+	
+	GBD gbd( &ci );
+	if( !gbd.removeVertex( strGBDvertex_t0 ) )
+		cout << "\tError: " << gbd.get_strError( ) << endl;	
+	else
+		cout << "\tNumber of new hyperplanes: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
+	
+	cout << endl;
+}
 
 void App::run( )
 {
@@ -262,7 +302,7 @@ void App::run( )
 	chrono::time_point< std::chrono::system_clock > timeStart, timeEnd;
 	
 	bool bEulerSuccess( true ), bCanBeFiniteCovolume( false ), bSignatureComputed( false );
-	unsigned int iVerticesCountStart;
+	
 	
 	CoxIter ci;
 	ci.set_bCheckCocompactness( bCheckCocompacity );
@@ -312,25 +352,9 @@ void App::run( )
 		printHelp();
 		return;
 	}
-	
-	iVerticesCountStart = ci.get_iVerticesCount();
 
 	if( bGBD )
-	{
-		cout << "Index two subgroup:" << endl;
-		if( strGBDvertex == "" )
-			cout << "\tError: A vertex must be given" << endl;
-		else
-		{
-			GBD gbd( &ci );
-			if( !gbd.removeVertex( strGBDvertex ) )
-				cout << "\tError: " << gbd.get_strError( ) << endl;	
-			else
-				cout << "\tNumber of new hyperplanes: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
-		}
-		
-		cout << endl;
-	}
+		doGBD( ci );
 	
 	if( bPrintGramMatrix )
 		ci.printGramMatrix( );
@@ -366,6 +390,8 @@ void App::run( )
 			cout << "Error while writing file: " << ci.get_strError( ) << endl;
 	}
 	
+	if( bGBD )
+		return;
 	
 	// -----------------------------------------------------------------
 	// composantes connexes sphériques et euclidiennes

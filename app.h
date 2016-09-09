@@ -75,7 +75,8 @@ class App
 		string strOuputMathematicalFormat; ///< Format of output: generic, mathematica, pari
 		vector< string > strVerticesRemove; ///< The vertices we want to remove
 		vector< string > strVertices; ///< If we specify the vertices
-		string strGBDvertex;
+		string strGBDvertex_t0; ///< Reflexion and glueing with respect to the hyperplane corresponding to t0
+		string strGBDvertex_s0; ///< If we want to compute the f-vector of the corresponding infinite sequence
 		
 	public:
 		bool bCoutFile; ///< If the output is redirected to a file
@@ -90,6 +91,9 @@ class App
 		bool bReadMainParameters( int argc, char **argv );
 		void run( );
 		void printHelp( ) const;
+		
+	private:
+		void doGBD( CoxIter& ci );
 };
 
 #endif // APP_H
