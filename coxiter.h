@@ -490,6 +490,13 @@ class CoxIter
 		vector< vector<unsigned int> > get_iCoxeterMatrix() const;
 		
 		/*!
+		 * 	\fn get_iCoxeterMatrixEntry
+		 * 	\brief Return the one entry of the Coxeter matrix
+		 * 	\return Entry
+		 */
+		unsigned int get_iCoxeterMatrixEntry( const unsigned int& i, const unsigned int& j ) const;
+		
+		/*!
 		 * 	\fn get_iCoxeterMatrix
 		 * 	\brief Return the weights of the dotted lines
 		 * 	\return Weights of the dotted lines

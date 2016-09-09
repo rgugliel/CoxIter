@@ -2908,6 +2908,14 @@ vector< vector< unsigned int > > CoxIter::get_iCoxeterMatrix() const
 	return iCoxeterMatrix;
 }
 
+unsigned int CoxIter::get_iCoxeterMatrixEntry( const unsigned int& i, const unsigned int& j ) const
+{
+	if( i >= iVerticesCount || j >= iVerticesCount )
+		throw( string("CoxIter::get_iCoxeterMatrixEntry: This entry does not exist") );
+		
+	return iCoxeterMatrix[i][j];
+}
+
 std::map< unsigned int, string > CoxIter::get_strWeights() const
 {
 	return strWeights;
