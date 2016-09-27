@@ -33,7 +33,6 @@ CoxIter::CoxIter()
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
 	bWriteInfo( false ),
-	bWriteProgress( false ),
 	bGraphExplored( false ),
 	bGraphsProductsComputed( false ),
 	bUseOpenMP( true ),
@@ -71,7 +70,6 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
 	bWriteInfo( false ), 
-	bWriteProgress( false ),
 	bDebug( false ),
 	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
@@ -596,9 +594,6 @@ void CoxIter::exploreGraph()
 	// pour chaque sommet, on cherche toutes les chaînes qui partent, ce qui donne les An, Bn, Dn, En, Hn
 	iPath.clear();
 	
-	if( bWriteProgress )
-		cout << "\tFirst part of spherical graphs" << endl;
-	
 	for( i = 0; i < iVerticesCount; i++ )
 	{
 		iPath.clear();
@@ -606,18 +601,10 @@ void CoxIter::exploreGraph()
 		bEdgesVisited = vector< vector<bool> >(iVerticesCount, vector<bool>( iVerticesCount, false ) );
 		
 		DFS( i, i );
-		
-		if( bWriteProgress && i && !( i % 10 ) )
-			cout << "\t\t" << ( 100 * i / iVerticesCount ) << "%" << endl;
 	}
-	if( bWriteProgress )
-		cout << "\n\tFinished" << endl;
 	
 	// -------------------------------------------------------------------
 	// recherche des A_1, G_2^k avec k >= 4, F_4
-	if( bWriteProgress )
-		cout << "\tSecond part of spherical graphs" << endl;
-	
 	vector<bool> bVerticesLinkable, bVerticesLinkableTemp;
 	for( i = 0; i < iVerticesCount; i++ )
 	{
@@ -681,12 +668,7 @@ void CoxIter::exploreGraph()
 				}
 			}
 		}
-		
-		if( bWriteProgress && i && !( i % 10 ) )
-			cout << "\t\t" << ( 100 * i / iVerticesCount ) << "%" << endl;
 	}
-	if( bWriteProgress )
-		cout << "\n\tFinished" << endl;
 	
 	bGraphExplored = true;
 }
@@ -1591,9 +1573,6 @@ void CoxIter::computeGraphsProducts()
 			++grIt_spherical;
 		}
 	}
-	
-	if( bWriteProgress )
-		cout << "\tFinished" << endl;
 	
 	// --------------------------------------------------------------
 	// produits de graphes euclidiens
@@ -3066,11 +3045,10 @@ unsigned int CoxIter::get_iVertexIndex( const string& strVertexLabel ) const
 	return it->second;
 }
 
-// TODO: les deux sont les mêmes?
 string CoxIter::get_strVertexLabel( const unsigned int& iVertex ) const
 {
 	if( iVertex >= iVerticesCount )
-		throw( 0 );
+		throw( string( "CoxIter::get_strVertexLabel: Invalid vertex index" ) );
 	
 	return map_vertices_indexToLabel[ iVertex ];
 }

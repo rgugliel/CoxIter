@@ -81,7 +81,6 @@ class CoxIter
 		// -----------------------------------------------------------
 		// I/O
 		bool bWriteInfo; ///< If we want to write informations (false if CoxIter is used "as a plugin")
-		bool bWriteProgress; ///< If we want to display the progress // TODO: option
 		
 		// -----------------------------------------------------------
 		// Redirection cout to a file
