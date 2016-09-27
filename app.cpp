@@ -246,7 +246,7 @@ bool App::bReadMainParameters( int argc, char **argv )
 	
 	// --------------------------------------------------
 	// GBD
-	if( ( iRegexpCount = regexp.preg_match_all( "-is=([[:alnum:],_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
+	if( ( iRegexpCount = regexp.preg_match_all( "-is=\\[?([[:alnum:],_-]+)\\]?", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
 	{
 		str_replace( regexpRes[1][0], " ", "" );
 		vector< string> strV( explode( ",", regexpRes[1][0] ) );
@@ -565,7 +565,7 @@ void App::run( )
 			cout << "\tAlternating sum of the components of the f-vector: " << ci.get_iFVectorAlternateSum( ) << endl;
 		}
 		
-		if( bDoComputations )
+		if( bDoComputations ) // TODO: utile?
 			cout << "\tEuler characteristic: " << ci.get_brEulerCaracteristic( ) << endl;
 		else
 			cout << "--------- BEGIN: Euler characteristic ---------\n" << ci.get_strEulerCharacteristic_computations( ) << "\n" << "--------- END: Euler characteristic ---------" << endl;
