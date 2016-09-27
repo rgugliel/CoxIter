@@ -34,7 +34,6 @@ bComputeEuler( true ),
 bComputeGrowthRate( false ),
 bComputeGrowthSeries( false ),
 bComputeSignature( false ),
-bDoComputations( true ), 
 bDebug( false ), 
 bGBD( false ), 
 bOpenMP( true ),
@@ -147,11 +146,6 @@ bool App::bReadMainParameters( int argc, char **argv )
 		{
 			bPrintHelp = true;
 			szPrevType = "help";
-		}
-		else if( szTemp == "-nc" ) // don't do the computations using BigNumbers
-		{
-			bDoComputations = false;
-			szPrevType = "nc";
 		}
 		else if( szTemp == "-ne" || szTemp == "-neuler" ) // don't compute the Euler characteristic
 		{
@@ -565,10 +559,7 @@ void App::run( )
 			cout << "\tAlternating sum of the components of the f-vector: " << ci.get_iFVectorAlternateSum( ) << endl;
 		}
 		
-		if( bDoComputations ) // TODO: utile?
-			cout << "\tEuler characteristic: " << ci.get_brEulerCaracteristic( ) << endl;
-		else
-			cout << "--------- BEGIN: Euler characteristic ---------\n" << ci.get_strEulerCharacteristic_computations( ) << "\n" << "--------- END: Euler characteristic ---------" << endl;
+		cout << "\tEuler characteristic: " << ci.get_brEulerCaracteristic() << endl;
 	}
 	
 	// volume

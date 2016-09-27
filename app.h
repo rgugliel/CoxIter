@@ -64,7 +64,6 @@ class App
 		bool bComputeGrowthRate; ///< If we want to compute the growth rate
 		bool bComputeEuler; ///< If we want to compute the Euler characteristic
 		bool bComputeSignature; ///< If we want to compute the signature
-		bool bDoComputations; ///< If we use the big integers GMPlib) library or not
 		bool bDebug; ///< Display additional information
 		bool bGBD; ///< Doing GBD?
 		bool bOpenMP; ///< Use OpenMP
