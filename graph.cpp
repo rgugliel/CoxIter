@@ -53,6 +53,16 @@ ostream& operator<<( ostream &o, const Graph &g )
 	if( g.iDataSupp && g.bSpherical )
 		o << " (" << g.iDataSupp << ")";
 	
+	// Extended debbuging info
+	/*
+	o << "N={";
+	for( i = 0; i < g.bVerticesLinkable.size(); i++ )
+	{
+		if( !g.bVerticesLinkable[i] )
+			o << ( i + 1 ) << ",";
+	}
+	o << "}";*/
+	
 	o << endl;
 	
 	return o;
