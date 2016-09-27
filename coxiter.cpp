@@ -941,6 +941,8 @@ void CoxIter::addGraphsFromPath()
 					else
 						graphsList_euclidean->addGraph( iPathTemp, bVerticesLinkableTemp, 6, false, j, 0, 1 );
 					
+					auto bVerticesLinkableTemp_bck( bVerticesLinkableTemp ); // Contains info for: iPathTemp + j
+					
 					// ------------------------------------------
 					// on va tenter de prolonger cela en un TCn, n \geq 3
 					if( iCoxeterMatrix[ iPath[i] ][j] == 4 )
@@ -949,6 +951,7 @@ void CoxIter::addGraphsFromPath()
 						{
 							if( iCoxeterMatrix[k][ iPathTemp[0] ] == 4 && k != j && bVerticesLinkable_1_n[k] && iCoxeterMatrix[k][j] == 2 )
 							{
+								// Additional info for vertex k 
 								for( l = 0; l < iVerticesCount; l++ )
 								{
 									if( iCoxeterMatrix[k][l] != 2 )
@@ -956,6 +959,8 @@ void CoxIter::addGraphsFromPath()
 								}
 								
 								graphsList_euclidean->addGraph( iPathTemp, bVerticesLinkableTemp, 2, false, k, j );
+								
+								bVerticesLinkableTemp = bVerticesLinkableTemp_bck; // Restoring to info of iPathTemp and j
 							}
 						}
 					}
