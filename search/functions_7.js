@@ -17,6 +17,7 @@ var searchData=
   ['iprimefactorswithoutsquares',['iPrimeFactorsWithoutSquares',['../namespace_math_tools.html#a59e2b343bbf2b56237335ef88ba2bc00',1,'MathTools']]],
   ['iremovesquarefactors',['iRemoveSquareFactors',['../namespace_math_tools.html#ad53778c03ef7881ea56c29d35f6d1e01',1,'MathTools']]],
   ['irreduciblefactors',['irreducibleFactors',['../class_growth_rate.html#a9b8c9fb7f87c98ad729eb582eb628b2c',1,'GrowthRate']]],
+  ['is_5fcomputations',['IS_computations',['../class_cox_iter.html#a023e934a6dcf93807cf67ef2db5575b3',1,'CoxIter']]],
   ['iscointeger',['isCOInteger',['../class_m_p_z__rational.html#ab1a3ae88972928a43df5deeeb4e03e51',1,'MPZ_rational']]],
   ['isfinitecovolume',['isFiniteCovolume',['../class_cox_iter.html#a150ee97029dc69c03aa67f0ee5a83908',1,'CoxIter']]],
   ['isinteger',['isInteger',['../class_m_p_z__rational.html#ae102aba4092ccdab9ed4ff38ce57a3b9',1,'MPZ_rational']]],

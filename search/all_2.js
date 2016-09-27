@@ -41,6 +41,7 @@ var searchData=
   ['bissubgraphof',['bIsSubgraphOf',['../class_graph.html#aa2ec710575b76fda9263efbbc1ee81d9',1,'Graph']]],
   ['bissubgraphof_5fspherical_5feuclidean',['bIsSubgraphOf_spherical_euclidean',['../class_graph.html#a98b960e57973088db5774f76682fdf06',1,'Graph']]],
   ['bissubgraphof_5fspherical_5fspherical',['bIsSubgraphOf_spherical_spherical',['../class_graph.html#aa6b7ca7a31f90cb6c8baf9020c0aeadc',1,'Graph']]],
+  ['bisvertexadmissible',['bIsVertexAdmissible',['../class_g_b_d.html#a4171f888645ab6bfca7ed05d4ad15fba',1,'GBD']]],
   ['bisvertexvalid',['bIsVertexValid',['../class_cox_iter.html#a953d7468acc0b52cb4d77d49831ef93d',1,'CoxIter']]],
   ['blimitverticesmax',['bLimitVerticesMax',['../class_graphs_list_iterator.html#abc00fdb886b3e270bfc7d8c621a15a88',1,'GraphsListIterator']]],
   ['blistcycles',['bListCycles',['../class_arithmeticity.html#a11bce0f316d2b34859017f570f1810de',1,'Arithmeticity']]],
