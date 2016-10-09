@@ -146,6 +146,7 @@ Then, we need to install CygWin together with the following packages:
 - Devel > gcc-g++
 - Devel > git
 - Devel > make
+- Graphics > graphviz
 - Libs > libpcre-devel
 - Libs > libgmp-devel
 
