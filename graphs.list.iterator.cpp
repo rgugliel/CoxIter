@@ -35,6 +35,11 @@ GraphsListIterator::GraphsListIterator( GraphsList *gl )
 	}
 }
 
+GraphsListIterator::GraphsListIterator( const GraphsListIterator& gl )
+: iVCount( gl.iVCount ), iGraphIndex( gl.iGraphIndex ), graphsList( gl.graphsList ), iVerticesCountMax( gl.iVerticesCountMax ), bLimitVerticesMax( gl.bLimitVerticesMax ), ptr( gl.ptr )
+{
+}
+
 GraphsListIterator::GraphsListIterator( GraphsList *gl, const unsigned int& iVerticesCountMin, const unsigned int& iVerticesCountMax )
 : iVerticesCountMax( iVerticesCountMax ), bLimitVerticesMax( false )
 {
