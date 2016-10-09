@@ -93,6 +93,8 @@ class CoxIter
 		// -----------------------------------------------------------
 		// Graph
 		unsigned int iVerticesCount; ///< Number of vertices
+		unsigned int iMaximalSubgraphRank; ///< Maximal rank of a subgraph
+		
 		unsigned int iDimension; ///< Dimension (or 0)
 		unsigned int iSphericalMaxRankFound; ///< Maximal rank for a spherical graph
 		unsigned int iEuclideanMaxRankFound; ///< Maximal rank for an euclidean graph

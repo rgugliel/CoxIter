@@ -37,8 +37,8 @@ CoxIter::CoxIter()
 	bGraphsProductsComputed( false ),
 	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
-	graphsList_spherical( 0 ),
-	graphsList_euclidean( 0 ),
+	graphsList_spherical( nullptr ),
+	graphsList_euclidean( nullptr ),
 	iDimension( 0 ),
 	iEuclideanMaxRankFound( 0 ),
 	iSphericalMaxRankFound( 0 ),
@@ -73,8 +73,8 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	bDebug( false ),
 	bUseOpenMP( true ),
 	brEulerCaracteristic( 0 ),
-	graphsList_spherical( 0 ),
-	graphsList_euclidean( 0 ),
+	graphsList_spherical( nullptr ),
+	graphsList_euclidean( nullptr ),
 	iDimension( iDimension ),
 	iEuclideanMaxRankFound( 0 ),
 	iSphericalMaxRankFound( 0 ),
@@ -95,6 +95,8 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	
 	iCoxeterMatrix = iMatrix;
 	
+	iMaximalSubgraphRank = iDimension ? iDimension : iVerticesCount;
+	
 	#ifndef _OPENMP
 	this->bUseOpenMP = false;
 	#endif
@@ -104,10 +106,10 @@ CoxIter::~CoxIter()
 {
 	if( graphsList_spherical )
 		delete graphsList_spherical;
-	
+		
 	if( graphsList_euclidean )
 		delete graphsList_euclidean;
-	
+		
 	// if cout is redirected to a file
 	if( bCoutFile )
 	{
@@ -353,6 +355,8 @@ bool CoxIter::parseGraph( istream& streamIn )
 			map_vertices_labelToIndex[ v_ItL[i] ] = j++;
 		}
 	}
+	
+	iMaximalSubgraphRank = iDimension ? iDimension : iVerticesCount;
 	
 	// ---------------------------------------------------------------------------
 	// some information
@@ -1634,11 +1638,9 @@ void CoxIter::computeGraphsProducts( GraphsListIterator grIt, vector< map<vector
 	vector< short unsigned int >::iterator iIt;
 	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
-	static unsigned int iMaxRank( iDimension ? iDimension : iVerticesCount );
-	
 	vector< vector< short unsigned int > > vFootPrintTest;
 	
-	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaxRank ) )
+	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaximalSubgraphRank ) )
 	{
 		// ---------------------------------------------------
 		// est ce que le graphe est admissible?
@@ -1817,9 +1819,8 @@ void CoxIter::computeGraphsProducts_IS( GraphsListIterator grIt, const bool& bSp
 	vector< short unsigned int >::iterator iIt;
 	vector< short unsigned int > iVerticesFlagged;
 	unsigned int iGraphRank(0);
-	static unsigned int iMaxRank( iDimension ? iDimension : iVerticesCount );
 	
-	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaxRank ) )
+	while( grIt.ptr && ( gp.iRank + iGraphRank <= iMaximalSubgraphRank ) )
 	{
 		// ---------------------------------------------------
 		// est ce que le graphe est admissible?
@@ -3595,6 +3596,7 @@ void CoxIter::set_sdtoutToFile( const string& strFilename )
 void CoxIter::set_iDimension(const unsigned int& iDimension_)
 {
 	iDimension = iDimension_;
+	iMaximalSubgraphRank = iDimension ? iDimension : iVerticesCount;
 }
 
 void CoxIter::set_iCoxeterMatrix( const vector< vector< unsigned int > >& iMat )
@@ -3613,6 +3615,8 @@ void CoxIter::set_iCoxeterMatrix( const vector< vector< unsigned int > >& iMat )
 	iSphericalMaxRankFound = 0;
 	bDimension_guessed = false;
 	iHasDottedLineWithoutWeight = -1;
+	
+	iMaximalSubgraphRank = iDimension ? iDimension : iVerticesCount;
 }
 
 void CoxIter::set_strOuputMathematicalFormat(const string& strO)
