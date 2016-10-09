@@ -43,7 +43,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 class GraphsListIterator
 {
-	public: // TODO
+	private:
 		size_t iVCount; ///< Nombre de sommets du graphe courant
 		size_t iGraphIndex; ///< Index du graphe courant
 		
