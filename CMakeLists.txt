@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.4)
 project(coxiter)
 
 add_definitions("-std=c++11")
-if( ${CMAKE_SYSTEM_NAME} STREQUAL "CYGWIN" )
+if( CYGWIN )
 	add_definitions("-std=gnu++11")
 endif()
 
