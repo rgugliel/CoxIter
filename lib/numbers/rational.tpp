@@ -182,6 +182,13 @@ bool Rational<T>::operator>(const Rational<T>& r) const
 }
 
 template <typename T>
+bool Rational<T>::operator<(const Rational<T>& r) const
+{
+	Rational<T> n( *this - r );
+	return ( n.a < 0 );
+}
+
+template <typename T>
 bool Rational<T>::operator>=(const int& ni) const
 {
 	Rational<T> n( *this - ni );

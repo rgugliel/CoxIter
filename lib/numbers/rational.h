@@ -63,6 +63,7 @@ class Rational
 		Rational( const int& i );
 
 		bool operator>( Rational const& ) const;
+		bool operator<( Rational const& ) const;
 		bool operator>=( int const& ) const;
 		bool operator==( int const& ) const;
 		bool operator==( Rational const& ) const;
