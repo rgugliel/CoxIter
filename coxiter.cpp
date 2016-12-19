@@ -2933,14 +2933,31 @@ void CoxIter::printCoxeterMatrix()
 	cout << endl;
 	
 	unsigned int i, j;
-	for( i = 0; i < iVerticesCount; i++ )
+	if( strOuputMathematicalFormat == "mathematica" || strOuputMathematicalFormat == "gap" )
 	{
-		cout << "\t";
-		for( j = 0; j < iVerticesCount; j++ )
+		cout << "\t[";
+		for( i = 0; i < iVerticesCount; i++ )
 		{
-			cout << ( j ? "," : "" ) << ( i == j ? 1 : ( iCoxeterMatrix[i][j] < 2 ? 0 : iCoxeterMatrix[i][j] ) );
+			cout << ( i ? "," : "" ) << "[";
+			for( j = 0; j < iVerticesCount; j++ )
+			{
+				cout << ( j ? "," : "" ) << ( i == j ? 1 : ( iCoxeterMatrix[i][j] < 2 ? 0 : iCoxeterMatrix[i][j] ) );
+			}
+			cout << "]";
 		}
-		cout << endl;
+		cout << "]" << endl;
+	}
+	else
+	{
+		for( i = 0; i < iVerticesCount; i++ )
+		{
+			cout << "\t";
+			for( j = 0; j < iVerticesCount; j++ )
+			{
+				cout << ( j ? "," : "" ) << ( i == j ? 1 : ( iCoxeterMatrix[i][j] < 2 ? 0 : iCoxeterMatrix[i][j] ) );
+			}
+			cout << endl;
+		}
 	}
 }
 
