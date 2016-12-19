@@ -30,7 +30,7 @@ namespace PariPolynomials
 		const long iVar = 0; // Polynomial variable
 		
 		GEN pol( cgetg(iSize+2, t_POL) ); // iSize coefficients, sign and variable number
-		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgef(iSize+2); // not equal to zero, variable, coefficients
+		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgefint(iSize+2); // not equal to zero, variable, coefficients
 		
 		for( unsigned int i(0); i < iSize; i++ )
 			pol[i+2] = (long)stoi( iCoefficients[i] );
@@ -44,7 +44,7 @@ namespace PariPolynomials
 		const long iVar = 0; // Polynomial variable
 		
 		GEN pol( cgetg(iSize+2, t_POL) ); // iSize coefficients, sign and variable number
-		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgef(iSize+2); // not equal to zero, variable, coefficients
+		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgefint(iSize+2); // not equal to zero, variable, coefficients
 		
 		for( unsigned int i(0); i < iSize; i++ )
 		{
