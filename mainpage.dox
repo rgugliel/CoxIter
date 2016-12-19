@@ -70,7 +70,7 @@ sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev git
 
 On Fedora, type the following commands in a Shell:
 \code
-sudo yum install g++ cmake graphviz pcre-devel pari-devel git
+sudo dnf install g++ cmake graphviz pcre-devel pari-devel git
 \endcode
 
 \subsection main_compilation_gnu_compile Compilation
@@ -86,7 +86,7 @@ The compilation should be done withour error or warning. Now, %CoxIter is usable
 Remark: If you don't have Git, you can simply download %CoxIter here: <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">https://github.com/rgugliel/CoxIter/archive/master.zip</a>
 
 \subsection main_compilation_gnu_troubleshooting Troubleshooting
-If one of the library (PCRE, PARI/GP) is installed but is not found, try to run the following command:
+If one of the libraries (PCRE, PARI/GP) is installed but not found, try to run the following command:
 \code
 sudo ldconfig
 \endcode
