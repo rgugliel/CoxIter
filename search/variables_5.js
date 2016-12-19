@@ -22,6 +22,7 @@ var searchData=
   ['iisfvectorsunits',['iISFVectorsUnits',['../class_cox_iter.html#a96cdfa35f9ea17cf69618816b67c7f54',1,'CoxIter']]],
   ['iiss0',['iISs0',['../class_cox_iter.html#af61a1d0cc578520e94e8a8d874b5689d',1,'CoxIter']]],
   ['iist0',['iISt0',['../class_cox_iter.html#a8894aee4c39fbfdf32a5f2681cc38de4',1,'CoxIter']]],
+  ['imaximalsubgraphrank',['iMaximalSubgraphRank',['../class_cox_iter.html#a0b5eae93b54c2b21af7a0afb463d9a75',1,'CoxIter']]],
   ['inewcox',['iNewCox',['../class_g_b_d.html#ad790bcb67e09e9bf260e99c61cd42b60',1,'GBD']]],
   ['inewverticescount',['iNewVerticesCount',['../class_g_b_d.html#ae97baa206fa8e795ff43d0016499bc39',1,'GBD']]],
   ['ioriginvertex',['iOriginVertex',['../struct_new_vertex.html#ae051d8ed07b68694298685b81758b3f6',1,'NewVertex']]],

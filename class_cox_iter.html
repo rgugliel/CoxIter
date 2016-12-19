@@ -437,9 +437,6 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a2ffcddeed87a1d38e0aaf4513fab56a0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0">bWriteInfo</a></td></tr>
 <tr class="memdesc:a2ffcddeed87a1d38e0aaf4513fab56a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we want to write informations (false if <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> is used "as a plugin")  <a href="#a2ffcddeed87a1d38e0aaf4513fab56a0">More...</a><br /></td></tr>
 <tr class="separator:a2ffcddeed87a1d38e0aaf4513fab56a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5c6a89796309eab098dd052c0c1e238"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#af5c6a89796309eab098dd052c0c1e238">bWriteProgress</a></td></tr>
-<tr class="memdesc:af5c6a89796309eab098dd052c0c1e238"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we want to display the progress // TODO: option.  <a href="#af5c6a89796309eab098dd052c0c1e238">More...</a><br /></td></tr>
-<tr class="separator:af5c6a89796309eab098dd052c0c1e238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb96e97522e41502905a6824969cb687"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#abb96e97522e41502905a6824969cb687">bCoutFile</a></td></tr>
 <tr class="memdesc:abb96e97522e41502905a6824969cb687"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if we want to redirect cout to a file.  <a href="#abb96e97522e41502905a6824969cb687">More...</a><br /></td></tr>
 <tr class="separator:abb96e97522e41502905a6824969cb687"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -455,6 +452,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a3cbcd46aa55cadcea456ef669d3a025d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a3cbcd46aa55cadcea456ef669d3a025d">iVerticesCount</a></td></tr>
 <tr class="memdesc:a3cbcd46aa55cadcea456ef669d3a025d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of vertices.  <a href="#a3cbcd46aa55cadcea456ef669d3a025d">More...</a><br /></td></tr>
 <tr class="separator:a3cbcd46aa55cadcea456ef669d3a025d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5eae93b54c2b21af7a0afb463d9a75"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a0b5eae93b54c2b21af7a0afb463d9a75">iMaximalSubgraphRank</a></td></tr>
+<tr class="memdesc:a0b5eae93b54c2b21af7a0afb463d9a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximal rank of a subgraph.  <a href="#a0b5eae93b54c2b21af7a0afb463d9a75">More...</a><br /></td></tr>
+<tr class="separator:a0b5eae93b54c2b21af7a0afb463d9a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab88039b1a5bdbd70e2cdafb31312896c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#ab88039b1a5bdbd70e2cdafb31312896c">iDimension</a></td></tr>
 <tr class="memdesc:ab88039b1a5bdbd70e2cdafb31312896c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dimension (or 0)  <a href="#ab88039b1a5bdbd70e2cdafb31312896c">More...</a><br /></td></tr>
 <tr class="separator:ab88039b1a5bdbd70e2cdafb31312896c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -3556,28 +3556,6 @@ Weights of the dotted lines </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="af5c6a89796309eab098dd052c0c1e238"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool CoxIter::bWriteProgress</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>If we want to display the progress // TODO: option. </p>
-
-</div>
-</div>
 <a class="anchor" id="a810edffb8e1d5fdd6e7b90d11cce4c95"></a>
 <div class="memitem">
 <div class="memproto">
@@ -4109,6 +4087,28 @@ Weights of the dotted lines </dd></dl>
 
 </div>
 </div>
+<a class="anchor" id="a0b5eae93b54c2b21af7a0afb463d9a75"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int CoxIter::iMaximalSubgraphRank</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximal rank of a subgraph. </p>
+
+</div>
+</div>
 <a class="anchor" id="abd16373e7c8fc979dc4a5467877146e9"></a>
 <div class="memitem">
 <div class="memproto">
@@ -4468,7 +4468,7 @@ Weights of the dotted lines </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 27 2016 07:39:18 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Dec 19 2016 08:21:19 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

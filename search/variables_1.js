@@ -17,7 +17,6 @@ var searchData=
   ['bcoutfile',['bCoutFile',['../class_app.html#aed3b63782e64fc1f7b7fa6d8f6eb89ec',1,'App::bCoutFile()'],['../class_cox_iter.html#abb96e97522e41502905a6824969cb687',1,'CoxIter::bCoutFile()']]],
   ['bdebug',['bDebug',['../class_app.html#a43d3865da93bf048976cc0ea6de9e9e9',1,'App::bDebug()'],['../class_cox_iter.html#addbb154d757c42257d6bff5321415911',1,'CoxIter::bDebug()']]],
   ['bdimension_5fguessed',['bDimension_guessed',['../class_cox_iter.html#aae71194ada9737f2bdbbe7ab28814db8',1,'CoxIter']]],
-  ['bdocomputations',['bDoComputations',['../class_app.html#a593897860b69e69982c7b48533a1b79b',1,'App']]],
   ['bedgesvisited',['bEdgesVisited',['../class_arithmeticity.html#afa656f09db2d790adb2c26c483167493',1,'Arithmeticity::bEdgesVisited()'],['../class_cox_iter.html#afc7f4de6fe30f543eb0e410101a29f7a',1,'CoxIter::bEdgesVisited()']]],
   ['bgbd',['bGBD',['../class_app.html#a687e08237c8629002b6dda57768368ec',1,'App']]],
   ['bgrammatrixfield',['bGramMatrixField',['../class_cox_iter.html#aa3827295baba1d0fc82a6ccb2645573a',1,'CoxIter']]],
@@ -41,6 +40,5 @@ var searchData=
   ['buseopenmp',['bUseOpenMP',['../class_cox_iter.html#a7c7ea0018ce8822bde3621a8359782a1',1,'CoxIter']]],
   ['bverticeslinkable',['bVerticesLinkable',['../class_graph.html#a7b91d58559d71e3bba218338ab8f68b3',1,'Graph']]],
   ['bverticesvisited',['bVerticesVisited',['../class_arithmeticity.html#ab6eca83ed9066ae5db07b57ebd2811a1',1,'Arithmeticity::bVerticesVisited()'],['../class_cox_iter.html#a4f0fe93b03a65da5f990ba7e9ba9a58d',1,'CoxIter::bVerticesVisited()']]],
-  ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]],
-  ['bwriteprogress',['bWriteProgress',['../class_cox_iter.html#af5c6a89796309eab098dd052c0c1e238',1,'CoxIter']]]
+  ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]]
 ];

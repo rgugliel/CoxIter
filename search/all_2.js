@@ -26,7 +26,6 @@ var searchData=
   ['bcoutfile',['bCoutFile',['../class_app.html#aed3b63782e64fc1f7b7fa6d8f6eb89ec',1,'App::bCoutFile()'],['../class_cox_iter.html#abb96e97522e41502905a6824969cb687',1,'CoxIter::bCoutFile()']]],
   ['bdebug',['bDebug',['../class_app.html#a43d3865da93bf048976cc0ea6de9e9e9',1,'App::bDebug()'],['../class_cox_iter.html#addbb154d757c42257d6bff5321415911',1,'CoxIter::bDebug()']]],
   ['bdimension_5fguessed',['bDimension_guessed',['../class_cox_iter.html#aae71194ada9737f2bdbbe7ab28814db8',1,'CoxIter']]],
-  ['bdocomputations',['bDoComputations',['../class_app.html#a593897860b69e69982c7b48533a1b79b',1,'App']]],
   ['bedgesvisited',['bEdgesVisited',['../class_arithmeticity.html#afa656f09db2d790adb2c26c483167493',1,'Arithmeticity::bEdgesVisited()'],['../class_cox_iter.html#afc7f4de6fe30f543eb0e410101a29f7a',1,'CoxIter::bEdgesVisited()']]],
   ['begin',['begin',['../class_graphs_list.html#a6adcd89f242486640ca6b21226711945',1,'GraphsList::begin()'],['../class_graphs_list_n.html#a6a84dec7eada01a57052bf7709bf6de6',1,'GraphsListN::begin()']]],
   ['beulercharacteristicfvector',['bEulerCharacteristicFVector',['../class_cox_iter.html#accb4ceba4add94cf237a27a1a33e289f',1,'CoxIter']]],
@@ -64,6 +63,5 @@ var searchData=
   ['bwritegraph',['bWriteGraph',['../class_cox_iter.html#a0cd4c18a14648d3f3b9f2232708681f2',1,'CoxIter']]],
   ['bwritegraphtodraw',['bWriteGraphToDraw',['../class_cox_iter.html#a42c041344c1107dc073e1a47a7590abe',1,'CoxIter']]],
   ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]],
-  ['bwriteprogress',['bWriteProgress',['../class_cox_iter.html#af5c6a89796309eab098dd052c0c1e238',1,'CoxIter']]],
   ['building_20_25coxiter',['Building %CoxIter',['../pageInstall.html',1,'']]]
 ];

@@ -31,6 +31,7 @@ var searchData=
   ['ilinearizationmatrix_5findex',['iLinearizationMatrix_index',['../coxiter_8h.html#a03afd2c76a3b78a19da015c32d3f60e5',1,'coxiter.h']]],
   ['ilinearizationmatrix_5frow',['iLinearizationMatrix_row',['../coxiter_8h.html#aa4bdcba0375eebd1f60effad0cd72f7d',1,'coxiter.h']]],
   ['ilistdivisors',['iListDivisors',['../namespace_math_tools.html#ad6df7408563b284c22cdfdabb88d0e61',1,'MathTools']]],
+  ['imaximalsubgraphrank',['iMaximalSubgraphRank',['../class_cox_iter.html#a0b5eae93b54c2b21af7a0afb463d9a75',1,'CoxIter']]],
   ['implode',['implode',['../string_8cpp.html#acb00f4fd002bf4ee2b9e18c86cc2c3ff',1,'implode(const string &amp;strSeparator, const vector&lt; string &gt; &amp;strVector):&#160;string.cpp'],['../string_8h.html#acb00f4fd002bf4ee2b9e18c86cc2c3ff',1,'implode(const string &amp;strSeparator, const vector&lt; string &gt; &amp;strVector):&#160;string.cpp'],['../string_8h.html#ad1de5bc0db5ff07f05548cd048c248e4',1,'implode(const string &amp;strSeparator, const vector&lt; T &gt; &amp;iVector):&#160;string.h']]],
   ['inewcox',['iNewCox',['../class_g_b_d.html#ad790bcb67e09e9bf260e99c61cd42b60',1,'GBD']]],
   ['inewverticescount',['iNewVerticesCount',['../class_g_b_d.html#ae97baa206fa8e795ff43d0016499bc39',1,'GBD']]],
