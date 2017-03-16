@@ -24,7 +24,7 @@ var searchData=
   ['printgrammatrix_5fpari',['printGramMatrix_PARI',['../class_cox_iter.html#a0fae877101bb76f1b3fc5ae04a038262',1,'CoxIter']]],
   ['printgrowthseries',['printGrowthSeries',['../class_cox_iter.html#aa53be841fc1a1dbdc0ceb454fcf9d038',1,'CoxIter']]],
   ['printhelp',['printHelp',['../class_app.html#af851a081c2b614105d100c87e2589ab4',1,'App']]],
-  ['printmatrix',['printMatrix',['../class_g_b_d.html#abe8506777f8721ec88816f95dde04828',1,'GBD']]],
+  ['printmatrix',['printMatrix',['../class_index2.html#ae2136a8f2010ff7b446eba17476dbc80',1,'Index2']]],
   ['printpath',['printPath',['../class_cox_iter.html#a50e1d57404fbbe57e21e2d4667a716e1',1,'CoxIter']]],
   ['ptr',['ptr',['../class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a',1,'GraphsListIterator']]],
   ['ptr_5fmap_5fvertices_5findextolabel',['ptr_map_vertices_indexToLabel',['../class_graph.html#a0184d1dc4edb346abafcd5cd4566a1dd',1,'Graph::ptr_map_vertices_indexToLabel()'],['../class_graphs_list_n.html#adf91cbdc53426796f37c31bc5a9caa75',1,'GraphsListN::ptr_map_vertices_indexToLabel()']]]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mpz_5frational',['MPZ_rational',['../class_m_p_z__rational.html',1,'']]]
+  ['index2',['Index2',['../class_index2.html',1,'']]]
 ];

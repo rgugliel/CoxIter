@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['gbd_2ecpp',['gbd.cpp',['../gbd_8cpp.html',1,'']]],
-  ['gbd_2eh',['gbd.h',['../gbd_8h.html',1,'']]],
   ['graph_2ecpp',['graph.cpp',['../graph_8cpp.html',1,'']]],
   ['graph_2eh',['graph.h',['../graph_8h.html',1,'']]],
   ['graphs_2elist_2ecpp',['graphs.list.cpp',['../graphs_8list_8cpp.html',1,'']]],

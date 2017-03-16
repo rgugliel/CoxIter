@@ -133,8 +133,8 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:ad2051cc67b51d678570338d17c7d639a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ad2051cc67b51d678570338d17c7d639a">doGBD</a> (<a class="el" href="class_cox_iter.html">CoxIter</a> &amp;ci)</td></tr>
-<tr class="separator:ad2051cc67b51d678570338d17c7d639a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d18ebd62307f3af79d2ea2d48a0a08f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a8d18ebd62307f3af79d2ea2d48a0a08f">extractIndex2Subgroup</a> (<a class="el" href="class_cox_iter.html">CoxIter</a> &amp;ci)</td></tr>
+<tr class="separator:a8d18ebd62307f3af79d2ea2d48a0a08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -165,9 +165,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a43d3865da93bf048976cc0ea6de9e9e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a43d3865da93bf048976cc0ea6de9e9e9">bDebug</a></td></tr>
 <tr class="memdesc:a43d3865da93bf048976cc0ea6de9e9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display additional information.  <a href="#a43d3865da93bf048976cc0ea6de9e9e9">More...</a><br /></td></tr>
 <tr class="separator:a43d3865da93bf048976cc0ea6de9e9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687e08237c8629002b6dda57768368ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a687e08237c8629002b6dda57768368ec">bGBD</a></td></tr>
-<tr class="memdesc:a687e08237c8629002b6dda57768368ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Doing <a class="el" href="class_g_b_d.html" title="Gal, Bonnafé-Dyer This part is still experimental! ">GBD</a>?  <a href="#a687e08237c8629002b6dda57768368ec">More...</a><br /></td></tr>
-<tr class="separator:a687e08237c8629002b6dda57768368ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d2c3e91395272fe29bcb9a84d5a16bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a5d2c3e91395272fe29bcb9a84d5a16bd">bIndex2</a></td></tr>
+<tr class="memdesc:a5d2c3e91395272fe29bcb9a84d5a16bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trying to extract an index two subroup?  <a href="#a5d2c3e91395272fe29bcb9a84d5a16bd">More...</a><br /></td></tr>
+<tr class="separator:a5d2c3e91395272fe29bcb9a84d5a16bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d9a4871fbc1a6894587285b91241833"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a8d9a4871fbc1a6894587285b91241833">bOpenMP</a></td></tr>
 <tr class="memdesc:a8d9a4871fbc1a6894587285b91241833"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use OpenMP.  <a href="#a8d9a4871fbc1a6894587285b91241833">More...</a><br /></td></tr>
 <tr class="separator:a8d9a4871fbc1a6894587285b91241833"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,12 +192,12 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:aa5e37b8addd89ea40ccc657c7ced6fa7"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aa5e37b8addd89ea40ccc657c7ced6fa7">strVertices</a></td></tr>
 <tr class="memdesc:aa5e37b8addd89ea40ccc657c7ced6fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we specify the vertices.  <a href="#aa5e37b8addd89ea40ccc657c7ced6fa7">More...</a><br /></td></tr>
 <tr class="separator:aa5e37b8addd89ea40ccc657c7ced6fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bbc0fe52b28a7bd73c97f37f0c6f2a5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a9bbc0fe52b28a7bd73c97f37f0c6f2a5">strGBDvertex_t0</a></td></tr>
-<tr class="memdesc:a9bbc0fe52b28a7bd73c97f37f0c6f2a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflexion and glueing with respect to the hyperplane corresponding to t0.  <a href="#a9bbc0fe52b28a7bd73c97f37f0c6f2a5">More...</a><br /></td></tr>
-<tr class="separator:a9bbc0fe52b28a7bd73c97f37f0c6f2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f57879e3f53c38b60adf277f411471d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a9f57879e3f53c38b60adf277f411471d">strGBDvertex_s0</a></td></tr>
-<tr class="memdesc:a9f57879e3f53c38b60adf277f411471d"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we want to compute the f-vector of the corresponding infinite sequence.  <a href="#a9f57879e3f53c38b60adf277f411471d">More...</a><br /></td></tr>
-<tr class="separator:a9f57879e3f53c38b60adf277f411471d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84198d8385887ad9a81019063cbb2f72"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a84198d8385887ad9a81019063cbb2f72">strIndex2vertex_t0</a></td></tr>
+<tr class="memdesc:a84198d8385887ad9a81019063cbb2f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflexion and glueing with respect to the hyperplane corresponding to t0.  <a href="#a84198d8385887ad9a81019063cbb2f72">More...</a><br /></td></tr>
+<tr class="separator:a84198d8385887ad9a81019063cbb2f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fdf25a9a10a74b28a1e79012c92ee40"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a8fdf25a9a10a74b28a1e79012c92ee40">strIndex2vertex_s0</a></td></tr>
+<tr class="memdesc:a8fdf25a9a10a74b28a1e79012c92ee40"><td class="mdescLeft">&#160;</td><td class="mdescRight">If we want to compute the f-vector of the corresponding infinite sequence.  <a href="#a8fdf25a9a10a74b28a1e79012c92ee40">More...</a><br /></td></tr>
+<tr class="separator:a8fdf25a9a10a74b28a1e79012c92ee40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main class for the application. </p>
@@ -244,7 +244,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad2051cc67b51d678570338d17c7d639a"></a>
+<a class="anchor" id="a8d18ebd62307f3af79d2ea2d48a0a08f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -252,7 +252,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void App::doGBD </td>
+          <td class="memname">void App::extractIndex2Subgroup </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_cox_iter.html">CoxIter</a> &amp;&#160;</td>
           <td class="paramname"><em>ci</em></td><td>)</td>
@@ -511,7 +511,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a687e08237c8629002b6dda57768368ec"></a>
+<a class="anchor" id="a5d2c3e91395272fe29bcb9a84d5a16bd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -519,7 +519,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool App::bGBD</td>
+          <td class="memname">bool App::bIndex2</td>
         </tr>
       </table>
   </td>
@@ -529,7 +529,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Doing <a class="el" href="class_g_b_d.html" title="Gal, Bonnafé-Dyer This part is still experimental! ">GBD</a>? </p>
+<p>Trying to extract an index two subroup? </p>
 
 </div>
 </div>
@@ -671,7 +671,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9f57879e3f53c38b60adf277f411471d"></a>
+<a class="anchor" id="a8fdf25a9a10a74b28a1e79012c92ee40"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -679,7 +679,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string App::strGBDvertex_s0</td>
+          <td class="memname">string App::strIndex2vertex_s0</td>
         </tr>
       </table>
   </td>
@@ -693,7 +693,7 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9bbc0fe52b28a7bd73c97f37f0c6f2a5"></a>
+<a class="anchor" id="a84198d8385887ad9a81019063cbb2f72"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -701,7 +701,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string App::strGBDvertex_t0</td>
+          <td class="memname">string App::strIndex2vertex_t0</td>
         </tr>
       </table>
   </td>
@@ -816,7 +816,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 19 2016 08:21:19 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 16 2017 11:27:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

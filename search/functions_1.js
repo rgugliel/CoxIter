@@ -15,7 +15,7 @@ var searchData=
   ['bissubgraphof',['bIsSubgraphOf',['../class_graph.html#aa2ec710575b76fda9263efbbc1ee81d9',1,'Graph']]],
   ['bissubgraphof_5fspherical_5feuclidean',['bIsSubgraphOf_spherical_euclidean',['../class_graph.html#a98b960e57973088db5774f76682fdf06',1,'Graph']]],
   ['bissubgraphof_5fspherical_5fspherical',['bIsSubgraphOf_spherical_spherical',['../class_graph.html#aa6b7ca7a31f90cb6c8baf9020c0aeadc',1,'Graph']]],
-  ['bisvertexadmissible',['bIsVertexAdmissible',['../class_g_b_d.html#a4171f888645ab6bfca7ed05d4ad15fba',1,'GBD']]],
+  ['bisvertexadmissible',['bIsVertexAdmissible',['../class_index2.html#a9f3ae99f0aa219292fc148737924d49b',1,'Index2']]],
   ['bisvertexvalid',['bIsVertexValid',['../class_cox_iter.html#a953d7468acc0b52cb4d77d49831ef93d',1,'CoxIter']]],
   ['breadgraphfromfile',['bReadGraphFromFile',['../class_cox_iter.html#af6c3264f810401353fe3b4652e4ed247',1,'CoxIter']]],
   ['breadmainparameters',['bReadMainParameters',['../class_app.html#a57f4f2ed98d7359fe4d883f8b224627d',1,'App']]],

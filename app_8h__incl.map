@@ -1,8 +1,8 @@
 <map id="app.h" name="app.h">
 <area shape="rect" id="node7" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="1171,155,1243,181"/>
-<area shape="rect" id="node32" href="$gbd_8h.html" title="gbd.h" alt="" coords="1179,80,1234,107"/>
-<area shape="rect" id="node33" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="1649,80,1753,107"/>
-<area shape="rect" id="node8" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1583,304,1676,331"/>
+<area shape="rect" id="node32" href="$index2_8h.html" title="index2.h" alt="" coords="1171,80,1242,107"/>
+<area shape="rect" id="node33" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="1633,80,1737,107"/>
+<area shape="rect" id="node8" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1596,304,1689,331"/>
 <area shape="rect" id="node13" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1590,229,1727,256"/>
 <area shape="rect" id="node14" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="1270,379,1389,405"/>
 <area shape="rect" id="node15" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="1316,304,1457,331"/>
@@ -10,7 +10,7 @@
 <area shape="rect" id="node20" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="784,379,899,405"/>
 <area shape="rect" id="node23" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="974,379,1093,405"/>
 <area shape="rect" id="node25" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="435,379,613,405"/>
-<area shape="rect" id="node9" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1643,379,1747,405"/>
+<area shape="rect" id="node9" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1649,379,1753,405"/>
 <area shape="rect" id="node10" href="$graph_8h.html" title="graph.h" alt="" coords="1421,453,1486,480"/>
 <area shape="rect" id="node26" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="303,453,436,480"/>
 <area shape="rect" id="node27" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="561,453,639,480"/>

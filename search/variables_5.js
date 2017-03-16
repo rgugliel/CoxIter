@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['icox',['iCox',['../class_g_b_d.html#a6b832ae6cadc83bec6f43db434f0d90f',1,'GBD']]],
+  ['icox',['iCox',['../class_index2.html#a37dfbfd4899364c3b11a114b5df5818f',1,'Index2']]],
   ['icoxetermatrix',['iCoxeterMatrix',['../class_arithmeticity.html#a3d07086e82405632a382aa1a61350df6',1,'Arithmeticity::iCoxeterMatrix()'],['../class_cox_iter.html#a49e8afbb94a3b8ccb21ae04c24107dc3',1,'CoxIter::iCoxeterMatrix()']]],
   ['icyclotomicpolynomials',['iCyclotomicPolynomials',['../namespace_polynomials.html#ab32cb8b2c21ed3695be3d05ba2e0b5fd',1,'Polynomials']]],
   ['idatasupp',['iDataSupp',['../class_graph.html#ace8e18a6254e4e748c5e858553f697c5',1,'Graph']]],
@@ -23,8 +23,8 @@ var searchData=
   ['iiss0',['iISs0',['../class_cox_iter.html#af61a1d0cc578520e94e8a8d874b5689d',1,'CoxIter']]],
   ['iist0',['iISt0',['../class_cox_iter.html#a8894aee4c39fbfdf32a5f2681cc38de4',1,'CoxIter']]],
   ['imaximalsubgraphrank',['iMaximalSubgraphRank',['../class_cox_iter.html#a0b5eae93b54c2b21af7a0afb463d9a75',1,'CoxIter']]],
-  ['inewcox',['iNewCox',['../class_g_b_d.html#ad790bcb67e09e9bf260e99c61cd42b60',1,'GBD']]],
-  ['inewverticescount',['iNewVerticesCount',['../class_g_b_d.html#ae97baa206fa8e795ff43d0016499bc39',1,'GBD']]],
+  ['inewcox',['iNewCox',['../class_index2.html#a50a108f379d3744a3c91536a512e8217',1,'Index2']]],
+  ['inewverticescount',['iNewVerticesCount',['../class_index2.html#a6464d36341d4add337d1537860ff93c5',1,'Index2']]],
   ['ioriginvertex',['iOriginVertex',['../struct_new_vertex.html#ae051d8ed07b68694298685b81758b3f6',1,'NewVertex']]],
   ['iovectorsize',['iOvectorSize',['../class_p_c_r_e_regexp.html#ae1939f68ba4f72dd1ab63be25e45f0d9',1,'PCRERegexp']]],
   ['ipariprecision',['iPariPrecision',['../class_growth_rate.html#a4a45729e47239077f3d3aca20120847c',1,'GrowthRate']]],
@@ -44,9 +44,9 @@ var searchData=
   ['iv1',['iV1',['../struct_cycle_element.html#ae4d801d9374ed931d56fa2c38ab80de7',1,'CycleElement']]],
   ['iv2',['iV2',['../struct_cycle_element.html#a7a8fd7ea8fe08fcfb9f726503924465b',1,'CycleElement']]],
   ['ivcount',['iVCount',['../class_graphs_list_iterator.html#a1e4290dbfd7afdc00db562ea1b67a9a6',1,'GraphsListIterator']]],
-  ['ivertex',['iVertex',['../class_g_b_d.html#ad9b22f33e027b97022f8588d6b606b19',1,'GBD']]],
+  ['ivertex',['iVertex',['../class_index2.html#ad5c2d7329e836c006d972c1a97db9cab',1,'Index2']]],
   ['ivertices',['iVertices',['../class_graph.html#a1dec99f56ea629de8eef8bf6f82d949a',1,'Graph']]],
   ['iverticesatinfinitycount',['iVerticesAtInfinityCount',['../class_cox_iter.html#a8272dbae3fa772568cd201ac63844f05',1,'CoxIter']]],
-  ['iverticescount',['iVerticesCount',['../class_arithmeticity.html#a9301351507a1fe6a9017532dc741ef67',1,'Arithmeticity::iVerticesCount()'],['../class_cox_iter.html#a3cbcd46aa55cadcea456ef669d3a025d',1,'CoxIter::iVerticesCount()'],['../class_g_b_d.html#abccd9e555c85ce251a9d2eef6ec10bc1',1,'GBD::iVerticesCount()'],['../class_graphs_list.html#a7a2b32db50048a178bbcea92ee21036a',1,'GraphsList::iVerticesCount()'],['../class_graphs_list_n.html#a87d417c7535c9bfff28988c5f1e7f0bf',1,'GraphsListN::iVerticesCount()']]],
+  ['iverticescount',['iVerticesCount',['../class_arithmeticity.html#a9301351507a1fe6a9017532dc741ef67',1,'Arithmeticity::iVerticesCount()'],['../class_cox_iter.html#a3cbcd46aa55cadcea456ef669d3a025d',1,'CoxIter::iVerticesCount()'],['../class_graphs_list.html#a7a2b32db50048a178bbcea92ee21036a',1,'GraphsList::iVerticesCount()'],['../class_graphs_list_n.html#a87d417c7535c9bfff28988c5f1e7f0bf',1,'GraphsListN::iVerticesCount()'],['../class_index2.html#adb18d240e8547d61e27461b368c09e8c',1,'Index2::iVerticesCount()']]],
   ['iverticescountmax',['iVerticesCountMax',['../class_graphs_list_iterator.html#ade7d67e5655a5ad11a5ea706652fec47',1,'GraphsListIterator']]]
 ];

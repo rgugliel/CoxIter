@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['signature',['Signature',['../class_signature.html',1,'']]]
+  ['rational',['Rational',['../class_rational.html',1,'']]]
 ];

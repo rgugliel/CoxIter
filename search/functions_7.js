@@ -10,6 +10,7 @@ var searchData=
   ['ilinearizationmatrix_5frow',['iLinearizationMatrix_row',['../coxiter_8h.html#aa4bdcba0375eebd1f60effad0cd72f7d',1,'coxiter.h']]],
   ['ilistdivisors',['iListDivisors',['../namespace_math_tools.html#ad6df7408563b284c22cdfdabb88d0e61',1,'MathTools']]],
   ['implode',['implode',['../string_8cpp.html#acb00f4fd002bf4ee2b9e18c86cc2c3ff',1,'implode(const string &amp;strSeparator, const vector&lt; string &gt; &amp;strVector):&#160;string.cpp'],['../string_8h.html#acb00f4fd002bf4ee2b9e18c86cc2c3ff',1,'implode(const string &amp;strSeparator, const vector&lt; string &gt; &amp;strVector):&#160;string.cpp'],['../string_8h.html#ad1de5bc0db5ff07f05548cd048c248e4',1,'implode(const string &amp;strSeparator, const vector&lt; T &gt; &amp;iVector):&#160;string.h']]],
+  ['index2',['Index2',['../class_index2.html#a624417e4c37e90e4552efc8f20aa8e5d',1,'Index2']]],
   ['initializations',['initializations',['../class_cox_iter.html#a8fa2fb1c481335c9152ee8ef8799617d',1,'CoxIter']]],
   ['inumberrootsunitcircle',['iNumberRootsUnitCircle',['../class_growth_rate.html#a613bf68d9fe7c5fbeda6a1a9117447f8',1,'GrowthRate']]],
   ['iprimedecomposition',['iPrimeDecomposition',['../namespace_math_tools.html#adf0a44da0cb1f8863e60ff6aa58fc71f',1,'MathTools']]],

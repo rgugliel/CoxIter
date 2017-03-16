@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['gbd',['GBD',['../class_g_b_d.html',1,'']]],
   ['graph',['Graph',['../class_graph.html',1,'']]],
   ['graphptrcomp',['GraphPtrComp',['../struct_graph_ptr_comp.html',1,'']]],
   ['graphslist',['GraphsList',['../class_graphs_list.html',1,'']]],

@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['gbd',['GBD',['../class_g_b_d.html',1,'GBD'],['../class_g_b_d.html#afdcf982cfc93ae81919f0b1c9925b87e',1,'GBD::GBD()']]],
-  ['gbd_2ecpp',['gbd.cpp',['../gbd_8cpp.html',1,'']]],
-  ['gbd_2eh',['gbd.h',['../gbd_8h.html',1,'']]],
   ['gepsilon',['gEpsilon',['../class_growth_rate.html#a8668eb3910171091be9fd10dab538088',1,'GrowthRate::gEpsilon()'],['../class_signature.html#ae6855299cbb38e2c8da800ea8b39b738',1,'Signature::gEpsilon()']]],
   ['get_5farray_5fstr_5f2_5fgrammatrix',['get_array_str_2_GramMatrix',['../class_cox_iter.html#a04aae5524d0be98350f387fa7914b3a3',1,'CoxIter']]],
   ['get_5fb_5fhaseuclideangraphsofrank',['get_b_hasEuclideanGraphsOfRank',['../class_cox_iter.html#afc377194edda4fe9ef04136b83bc2411',1,'CoxIter']]],
@@ -39,7 +36,7 @@ var searchData=
   ['get_5fstr_5fmap_5fvertices_5findextolabel',['get_str_map_vertices_indexToLabel',['../class_cox_iter.html#a020ebacb6b8fa76e3c7a6cc7e70cd315',1,'CoxIter']]],
   ['get_5fstrcoxetergraph',['get_strCoxeterGraph',['../class_cox_iter.html#a15f68b5a06abb02790cac49a22edd8c1',1,'CoxIter']]],
   ['get_5fstrcoxetermatrix',['get_strCoxeterMatrix',['../class_cox_iter.html#a22a8b15dcd3b75d2d4bf500df4cfbe03',1,'CoxIter']]],
-  ['get_5fstrerror',['get_strError',['../class_arithmeticity.html#aeaf5b99fe87638b33a0ed97f78fa156a',1,'Arithmeticity::get_strError()'],['../class_cox_iter.html#a4995ed17522a64b6f55bc835171c9090',1,'CoxIter::get_strError()'],['../class_g_b_d.html#a98f4a2b8937f27f5c7422faf4b978752',1,'GBD::get_strError()'],['../class_p_c_r_e_regexp.html#af46ed9f3d1a58d36496896aeab291898',1,'PCRERegexp::get_strError()']]],
+  ['get_5fstrerror',['get_strError',['../class_arithmeticity.html#aeaf5b99fe87638b33a0ed97f78fa156a',1,'Arithmeticity::get_strError()'],['../class_cox_iter.html#a4995ed17522a64b6f55bc835171c9090',1,'CoxIter::get_strError()'],['../class_index2.html#a01b80e508d5f3baaadc174f8f7e663ea',1,'Index2::get_strError()'],['../class_p_c_r_e_regexp.html#af46ed9f3d1a58d36496896aeab291898',1,'PCRERegexp::get_strError()']]],
   ['get_5fstreulercaracteristic',['get_strEulerCaracteristic',['../class_cox_iter.html#a4c7bacfb15aed9b156373bed45efea8c',1,'CoxIter']]],
   ['get_5fstreulercharacteristic_5fcomputations',['get_strEulerCharacteristic_computations',['../class_cox_iter.html#a7b3b1a3266f7b2d2b788203018eae4f1',1,'CoxIter']]],
   ['get_5fstrgrammatrix',['get_strGramMatrix',['../class_cox_iter.html#a6def28e6eae0cee2a714b7d30153a5da',1,'CoxIter']]],
