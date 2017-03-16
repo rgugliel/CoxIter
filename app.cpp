@@ -137,11 +137,6 @@ bool App::bReadMainParameters( int argc, char **argv )
 			szPrevType = "growthrate";
 #endif
 		}
-		else if( szTemp == "-gbd" )
-		{
-			bGBD = true;
-			szPrevType = "gbd";
-		}
 		else if( szTemp == "-help" )
 		{
 			bPrintHelp = true;
@@ -251,9 +246,9 @@ bool App::bReadMainParameters( int argc, char **argv )
 		str_replace( strParams, regexpRes[0][0], "" );
 		bGBD = true;
 	}
-	else if( ( iRegexpCount = regexp.preg_match_all( "-gbd ([[:alnum:]_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
+	else if( ( iRegexpCount = regexp.preg_match_all( "(-gbd|-index2) ([[:alnum:]_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
 	{
-		strGBDvertex_t0 = regexpRes[1][0];
+		strGBDvertex_t0 = regexpRes[2][0];
 		str_replace( strParams, regexpRes[0][0], "" );
 		bGBD = true;
 	}
