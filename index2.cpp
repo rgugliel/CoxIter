@@ -20,14 +20,14 @@ You should have received a copy of the GNU General Public License
 along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gbd.h"
+#include "index2.h"
 
-GBD::GBD( CoxIter* ci )
+Index2::Index2( CoxIter* ci )
 : ci( ci ), iVerticesCount( ci->get_iVerticesCount( ) ), iNewVerticesCount( 0 ), iCox( ci->get_iCoxeterMatrix( ) )
 {
 }
 
-bool GBD::bIsVertexAdmissible( const string& strVertexName )
+bool Index2::bIsVertexAdmissible( const string& strVertexName )
 {
 	
 	if( !ci->bIsVertexValid( strVertexName ) )
@@ -50,7 +50,7 @@ bool GBD::bIsVertexAdmissible( const string& strVertexName )
 	return true;
 }
 
-bool GBD::removeVertex( const string& strVertexName )
+bool Index2::removeVertex( const string& strVertexName )
 {
 	unsigned int iWeight;
 	
@@ -131,7 +131,7 @@ bool GBD::removeVertex( const string& strVertexName )
 						iWeight = 1;
 				}
 				else
-					throw( string( "GBD::removeVertex: Error" ) ); // TODO: idem
+					throw( string( "Index2::removeVertex: Error" ) ); // TODO: idem
 			}
 			
 			iNewCox[ i > iVertex ? i - 1 : i ][ (*itNew).iIndex ] = iWeight;
@@ -151,7 +151,7 @@ bool GBD::removeVertex( const string& strVertexName )
 	return true;
 }
 
-void GBD::printMatrix( vector< vector< unsigned int > >* iMatrix )
+void Index2::printMatrix( vector< vector< unsigned int > >* iMatrix )
 {
 	for( vector< vector< unsigned int > >::const_iterator itRow( iMatrix->begin( ) ); itRow != iMatrix->end( ); ++itRow )
 	{
@@ -162,7 +162,7 @@ void GBD::printMatrix( vector< vector< unsigned int > >* iMatrix )
 	}
 }
 
-string GBD::get_strError( ) const
+string Index2::get_strError( ) const
 {
 	return strError;
 }

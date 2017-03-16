@@ -14,7 +14,7 @@ add_definitions("-Wno-unknown-pragmas")
 set( CMAKE_BUILD_TYPE Release )
 
 # Main files
-add_executable(coxiter gbd.cpp lib/string.cpp lib/regexp.cpp coxiter.cpp arithmeticity.cpp app.cpp main.cpp)
+add_executable(coxiter index2.cpp lib/string.cpp lib/regexp.cpp coxiter.cpp arithmeticity.cpp app.cpp main.cpp)
 
 # Maths: polynomials, fractions, varia functions
 add_library( coxiter_maths STATIC lib/math_tools.cpp lib/polynomials.cpp lib/numbers/number_template.cpp lib/numbers/mpz_rational.cpp )

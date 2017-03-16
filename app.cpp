@@ -35,7 +35,7 @@ bComputeGrowthRate( false ),
 bComputeGrowthSeries( false ),
 bComputeSignature( false ),
 bDebug( false ), 
-bGBD( false ), 
+bIndex2( false ), 
 bOpenMP( true ),
 bPrintCoxeterGraph( false ),
 bPrintCoxeterMatrix( false ), 
@@ -234,23 +234,23 @@ bool App::bReadMainParameters( int argc, char **argv )
 	}
 	
 	// --------------------------------------------------
-	// GBD
+	// Index2
 	if( ( iRegexpCount = regexp.preg_match_all( "-is=\\[?([[:alnum:],_-]+)\\]?", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
 	{
 		str_replace( regexpRes[1][0], " ", "" );
 		vector< string> strV( explode( ",", regexpRes[1][0] ) );
-		strGBDvertex_t0 = strV[0];
+		strIndex2vertex_t0 = strV[0];
 		if( strV.size() > 1 )
-			strGBDvertex_s0 = strV[1];
+			strIndex2vertex_s0 = strV[1];
 			
 		str_replace( strParams, regexpRes[0][0], "" );
-		bGBD = true;
+		bIndex2 = true;
 	}
 	else if( ( iRegexpCount = regexp.preg_match_all( "(-gbd|-index2) ([[:alnum:]_-]+)", strParams, regexpRes, PCRE_CASELESS ) ) > 0 )
 	{
-		strGBDvertex_t0 = regexpRes[2][0];
+		strIndex2vertex_t0 = regexpRes[2][0];
 		str_replace( strParams, regexpRes[0][0], "" );
-		bGBD = true;
+		bIndex2 = true;
 	}
 	
 	return true;
@@ -258,34 +258,34 @@ bool App::bReadMainParameters( int argc, char **argv )
 
 // TODO: si exposant > 50, afficher erreur pour growth rate (car facteurs pas forcément premiers entre eux)
 
-void App::doGBD( CoxIter& ci )
+void App::extractIndex2Subgroup( CoxIter& ci )
 {
 	unsigned int iVerticesCountStart( ci.get_iVerticesCount() );
 	
-	if( strGBDvertex_t0 == "" )
+	if( strIndex2vertex_t0 == "" )
 	{
 		cout << "Error: A vertex must be given" << endl;
 		return;
 	}
 	
-	GBD gbd( &ci );
+	Index2 idx2( &ci );
 	
-	if( strGBDvertex_s0 != "" )
+	if( strIndex2vertex_s0 != "" )
 	{
 		cout << "This is an experimental feature (to be properly tested)" << endl;
 		cout << "------------------------------------------------------\n" << endl;
 		
 		cout << "Infinite sequence:" << endl;
 		
-		if( !gbd.bIsVertexAdmissible( strGBDvertex_t0 ) )
+		if( !idx2.bIsVertexAdmissible( strIndex2vertex_t0 ) )
 		{
-			cout << "\tError: " << gbd.get_strError( ) << endl;
+			cout << "\tError: " << idx2.get_strError( ) << endl;
 			return ;		
 		}
 		
-		if( !gbd.bIsVertexAdmissible( strGBDvertex_s0 ) )
+		if( !idx2.bIsVertexAdmissible( strIndex2vertex_s0 ) )
 		{
-			cout << "\tError: " << gbd.get_strError( ) << endl;
+			cout << "\tError: " << idx2.get_strError( ) << endl;
 			return ;		
 		}
 		
@@ -295,13 +295,13 @@ void App::doGBD( CoxIter& ci )
 			return ;		
 		}
 		
-		if( ci.get_iCoxeterMatrixEntry( ci.get_iVertexIndex( strGBDvertex_t0 ), ci.get_iVertexIndex( strGBDvertex_s0 ) ) >= 2 )
+		if( ci.get_iCoxeterMatrixEntry( ci.get_iVertexIndex( strIndex2vertex_t0 ), ci.get_iVertexIndex( strIndex2vertex_s0 ) ) >= 2 )
 		{
 			cout << "\tError: The two hyperplanes must be (ultra)parallel " << endl;
 			return ;
 		}
 		
-		ci.IS_computations( strGBDvertex_t0, strGBDvertex_s0 );
+		ci.IS_computations( strIndex2vertex_t0, strIndex2vertex_s0 );
 		
 		auto iFVUnits( ci.get_iISFVectorsUnits() ), iFVPowers( ci.get_iISFVectorsPowers() );
 		
@@ -312,8 +312,8 @@ void App::doGBD( CoxIter& ci )
 	
 	// -----------------------------------------
 	// Doing the GBD
-	if( !gbd.removeVertex( strGBDvertex_t0 ) )
-		cout << "\tError: " << gbd.get_strError( ) << endl;	
+	if( !idx2.removeVertex( strIndex2vertex_t0 ) )
+		cout << "\tError: " << idx2.get_strError( ) << endl;	
 	else
 		cout << "\tNumber of new hyperplanes after first doubling: " << ( ci.get_iVerticesCount() - iVerticesCountStart ) << endl;	
 	
@@ -382,8 +382,8 @@ void App::run( )
 		return;
 	}
 
-	if( bGBD )
-		doGBD( ci );
+	if( bIndex2 )
+		extractIndex2Subgroup( ci );
 	
 	if( bPrintGramMatrix )
 		ci.printGramMatrix( );
@@ -419,7 +419,7 @@ void App::run( )
 			cout << "Error while writing file: " << ci.get_strError( ) << endl;
 	}
 	
-	if( bGBD )
+	if( bIndex2 )
 		return;
 	
 	// -----------------------------------------------------------------

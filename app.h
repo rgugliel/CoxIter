@@ -50,7 +50,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 using namespace std;
 
 #include "coxiter.h"
-#include "gbd.h"
+#include "index2.h"
 #include "arithmeticity.h"
 
 class App
@@ -65,7 +65,7 @@ class App
 		bool bComputeEuler; ///< If we want to compute the Euler characteristic
 		bool bComputeSignature; ///< If we want to compute the signature
 		bool bDebug; ///< Display additional information
-		bool bGBD; ///< Doing GBD?
+		bool bIndex2; ///< Trying to extract an index two subroup?
 		bool bOpenMP; ///< Use OpenMP
 		bool bPrintCoxeterGraph; ///< Print the Coxeter graph?
 		bool bPrintCoxeterMatrix; ///< Print the Coxeter matrix?
@@ -74,8 +74,8 @@ class App
 		string strOuputMathematicalFormat; ///< Format of output: generic, mathematica, pari
 		vector< string > strVerticesRemove; ///< The vertices we want to remove
 		vector< string > strVertices; ///< If we specify the vertices
-		string strGBDvertex_t0; ///< Reflexion and glueing with respect to the hyperplane corresponding to t0
-		string strGBDvertex_s0; ///< If we want to compute the f-vector of the corresponding infinite sequence
+		string strIndex2vertex_t0; ///< Reflexion and glueing with respect to the hyperplane corresponding to t0
+		string strIndex2vertex_s0; ///< If we want to compute the f-vector of the corresponding infinite sequence
 		
 	public:
 		bool bCoutFile; ///< If the output is redirected to a file
@@ -92,7 +92,7 @@ class App
 		void printHelp( ) const;
 		
 	private:
-		void doGBD( CoxIter& ci );
+		void extractIndex2Subgroup( CoxIter& ci );
 };
 
 #endif // APP_H

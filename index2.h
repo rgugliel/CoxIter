@@ -23,16 +23,15 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 
 /*!
- * \file gbd.h
+ * \file index2.h
  * \author Rafael Guglielmetti
  * 
- * \class GBD
- * \brief Gal, Bonnafé-Dyer
- * This part is still experimental!
+ * \class Index2
+ * \brief Extract an index two subroup (based on Gal, Bonnafé-Dyer)
 */
 
-#ifndef GBD_H
-#define GBD_H
+#ifndef __INDEX2_H__
+#define __INDEX2_H__
 
 #include <string>
 
@@ -47,7 +46,7 @@ struct NewVertex
 	unsigned int iOriginVertex;
 };
 
-class GBD
+class Index2
 {
 	private:
 		CoxIter* ci;
@@ -63,7 +62,7 @@ class GBD
 		string strError;
 		
 	public:
-		GBD( CoxIter* ci );
+		Index2( CoxIter* ci );
 		
 		bool bIsVertexAdmissible( const string& strVertexName );
 		bool removeVertex( const string& strVertexName );
@@ -72,4 +71,4 @@ class GBD
 		string get_strError( ) const;
 };
 
-#endif // GBD_H
+#endif // __INDEX2_H__
