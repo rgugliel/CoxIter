@@ -22,44 +22,45 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "string.h"
 
-void str_replace( string &str, const string &from, const string &to )
+void str_replace(string &str, const string &from, const string &to)
 {
 	size_t start_pos = 0;
-	while( ( start_pos = str.find( from, start_pos ) ) != std::string::npos ) 
+	while ((start_pos = str.find(from, start_pos)) != std::string::npos) 
 	{
 		str.replace(start_pos, from.length(), to);
 		start_pos += to.length();
 	}
 }
 
-vector<string> explode( const string &separator, string source  )
+vector<string> explode(const string &separator, string source)
 {
 	size_t found;
 	vector< string > results;
 	
-	found = source.find_first_of( separator );
-	while( found != string::npos )
+	found = source.find_first_of(separator);
+	while (found != string::npos)
 	{
-		if( found > 0 )
-			results.push_back( source.substr( 0,found ) );
+		if ( found > 0 )
+			results.push_back(source.substr(0,found));
 		else
-			results.push_back( "" );
+			results.push_back("");
 		
-		source = source.substr( found + 1 );
-		found = source.find_first_of( separator );
+		source = source.substr(found + 1);
+		found = source.find_first_of(separator);
 	}
 
-	if( source.length() > 0 )
+	if (source.length() > 0)
 		results.push_back( source );
 
 	return results;
 }
 
-void explode( const string &separator, string source, vector<string> &results )
+void explode(const string &separator, string source, vector<string> &results)
 {
 	size_t found;
-
-	found = source.find_first_of( separator );
+	results.clear();
+	
+	found = source.find_first_of(separator);
 	while( found != string::npos )
 	{
 		if( found > 0 )
@@ -78,7 +79,8 @@ void explode( const string &separator, string source, vector<string> &results )
 void explode( const string &separator, string source, vector<int> &results )
 {
 	size_t found;
-
+	results.clear();
+	
 	found = source.find_first_of( separator );
 	while( found != string::npos )
 	{
@@ -98,7 +100,8 @@ void explode( const string &separator, string source, vector<int> &results )
 void explode( const string &separator, string source, vector<unsigned int> &results )
 {
 	size_t found;
-
+	results.clear();
+	
 	found = source.find_first_of( separator );
 	while( found != string::npos )
 	{
