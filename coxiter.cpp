@@ -67,6 +67,7 @@ CoxIter::CoxIter( const vector< vector< unsigned int > >& iMatrix, const unsigne
 	bGraphExplored( false ),
 	bGraphsProductsComputed( false ),
 	bGrowthSeriesComputed( false ),
+	bHasBoldLine( false ),
 	bHasDottedLine( false ),
 	iHasDottedLineWithoutWeight( 0 ),
 	bWriteInfo( false ), 
@@ -1319,7 +1320,7 @@ int CoxIter::iIsGraphCocompact()
 	
 	if( !bGraphsProductsComputed )
 		computeGraphsProducts();
-	
+		set
 	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
 	{
 		iIsCocompact = -1;
@@ -1332,7 +1333,7 @@ int CoxIter::iIsGraphCocompact()
 		return 0;
 	}
 	
-	if( bHasBoldLine )
+	if(bHasBoldLine)
 	{
 		iIsCocompact = 0;
 		return 0;
@@ -3632,6 +3633,7 @@ void CoxIter::set_iCoxeterMatrix( const vector< vector< unsigned int > >& iMat )
 	iSphericalMaxRankFound = 0;
 	bDimension_guessed = false;
 	iHasDottedLineWithoutWeight = -1;
+	bHasBoldLine = false;
 	
 	iMaximalSubgraphRank = iDimension ? iDimension : iVerticesCount;
 }
@@ -3655,4 +3657,3 @@ void CoxIter::set_strVerticesToRemove(const vector< string >& strVerticesRemove_
 	sort( strVerticesRemove.begin(), strVerticesRemove.end() );
 	strVerticesRemove = vector< string >( strVerticesRemove.begin(), unique( strVerticesRemove.begin(), strVerticesRemove.end() ) );
 }
-
