@@ -1320,7 +1320,7 @@ int CoxIter::iIsGraphCocompact()
 	
 	if( !bGraphsProductsComputed )
 		computeGraphsProducts();
-		set
+		
 	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
 	{
 		iIsCocompact = -1;
