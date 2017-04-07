@@ -1359,19 +1359,19 @@ int CoxIter::isFiniteCovolume()
 	
 	// ----------------------------------------------------
 	// some stupid tests
-	if( !graphsProducts.size() || !graphsProducts[0].size() )
+	if( !graphsProducts.size() )
 	{
 		iIsFiniteCovolume = -1;
 		return -1;
 	}
 	
-	if( !graphsProducts[0].size() )
+	if( !graphsProducts[2].size() && !graphsProducts[1].size() ) // No vertices
 	{
 		iIsFiniteCovolume = 0;
 		return 0;
 	}
 	
-	if( !graphsProducts[2].size() && !graphsProducts[1].size() ) // No vertices
+	if( !graphsProducts[0].size() ) // No edges
 	{
 		iIsFiniteCovolume = 0;
 		return 0;
