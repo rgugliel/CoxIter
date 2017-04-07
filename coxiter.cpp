@@ -1321,13 +1321,13 @@ int CoxIter::iIsGraphCocompact()
 	if( !bGraphsProductsComputed )
 		computeGraphsProducts();
 		
-	if( !bCheckCocompactness || !graphsProducts.size() || !graphsProducts[0].size() )
+	if( !bCheckCocompactness || !graphsProducts.size() )
 	{
 		iIsCocompact = -1;
 		return -1;
 	}
 	
-	if( !graphsProducts[1].size() )
+	if( !graphsProducts[1].size() || !graphsProducts[0].size() ) // No vertices, no edges
 	{
 		iIsCocompact = 0;
 		return 0;
