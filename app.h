@@ -63,6 +63,7 @@ class App
 		bool bCheckFiniteCovolume; ///< If we want to check whether the group has finite covolume or not
 		bool bComputeGrowthSeries; ///< If we want compute the growth series
 		bool bComputeGrowthRate; ///< If we want to compute the growth rate
+		bool bComputeInvariantTraceField; ///< If we want to compute the invariant trace field
 		bool bComputeEuler; ///< If we want to compute the Euler characteristic
 		bool bComputeSignature; ///< If we want to compute the signature
 		bool bDebug; ///< Display additional information

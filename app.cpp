@@ -33,6 +33,7 @@ bCheckArithmeticity(false),
 bComputeEuler(true),
 bComputeGrowthRate(false),
 bComputeGrowthSeries(false),
+bComputeInvariantTraceField(false),
 bComputeSignature(false),
 bDebug(false), 
 bIndex2(false), 
@@ -141,6 +142,12 @@ bool App::bReadMainParameters(int argc, char **argv)
 		{
 			bPrintHelp = true;
 			szPrevType = "help";
+		}
+		else if (szTemp == "-itf" )
+		{
+#ifdef _COMPILE_WITH_PARI_
+			bComputeInvariantTraceField = true;
+#endif
 		}
 		else if (szTemp == "-ne" || szTemp == "-neuler") // don't compute the Euler characteristic
 		{
@@ -478,9 +485,9 @@ void App::run()
 	if (ci.get_iHasDottedLineWithoutWeight() != 0)
 		bComputeSignature = false;
 	
+	#ifdef _COMPILE_WITH_PARI_
 	if (bComputeSignature)
 	{
-		#ifdef _COMPILE_WITH_PARI_
 		try{
 			Signature s;
 			iSignature = s.iComputeSignature(ci.get_strGramMatrix_PARI());
@@ -492,12 +499,10 @@ void App::run()
 			cout << "Error while computing the signature:\n\t" << strE << endl;
 			cout << "---------------------------------------------------------\n" << endl;
 		}
-		#endif
 	}
 	
 	if (bComputeGrowthRate)
 	{
-		#ifdef _COMPILE_WITH_PARI_
 		try{
 			GrowthRate gr;
 			grr = gr.grrComputations(ci.get_iGrowthSeries_denominator());
@@ -508,8 +513,19 @@ void App::run()
 			cout << "Error while computing the growth rate:\n\t" << strE << endl;
 			cout << "---------------------------------------------------------\n" << endl;
 		}
-		#endif
 	}
+	
+	if (bComputeInvariantTraceField)
+	{
+		cout << "\n\n---------------------------------------------------------" << endl;
+		cout << "Invariant trace field\nThis is an experimental feature" << endl;
+		
+		InvariantTraceField itf(ci);
+		itf.compute();
+		
+		cout << "\n\n---------------------------------------------------------" << endl;
+	}
+	#endif // #ifdef _COMPILE_WITH_PARI_
 	
 	timeEnd = chrono::system_clock::now();
 	cout << "\tComputation time: " << chrono::duration <double, milli>(timeEnd-timeStart).count() / 1000 << "s\n" << endl;

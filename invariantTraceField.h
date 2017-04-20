@@ -20,6 +20,12 @@ You should have received a copy of the GNU General Public License
 along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*
+ * THIS IS AN EXPERIMENTAL MODULE!!!
+ * Use at your own risk!!
+ * TODO: remove
+ */
+
 /*!
  * \file invariantTraceField.h
  * \author Rafael Guglielmetti
@@ -38,15 +44,26 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 class InvariantTraceField
 {
 	private:
-		vector<vector<short unsigned int>> iAdjacency; ///< Neighbours of each vertex
+		vector<vector<unsigned int>> iAdjacency; ///< Neighbours of each vertex TODO: séparer pour chaque thread?
 		unsigned int iVerticesCount; ///< Number of vertices of the graph
+		
+		// To find cycles
+		vector<vector<unsigned int>> iPath;
+		vector<vector<vector<bool>>> bEdgesVisited;
+		
+		const unsigned int iOMPMaxThreads;
 		
 	public:
 		InvariantTraceField(const CoxIter& ci);
 		~InvariantTraceField();
 		
+		void compute();
+		
 	private:
 		void initializations(const CoxIter& ci);
+		
+		void findCycles();
+		void findCycles(const unsigned int& iThreadIndex, const unsigned int& iRoot, const unsigned int& iFrom);
 };
 
 #endif
