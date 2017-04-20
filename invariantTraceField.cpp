@@ -31,3 +31,21 @@ InvariantTraceField::~InvariantTraceField()
 {
 	pari_close();
 }
+
+void InvariantTraceField::initializations(const CoxIter& ci)
+{
+	vector<vector<unsigned int>> iCoxeterMatrix(ci.get_iCoxeterMatrix());
+	iVerticesCount = iCoxeterMatrix.size();
+	iAdjacency = vector<vector<short unsigned int>>(iVerticesCount, vector<short unsigned int>());
+	
+	unsigned int j;
+	
+	for (unsigned int i(0); i < iVerticesCount; i++)
+	{
+		for (j = i + 1; j < iVerticesCount; j++)
+		{
+			if (iCoxeterMatrix[i][j] != 2)
+				iAdjacency[i].push_back(j);
+		}
+	}
+}

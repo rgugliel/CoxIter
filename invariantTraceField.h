@@ -44,6 +44,9 @@ class InvariantTraceField
 	public:
 		InvariantTraceField(const CoxIter& ci);
 		~InvariantTraceField();
+		
+	private:
+		void initializations(const CoxIter& ci);
 };
 
 #endif
