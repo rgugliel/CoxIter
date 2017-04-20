@@ -46,7 +46,7 @@ target_link_libraries( coxiter ${GMP_LIBRARYXX} )
 
 find_library( PARI_LIBRARY pari )
 if( PARI_LIBRARY )
-	add_library( coxiter_pari STATIC lib/paripolynomials.cpp growthrate.cpp signature.cpp )
+	add_library( coxiter_pari STATIC lib/paripolynomials.cpp growthrate.cpp signature.cpp invariantTraceField.cpp)
 	target_link_libraries( coxiter_pari ${GMP_LIBRARY} )
 	target_link_libraries( coxiter_pari ${GMP_LIBRARYXX} )
 	target_link_libraries( coxiter coxiter_pari )

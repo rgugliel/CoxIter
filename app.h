@@ -45,6 +45,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #ifdef _COMPILE_WITH_PARI_
 #include "growthrate.h"
 #include "signature.h"
+#include "invariantTraceField.h"
 #endif
 
 using namespace std;
