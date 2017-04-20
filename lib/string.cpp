@@ -40,7 +40,7 @@ vector<string> explode(const string &separator, string source)
 	found = source.find_first_of(separator);
 	while (found != string::npos)
 	{
-		if ( found > 0 )
+		if (found > 0)
 			results.push_back(source.substr(0,found));
 		else
 			results.push_back("");
@@ -50,7 +50,7 @@ vector<string> explode(const string &separator, string source)
 	}
 
 	if (source.length() > 0)
-		results.push_back( source );
+		results.push_back(source);
 
 	return results;
 }
@@ -61,70 +61,70 @@ void explode(const string &separator, string source, vector<string> &results)
 	results.clear();
 	
 	found = source.find_first_of(separator);
-	while( found != string::npos )
+	while (found != string::npos)
 	{
-		if( found > 0 )
-			results.push_back( source.substr( 0,found ) );
+		if (found > 0)
+			results.push_back(source.substr(0,found));
 		else
-			results.push_back( "" );
+			results.push_back("");
 
-		source = source.substr( found + 1 );
-		found = source.find_first_of( separator );
+		source = source.substr(found + 1);
+		found = source.find_first_of(separator);
 	}
 
-	if( source.length() > 0 )
+	if (source.length() > 0)
 		results.push_back(source);
 }
 
-void explode( const string &separator, string source, vector<int> &results )
+void explode(const string &separator, string source, vector<int> &results)
 {
 	size_t found;
 	results.clear();
 	
-	found = source.find_first_of( separator );
-	while( found != string::npos )
+	found = source.find_first_of(separator);
+	while (found != string::npos)
 	{
-		if(found > 0)
-			results.push_back( stoi( source.substr( 0,found ) ) );
+		if (found > 0)
+			results.push_back(stoi(source.substr(0,found)));
 		else
-			results.push_back( 0 );
+			results.push_back(0);
 
-		source = source.substr( found + 1 );
-		found = source.find_first_of( separator );
+		source = source.substr(found + 1);
+		found = source.find_first_of(separator);
 	}
 
-	if( source.length() > 0 )
-		results.push_back( stoi( source) );
+	if (source.length() > 0)
+		results.push_back(stoi(source));
 }
 
-void explode( const string &separator, string source, vector<unsigned int> &results )
+void explode(const string &separator, string source, vector<unsigned int> &results)
 {
 	size_t found;
 	results.clear();
 	
-	found = source.find_first_of( separator );
-	while( found != string::npos )
+	found = source.find_first_of(separator);
+	while (found != string::npos)
 	{
-		if(found > 0)
-			results.push_back( abs( stoi( source.substr( 0,found ) ) ) );
+		if (found > 0)
+			results.push_back(abs(stoi(source.substr(0,found))));
 		else
-			results.push_back( 0 );
+			results.push_back(0);
 
-		source = source.substr( found + 1 );
-		found = source.find_first_of( separator );
+		source = source.substr(found + 1);
+		found = source.find_first_of(separator);
 	}
 
-	if( source.length() > 0 )
-		results.push_back( abs( stoi( source ) ) );
+	if (source.length() > 0)
+		results.push_back(abs(stoi(source)));
 }
 
-string implode( const string& strSeparator, const vector< string >& strVector )
+string implode(const string& strSeparator, const vector< string >& strVector)
 {
 	ostringstream oStr;
 	string strRes;
 	
-	copy( strVector.begin( ), strVector.end( ), ostream_iterator< string >( oStr, strSeparator.c_str( ) ) );
+	copy(strVector.begin(), strVector.end(), ostream_iterator< string >(oStr, strSeparator.c_str()));
 	
-	strRes = oStr.str( );
-	return strRes.substr( 0, strRes.size( ) - strSeparator.size( ) );
+	strRes = oStr.str();
+	return strRes.substr(0, strRes.size() - strSeparator.size());
 }

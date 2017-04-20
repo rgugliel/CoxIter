@@ -38,7 +38,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 using namespace std;
 
 /**
-	* \fn void str_replace( string &str, const string &from, const string &to )
+	* \fn void str_replace(string &str, const string &from, const string &to)
 	* \brief Rechercher remplacer
 	*
 	* \param[out] str Chaîne dans laquelle se fait la recherche/remplacement
@@ -46,10 +46,10 @@ using namespace std;
 	* \param[in] to Ce par quoi on remplace
 	* \return void
 */
-void str_replace( string &str, const string &from, const string &to );
+void str_replace(string &str, const string &from, const string &to);
 
 /**
-	* \fn vector<string> explode( string source, const string &separator );
+	* \fn vector<string> explode(string source, const string &separator);
 	* \brief Équivalent de la fonction explode de PHP
 	*
 	* \param[in] source Chaîne de caractères sur laquelle on travaille
@@ -58,10 +58,10 @@ void str_replace( string &str, const string &from, const string &to );
 
 	Prend une string ainsi qu'un séparateur et découpe la chaîne vers un tableau
 */
-vector<string> explode( const string &separator, string source );
+vector<string> explode(const string &separator, string source);
 
 /**
-	* \fn vector<string> explode( string source, const string &separator, vector<string> &results );
+	* \fn vector<string> explode(string source, const string &separator, vector<string> &results);
 	* \brief Équivalent de la fonction explode en C++
 	*
 	* \param[in] source Chaîne de caractères sur laquelle on travaille
@@ -71,10 +71,10 @@ vector<string> explode( const string &separator, string source );
 
 	Prend une string ainsi qu'un séparateur et découpe la chaîne vers un tableau
 */
-void explode( const string &separator, string source, vector<string> &results );
+void explode(const string &separator, string source, vector<string> &results);
 
 /**
-	* \fn vector<string> explode( string source, const string &separator, vector<int> &results );
+	* \fn vector<string> explode(string source, const string &separator, vector<int> &results);
 	* \brief Équivalent de la fonction explode en C++
 	*
 	* \param[in] source Chaîne de caractères sur laquelle on travaille
@@ -84,10 +84,10 @@ void explode( const string &separator, string source, vector<string> &results );
 
 	Prend une string ainsi qu'un séparateur et découpe la chaîne vers un tableau
 */
-void explode( const string &separator, string source, vector<int> &results );
+void explode(const string &separator, string source, vector<int> &results);
 
 /**
-	* \fn vector<string> explode( string source, const string &separator, vector<unsigned int> &results );
+	* \fn vector<string> explode(string source, const string &separator, vector<unsigned int> &results);
 	* \brief Équivalent de la fonction explode en C++
 	*
 	* \param[in] source Chaîne de caractères sur laquelle on travaille
@@ -97,37 +97,37 @@ void explode( const string &separator, string source, vector<int> &results );
 
 	Prend une string ainsi qu'un séparateur et découpe la chaîne vers un tableau
 */
-void explode( const string &separator, string source, vector<unsigned int> &results );
+void explode(const string &separator, string source, vector<unsigned int> &results);
 
 /*!
  * 	\fn implode
  * 	\brief Implode function (as in the PHP language)
  * 
- * 	\param strSeparator( const string & ) Separator
- * 	\param strVector( const vector< string >& ) Vector to implode
+ * 	\param strSeparator(const string &) Separator
+ * 	\param strVector(const vector< string >&) Vector to implode
  * 	\return Imploded string
  */
-string implode( const string& strSeparator, const vector< string >& strVector );
+string implode(const string& strSeparator, const vector< string >& strVector);
 
 /*!
  * 	\fn implode
  * 	\brief Implode function (as in the PHP language)
  * 
- * 	\param strSeparator( const string & ) Separator
- * 	\param iVector( const vector< int >& ) Vector to implode
+ * 	\param strSeparator(const string &) Separator
+ * 	\param iVector(const vector< int >&) Vector to implode
  * 	\return Imploded string
  */
 template <typename T>
-typename std::enable_if<std::is_arithmetic<T>::value, string>::type implode( const string& strSeparator, const vector< T >& iVector )
+typename std::enable_if<std::is_arithmetic<T>::value, string>::type implode(const string& strSeparator, const vector< T >& iVector)
 {
 	vector< string > strVector;
-	for( typename vector< T >::const_iterator it( iVector.begin( ) ); it != iVector.end( ); ++it )
-		strVector.push_back( to_string( *it ) );
+	for (typename vector< T >::const_iterator it(iVector.begin()); it != iVector.end(); ++it)
+		strVector.push_back(to_string(*it));
 	
-	return implode( strSeparator, strVector );
+	return implode(strSeparator, strVector);
 }
 
-int string_to_int( const string &strNumber );
-double string_to_double( const string &strNumber );
+int string_to_int(const string &strNumber);
+double string_to_double(const string &strNumber);
 
 #endif

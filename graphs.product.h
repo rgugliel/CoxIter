@@ -49,15 +49,15 @@ class GraphsProduct
 		unsigned int iRank; ///< Rank of the product
 		
 	public:
-		GraphsProduct( );
+		GraphsProduct();
 		
 		/*! \fn createFootPrint
 		 * 	\brief Pour un graphe, crée le "footprint", c'est-à-dire la clé utilisée dans la map CoxIter.graphsProductsCount
 		 * 	\return Clé pour la map
 		 */
-		vector< vector< short unsigned int > > createFootPrint( );
+		vector< vector< short unsigned int > > createFootPrint();
 		
-		friend ostream& operator<<( ostream &o, const GraphsProduct &gp );
+		friend ostream& operator<<(ostream &o, const GraphsProduct &gp);
 };
 
 #endif // GRAPHS_PRODUCT_H

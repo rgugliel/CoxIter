@@ -24,7 +24,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 namespace Polynomials
 {
-	vector< vector< mpz_class > > iCyclotomicPolynomials = vector< vector< mpz_class > >( { {},
+	vector< vector< mpz_class > > iCyclotomicPolynomials = vector< vector< mpz_class > >({ {},
 		{-1,1},
 		{1,1},
 		{1,1,1},
@@ -84,5 +84,5 @@ namespace Polynomials
 		{1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,-1,0,1,0,-1,1,0,-1,1,0,-1,1,0,-1,1,0,-1,1,0,-1,1},
 		{1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,1,0,0,0,-1,0,-1,0,-1,0,0,0,1,0,1} } );
+		{1,0,1,0,0,0,-1,0,-1,0,-1,0,0,0,1,0,1} });
 }

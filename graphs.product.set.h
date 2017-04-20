@@ -49,24 +49,24 @@ class GraphsProductSet
 		set< Graph*, GraphPtrComp > graphs; ///< Pointeurs vers les graphes qui constituent le produit
 		
 	public:
-		GraphsProductSet( );
-		GraphsProductSet( const GraphsProduct& gp );
+		GraphsProductSet();
+		GraphsProductSet(const GraphsProduct& gp);
 		
 		/*!	\fn get_iVertices
 		 * 	\brief Get the list of vertices of the product
 		 * 
-		 * 	\return vertices( vector< unsigned int > )
+		 * 	\return vertices(vector< unsigned int >)
 		 */
-		vector< short unsigned int > get_iVertices( ) const;
+		vector< short unsigned int > get_iVertices() const;
 		
 		/*!	\fn b_areVerticesSubsetOf
 		 * 	\brief Test if the vertices appear in another Product
-		 * 	\param gp( const GraphsProductSet& ): The other product
+		 * 	\param gp(const GraphsProductSet&): The other product
 		 * 	\return Bool
 		 */
-		bool b_areVerticesSubsetOf( const GraphsProductSet& gp ) const;
+		bool b_areVerticesSubsetOf(const GraphsProductSet& gp) const;
 		
-	friend ostream& operator<<( ostream &o, const GraphsProductSet& gp );
+	friend ostream& operator<<(ostream &o, const GraphsProductSet& gp);
 };
 
 #endif // GRAPHSPRODUCTSET_H

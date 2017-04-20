@@ -139,7 +139,7 @@ class CoxIter
 		
 		// -----------------------------------------------------------
 		// Graphs products
-		/*! \var graphsProducts( vector< vector< GraphsProductSet > > )
+		/*! \var graphsProducts(vector< vector< GraphsProductSet > >)
 		 * [0] Spherical products of codimension 1
 		 * [1] Spherical products of codimension 0
 		 * [2] Euclidean products of codimension 0
@@ -150,7 +150,7 @@ class CoxIter
 		 */
 		vector< vector< GraphsProductSet > > graphsProducts;
 		
-		/*! \var graphsProducts_bCanBeFiniteCovolume( vector< vector< GraphsProductSet > > )
+		/*! \var graphsProducts_bCanBeFiniteCovolume(vector< vector< GraphsProductSet > >)
 		 * Used in bCanBeFiniteCovolume and bCanBeFiniteCovolume_complete
 		 * [0] Euclidean products of codimension 0
 		 * 
@@ -196,14 +196,14 @@ class CoxIter
 		 */
 		CoxIter();
 		
-		/*! \fn CoxIter( const vector< vector<unsigned int> >& iMatrix, const unsigned int& iDimension )
+		/*! \fn CoxIter(const vector< vector<unsigned int> >& iMatrix, const unsigned int& iDimension)
 		 * 	\brief Constructor
-		 * 	\param iMatrix( const vector< vector<unsigned int> >& ) Coxeter matrix
-		 * 	\param iDimension( const unsigned int & ) Dimension
+		 * 	\param iMatrix(const vector< vector<unsigned int> >&) Coxeter matrix
+		 * 	\param iDimension(const unsigned int &) Dimension
 		 * 
 		 * 	CoxIter does not verification on iMatrix. Especially, it is assumed that iMatrix is symmetric
 		*/
-		CoxIter( const vector< vector<unsigned int> >& iMatrix, const unsigned int& iDimension );
+		CoxIter(const vector< vector<unsigned int> >& iMatrix, const unsigned int& iDimension);
 		
 		~CoxIter();
 		
@@ -265,38 +265,38 @@ class CoxIter
 		/*! \fn bReadGraphFromFile
 		 * 	\brief Read the graph from a file
 		 * 
-		 * 	\param strInputFilename( const string& ) Path to the file
+		 * 	\param strInputFilename(const string&) Path to the file
 		 * 	\return True if success
 		 */
 		#ifndef _COMPILE_WITHOUT_REGEXP_
-		bool bReadGraphFromFile( const string& strInputFilename );
+		bool bReadGraphFromFile(const string& strInputFilename);
 		#endif
 		
 		/*!	\fn bWriteGraphToDraw
 		 * 	\brief Write the graph in a file for GraphViz
 		 * 
 		 * 	The graph is written in szOutputGraphFilename + ".graphviz"
-		 * 	\param strOutFilenameBasis( const string& ) Filename
+		 * 	\param strOutFilenameBasis(const string&) Filename
 		 *	\return True if OK, false otherwise
 		 */
-		bool bWriteGraphToDraw( const string& strOutFilenameBasis );
+		bool bWriteGraphToDraw(const string& strOutFilenameBasis);
 		
 		/*! 	\fn bWriteGraph
 		 *	\brief Write the graph in a file (so that it can be read by CoxIter)
 		 * 
-		 *	\param strFilename( const string & )
+		 *	\param strFilename(const string &)
 		 * 	\return True if success, false otherwise
 		 */
-		bool bWriteGraph( const string& strFilename );
+		bool bWriteGraph(const string& strFilename);
 		
 		/*!	\fn parseGraph
 		 * 	\brief Read and parse graph from stream
 		 * 
-		 * 	\param streamIn( const ifstream& ) Stream to the content (file or std::cin)
+		 * 	\param streamIn(const ifstream&) Stream to the content (file or std::cin)
 		 * 	\return True if success
 		 */
 		#ifndef _COMPILE_WITHOUT_REGEXP_
-		bool parseGraph( istream& streamIn );
+		bool parseGraph(istream& streamIn);
 		#endif
 		
 		/*!
@@ -312,10 +312,10 @@ class CoxIter
 		 * 	\brief Do some computations related to the infinite sequence
 		 * 	Remark: It is suppose that both t0, s0 are admissible vertices whose corresponding hyperplanes are (ultra)parallel
 		 * 
-		 * \param t0( const string& ) t0 Reflecting hyperplane
-		 * \param t0( const string& ) s0 Other hyperplane
+		 * \param t0(const string&) t0 Reflecting hyperplane
+		 * \param t0(const string&) s0 Other hyperplane
 		 */
-		void IS_computations( const string& t0, const string& s0 );
+		void IS_computations(const string& t0, const string& s0);
 
 		/*!	\fn bEulerCharacteristicFVector
 		 * 	\brief Conmpute the euler characteristic and f-vector
@@ -373,30 +373,30 @@ class CoxIter
 		/*! \fn printEuclideanGraphsProducts
 		 * 	\brief Display the euclidean graph products found
 		 * 
-		 * 	\param graphsProductsCount( vector< map<vector< vector<short unsigned int> >, unsigned int> >* ) Pointer to the vector contaitning the results
+		 * 	\param graphsProductsCount(vector< map<vector< vector<short unsigned int> >, unsigned int> >*) Pointer to the vector contaitning the results
 		 */
-		void printEuclideanGraphsProducts( vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount );
+		void printEuclideanGraphsProducts(vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount);
 		
 		/*! 	\fn bIsVertexValid
 		 * 	\brief Test if a vertex exists in the graph
-		 * 	\param strVertexLabel( const string& ) Label of the vertex
+		 * 	\param strVertexLabel(const string&) Label of the vertex
 		 * 	\return True if the vertex exists, false otherwise
 		 */
-		bool bIsVertexValid( const string& strVertexLabel ) const;
+		bool bIsVertexValid(const string& strVertexLabel) const;
 		
 		/*! 	\fn get_iVertexIndex
 		 * 	\brief Get the index of a vertex
-		 * 	\param strVertexLabel( const string& ) Label of the vertex
+		 * 	\param strVertexLabel(const string&) Label of the vertex
 		 * 	\return Index of the vertex (throw an exception if the vertex does not exist)
 		 */
-		unsigned int get_iVertexIndex( const string& strVertexLabel ) const;
+		unsigned int get_iVertexIndex(const string& strVertexLabel) const;
 		
 		/*! 	\fn get_strVertexLabel
 		 * 	\brief Get the label of a vertex
-		 * 	\param iVertex( const unsigned int& ) Index of the vertex
+		 * 	\param iVertex(const unsigned int&) Index of the vertex
 		 * 	\return Label of the vertex (throw an exception if the vertex does not exist)
 		 */
-		string get_strVertexLabel( const unsigned int& iVertex ) const;
+		string get_strVertexLabel(const unsigned int& iVertex) const;
 		
 		/*! \fn get_strError
 		 * \brief Retourne le code d'erreur
@@ -523,7 +523,7 @@ class CoxIter
 		 * 	\brief Return the one entry of the Coxeter matrix
 		 * 	\return Entry
 		 */
-		unsigned int get_iCoxeterMatrixEntry( const unsigned int& i, const unsigned int& j ) const;
+		unsigned int get_iCoxeterMatrixEntry(const unsigned int& i, const unsigned int& j) const;
 		
 		/*!
 		 * 	\fn get_iCoxeterMatrix
@@ -618,48 +618,48 @@ class CoxIter
 		 * 	
 		 * 	This is used by the Arithmeticity class
 		 */
-		void set_iIsArithmetic( const unsigned int &iArithmetic );
+		void set_iIsArithmetic(const unsigned int &iArithmetic);
 		
-		void set_bCheckCocompactness( const bool& bValue );
-		void set_bCheckCofiniteness( const bool& bValue );
-		void set_bDebug( const bool& bValue );
-		void set_bUseOpenMP( const bool& bValue );
-		void set_strOutputFilename( const string& strValue );
-		void set_sdtoutToFile( const string& strFilename );
-		void set_strVerticesToRemove( const vector< string >& strVerticesRemove_ );
-		void set_strVerticesToConsider( const vector< string >& strVerticesToConsider );
+		void set_bCheckCocompactness(const bool& bValue);
+		void set_bCheckCofiniteness(const bool& bValue);
+		void set_bDebug(const bool& bValue);
+		void set_bUseOpenMP(const bool& bValue);
+		void set_strOutputFilename(const string& strValue);
+		void set_sdtoutToFile(const string& strFilename);
+		void set_strVerticesToRemove(const vector< string >& strVerticesRemove_);
+		void set_strVerticesToConsider(const vector< string >& strVerticesToConsider);
 		
 		/*!
 		 * 	\fn set_bWriteInfo
 		 * 	\brief Set bWriteInfo
-		 * 	\param bNewValue( const bool& ) The new value
+		 * 	\param bNewValue(const bool&) The new value
 		 * 	\return void
 		 */
-		void set_bWriteInfo( const bool& bNewValue );
+		void set_bWriteInfo(const bool& bNewValue);
 		
 		/*!
 		 * 	\fn set_iDimension
 		 * 	\brief Update the member iDimension
 		 */
-		void set_iDimension( const unsigned int& iDimension_ ); 
+		void set_iDimension(const unsigned int& iDimension_); 
 		
 		GraphsList* get_gl_graphsList_spherical() const;
 		
 		GraphsList* get_gl_graphsList_euclidean() const;
 		
-		bool get_b_hasSphericalGraphsOfRank( const unsigned int& iRank ) const;
+		bool get_b_hasSphericalGraphsOfRank(const unsigned int& iRank) const;
 		
-		bool get_b_hasEuclideanGraphsOfRank( const unsigned int& iRank ) const;
+		bool get_b_hasEuclideanGraphsOfRank(const unsigned int& iRank) const;
 		
 		/*!
 		 * 	\fn get_iGrowthSeries
 		 * 	\brief Return the growth series of the group
 		 * 	
-		 * 	\param iCyclotomicNumerator( vector<unsigned int>& ) Numerator (cyclotomic factors)
-		 * 	\param iPolynomialDenominator( vector< mpz_class >& ) Denominator
-		 * 	\param bReduced( bool& ) True if the fraction is reduced
+		 * 	\param iCyclotomicNumerator(vector<unsigned int>&) Numerator (cyclotomic factors)
+		 * 	\param iPolynomialDenominator(vector< mpz_class >&) Denominator
+		 * 	\param bReduced(bool&) True if the fraction is reduced
 		 */
-		void get_iGrowthSeries( vector<unsigned int>& iCyclotomicNumerator, vector< mpz_class >& iPolynomialDenominator, bool& bReduced );
+		void get_iGrowthSeries(vector<unsigned int>& iCyclotomicNumerator, vector< mpz_class >& iPolynomialDenominator, bool& bReduced);
 		
 		/*!
 		 * 	\fn get_bGrowthSeriesReduced
@@ -684,25 +684,25 @@ class CoxIter
 		/*!
 		 * 	\fn set_iCoxeterMatrix
 		 * 	\brief Set the Coxeter matrix
-		 * 	\param iMat( const vector< vector<short unsigned int> >& ) The matrix
+		 * 	\param iMat(const vector< vector<short unsigned int> >&) The matrix
 		 */
-		void set_iCoxeterMatrix( const vector< vector<unsigned int> >& iMat );
+		void set_iCoxeterMatrix(const vector< vector<unsigned int> >& iMat);
 		
-		void set_strOuputMathematicalFormat( const string& strO );
+		void set_strOuputMathematicalFormat(const string& strO);
 		
 		/*!
 		 * 	\fn map_vertices_labels_removeReference
 		 * 	\brief Remove the references to a vertex (for the label)
-		 * 	\param iIndex( const unsigned int& ) iIndex of the vertex
+		 * 	\param iIndex(const unsigned int&) iIndex of the vertex
 		 */
-		void map_vertices_labels_removeReference( const unsigned int& iIndex );
+		void map_vertices_labels_removeReference(const unsigned int& iIndex);
 		
 		/*!
 		 * 	\fn map_vertices_labels_addReference
 		 * 	\brief Add a references for a new vertex
-		 * 	\param strLabel( const string& ) Label of the vertec
+		 * 	\param strLabel(const string&) Label of the vertec
 		 */
-		void map_vertices_labels_addReference( const string& strLabel );
+		void map_vertices_labels_addReference(const string& strLabel);
 		
 		/*!
 		 * 	\fn map_vertices_labels_create
@@ -717,10 +717,10 @@ class CoxIter
 		void map_vertices_labels_reinitialize();
                 
 	private:
-		CoxIter( const CoxIter& ); ///< We do not want to do this
+		CoxIter(const CoxIter&); ///< We do not want to do this
 		
 		/*! 	\fn initializations
-		 * 	\brief Une fois le nombre de sommets du graphe connu (via inputRead() ), fait divers initialisations de variables
+		 * 	\brief Une fois le nombre de sommets du graphe connu (via inputRead()), fait divers initialisations de variables
 		 */
 		void initializations();
 		
@@ -732,7 +732,7 @@ class CoxIter
 		 * \param iRoot Starting point
 		 * \param iFrom Previous vertex (or iRoot if first call)
 		 */
-		void DFS( unsigned int iRoot, unsigned int iFrom );
+		void DFS(unsigned int iRoot, unsigned int iFrom);
 		
 		/*! 	\fn printPath
 		 * 	\brief Print the iPath vector
@@ -747,58 +747,58 @@ class CoxIter
 		void addGraphsFromPath();
 		
 		/*!
-		 * \fn AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable )
+		 * \fn AnToEn_AnToTEn(const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable)
 		 * \brief Essaie de construire des En depuis un An
 		 * 
-		 * \param iPathTemp( vector<short unsigned int>& ) Chemin actuel composant le An
-		 * \param bVerticesLinkable( const vector< bool >& ) Ce qui est liable ou non au graphe
+		 * \param iPathTemp(vector<short unsigned int>&) Chemin actuel composant le An
+		 * \param bVerticesLinkable(const vector< bool >&) Ce qui est liable ou non au graphe
 		 */
-		void AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable );
+		void AnToEn_AnToTEn(const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable);
 		
 		/*!
-		 * \fn AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart )
+		 * \fn AnToEn_AnToTEn(const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart)
 		 * \brief Try to foind an En from an An
 		 * 
-		 * \param iPathTemp ( const vector<unsigned int>& ) Vertices of the An
-		 * \param bVerticesLinkable( const vector<bool> & ) Linkable vertices 	
-		 * \param bSpherical( const bool& ) True if spherical, false if euclidean
-		 * \param iStart( const unsigned int& ) Starting point
+		 * \param iPathTemp (const vector<unsigned int>&) Vertices of the An
+		 * \param bVerticesLinkable(const vector<bool> &) Linkable vertices 	
+		 * \param bSpherical(const bool&) True if spherical, false if euclidean
+		 * \param iStart(const unsigned int&) Starting point
 		 */
-		void AnToEn_AnToTEn( const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart );
+		void AnToEn_AnToTEn(const vector<short unsigned int>& iPathTemp, const vector< bool >& bVerticesLinkable, const bool& bSpherical, const short unsigned int& iStart);
 		
 		/*!
 		 * \fn B3ToF4_B4ToTF4
 		 * \brief Essaie de construire un F4 depuis un B3
 		 * 
-		 * \param bVerticesBeginLinkable( const vector<bool> & ) What's linkable to the B3
+		 * \param bVerticesBeginLinkable(const vector<bool> &) What's linkable to the B3
 		 * \param iPathTemp (vector<unsigned int>) Vertices of the B3
 		 * \param iVEnd Index of the vertex connected by a 4
 		 */
-		void B3ToF4_B4ToTF4( const vector<bool> &bVerticesBeginLinkable, vector<short unsigned int> iPathTemp, const short unsigned int &iVEnd );
+		void B3ToF4_B4ToTF4(const vector<bool> &bVerticesBeginLinkable, vector<short unsigned int> iPathTemp, const short unsigned int &iVEnd);
 		
-		/*!	\fn computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+		/*!	\fn computeGraphsProducts(GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable)
 		 * 	\brief Try to find products of connected graphs
 		 * 
-		 * 	\param grIt( GraphsListIterator ): Iterator on the list
-		 * 	\param graphsProductsCount( vector< map<vector< vector<short unsigned int> >, unsigned int> >* ) Point to the list of graphs
-		 * 	\param bSpherical( const bool& ): True if spherical, false if euclidean
-		 * 	\param gp( GraphsProduct& ) To store the product (for the cocompacity and finite covolume tests)
-		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
+		 * 	\param grIt(GraphsListIterator): Iterator on the list
+		 * 	\param graphsProductsCount(vector< map<vector< vector<short unsigned int> >, unsigned int> >*) Point to the list of graphs
+		 * 	\param bSpherical(const bool&): True if spherical, false if euclidean
+		 * 	\param gp(GraphsProduct&) To store the product (for the cocompacity and finite covolume tests)
+		 * 	\param bGPVerticesNonLinkable(vector< bool >&) Vertices which cannot be linked to the current product
 		 */
-		void computeGraphsProducts( GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		void computeGraphsProducts(GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable);
 		
-		/*!	\fn computeGraphsProducts_IS( GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable )
+		/*!	\fn computeGraphsProducts_IS(GraphsListIterator grIt, vector< map<vector< vector<short unsigned int> >, unsigned int> >* graphsProductsCount, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable)
 		 * 	\brief Compute the FVector for the infinite sequence
 		 * 
-		 * 	\param grIt( GraphsListIterator ): Iterator on the list
-		 * 	\param bSpherical( const bool& ): True if spherical, false if euclidean
-		 * 	\param gp( GraphsProduct& ) To store the product (for the cocompacity and finite covolume tests)
-		 * 	\param bGPVerticesNonLinkable( vector< bool >& ) Vertices which cannot be linked to the current product
+		 * 	\param grIt(GraphsListIterator): Iterator on the list
+		 * 	\param bSpherical(const bool&): True if spherical, false if euclidean
+		 * 	\param gp(GraphsProduct&) To store the product (for the cocompacity and finite covolume tests)
+		 * 	\param bGPVerticesNonLinkable(vector< bool >&) Vertices which cannot be linked to the current product
 		 */
-		void computeGraphsProducts_IS( GraphsListIterator grIt, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		void computeGraphsProducts_IS(GraphsListIterator grIt, const bool& bSpherical, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable);
 		
-		void bCanBeFiniteCovolume_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
-		void bCanBeFiniteCovolume_complete_computeGraphsProducts( GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable );
+		void bCanBeFiniteCovolume_computeGraphsProducts(GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable);
+		void bCanBeFiniteCovolume_complete_computeGraphsProducts(GraphsListIterator grIt, GraphsProduct& gp, vector< bool >& bGPVerticesNonLinkable);
 		
 		/*!	\fn i_orderFiniteSubgraph
 		 * 	\brief Order of a connected spherical graph
@@ -808,41 +808,41 @@ class CoxIter
 		 * 
 		 * 	\return Ordre (unsigned long int)
 		 */
-		mpz_class i_orderFiniteSubgraph( const unsigned int &iType, const unsigned int &iDataSupp );
+		mpz_class i_orderFiniteSubgraph(const unsigned int &iType, const unsigned int &iDataSupp);
 		
 		/*!	\fn b_isGraph_cocompact_finiteVolume_parallel
 		 * 	\brief Check whether the graph is cocompact or not or has finite covolume or not
 		 * 	Called by: iIsGraphCocompact and iIsFiniteCovolume
-		 * 	\param iIndex( unsigned int ): 1 if test for compacity, 2 if test for the finite covolume
+		 * 	\param iIndex(unsigned int): 1 if test for compacity, 2 if test for the finite covolume
 		 * 	\return True or false
 		 */
-		bool b_isGraph_cocompact_finiteVolume_parallel( unsigned int iIndex );
+		bool b_isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex);
 		
 		/*!	\fn b_isGraph_cocompact_finiteVolume_sequential
 		 * 	\brief Check whether the graph is cocompact or not or has finite covolume or not
 		 * 	Called by: iIsGraphCocompact and iIsFiniteCovolume
-		 * 	\param iIndex( unsigned int ): 1 if test for compacity, 2 if test for the finite covolume
+		 * 	\param iIndex(unsigned int): 1 if test for compacity, 2 if test for the finite covolume
 		 * 	\return True or false
 		 */
-		bool b_isGraph_cocompact_finiteVolume_sequential( unsigned int iIndex );
+		bool b_isGraph_cocompact_finiteVolume_sequential(unsigned int iIndex);
 		
-		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent ) const
+		/*!	\fn growthSeries_symbolExponentFromProduct(const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent) const
 		 * 	From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.
 		 * 	
-		 * 	\param iProduct( const vector< vector<short unsigned int> >& ) The product of graphs
-		 * 	\param iSymbol( vector<short unsigned int>& ) [i] = j means [i, ..., i] j times (parameter by reference)
-		 * 	\param iExponent( unsigned int& ) The exponent
+		 * 	\param iProduct(const vector< vector<short unsigned int> >&) The product of graphs
+		 * 	\param iSymbol(vector<short unsigned int>&) [i] = j means [i, ..., i] j times (parameter by reference)
+		 * 	\param iExponent(unsigned int&) The exponent
 		 */
-		void growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent ) const;
+		void growthSeries_symbolExponentFromProduct(const vector< vector<short unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int& iExponent) const;
 		
-		/*!	\fn growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent ) const
+		/*!	\fn growthSeries_symbolExponentFromProduct(const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent) const
 		 * 	From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.
 		 * 	
-		 * 	\param iProduct( const vector< vector<unsigned int> >& ) The product of graphs
-		 * 	\param strSymbol( string& )
-		 * 	\param iExponent (u nsigned int& ) The exponent
+		 * 	\param iProduct(const vector< vector<unsigned int> >&) The product of graphs
+		 * 	\param strSymbol(string&)
+		 * 	\param iExponent (u nsigned int&) The exponent
 		 */
-		void growthSeries_symbolExponentFromProduct( const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent ) const;
+		void growthSeries_symbolExponentFromProduct(const vector< vector<short unsigned int> >& iProduct, string& strSymbol, unsigned int& iExponent) const;
 		
 		/*!	\fn growthSeries_parallel
 		 * 	Compute the growth series
@@ -859,34 +859,34 @@ class CoxIter
 		/*!	\fn growthSeries_mergeTerms
 		 * 	Given the parameters, compute iPolynomial/iSymbol += iTemp_polynomial/iTemp_symbol
 		 * 
-		 * 	\param iPolynomial( vector< mpz_class >& ) First polynomial (by reference)
-		 * 	\param iSymbol( vector<short unsigned int>& ) First symbol (by reference)
-		 * 	\param iTemp_polynomial( vector< mpz_class > ) Second polynomial
-		 * 	\param iTemp_symbol( const vector<short unsigned int>& ) Second symbol
-		 * 	\param biTemp( mpz_class ) Eventually, some coefficient for the second polynomial
+		 * 	\param iPolynomial(vector< mpz_class >&) First polynomial (by reference)
+		 * 	\param iSymbol(vector<short unsigned int>&) First symbol (by reference)
+		 * 	\param iTemp_polynomial(vector< mpz_class >) Second polynomial
+		 * 	\param iTemp_symbol(const vector<short unsigned int>&) Second symbol
+		 * 	\param biTemp(mpz_class) Eventually, some coefficient for the second polynomial
 		 * 
 		 * 	\return Nothing but the first two parameters are modified
 		 */
-		void growthSeries_mergeTerms( vector< mpz_class >& iPolynomial, vector<unsigned int>& iSymbol, vector< mpz_class > iTemp_polynomial, const vector<unsigned int>& iTemp_symbol, mpz_class biTemp = 1 );
+		void growthSeries_mergeTerms(vector< mpz_class >& iPolynomial, vector<unsigned int>& iSymbol, vector< mpz_class > iTemp_polynomial, const vector<unsigned int>& iTemp_symbol, mpz_class biTemp = 1);
 		
 	public:
-		friend ostream& operator<<( ostream& , CoxIter const & );
+		friend ostream& operator<<(ostream& , CoxIter const &);
 };
 
-inline unsigned int iLinearizationMatrix_index( const unsigned int& i, const unsigned int& j, const unsigned int& n )
+inline unsigned int iLinearizationMatrix_index(const unsigned int& i, const unsigned int& j, const unsigned int& n)
 {
-	return ( i*(2*n - 1 - i)/2 + j);
+	return (i*(2*n - 1 - i)/2 + j);
 }
 
-inline unsigned int iLinearizationMatrix_row( const unsigned int& k, const unsigned int& n )
+inline unsigned int iLinearizationMatrix_row(const unsigned int& k, const unsigned int& n)
 {
-	return ( ( 2*n+1 - iSQRTsup((2*n+1)*(2*n+1) - 8*k) )/2 );
+	return ((2*n+1 - iSQRTsup((2*n+1)*(2*n+1) - 8*k))/2);
 }
 
-inline unsigned int iLinearizationMatrix_col( const unsigned int& k, const unsigned int& n )
+inline unsigned int iLinearizationMatrix_col(const unsigned int& k, const unsigned int& n)
 {
-	unsigned int iRow( iLinearizationMatrix_row( k, n ) );
-	return ( k - ( iRow * ( 2*n-1-iRow ))/2 );
+	unsigned int iRow(iLinearizationMatrix_row(k, n));
+	return (k - (iRow * (2*n-1-iRow))/2);
 }
 
 #endif

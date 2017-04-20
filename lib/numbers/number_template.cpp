@@ -38,46 +38,46 @@ bool Number_template::operator!=(Number_template const &) const
 	return false;
 }
 
-Number_template Number_template::operator+( Number_template const &n ) const
+Number_template Number_template::operator+(Number_template const &n) const
 {
 	return *this;
 }
 
-Number_template& Number_template::operator+=( Number_template const &n )
+Number_template& Number_template::operator+=(Number_template const &n)
 {
 	return *this;
 }
 
-Number_template Number_template::operator-( Number_template const &n ) const
+Number_template Number_template::operator-(Number_template const &n) const
 {
 	return *this;
 }
 
-Number_template& Number_template::operator-=( Number_template const &n )
+Number_template& Number_template::operator-=(Number_template const &n)
 {
 	return *this;
 }
 
-Number_template Number_template::operator*( Number_template const &n ) const
+Number_template Number_template::operator*(Number_template const &n) const
 {
 	return *this;
 }
 
-Number_template& Number_template::operator*=( Number_template const &n )
+Number_template& Number_template::operator*=(Number_template const &n)
 {
 	return *this;
 }
 
-Number_template Number_template::operator/( Number_template const &n ) const
+Number_template Number_template::operator/(Number_template const &n) const
 {
 	return *this;
 }
 
-Number_template&Number_template:: operator/=( Number_template const &n )
+Number_template&Number_template:: operator/=(Number_template const &n)
 {
 	return *this;
 }
 
-void Number_template::print( ostream & ) const
+void Number_template::print(ostream &) const
 {
 }

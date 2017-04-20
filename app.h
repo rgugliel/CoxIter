@@ -85,14 +85,14 @@ class App
 		string strOutFilenameBasis; ///< Path to the file for the output (+ .output, .graphviz, .coxiter)
 		
 	public:
-		App( );
+		App();
 		
-		bool bReadMainParameters( int argc, char **argv );
-		void run( );
-		void printHelp( ) const;
+		bool bReadMainParameters(int argc, char **argv);
+		void run();
+		void printHelp() const;
 		
 	private:
-		void extractIndex2Subgroup( CoxIter& ci );
+		void extractIndex2Subgroup(CoxIter& ci);
 };
 
 #endif // APP_H

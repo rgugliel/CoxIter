@@ -70,26 +70,26 @@ class GrowthRate
 		GrowthRate();
 		~GrowthRate();
 		
-		GrowthRate_Result grrComputations( vector< mpz_class > iPolynomial, const bool& bOnlyGrowthRate = false );
+		GrowthRate_Result grrComputations(vector< mpz_class > iPolynomial, const bool& bOnlyGrowthRate = false);
 		
 	private:
-		/*!	\fn irreducibleFactors( const vector< mpz_class >& iPolynomial )
+		/*!	\fn irreducibleFactors(const vector< mpz_class >& iPolynomial)
 		 * 	Factor the polynomial iPolynomial and store the factors into t_POLfactors
-		 * 	\param iPolynomial( vector< mpz_class > ) The polynomial (coefficients in GMPlib)
+		 * 	\param iPolynomial(vector< mpz_class >) The polynomial (coefficients in GMPlib)
 		 */
-		void irreducibleFactors( const vector< mpz_class >& iPolynomial );
+		void irreducibleFactors(const vector< mpz_class >& iPolynomial);
 		
 		/*!	\fn minimalRoot()
 		 * 	Find which fact has the smallest (positive, <1) real root and store the index into iIndexMinimalRoot
 		 */
 		void minimalRoot();
 
-		/*!	\fn iNumberRootsUnitCircle( GEN gPol );
+		/*!	\fn iNumberRootsUnitCircle(GEN gPol);
 		 * 	For a palindromic polynomial, try to compute the number of zeros on the unit circle
 		 * 	\param gPol (GEN, PARI polynomial)
 		 * 	\return Number of roots on the unit circle of -1 if we cannot decide
 		 */
-		long int iNumberRootsUnitCircle( GEN gPol );
+		long int iNumberRootsUnitCircle(GEN gPol);
 };
 
 #endif // GROWTHRATE_H

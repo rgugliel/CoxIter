@@ -22,68 +22,68 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graphs.list.iterator.h"
 
-GraphsListIterator::GraphsListIterator( GraphsList *gl )
-: bLimitVerticesMax( false ), 
-  graphsList( gl ),
-  iVerticesCountMax( 0 ) // The value 0 has no effect because of bLimitVerticesMax( false )
+GraphsListIterator::GraphsListIterator(GraphsList *gl)
+: bLimitVerticesMax(false), 
+  graphsList(gl),
+  iVerticesCountMax(0) // The value 0 has no effect because of bLimitVerticesMax(false)
 {
-	ptr = graphsList->begin( );
-	if( ptr )
+	ptr = graphsList->begin();
+	if (ptr)
 	{
-		iVCount = ptr->iVertices.size( );
+		iVCount = ptr->iVertices.size();
 		iGraphIndex = 0;
 	}
 }
 
-GraphsListIterator::GraphsListIterator( const GraphsListIterator& gl )
-: iVCount( gl.iVCount ), iGraphIndex( gl.iGraphIndex ), graphsList( gl.graphsList ), iVerticesCountMax( gl.iVerticesCountMax ), bLimitVerticesMax( gl.bLimitVerticesMax ), ptr( gl.ptr )
+GraphsListIterator::GraphsListIterator(const GraphsListIterator& gl)
+: iVCount(gl.iVCount), iGraphIndex(gl.iGraphIndex), graphsList(gl.graphsList), iVerticesCountMax(gl.iVerticesCountMax), bLimitVerticesMax(gl.bLimitVerticesMax), ptr(gl.ptr)
 {
 }
 
-GraphsListIterator::GraphsListIterator( GraphsList *gl, const unsigned int& iVerticesCountMin, const unsigned int& iVerticesCountMax )
-: iVerticesCountMax( iVerticesCountMax ), bLimitVerticesMax( false )
+GraphsListIterator::GraphsListIterator(GraphsList *gl, const unsigned int& iVerticesCountMin, const unsigned int& iVerticesCountMax)
+: iVerticesCountMax(iVerticesCountMax), bLimitVerticesMax(false)
 {
-	if( iVerticesCountMax && iVerticesCountMin <= iVerticesCountMax )
+	if (iVerticesCountMax && iVerticesCountMin <= iVerticesCountMax)
 		bLimitVerticesMax = true;
 	
 	graphsList = gl;
 	
-	if( graphsList->graphs.size( ) < iVerticesCountMin )
-		throw( "Graphs of this size don't exist" );
+	if (graphsList->graphs.size() < iVerticesCountMin)
+		throw("Graphs of this size don't exist");
 	
 	// ---------------------------------------------------
 	// We look fot the first graph in the list
-	unsigned int i( iVerticesCountMin );
-	while( i < graphsList->graphs.size( ) && !graphsList->graphs[i].size( ) )
+	unsigned int i(iVerticesCountMin);
+	while (i < graphsList->graphs.size() && !graphsList->graphs[i].size())
 		i++;
 	
-	if( i < graphsList->graphs.size( ) )
+	if (i < graphsList->graphs.size())
 	{
-		ptr = graphsList->graphs[i].begin( );
-		iVCount = ptr->iVertices.size( );
+		ptr = graphsList->graphs[i].begin();
+		iVCount = ptr->iVertices.size();
 		iGraphIndex = 0;
 	}
 	else
 		ptr = 0;
 }
 
-GraphsListIterator::GraphsListIterator( )
+GraphsListIterator::GraphsListIterator()
 {
 }
 
-Graph* GraphsListIterator::next( )
+Graph* GraphsListIterator::next()
 {
-	ptr = graphsList->next( iVCount, iGraphIndex );
+	ptr = graphsList->next(iVCount, iGraphIndex);
 
-	if( bLimitVerticesMax && iVCount > iVerticesCountMax )
+	if (bLimitVerticesMax && iVCount > iVerticesCountMax)
 		return 0;
 	
 	return ptr;
 }
 
-GraphsListIterator& GraphsListIterator::operator++( )
+GraphsListIterator& GraphsListIterator::operator++()
 {
-	if( !next( ) )
+	if (!next())
 		ptr = 0;
 	
 	return *this;

@@ -25,72 +25,72 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 namespace MathTools
 {
 
-bool bIsPrime( unsigned int iN )
+bool bIsPrime(unsigned int iN)
 {
-	if( iN == 2 || iN == 3 )
+	if (iN == 2 || iN == 3)
 		return true;
 	
-	if( iN <= 1 || !( iN % 2) )
+	if (iN <= 1 || !(iN % 2))
 		return false;
 	
-	unsigned int iMax( iSQRTsup( iN ) );
-	for( unsigned int i( 3 ); i <= iMax; i += 2 )
+	unsigned int iMax(iSQRTsup(iN));
+	for (unsigned int i(3); i <= iMax; i += 2)
 	{
-		if( !( iN % i ) )
+		if (!(iN % i))
 			return false;
 	}
 	
 	return true;
 }
 
-int iJacobiSymbol( int iA_, unsigned iB )
+int iJacobiSymbol(int iA_, unsigned iB)
 {
-	int iJacobi( 1 );
+	int iJacobi(1);
 	unsigned int iA, iTemp;
 	
-	if( !iB )
-		throw( string( "Second argument of Jacobi symbol has to be positive." ) );
+	if (!iB)
+		throw(string("Second argument of Jacobi symbol has to be positive."));
 	
-	if( !( iB%2 ) )
-		throw( string( "Second argument of Jacobi symbol has to be odd." ) );
+	if (!(iB%2))
+		throw(string("Second argument of Jacobi symbol has to be odd."));
 	
-	if( iA_ == -1 )
-		return ( iB%4 == 1 ? 1 : -1 );
+	if (iA_ == -1)
+		return (iB%4 == 1 ? 1 : -1);
 	
-	if( iA_ < 0 )
+	if (iA_ < 0)
 	{
 		iA = -iA_;
-		if( iB % 4 == 3 )
+		if (iB % 4 == 3)
 			iJacobi = -1;
 	}
 	else
 		iA = iA_;
 	
-	if( !( iA % iB ) || ugcd( iA, iB ) != 1 )
+	if (!(iA % iB) || ugcd(iA, iB) != 1)
 		return 0;
 	
-	while( true )
+	while (true)
 	{
-		// ( a / n ) = ( a' / n ) if a=a' mod n
-		if( iA > iB )
+		// (a / n) = (a' / n) if a=a' mod n
+		if (iA > iB)
 			iA %= iB;
 		
-		while( !( iA % 4 ) ) // squares are not important
+		while (!(iA % 4)) // squares are not important
 			iA /= 4;
 		
 		// special rules
-		if( iA == 1 )
+		if (iA == 1)
 			return iJacobi;
-		else if( iA == 2 ) 
-			return ( ( iB%8 == 1 || iB%8 == 7 ) ? iJacobi : -iJacobi );
+		else if (iA == 2) 
+			return ((iB%8 == 1 || iB%8 == 7) ? iJacobi : -iJacobi);
 		
-		if( !( iA % 2 ) )
+		if (!(iA % 2))
 		{
-			if(  iB%8 == 3 || iB%8 == 5 )
+			if ( iB%8 == 3 || iB%8 == 5)
 				iJacobi = -iJacobi;
 			
 			iA /= 2;
-			if( iA == 1 )
+			if (iA == 1)
 				return iJacobi;
 		}
 		
@@ -98,46 +98,46 @@ int iJacobiSymbol( int iA_, unsigned iB )
 		iA = iB;
 		iB = iTemp;
 		
-		if( iA%4 == 3 && iB%4 == 3 )
+		if (iA%4 == 3 && iB%4 == 3)
 			iJacobi = -iJacobi;
 	}
 	
 	return iJacobi;
 }
 
-vector< unsigned int > iPrimeFactorsWithoutSquares( unsigned int iN )
+vector< unsigned int > iPrimeFactorsWithoutSquares(unsigned int iN)
 {
 	// TODO: optimiser
 	
-	unsigned int iDivisor( 3 ), iDivisorSquared;
+	unsigned int iDivisor(3), iDivisorSquared;
 	vector< unsigned int > iPrimes;
 	
-	if( iN == 1 )
-		return vector< unsigned int >( 0 );
+	if (iN == 1)
+		return vector< unsigned int >(0);
 	
-	while( !( iN % 4 ) )
+	while (!(iN % 4))
 		iN /= 4;
 	
-	if( !( iN % 2 ) )
+	if (!(iN % 2))
 	{
-		iPrimes.push_back( 2 );
+		iPrimes.push_back(2);
 		do{ // TODO: inutile (loop)
 			iN/= 2;
-		}while( !( iN % 2 ) );
+		}while (!(iN % 2));
 	}
 	
-	while( iN > 1 )
+	while (iN > 1)
 	{
 		iDivisorSquared = iDivisor * iDivisor;
-		while( !( iN % iDivisorSquared ) )
+		while (!(iN % iDivisorSquared))
 			iN /= iDivisorSquared;
 
-		if( !( iN % iDivisor ) )
+		if (!(iN % iDivisor))
 		{
-			iPrimes.push_back( iDivisor );
+			iPrimes.push_back(iDivisor);
 			do{ // TODO: inutile (loop)
 				iN/= iDivisor;
-			}while( !( iN % iDivisor ) );
+			}while (!(iN % iDivisor));
 		}
 		
 		iDivisor += 2;
@@ -146,27 +146,27 @@ vector< unsigned int > iPrimeFactorsWithoutSquares( unsigned int iN )
 	return iPrimes;
 }
 
-mpz_class iSQRTQuotient( const mpz_class& iNumerator, const mpz_class& iDenominator )
+mpz_class iSQRTQuotient(const mpz_class& iNumerator, const mpz_class& iDenominator)
 {
-	mpz_class tRes( iNumerator / iDenominator );
-	mpz_sqrt( tRes.get_mpz_t(), tRes.get_mpz_t() );
+	mpz_class tRes(iNumerator / iDenominator);
+	mpz_sqrt(tRes.get_mpz_t(), tRes.get_mpz_t());
 	
-	while( iDenominator * ( tRes + 1 ) * ( tRes + 1 ) <= iNumerator )
+	while (iDenominator * (tRes + 1) * (tRes + 1) <= iNumerator)
 		tRes++;
 	
 	return tRes;
 }
 
-mpz_class iSQRTsupQuotient( const mpz_class& iNumerator, const mpz_class& iDenominator ) // TODO: tester
+mpz_class iSQRTsupQuotient(const mpz_class& iNumerator, const mpz_class& iDenominator) // TODO: tester
 {
-	if( iNumerator == 0 )
+	if (iNumerator == 0)
 		return 0;
 	
-	mpz_class tRes( (iNumerator % iDenominator) != 0 ? mpz_class( iNumerator / iDenominator ) : mpz_class( iNumerator / iDenominator - 1 ) );
-	mpz_sqrt( tRes.get_mpz_t(), tRes.get_mpz_t() );
+	mpz_class tRes((iNumerator % iDenominator) != 0 ? mpz_class(iNumerator / iDenominator) : mpz_class(iNumerator / iDenominator - 1));
+	mpz_sqrt(tRes.get_mpz_t(), tRes.get_mpz_t());
 	tRes++;
 
-	while( iNumerator <= iDenominator * ( tRes - 1 ) * ( tRes - 1 ) )
+	while (iNumerator <= iDenominator * (tRes - 1) * (tRes - 1))
 		tRes--;
 	
 	return tRes;

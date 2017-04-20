@@ -46,7 +46,7 @@ class Signature
 		Signature();
 		~Signature();
 		
-		array< unsigned int, 3 > iComputeSignature( string strMatrix );
+		array< unsigned int, 3 > iComputeSignature(string strMatrix);
 };
 
 #endif // SIGNATURE_H

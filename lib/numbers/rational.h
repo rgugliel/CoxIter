@@ -52,55 +52,55 @@ class Rational
 		/*! \fn update
 		 * 	\brief Met à jour les attributs (gcd, isInt, ...)
 		 */
-		void update( );
+		void update();
 
 	public:
-		Rational( );
+		Rational();
 		
-		Rational( T a, T b );
-		Rational( T a );
+		Rational(T a, T b);
+		Rational(T a);
 		
-		Rational( const int& i );
+		Rational(const int& i);
 
-		bool operator>( Rational const& ) const;
-		bool operator<( Rational const& ) const;
-		bool operator>=( int const& ) const;
-		bool operator==( int const& ) const;
-		bool operator==( Rational const& ) const;
-		bool operator!=( Rational const& ) const;
+		bool operator>(Rational const&) const;
+		bool operator<(Rational const&) const;
+		bool operator>=(int const&) const;
+		bool operator==(int const&) const;
+		bool operator==(Rational const&) const;
+		bool operator!=(Rational const&) const;
 		
-		Rational& operator=( long int );
+		Rational& operator=(long int);
 		
-		Rational operator+( Rational const &n ) const;
-		Rational& operator+=( Rational const &n );
+		Rational operator+(Rational const &n) const;
+		Rational& operator+=(Rational const &n);
 
-		Rational operator-( Rational const &n ) const;
-		Rational operator-( ) const;
-		void opp( Rational* &_c ) const;
-		Rational& operator-=( Rational const &n );
+		Rational operator-(Rational const &n) const;
+		Rational operator-() const;
+		void opp(Rational* &_c) const;
+		Rational& operator-=(Rational const &n);
 		
-		Rational operator*( Rational const &n ) const;
-		Rational& operator*=( Rational const &n );
+		Rational operator*(Rational const &n) const;
+		Rational& operator*=(Rational const &n);
 
-		Rational operator/( Rational const &n ) const;
-		Rational& operator/=( Rational const &n );
+		Rational operator/(Rational const &n) const;
+		Rational& operator/=(Rational const &n);
 
-		void print( ostream & ) const;	
+		void print(ostream &) const;	
 		
-		string to_string( ) const;
+		string to_string() const;
 		
 		bool get_hasDenominatorOne() const;
 };
 
 template <typename T>
-ostream& operator<<( ostream& , Rational<T> const & );
+ostream& operator<<(ostream& , Rational<T> const &);
 
 template <typename T>
-T abs( const T& r )
+T abs(const T& r)
 {
-	T rabs( r );
-	if( rabs.a.bIsLessThan( 0 ) )
-		rabs.a.multiplyBy( -1 );
+	T rabs(r);
+	if (rabs.a.bIsLessThan(0))
+		rabs.a.multiplyBy(-1);
 	
 	return rabs;
 }

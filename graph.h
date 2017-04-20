@@ -43,7 +43,7 @@ class Graph
 {
 	public:
 		vector< short unsigned int > iVertices; ///< Vertices of the graph
-		vector< bool > bVerticesLinkable; ///< A quels sommets on peut lier le graphe { sommets } \ { sommets du graphes et leurs voisins )
+		vector< bool > bVerticesLinkable; ///< A quels sommets on peut lier le graphe { sommets } \ { sommets du graphes et leurs voisins)
 		
 		unsigned int iGraphType; ///< Type of the graph: A=0, B=1, ...
 		
@@ -58,52 +58,52 @@ class Graph
 	public:
 		/*! \fn Graph
 		 * 	\brief Constructeur
-		 * 	\param iVertices( const vector<short unsigned int>& ) Sommets composant le graphe
-		 * 	\param ptr_map_vertices_indexToLabel( vector< string > * ) Pointeur vers la correspondance index --> label des sommets
-		 * 	\param bVerticesLinkable( const vector< bool >& ) Ce à quoi le graphe est liable
-		 * 	\param iType ( const unsigned int & ) Type du graphe: A=0, B=1, ...
-		 * 	\param bSpherical( const bool&  ) True si sphérique, false si euclidien
-		 * 	\param iDataSupp( const unsigned int & ) Eventuelle information supplémentaire, par exemple poids pour le G2
+		 * 	\param iVertices(const vector<short unsigned int>&) Sommets composant le graphe
+		 * 	\param ptr_map_vertices_indexToLabel(vector< string > *) Pointeur vers la correspondance index --> label des sommets
+		 * 	\param bVerticesLinkable(const vector< bool >&) Ce à quoi le graphe est liable
+		 * 	\param iType (const unsigned int &) Type du graphe: A=0, B=1, ...
+		 * 	\param bSpherical(const bool& ) True si sphérique, false si euclidien
+		 * 	\param iDataSupp(const unsigned int &) Eventuelle information supplémentaire, par exemple poids pour le G2
 		 */
-		Graph( const vector< short unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp = 0 );
+		Graph(const vector< short unsigned int >& iVertices, vector< string > *ptr_map_vertices_indexToLabel, const vector< bool >& bVerticesLinkable, const unsigned int &iType, const bool& bSpherical, const unsigned int &iDataSupp = 0);
 		
 		/*! \fn bIsSubgraphOf
 		 * 	\brief Test if a graph (spherical) is a subgraph of another graph (spherical or euclidean)
 		 * 
-		 * 	\param grBig( Graph* ) Bigger graph
+		 * 	\param grBig(Graph*) Bigger graph
 		 *	\return True if the *this is a subgraph of the graph given in parameter, false otherwise
 		 */
-		bool bIsSubgraphOf( const Graph* grBig ) const;
+		bool bIsSubgraphOf(const Graph* grBig) const;
 		
 		/*! \fn bIsSubgraphOf_spherical_spherical
 		 * 	\brief Test if a graph (spherical) is a subgraph of another graph (spherical) graph
 		 * 
-		 * 	\param grBig( Graph* ) Bigger graph
+		 * 	\param grBig(Graph*) Bigger graph
 		 *	\return True if the *this is a subgraph of the graph given in parameter, false otherwise
 		 */
-		bool bIsSubgraphOf_spherical_spherical( const Graph* grBig ) const;
+		bool bIsSubgraphOf_spherical_spherical(const Graph* grBig) const;
 		
 		/*! \fn bIsSubgraphOf_spherical_euclidean
 		 * 	\brief Test if a graph (spherical) is a subgraph of another graph (euclidean) graph
 		 * 
-		 * 	\param grBig( Graph* ) Bigger graph
+		 * 	\param grBig(Graph*) Bigger graph
 		 *	\return True if the *this is a subgraph of the graph given in parameter, false otherwise
 		 */
-		bool bIsSubgraphOf_spherical_euclidean( const Graph* grBig ) const;
+		bool bIsSubgraphOf_spherical_euclidean(const Graph* grBig) const;
 		
-		friend bool operator==( const Graph &g1, const Graph &g2 );
-		friend bool operator<( const Graph &g1, const Graph &g2 );
+		friend bool operator==(const Graph &g1, const Graph &g2);
+		friend bool operator<(const Graph &g1, const Graph &g2);
 		
 	private:
-		static bool bAnSubAm( const vector<short unsigned int>& iSubV, const vector<short unsigned int>& iBigV );
+		static bool bAnSubAm(const vector<short unsigned int>& iSubV, const vector<short unsigned int>& iBigV);
 		
 	public:
-		friend ostream& operator<<( ostream& , Graph const & );
+		friend ostream& operator<<(ostream& , Graph const &);
 };
 
 struct GraphPtrComp
 {
-	bool operator() ( const Graph* g1, const Graph* g2 ) const  { return ( *g1 < *g2 );  }
+	bool operator() (const Graph* g1, const Graph* g2) const  { return (*g1 < *g2);  }
 };
 
 #endif // GRAPH_H

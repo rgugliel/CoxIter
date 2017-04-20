@@ -23,153 +23,153 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "rational.h"
 
 template <typename T>   
-Rational<T>::Rational( ) 
-	: a( 0 ), b( 1 )
+Rational<T>::Rational() 
+	: a(0), b(1)
 {
-	update( );
+	update();
 }
 
 template <typename T>
-Rational<T>::Rational( const int& i )
-	: a( i ), b( 1 )
+Rational<T>::Rational(const int& i)
+	: a(i), b(1)
 {
-	update( );
+	update();
 }
 
 template <typename T>
-Rational<T>::Rational( T a ) 
-	: a( a ), b( 1 )
+Rational<T>::Rational(T a) 
+	: a(a), b(1)
 {
-	update( );
+	update();
 }
 
 template <typename T>
-Rational<T>::Rational( T a, T b ) 
-	: a( a ), b( b )
+Rational<T>::Rational(T a, T b) 
+	: a(a), b(b)
 {
-	update( );
+	update();
 }
 
 template <typename T>
-void Rational<T>::update( )
+void Rational<T>::update()
 {
-	if( a.divideByIfDivisible( &b ) )
+	if (a.divideByIfDivisible(&b))
 	{
 		b = 1;
 	}
 	else
 	{
-		T iGCD( a );
-		iGCD.gcd( &b );
+		T iGCD(a);
+		iGCD.gcd(&b);
 		
 		a /= iGCD;
 		b /= iGCD;
 	}
 
-	if( b.bIsLessThan( 0 ) )
+	if (b.bIsLessThan(0))
 	{
-		a.multiplyBy( -1 );
-		b.multiplyBy( -1 );
+		a.multiplyBy(-1);
+		b.multiplyBy(-1);
 	}
 
-	isZero = a.bIsEqualTo( 0 );
-	hasDenominatorOne = b.bIsEqualTo( 1 );
-	isOne = hasDenominatorOne && a.bIsEqualTo( 1 );
-	isMinusOne = hasDenominatorOne && a.bIsEqualTo( -1 );
+	isZero = a.bIsEqualTo(0);
+	hasDenominatorOne = b.bIsEqualTo(1);
+	isOne = hasDenominatorOne && a.bIsEqualTo(1);
+	isMinusOne = hasDenominatorOne && a.bIsEqualTo(-1);
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator+( Rational<T> const &n ) const
+Rational<T> Rational<T>::operator+(Rational<T> const &n) const
 {
-	return Rational( a * n.b + b * n.a, b * n.b );
+	return Rational(a * n.b + b * n.a, b * n.b);
 }
 
 template <typename T>
-Rational<T>& Rational<T>::operator+=( Rational<T> const &n )
+Rational<T>& Rational<T>::operator+=(Rational<T> const &n)
 {
 	a = a * n.b + b * n.a ;
 	b = b * n.b ;
-	update( );
+	update();
 
 	return *this;
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator-( Rational<T> const &n ) const
+Rational<T> Rational<T>::operator-(Rational<T> const &n) const
 {
-	return Rational( a * n.b - b * n.a, b * n.b );
+	return Rational(a * n.b - b * n.a, b * n.b);
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator-( ) const
+Rational<T> Rational<T>::operator-() const
 {
-	return Rational( -a, b );
+	return Rational(-a, b);
 }
 
 template <typename T>
-void Rational<T>::opp( Rational<T>* &_c ) const
+void Rational<T>::opp(Rational<T>* &_c) const
 {
-	_c = new Rational( -a, -b );
+	_c = new Rational(-a, -b);
 }
 
 template <typename T>
-Rational<T>& Rational<T>::operator-=( Rational<T> const &n )
+Rational<T>& Rational<T>::operator-=(Rational<T> const &n)
 {
 	a = a * n.b - b * n.a ;
 	b = b * n.b ;
-	update( );
+	update();
 
 	return *this;
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator*( Rational<T> const &n ) const
+Rational<T> Rational<T>::operator*(Rational<T> const &n) const
 {
-	return Rational( a * n.a, b * n.b );
+	return Rational(a * n.a, b * n.b);
 }
 
 template <typename T>
-Rational<T>& Rational<T>::operator*=( Rational<T> const &n )
+Rational<T>& Rational<T>::operator*=(Rational<T> const &n)
 {
 	a *= n.a;
 	b *= n.b;
-	update( );
+	update();
 
 	return *this;
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator/( Rational<T> const &n ) const
+Rational<T> Rational<T>::operator/(Rational<T> const &n) const
 {
-	if( n.isZero )
-		throw( 0 );
+	if (n.isZero)
+		throw(0);
 
-	return Rational( a * n.b, b * n.a );
+	return Rational(a * n.b, b * n.a);
 }
 
 template <typename T>
-Rational<T>& Rational<T>::operator/=( Rational<T> const &n )
+Rational<T>& Rational<T>::operator/=(Rational<T> const &n)
 {
-	if( n.isZero )
-		throw( 0 );
+	if (n.isZero)
+		throw(0);
 	
 	a *= n.b;
 	b *= n.a;
-	update( );
+	update();
 
 	return *this;
 }
 
 template <typename T>
-Rational<T>& Rational<T>::operator=( long int i )
+Rational<T>& Rational<T>::operator=(long int i)
 {
 	a = i;
 	b = 1;
 	
-	isZero = a.bIsEqualTo( 0 );
-	hasDenominatorOne = b.bIsEqualTo( 1 );
-	isOne = hasDenominatorOne && a.bIsEqualTo( 1 );
-	isMinusOne = hasDenominatorOne && a.bIsEqualTo( -1 );
+	isZero = a.bIsEqualTo(0);
+	hasDenominatorOne = b.bIsEqualTo(1);
+	isOne = hasDenominatorOne && a.bIsEqualTo(1);
+	isMinusOne = hasDenominatorOne && a.bIsEqualTo(-1);
 	
 	return *this;
 }
@@ -177,46 +177,46 @@ Rational<T>& Rational<T>::operator=( long int i )
 template <typename T>
 bool Rational<T>::operator>(const Rational<T>& r) const
 {
-	Rational<T> n( *this - r );
-	return ( n.a > 0 );
+	Rational<T> n(*this - r);
+	return (n.a > 0);
 }
 
 template <typename T>
 bool Rational<T>::operator<(const Rational<T>& r) const
 {
-	Rational<T> n( *this - r );
-	return ( n.a < 0 );
+	Rational<T> n(*this - r);
+	return (n.a < 0);
 }
 
 template <typename T>
 bool Rational<T>::operator>=(const int& ni) const
 {
-	Rational<T> n( *this - ni );
-	return ( n.a.bIsGreaterOEThan(0) );
+	Rational<T> n(*this - ni);
+	return (n.a.bIsGreaterOEThan(0));
 }
 
 template <typename T>
-bool Rational<T>::operator==( const int& i ) const
+bool Rational<T>::operator==(const int& i) const
 {
-	return ( a == i && b == 1 );
+	return (a == i && b == 1);
 }
 
 template <typename T>
-bool Rational<T>::operator==( Rational<T> const& n ) const
+bool Rational<T>::operator==(Rational<T> const& n) const
 {
-	return ( a == n.a && b == n.b );
+	return (a == n.a && b == n.b);
 }
 
 template <typename T>
-bool Rational<T>::operator!=( Rational<T> const& n ) const
+bool Rational<T>::operator!=(Rational<T> const& n) const
 {
-	return ( a != n.a || b != n.b );
+	return (a != n.a || b != n.b);
 }
 
 template <typename T>
-void Rational<T>::print( ostream &o ) const
+void Rational<T>::print(ostream &o) const
 {
-	if( hasDenominatorOne )
+	if (hasDenominatorOne)
 		o << a;
 	else
 		o << a << "/" << b;
@@ -225,28 +225,28 @@ void Rational<T>::print( ostream &o ) const
 template <typename T>
 string Rational<T>::to_string() const
 {
-	if( hasDenominatorOne )
-		return a.get_str( );
+	if (hasDenominatorOne)
+		return a.get_str();
 	else
-		return ( a.get_str() + "/" + b.get_str() );
+		return (a.get_str() + "/" + b.get_str());
 }
 
 template <typename T>
-ostream& operator<<( ostream &o, Rational<T> const &n )
+ostream& operator<<(ostream &o, Rational<T> const &n)
 {
-	n.print( o );
+	n.print(o);
 
 	return o;
 }
 
 template <typename T>
-bool Rational<T>::get_hasDenominatorOne( ) const
+bool Rational<T>::get_hasDenominatorOne() const
 {
 	return hasDenominatorOne;
 }
 
 /*
-BigInteger gcd( const BigInteger &n, const BigInteger &m )
+BigInteger gcd(const BigInteger &n, const BigInteger &m)
 {
-	return ( m == 0 ? n : gcd( m, n % m ) );
+	return (m == 0 ? n : gcd(m, n % m));
 }*/

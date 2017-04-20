@@ -49,29 +49,29 @@ namespace Polynomials
 {
 	/*! 	\fn polynomialDisplay
 	* 	\brief Display a polynomial
-	* 	\param iPolynomial( const vector< int >& iPolynomial ) Integer
+	* 	\param iPolynomial(const vector< int >& iPolynomial) Integer
 	*/
 	template <typename Type> 
-	void polynomialDisplay( const vector< Type >& iPolynomial )
+	void polynomialDisplay(const vector< Type >& iPolynomial)
 	{
-		bool bFirst( true );
-		unsigned int iSize( iPolynomial.size( ) );
+		bool bFirst(true);
+		unsigned int iSize(iPolynomial.size());
 		
-		for( unsigned int i( 0 ); i < iSize; i++ )
+		for (unsigned int i(0); i < iSize; i++)
 		{
-			if( iPolynomial[i] != 0 )
+			if (iPolynomial[i] != 0)
 			{
-				if( bFirst )
+				if (bFirst)
 				{
-					cout << iPolynomial[i] << ( i ? " * x" + string( i > 1 ? "^" + to_string( i ) : "" ) : "" );
+					cout << iPolynomial[i] << (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
 					bFirst = false;
 				}
 				else
 				{
-					if( ( iPolynomial[i] != 1 && iPolynomial[i] != -1 ) || !i )
-						cout << ( iPolynomial[i] > 0 ? " + " : " - " ) << abs( iPolynomial[i] ) << ( i ? " * x" + string( i > 1 ? "^" + to_string( i ) : "" ) : "" );
+					if ((iPolynomial[i] != 1 && iPolynomial[i] != -1) || !i)
+						cout << (iPolynomial[i] > 0 ? " + " : " - ") << abs(iPolynomial[i]) << (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
 					else
-						cout << ( iPolynomial[i] > 0 ? " + " : " - " ) << "x" + string( i > 1 ? "^" + to_string( i ) : "" );
+						cout << (iPolynomial[i] > 0 ? " + " : " - ") << "x" + string(i > 1 ? "^" + to_string(i) : "");
 				}
 			}
 		}
@@ -79,22 +79,22 @@ namespace Polynomials
 
 	/*! 	\fn symbolDisplay
 	* 	\brief Display a symbol
-	* 	\param iPolynomial( const vector< int >& iPolynomial ) Integer
+	* 	\param iPolynomial(const vector< int >& iPolynomial) Integer
 	*/
 	template <typename Type> 
-	void symbolDisplay( const vector< Type >& iSymbol )
+	void symbolDisplay(const vector< Type >& iSymbol)
 	{
-		bool bFirst( true );
-		unsigned int iSize( iSymbol.size( ) );
+		bool bFirst(true);
+		unsigned int iSize(iSymbol.size());
 		
 		cout << "[";
-		for( unsigned int i( 0 ); i < iSize; i++ )
+		for (unsigned int i(0); i < iSize; i++)
 		{
-			if( iSymbol[i] )
+			if (iSymbol[i])
 			{
-				for( unsigned int j(0); j < iSymbol[i]; j++ )
+				for (unsigned int j(0); j < iSymbol[i]; j++)
 				{
-					cout << ( bFirst ? "" : "," ) << i;
+					cout << (bFirst ? "" : ",") << i;
 					bFirst = false;
 				}
 			}
@@ -104,92 +104,92 @@ namespace Polynomials
 	
 	/*! 	\fn polynomialDotSymbol
 	* 	\brief Multiply a polynomial by a symbol
-	* 	\param iPolynomial( const vector< Type >& iPolynomial ) The polynomial
-	* 	\param iSymbol( const unsigned int& ) The symbol
+	* 	\param iPolynomial(const vector< Type >& iPolynomial) The polynomial
+	* 	\param iSymbol(const unsigned int&) The symbol
 	*/
 	template <typename Type> 
-	void polynomialDotSymbol( vector< Type >& iPolynomial, const unsigned int& iSymbol )
+	void polynomialDotSymbol(vector< Type >& iPolynomial, const unsigned int& iSymbol)
 	{
-		vector< Type > iPolynomialBackup( iPolynomial );
-		unsigned int iPolynomialDegree( iPolynomial.size( ) - 1 );
+		vector< Type > iPolynomialBackup(iPolynomial);
+		unsigned int iPolynomialDegree(iPolynomial.size() - 1);
 		
-		for( unsigned int i( 1 ); i < iSymbol - 1; i++ )
-			iPolynomial.push_back( 0 );
-		iPolynomial.push_back( iPolynomial[ iPolynomialDegree ] );
+		for (unsigned int i(1); i < iSymbol - 1; i++)
+			iPolynomial.push_back(0);
+		iPolynomial.push_back(iPolynomial[ iPolynomialDegree ]);
 		
-		if( iPolynomialDegree < iSymbol )
+		if (iPolynomialDegree < iSymbol)
 		{
-			for( unsigned int i( 1 ); i <= iPolynomialDegree; i++ )
+			for (unsigned int i(1); i <= iPolynomialDegree; i++)
 				iPolynomial[i] = iPolynomial[ i - 1 ] + iPolynomialBackup[i];
 			
-			fill( iPolynomial.begin( ) + iPolynomialDegree + 1, iPolynomial.end( ) - iPolynomialDegree, iPolynomial[ iPolynomialDegree ] );
+			fill(iPolynomial.begin() + iPolynomialDegree + 1, iPolynomial.end() - iPolynomialDegree, iPolynomial[ iPolynomialDegree ]);
 			
-			for( unsigned int i( 1 ); i <= iPolynomialDegree ; i++ ) // TODO: gérer degré plus petit que symbole
+			for (unsigned int i(1); i <= iPolynomialDegree ; i++) // TODO: gérer degré plus petit que symbole
 				iPolynomial[ iPolynomialDegree + iSymbol - i - 1 ] = iPolynomial[ iPolynomialDegree + iSymbol - i ] + iPolynomialBackup[ iPolynomialDegree - i ];
 		}
 		else
 		{
-			for( unsigned int i( 1 ); i < iSymbol; i++ )
+			for (unsigned int i(1); i < iSymbol; i++)
 				iPolynomial[i] = iPolynomial[ i - 1 ] + iPolynomialBackup[i];
 			
-			for( unsigned int i( iSymbol ); i < iPolynomialDegree; i++ )
+			for (unsigned int i(iSymbol); i < iPolynomialDegree; i++)
 				iPolynomial[i] = iPolynomial[i-1] - iPolynomialBackup[i-iSymbol] + iPolynomialBackup[i];
 			
-			for( unsigned int i( 1 ); i < iSymbol && i <= iPolynomialDegree ; i++ )
+			for (unsigned int i(1); i < iSymbol && i <= iPolynomialDegree ; i++)
 				iPolynomial[ iPolynomialDegree + iSymbol - i - 1 ] = iPolynomial[ iPolynomialDegree + iSymbol - i ] + iPolynomialBackup[ iPolynomialDegree - i ];
 		}
 	}
 	
 	template <typename Type>
-	bool dividePolynomialBySymbol( vector< Type >& iPolynomial, const unsigned int& iSymbol )
+	bool dividePolynomialBySymbol(vector< Type >& iPolynomial, const unsigned int& iSymbol)
 	{
-		unsigned int iPolynomialDegree( iPolynomial.size( ) - 1 );
+		unsigned int iPolynomialDegree(iPolynomial.size() - 1);
 
 		// Removing eventual 0
-		while( iPolynomial[ iPolynomialDegree ] == 0 )
+		while (iPolynomial[ iPolynomialDegree ] == 0)
 			iPolynomialDegree--;
 		
-		vector< Type > iWorking( iPolynomial.begin( ), iPolynomial.begin( ) + iPolynomialDegree + 1 );
+		vector< Type > iWorking(iPolynomial.begin(), iPolynomial.begin() + iPolynomialDegree + 1);
 		vector< Type > iQuotient;
 		
 		unsigned int i;
 		Type iTemp;
 		
-		if( iPolynomialDegree < iSymbol - 1 )
+		if (iPolynomialDegree < iSymbol - 1)
 			return false;
 
-		while( iPolynomialDegree >= iSymbol )
+		while (iPolynomialDegree >= iSymbol)
 		{
 			iTemp = iWorking[ iPolynomialDegree ];
-			iQuotient.insert( iQuotient.begin( ), iTemp );
+			iQuotient.insert(iQuotient.begin(), iTemp);
 			
-			for( i = 0; i < iSymbol; i++ )
+			for (i = 0; i < iSymbol; i++)
 				iWorking[ iPolynomialDegree - i ] -= iTemp;
 			
 			iPolynomialDegree--;
 			
-			while( iWorking[ iPolynomialDegree ] == 0 && iPolynomialDegree >= 1 )
+			while (iWorking[ iPolynomialDegree ] == 0 && iPolynomialDegree >= 1)
 			{
-				iQuotient.insert( iQuotient.begin( ), 0 );
+				iQuotient.insert(iQuotient.begin(), 0);
 				iPolynomialDegree--;
 			}
 		}
 		
-		if( iPolynomialDegree < iSymbol - 1 )
+		if (iPolynomialDegree < iSymbol - 1)
 		{
-			for( i = 0; i <= iPolynomialDegree; i++ )
+			for (i = 0; i <= iPolynomialDegree; i++)
 			{
-				if( iWorking[i] != 0 )
+				if (iWorking[i] != 0)
 					return false;
 			}
 		}
 		
 		iTemp = iWorking[ iPolynomialDegree ];
-		iQuotient.insert( iQuotient.begin( ), iTemp );
+		iQuotient.insert(iQuotient.begin(), iTemp);
 		
-		for( i = 0; i < iPolynomialDegree; i++ )
+		for (i = 0; i < iPolynomialDegree; i++)
 		{
-			if( iWorking[i] != iTemp )
+			if (iWorking[i] != iTemp)
 				return false;
 		}
 		
@@ -201,46 +201,46 @@ namespace Polynomials
 	/*!	\fn dividePolynomialByPolynomial
 	 * 	\brief Try to make a division
 	 *	
-	 * 	\param iNumerator( vector< Type >& ) The dividend ; updated if the remainder is 0
-	 * 	\param iDenominator( const vector< Type > ) The divisor
+	 * 	\param iNumerator(vector< Type >&) The dividend ; updated if the remainder is 0
+	 * 	\param iDenominator(const vector< Type >) The divisor
 	 * 	\return bool: True if iNumerator is divisible by iDenominator. In this case, iNumerator is updated to the quotient
 	 */
 	template <typename Type> 
-	bool dividePolynomialByPolynomial( vector< Type >& iNumerator, const vector< Type >& iDenominator )
+	bool dividePolynomialByPolynomial(vector< Type >& iNumerator, const vector< Type >& iDenominator)
 	{
-		unsigned int dN( iNumerator.size( ) - 1 ), dD( iDenominator.size( ) - 1 );
+		unsigned int dN(iNumerator.size() - 1), dD(iDenominator.size() - 1);
 	
-		if( dN < dD || ( dD == 0 && iDenominator[0] != 0 ) )
+		if (dN < dD || (dD == 0 && iDenominator[0] != 0))
 			return false;
 		
-		vector< Type > iWorking( iNumerator ), iQuotient;
+		vector< Type > iWorking(iNumerator), iQuotient;
 		
 		unsigned int i;
 		Type iTemp;
 		
-		while( dN >= dD )
+		while (dN >= dD)
 		{
-			if( iWorking[ dN ] % iDenominator[ dD ] != 0 )
+			if (iWorking[ dN ] % iDenominator[ dD ] != 0)
 				return false;
 			
 			iTemp = iWorking[ dN ] / iDenominator[ dD ];
-			iQuotient.insert( iQuotient.begin( ), iTemp );
+			iQuotient.insert(iQuotient.begin(), iTemp);
 			
-			for( i = 0; i <= dD; i++ )
+			for (i = 0; i <= dD; i++)
 				iWorking[dN - i] -= iTemp * iDenominator[dD - i];
 			
 			dN--;
 			
-			while( iWorking[ dN ] == 0 && dN >= 1 && dN >= dD )
+			while (iWorking[ dN ] == 0 && dN >= 1 && dN >= dD)
 			{
-				iQuotient.insert( iQuotient.begin( ), 0 );
+				iQuotient.insert(iQuotient.begin(), 0);
 				dN--;
 			}
 		}
 		
-		for( i = 0; i <= dN; i++ )
+		for (i = 0; i <= dN; i++)
 		{
-			if( iWorking[i] != 0 )
+			if (iWorking[i] != 0)
 				return false;
 		}
 		

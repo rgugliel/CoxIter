@@ -60,24 +60,24 @@ class PCRERegexp
 		int iOvectorSize; ///< Size of the ovector array
 
 	public:
-		PCRERegexp( int iOvectorSize = 30 );
-		~PCRERegexp( );
+		PCRERegexp(int iOvectorSize = 30);
+		~PCRERegexp();
 
 		/*!	\fn preg_match_all
 		* 	\brief As the usual PHP preg_match_all: executes the regexp and fetch all the occurrences
-		* 	\param pattern( const string & ) The pattern to search for
-		* 	\param subject( const string & ) The input string
-		* 	\param results( PCREResult & ) Array of all matches in multi-dimensional array
-		* 	\param optionsCompile( const int& ) Options for the regexp. For example: 0, PCRE_CASELESS
+		* 	\param pattern(const string &) The pattern to search for
+		* 	\param subject(const string &) The input string
+		* 	\param results(PCREResult &) Array of all matches in multi-dimensional array
+		* 	\param optionsCompile(const int&) Options for the regexp. For example: 0, PCRE_CASELESS
 		* 	\return Number of results (unsigned int) or -1 if an error occurred
 		*/
-		int preg_match_all( const string &pattern, const string &subject, PCREResult &results, const int& optionsCompile = 0 );
+		int preg_match_all(const string &pattern, const string &subject, PCREResult &results, const int& optionsCompile = 0);
 
 		/*! \fn get_strError
 		* 	\brief Return the error ccode
 		* 	\return Error code (string)
 		*/
-		string get_strError( );
+		string get_strError();
 };
 
 #endif

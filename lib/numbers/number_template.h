@@ -46,21 +46,21 @@ class Number_template
 		virtual bool operator==(Number_template const &) const;
 		virtual bool operator!=(Number_template const &) const;
 		
-		virtual Number_template operator+( Number_template const &n ) const;
-		virtual Number_template& operator+=( Number_template const &n );
+		virtual Number_template operator+(Number_template const &n) const;
+		virtual Number_template& operator+=(Number_template const &n);
 
-		virtual Number_template operator-( Number_template const &n ) const;
-		virtual Number_template& operator-=( Number_template const &n );
+		virtual Number_template operator-(Number_template const &n) const;
+		virtual Number_template& operator-=(Number_template const &n);
 		
-		virtual Number_template operator*( Number_template const &n ) const;
-		virtual Number_template& operator*=( Number_template const &n );
+		virtual Number_template operator*(Number_template const &n) const;
+		virtual Number_template& operator*=(Number_template const &n);
 
-		virtual Number_template operator/( Number_template const &n ) const;
-		virtual Number_template& operator/=( Number_template const &n );
+		virtual Number_template operator/(Number_template const &n) const;
+		virtual Number_template& operator/=(Number_template const &n);
 
-		virtual void print( ostream & ) const;
+		virtual void print(ostream &) const;
 };
 
-ostream& operator<<( ostream& , Number_template const & );
+ostream& operator<<(ostream& , Number_template const &);
 
 #endif

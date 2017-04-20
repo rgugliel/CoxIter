@@ -24,46 +24,46 @@ along with CIVA. If not, see <http://www.gnu.org/licenses/>.
 
 namespace PariPolynomials
 {
-	GEN vector2t_POL( const vector< int >& iCoefficients ) // [i] = x^i
+	GEN vector2t_POL(const vector< int >& iCoefficients) // [i] = x^i
 	{
-		unsigned int iSize( iCoefficients.size() );
+		unsigned int iSize(iCoefficients.size());
 		const long iVar = 0; // Polynomial variable
 		
-		GEN pol( cgetg(iSize+2, t_POL) ); // iSize coefficients, sign and variable number
+		GEN pol(cgetg(iSize+2, t_POL)); // iSize coefficients, sign and variable number
 		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgefint(iSize+2); // not equal to zero, variable, coefficients
 		
-		for( unsigned int i(0); i < iSize; i++ )
-			pol[i+2] = (long)stoi( iCoefficients[i] );
+		for (unsigned int i(0); i < iSize; i++)
+			pol[i+2] = (long)stoi(iCoefficients[i]);
 		
 		return pol;
 	}
 	
-	GEN vector2t_POL( const vector< mpz_class >& iCoefficients ) // [i] = x^i
+	GEN vector2t_POL(const vector< mpz_class >& iCoefficients) // [i] = x^i
 	{
-		unsigned int iSize( iCoefficients.size() );
+		unsigned int iSize(iCoefficients.size());
 		const long iVar = 0; // Polynomial variable
 		
-		GEN pol( cgetg(iSize+2, t_POL) ); // iSize coefficients, sign and variable number
+		GEN pol(cgetg(iSize+2, t_POL)); // iSize coefficients, sign and variable number
 		pol[1] = evalsigne(1) | evalvarn(iVar) | evallgefint(iSize+2); // not equal to zero, variable, coefficients
 		
-		for( unsigned int i(0); i < iSize; i++ )
+		for (unsigned int i(0); i < iSize; i++)
 		{
-			if( !iCoefficients[i].fits_slong_p() )
-				throw( string( "PariPolynomials::vector2t_POL : Component does not fit into long int."  ) );
+			if (!iCoefficients[i].fits_slong_p())
+				throw(string("PariPolynomials::vector2t_POL : Component does not fit into long int." ));
 			
-			pol[i+2] = (long)stoi( iCoefficients[i].get_si() );
+			pol[i+2] = (long)stoi(iCoefficients[i].get_si());
 		}
 		
 		return pol;
 	}
 
-	vector< long int > t_POL2vector( GEN poly )
+	vector< long int > t_POL2vector(GEN poly)
 	{
-		unsigned int iSize( lg(poly) );
+		unsigned int iSize(lg(poly));
 		vector< long int > iV;
 		
-		for( unsigned int i(2); i < iSize; i++ )
-			iV.push_back( gtolong(gel(poly,i)) );
+		for (unsigned int i(2); i < iSize; i++)
+			iV.push_back(gtolong(gel(poly,i)));
 		
 		return iV;
 	}

@@ -37,29 +37,29 @@ namespace PariPolynomials
 	/*!	\fn vector2t_POL
 	* 	\brief Create a polynomial in PARI form from a C++ vector
 	* 
-	* 	\param iCoefficients( const vector< int >& ) Coefficients of the vector
+	* 	\param iCoefficients(const vector< int >&) Coefficients of the vector
 	* 
 	* 	\return Polynomial (GEN > t_POL)
 	*/
-	GEN vector2t_POL( const vector< int >& iCoefficients );
+	GEN vector2t_POL(const vector< int >& iCoefficients);
 	
 	/*!	\fn vector2t_POL
 	* 	\brief Create a polynomial in PARI form from a C++ vector
 	* 
-	* 	\param iCoefficients( const vector< mpz_class >& ) Coefficients of the vector
+	* 	\param iCoefficients(const vector< mpz_class >&) Coefficients of the vector
 	* 
 	* 	\return Polynomial (GEN > t_POL)
 	*/
-	GEN vector2t_POL( const vector< mpz_class >& iCoefficients );
+	GEN vector2t_POL(const vector< mpz_class >& iCoefficients);
 	
 	/*!	\fn t_POL2vector
 	* 	\brief Create a C++ vector from a t_POL (PARI)
 	* 
-	* 	\param poly( GEN ) Polynomial
+	* 	\param poly(GEN) Polynomial
 	* 
 	* 	\return Vector (vector< long int >)
 	*/
-	vector< long int > t_POL2vector( GEN poly );
+	vector< long int > t_POL2vector(GEN poly);
 }
 
 #endif

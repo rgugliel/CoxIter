@@ -54,38 +54,38 @@ class Arithmeticity
 		vector< string > strListCycles; ///< The list
 		
 	public:
-		/*! \fn Arithmeticity( )
+		/*! \fn Arithmeticity()
 		 * 	\brief Basic constructor
 		 */
-		Arithmeticity( );
+		Arithmeticity();
 		
-		/*! 	\fn ~Arithmeticity( )
+		/*! 	\fn ~Arithmeticity()
 		 * 	\brief Destructor
 		 */
-		~Arithmeticity( );
+		~Arithmeticity();
 		
 		/*! 	\fn test
 		 *	\brief Test the arithmeticity of a graph
 		 * 
-		 * 	\param ci( CoxIter& ) The graph
-		 * 	\param bListCycles_( const bool& ) If true, will list the cycles to be manually tested
-		 * 	\return True if success, false otherwise. Then, use ci.get_iIsArithmetic( )
+		 * 	\param ci(CoxIter&) The graph
+		 * 	\param bListCycles_(const bool&) If true, will list the cycles to be manually tested
+		 * 	\return True if success, false otherwise. Then, use ci.get_iIsArithmetic()
 		 */
-		void test( CoxIter& ci, const bool& bListCycles_ );
+		void test(CoxIter& ci, const bool& bListCycles_);
 		
 		/*!	\fn get_strListCycles
 		 *	\brief Return the list of cycles
 		 * 
 		 *	\return List (vector<string>)
 		 */
-		vector< string > get_strListCycles( );
+		vector< string > get_strListCycles();
 		
 		/*!	\fn get_strError
 		 *	\brief Return the error code
 		 * 
 		 *	\return Error code (string)
 		 */
-		string get_strError( );
+		string get_strError();
 		
 	private:
 		/*!	\fn collapseQueues
@@ -93,30 +93,30 @@ class Arithmeticity
 		 * 
 		 * 	\return Number of vertices removed
 		 */
-		unsigned int collapseQueues( );
+		unsigned int collapseQueues();
 		
 		
 		/*! 	\fn testCycles
 		 * 	\brief Test the cycles
 		 */
-		void testCycles( );
+		void testCycles();
 		
 		/*! 	\fn findCycles
 		 * 	\brief Look for cycles
 		 * 
 		 * 	Update the vector iPath to find cycles
 		 * 
-		 * 	\param iRoot( unsigned int& ) Starting vertex
-		 * 	\param iFrom( unsigned int& ) Previoud vertex (if recursive call); iRoot otherwise
+		 * 	\param iRoot(unsigned int&) Starting vertex
+		 * 	\param iFrom(unsigned int&) Previoud vertex (if recursive call); iRoot otherwise
 		 */
-		void findCycles( const unsigned int& iRoot, const unsigned int& iFrom );
+		void findCycles(const unsigned int& iRoot, const unsigned int& iFrom);
 		
 		/*! 	\fn testCycle
 		 * 	\brief Test the cycle in iPath
 		 * 
 		 * 	This function is called by findCycles. Eventually, set bNotArithmetic to true
 		 */
-		void testCycle( );
+		void testCycle();
 };
 
 struct CycleElement
