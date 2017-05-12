@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2013, 2014, 2015, 2016
+Copyright (C) 2013-2017
 Rafael Guglielmetti, rafael.guglielmetti@unifr.ch
 */
 
