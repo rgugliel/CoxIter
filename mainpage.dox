@@ -28,6 +28,18 @@ The aim of %CoxIter is to provide tools to compute some invariants of hyperbolic
 	- Build %CoxIter with GCC (won't able to compute the growth rate)<br />
 		Information here: \ref main_compilation_win_mingw
 		
+\section main_infosTesting Testing CoxIter
+To test CoxIter, browse to "the testing/build/" folder and type the following commands:
+\code
+tar -xf ../../graphs/testing_index2.tar.gz --directory ../../graphs/
+cmake ../
+make
+./tests
+\endcode
+The tests should take several minutes to complete.
+
+More information are available here: https://github.com/rgugliel/CoxIter/blob/master/testing/README.md
+
 \section main_infosUpdate Updating CoxIter
 Under Linux and OSX, open a terminal and browse to your CoxIter directory. Then, type the following:
 \code
