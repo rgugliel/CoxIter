@@ -608,9 +608,12 @@ void App::run()
 			auto strWeights(ci.get_strWeights());
 			
 			cout << implode("\n", strCycles) << endl;
-			cout << "with" << endl;
-			for (auto it : strWeights)
-				cout << "l" << iLinearizationMatrix_row(it.first, ci.get_iVerticesCount()) << "m" << iLinearizationMatrix_col(it.first, ci.get_iVerticesCount()) << " = " << it.second << endl;
+			if (strWeights.size())
+			{
+				cout << "with" << endl;
+				for (auto it : strWeights)
+					cout << "l" << iLinearizationMatrix_row(it.first, ci.get_iVerticesCount()) << "m" << iLinearizationMatrix_col(it.first, ci.get_iVerticesCount()) << " = " << it.second << endl;
+			}
 		}
 	}
 	
