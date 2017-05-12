@@ -20,6 +20,17 @@ var searchData=
   ['breadgraphfromfile',['bReadGraphFromFile',['../class_cox_iter.html#af6c3264f810401353fe3b4652e4ed247',1,'CoxIter']]],
   ['breadmainparameters',['bReadMainParameters',['../class_app.html#a57f4f2ed98d7359fe4d883f8b224627d',1,'App']]],
   ['brunallcomputations',['bRunAllComputations',['../class_cox_iter.html#a4918c01a91ed54a75be1062011ce9abc',1,'CoxIter']]],
+  ['bruntests',['bRunTests',['../class_tests.html#a54e475473e14f14a5730a12abce088fe',1,'Tests']]],
+  ['bruntests_5farithmeticity',['bRunTests_arithmeticity',['../class_tests.html#aa2a84f5fbe45dcac9824600bc618bb88',1,'Tests']]],
+  ['bruntests_5fcocompactness_5fcofiniteness',['bRunTests_cocompactness_cofiniteness',['../class_tests.html#abbeabb92c0b8f754afce1eb7fe8596a7',1,'Tests']]],
+  ['bruntests_5fcomputations',['bRunTests_computations',['../class_tests.html#a734bdf1389ed472268c7c0e3d372b894',1,'Tests']]],
+  ['bruntests_5fdisplayinfo',['bRunTests_displayInfo',['../class_tests.html#a693e08fa56cdf53d8033987a39da4d42',1,'Tests']]],
+  ['bruntests_5ferror',['bRunTests_error',['../class_tests.html#aacd63aed90e1efcd67cf489e0c3ee575',1,'Tests']]],
+  ['bruntests_5feuler',['bRunTests_Euler',['../class_tests.html#ab9fafac08abe3f2c14aa44ea68238e2e',1,'Tests']]],
+  ['bruntests_5ffvector',['bRunTests_FVector',['../class_tests.html#ac36d8553e6d4f597a65308725d8def11',1,'Tests']]],
+  ['bruntests_5fgrowth',['bRunTests_growth',['../class_tests.html#adfe2132de791e809ef88075198fb2b02',1,'Tests']]],
+  ['bruntests_5finit',['bRunTests_init',['../class_tests.html#a9263b02ad29962ae4cfa6a3014822712',1,'Tests']]],
+  ['bruntests_5fsignature',['bRunTests_signature',['../class_tests.html#af1572b3110760faf917401c2798f9aeb',1,'Tests']]],
   ['bwritegraph',['bWriteGraph',['../class_cox_iter.html#a0cd4c18a14648d3f3b9f2232708681f2',1,'CoxIter']]],
   ['bwritegraphtodraw',['bWriteGraphToDraw',['../class_cox_iter.html#a42c041344c1107dc073e1a47a7590abe',1,'CoxIter']]]
 ];

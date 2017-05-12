@@ -194,7 +194,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af66b7656b6e6710421504f124d089da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the euclidean graph products found.  <a href="#af66b7656b6e6710421504f124d089da7">More...</a><br /></td></tr>
 <tr class="separator:af66b7656b6e6710421504f124d089da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a953d7468acc0b52cb4d77d49831ef93d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a953d7468acc0b52cb4d77d49831ef93d">bIsVertexValid</a> (const string &amp;strVertexLabel) const </td></tr>
-<tr class="memdesc:a953d7468acc0b52cb4d77d49831ef93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if a vertex exists in the graph.  <a href="#a953d7468acc0b52cb4d77d49831ef93d">More...</a><br /></td></tr>
+<tr class="memdesc:a953d7468acc0b52cb4d77d49831ef93d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_test.html" title="Contains information to perform a test. ">Test</a> if a vertex exists in the graph.  <a href="#a953d7468acc0b52cb4d77d49831ef93d">More...</a><br /></td></tr>
 <tr class="separator:a953d7468acc0b52cb4d77d49831ef93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a429233c6976509b7573c4dfbac66a9d1"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a429233c6976509b7573c4dfbac66a9d1">get_iVertexIndex</a> (const string &amp;strVertexLabel) const </td></tr>
 <tr class="memdesc:a429233c6976509b7573c4dfbac66a9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index of a vertex.  <a href="#a429233c6976509b7573c4dfbac66a9d1">More...</a><br /></td></tr>
@@ -371,7 +371,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:afd3affd49a404850e417523d455db5bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">We do not want to do this.  <a href="#afd3affd49a404850e417523d455db5bb">More...</a><br /></td></tr>
 <tr class="separator:afd3affd49a404850e417523d455db5bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa2fb1c481335c9152ee8ef8799617d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a8fa2fb1c481335c9152ee8ef8799617d">initializations</a> ()</td></tr>
-<tr class="memdesc:a8fa2fb1c481335c9152ee8ef8799617d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une fois le nombre de sommets du graphe connu (via inputRead() ), fait divers initialisations de variables.  <a href="#a8fa2fb1c481335c9152ee8ef8799617d">More...</a><br /></td></tr>
+<tr class="memdesc:a8fa2fb1c481335c9152ee8ef8799617d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une fois le nombre de sommets du graphe connu (via inputRead()), fait divers initialisations de variables.  <a href="#a8fa2fb1c481335c9152ee8ef8799617d">More...</a><br /></td></tr>
 <tr class="separator:a8fa2fb1c481335c9152ee8ef8799617d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ccbe36c7b36e65e4cf72d94b47f87c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cox_iter.html#a3ccbe36c7b36e65e4cf72d94b47f87c6">DFS</a> (unsigned int iRoot, unsigned int iFrom)</td></tr>
 <tr class="memdesc:a3ccbe36c7b36e65e4cf72d94b47f87c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look for all the An starting from a given vertex.  <a href="#a3ccbe36c7b36e65e4cf72d94b47f87c6">More...</a><br /></td></tr>
@@ -645,8 +645,8 @@ Friends</h2></td></tr>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iMatrix(</td><td>const vector&lt; vector&lt;unsigned int&gt; &gt;&amp; ) Coxeter matrix </td></tr>
-    <tr><td class="paramname">iDimension(</td><td>const unsigned int &amp; ) Dimension</td></tr>
+    <tr><td class="paramname">iMatrix(const</td><td>vector&lt; vector&lt;unsigned int&gt; &gt;&amp;) Coxeter matrix </td></tr>
+    <tr><td class="paramname">iDimension(const</td><td>unsigned int &amp;) Dimension</td></tr>
   </table>
   </dd>
 </dl>
@@ -757,8 +757,8 @@ Friends</h2></td></tr>
 <p>Essaie de construire des En depuis un An. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iPathTemp(</td><td>vector&lt;short unsigned int&gt;&amp; ) Chemin actuel composant le An </td></tr>
-    <tr><td class="paramname">bVerticesLinkable(</td><td>const vector&lt; bool &gt;&amp; ) Ce qui est liable ou non au graphe </td></tr>
+    <tr><td class="paramname">iPathTemp(vector&lt;short</td><td>unsigned int&gt;&amp;) Chemin actuel composant le An </td></tr>
+    <tr><td class="paramname">bVerticesLinkable(const</td><td>vector&lt; bool &gt;&amp;) Ce qui est liable ou non au graphe </td></tr>
   </table>
   </dd>
 </dl>
@@ -812,10 +812,10 @@ Friends</h2></td></tr>
 <p>Try to foind an En from an An. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iPathTemp</td><td>( const vector&lt;unsigned int&gt;&amp; ) Vertices of the An </td></tr>
-    <tr><td class="paramname">bVerticesLinkable(</td><td>const vector&lt;bool&gt; &amp; ) Linkable vertices </td></tr>
-    <tr><td class="paramname">bSpherical(</td><td>const bool&amp; ) True if spherical, false if euclidean </td></tr>
-    <tr><td class="paramname">iStart(</td><td>const unsigned int&amp; ) Starting point </td></tr>
+    <tr><td class="paramname">iPathTemp</td><td>(const vector&lt;unsigned int&gt;&amp;) Vertices of the An </td></tr>
+    <tr><td class="paramname">bVerticesLinkable(const</td><td>vector&lt;bool&gt; &amp;) Linkable vertices </td></tr>
+    <tr><td class="paramname">bSpherical(const</td><td>bool&amp;) True if spherical, false if euclidean </td></tr>
+    <tr><td class="paramname">iStart(const</td><td>unsigned int&amp;) Starting point </td></tr>
   </table>
   </dd>
 </dl>
@@ -863,7 +863,7 @@ Friends</h2></td></tr>
 <p>Essaie de construire un F4 depuis un B3. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bVerticesBeginLinkable(</td><td>const vector&lt;bool&gt; &amp; ) What's linkable to the B3 </td></tr>
+    <tr><td class="paramname">bVerticesBeginLinkable(const</td><td>vector&lt;bool&gt; &amp;) What's linkable to the B3 </td></tr>
     <tr><td class="paramname">iPathTemp</td><td>(vector&lt;unsigned int&gt;) Vertices of the B3 </td></tr>
     <tr><td class="paramname">iVEnd</td><td>Index of the vertex connected by a 4 </td></tr>
   </table>
@@ -897,7 +897,7 @@ Friends</h2></td></tr>
 <p>Check whether the graph is cocompact or not or has finite covolume or not Called by: iIsGraphCocompact and iIsFiniteCovolume. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iIndex(</td><td>unsigned int ): 1 if test for compacity, 2 if test for the finite covolume </td></tr>
+    <tr><td class="paramname">iIndex(unsigned</td><td>int): 1 if test for compacity, 2 if test for the finite covolume </td></tr>
   </table>
   </dd>
 </dl>
@@ -930,7 +930,7 @@ Friends</h2></td></tr>
 <p>Check whether the graph is cocompact or not or has finite covolume or not Called by: iIsGraphCocompact and iIsFiniteCovolume. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iIndex(</td><td>unsigned int ): 1 if test for compacity, 2 if test for the finite covolume </td></tr>
+    <tr><td class="paramname">iIndex(unsigned</td><td>int): 1 if test for compacity, 2 if test for the finite covolume </td></tr>
   </table>
   </dd>
 </dl>
@@ -1088,10 +1088,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Test if a vertex exists in the graph. </p>
+<p><a class="el" href="struct_test.html" title="Contains information to perform a test. ">Test</a> if a vertex exists in the graph. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strVertexLabel(</td><td>const string&amp; ) Label of the vertex </td></tr>
+    <tr><td class="paramname">strVertexLabel(const</td><td>string&amp;) Label of the vertex </td></tr>
   </table>
   </dd>
 </dl>
@@ -1116,7 +1116,7 @@ Friends</h2></td></tr>
 <p>Read the graph from a file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strInputFilename(</td><td>const string&amp; ) Path to the file </td></tr>
+    <tr><td class="paramname">strInputFilename(const</td><td>string&amp;) Path to the file </td></tr>
   </table>
   </dd>
 </dl>
@@ -1167,7 +1167,7 @@ Friends</h2></td></tr>
 <p>Write the graph in a file (so that it can be read by <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a>) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strFilename(</td><td>const string &amp; ) </td></tr>
+    <tr><td class="paramname">strFilename(const</td><td>string &amp;) </td></tr>
   </table>
   </dd>
 </dl>
@@ -1192,7 +1192,7 @@ Friends</h2></td></tr>
 <p>Write the graph in a file for GraphViz. </p>
 <p>The graph is written in szOutputGraphFilename + ".graphviz" </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strOutFilenameBasis(</td><td>const string&amp; ) Filename </td></tr>
+    <tr><td class="paramname">strOutFilenameBasis(const</td><td>string&amp;) Filename </td></tr>
   </table>
   </dd>
 </dl>
@@ -1271,11 +1271,11 @@ Friends</h2></td></tr>
 <p>Try to find products of connected graphs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">grIt(</td><td><a class="el" href="class_graphs_list_iterator.html" title="Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl )  GraphsListIterator it...">GraphsListIterator</a> ): Iterator on the list </td></tr>
-    <tr><td class="paramname">graphsProductsCount(</td><td>vector&lt; map&lt;vector&lt; vector&lt;short unsigned int&gt; &gt;, unsigned int&gt; &gt;* ) Point to the list of graphs </td></tr>
-    <tr><td class="paramname">bSpherical(</td><td>const bool&amp; ): True if spherical, false if euclidean </td></tr>
-    <tr><td class="paramname">gp(</td><td><a class="el" href="class_graphs_product.html" title=": Un produit de graphs ">GraphsProduct</a>&amp; ) To store the product (for the cocompacity and finite covolume tests) </td></tr>
-    <tr><td class="paramname">bGPVerticesNonLinkable(</td><td>vector&lt; bool &gt;&amp; ) Vertices which cannot be linked to the current product </td></tr>
+    <tr><td class="paramname">grIt(GraphsListIterator)</td><td>Iterator on the list </td></tr>
+    <tr><td class="paramname">graphsProductsCount(vector&lt;</td><td>map&lt;vector&lt; vector&lt;short unsigned int&gt; &gt;, unsigned int&gt; &gt;*) Point to the list of graphs </td></tr>
+    <tr><td class="paramname">bSpherical(const</td><td>bool&amp;): True if spherical, false if euclidean </td></tr>
+    <tr><td class="paramname">gp(GraphsProduct&amp;)</td><td>To store the product (for the cocompacity and finite covolume tests) </td></tr>
+    <tr><td class="paramname">bGPVerticesNonLinkable(vector&lt;</td><td>bool &gt;&amp;) Vertices which cannot be linked to the current product </td></tr>
   </table>
   </dd>
 </dl>
@@ -1329,10 +1329,10 @@ Friends</h2></td></tr>
 <p>Compute the FVector for the infinite sequence. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">grIt(</td><td><a class="el" href="class_graphs_list_iterator.html" title="Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl )  GraphsListIterator it...">GraphsListIterator</a> ): Iterator on the list </td></tr>
-    <tr><td class="paramname">bSpherical(</td><td>const bool&amp; ): True if spherical, false if euclidean </td></tr>
-    <tr><td class="paramname">gp(</td><td><a class="el" href="class_graphs_product.html" title=": Un produit de graphs ">GraphsProduct</a>&amp; ) To store the product (for the cocompacity and finite covolume tests) </td></tr>
-    <tr><td class="paramname">bGPVerticesNonLinkable(</td><td>vector&lt; bool &gt;&amp; ) Vertices which cannot be linked to the current product </td></tr>
+    <tr><td class="paramname">grIt(GraphsListIterator)</td><td>Iterator on the list </td></tr>
+    <tr><td class="paramname">bSpherical(const</td><td>bool&amp;): True if spherical, false if euclidean </td></tr>
+    <tr><td class="paramname">gp(GraphsProduct&amp;)</td><td>To store the product (for the cocompacity and finite covolume tests) </td></tr>
+    <tr><td class="paramname">bGPVerticesNonLinkable(vector&lt;</td><td>bool &gt;&amp;) Vertices which cannot be linked to the current product </td></tr>
   </table>
   </dd>
 </dl>
@@ -1726,9 +1726,9 @@ Weights of the dotted lines </dd></dl>
 <p>Return the growth series of the group. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iCyclotomicNumerator(</td><td>vector&lt;unsigned int&gt;&amp; ) Numerator (cyclotomic factors) </td></tr>
-    <tr><td class="paramname">iPolynomialDenominator(</td><td>vector&lt; mpz_class &gt;&amp; ) Denominator </td></tr>
-    <tr><td class="paramname">bReduced(</td><td>bool&amp; ) True if the fraction is reduced </td></tr>
+    <tr><td class="paramname">iCyclotomicNumerator(vector&lt;unsigned</td><td>int&gt;&amp;) Numerator (cyclotomic factors) </td></tr>
+    <tr><td class="paramname">iPolynomialDenominator(vector&lt;</td><td>mpz_class &gt;&amp;) Denominator </td></tr>
+    <tr><td class="paramname">bReduced(bool&amp;)</td><td>True if the fraction is reduced </td></tr>
   </table>
   </dd>
 </dl>
@@ -1891,7 +1891,7 @@ Weights of the dotted lines </dd></dl>
 <p>Get the index of a vertex. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strVertexLabel(</td><td>const string&amp; ) Label of the vertex </td></tr>
+    <tr><td class="paramname">strVertexLabel(const</td><td>string&amp;) Label of the vertex </td></tr>
   </table>
   </dd>
 </dl>
@@ -2215,7 +2215,7 @@ Weights of the dotted lines </dd></dl>
 <p>Get the label of a vertex. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iVertex(</td><td>const unsigned int&amp; ) Index of the vertex </td></tr>
+    <tr><td class="paramname">iVertex(const</td><td>unsigned int&amp;) Index of the vertex </td></tr>
   </table>
   </dd>
 </dl>
@@ -2330,11 +2330,11 @@ Weights of the dotted lines </dd></dl>
 <p>Given the parameters, compute iPolynomial/iSymbol += iTemp_polynomial/iTemp_symbol</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iPolynomial(</td><td>vector&lt; mpz_class &gt;&amp; ) First polynomial (by reference) </td></tr>
-    <tr><td class="paramname">iSymbol(</td><td>vector&lt;short unsigned int&gt;&amp; ) First symbol (by reference) </td></tr>
-    <tr><td class="paramname">iTemp_polynomial(</td><td>vector&lt; mpz_class &gt; ) Second polynomial </td></tr>
-    <tr><td class="paramname">iTemp_symbol(</td><td>const vector&lt;short unsigned int&gt;&amp; ) Second symbol </td></tr>
-    <tr><td class="paramname">biTemp(</td><td>mpz_class ) Eventually, some coefficient for the second polynomial</td></tr>
+    <tr><td class="paramname">iPolynomial(vector&lt;</td><td>mpz_class &gt;&amp;) First polynomial (by reference) </td></tr>
+    <tr><td class="paramname">iSymbol(vector&lt;short</td><td>unsigned int&gt;&amp;) First symbol (by reference) </td></tr>
+    <tr><td class="paramname">iTemp_polynomial(vector&lt;</td><td>mpz_class &gt;) Second polynomial </td></tr>
+    <tr><td class="paramname">iTemp_symbol(const</td><td>vector&lt;short unsigned int&gt;&amp;) Second symbol </td></tr>
+    <tr><td class="paramname">biTemp(mpz_class)</td><td>Eventually, some coefficient for the second polynomial</td></tr>
   </table>
   </dd>
 </dl>
@@ -2430,9 +2430,9 @@ Weights of the dotted lines </dd></dl>
 <p>From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iProduct(</td><td>const vector&lt; vector&lt;short unsigned int&gt; &gt;&amp; ) The product of graphs </td></tr>
-    <tr><td class="paramname">iSymbol(</td><td>vector&lt;short unsigned int&gt;&amp; ) [i] = j means [i, ..., i] j times (parameter by reference) </td></tr>
-    <tr><td class="paramname">iExponent(</td><td>unsigned int&amp; ) The exponent </td></tr>
+    <tr><td class="paramname">iProduct(const</td><td>vector&lt; vector&lt;short unsigned int&gt; &gt;&amp;) The product of graphs </td></tr>
+    <tr><td class="paramname">iSymbol(vector&lt;short</td><td>unsigned int&gt;&amp;) [i] = j means [i, ..., i] j times (parameter by reference) </td></tr>
+    <tr><td class="paramname">iExponent(unsigned</td><td>int&amp;) The exponent </td></tr>
   </table>
   </dd>
 </dl>
@@ -2479,9 +2479,9 @@ Weights of the dotted lines </dd></dl>
 <p>From a product of graphs, compute the corresponding symbol [n1, n2, ..., nk] together with the exponent.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iProduct(</td><td>const vector&lt; vector&lt;unsigned int&gt; &gt;&amp; ) The product of graphs </td></tr>
-    <tr><td class="paramname">strSymbol(</td><td>string&amp; ) </td></tr>
-    <tr><td class="paramname">iExponent</td><td>(u nsigned int&amp; ) The exponent </td></tr>
+    <tr><td class="paramname">iProduct(const</td><td>vector&lt; vector&lt;unsigned int&gt; &gt;&amp;) The product of graphs </td></tr>
+    <tr><td class="paramname">strSymbol(string&amp;)</td><td></td></tr>
+    <tr><td class="paramname">iExponent</td><td>(u nsigned int&amp;) The exponent </td></tr>
   </table>
   </dd>
 </dl>
@@ -2571,7 +2571,7 @@ Weights of the dotted lines </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Une fois le nombre de sommets du graphe connu (via inputRead() ), fait divers initialisations de variables. </p>
+<p>Une fois le nombre de sommets du graphe connu (via inputRead()), fait divers initialisations de variables. </p>
 
 </div>
 </div>
@@ -2602,8 +2602,8 @@ Weights of the dotted lines </dd></dl>
 <p>Do some computations related to the infinite sequence Remark: It is suppose that both t0, s0 are admissible vertices whose corresponding hyperplanes are (ultra)parallel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t0(</td><td>const string&amp; ) t0 Reflecting hyperplane </td></tr>
-    <tr><td class="paramname">t0(</td><td>const string&amp; ) s0 Other hyperplane </td></tr>
+    <tr><td class="paramname">t0(const</td><td>string&amp;) t0 Reflecting hyperplane </td></tr>
+    <tr><td class="paramname">t0(const</td><td>string&amp;) s0 Other hyperplane </td></tr>
   </table>
   </dd>
 </dl>
@@ -2646,7 +2646,7 @@ Weights of the dotted lines </dd></dl>
 <p>Add a references for a new vertex. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">strLabel(</td><td>const string&amp; ) Label of the vertec </td></tr>
+    <tr><td class="paramname">strLabel(const</td><td>string&amp;) Label of the vertec </td></tr>
   </table>
   </dd>
 </dl>
@@ -2704,7 +2704,7 @@ Weights of the dotted lines </dd></dl>
 <p>Remove the references to a vertex (for the label) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iIndex(</td><td>const unsigned int&amp; ) iIndex of the vertex </td></tr>
+    <tr><td class="paramname">iIndex(const</td><td>unsigned int&amp;) iIndex of the vertex </td></tr>
   </table>
   </dd>
 </dl>
@@ -2728,7 +2728,7 @@ Weights of the dotted lines </dd></dl>
 <p>Read and parse graph from stream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">streamIn(</td><td>const ifstream&amp; ) Stream to the content (file or std::cin) </td></tr>
+    <tr><td class="paramname">streamIn(const</td><td>ifstream&amp;) Stream to the content (file or std::cin) </td></tr>
   </table>
   </dd>
 </dl>
@@ -2804,7 +2804,7 @@ Weights of the dotted lines </dd></dl>
 <p>Display the euclidean graph products found. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graphsProductsCount(</td><td>vector&lt; map&lt;vector&lt; vector&lt;short unsigned int&gt; &gt;, unsigned int&gt; &gt;* ) Pointer to the vector contaitning the results </td></tr>
+    <tr><td class="paramname">graphsProductsCount(vector&lt;</td><td>map&lt;vector&lt; vector&lt;short unsigned int&gt; &gt;, unsigned int&gt; &gt;*) Pointer to the vector contaitning the results </td></tr>
   </table>
   </dd>
 </dl>
@@ -3019,7 +3019,7 @@ Weights of the dotted lines </dd></dl>
 <p>Set bWriteInfo. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bNewValue(</td><td>const bool&amp; ) The new value </td></tr>
+    <tr><td class="paramname">bNewValue(const</td><td>bool&amp;) The new value </td></tr>
   </table>
   </dd>
 </dl>
@@ -3044,7 +3044,7 @@ Weights of the dotted lines </dd></dl>
 <p>Set the Coxeter matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iMat(</td><td>const vector&lt; vector&lt;short unsigned int&gt; &gt;&amp; ) The matrix </td></tr>
+    <tr><td class="paramname">iMat(const</td><td>vector&lt; vector&lt;short unsigned int&gt; &gt;&amp;) The matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -4468,7 +4468,7 @@ Weights of the dotted lines </dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 16 2017 11:27:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 12 2017 15:04:18 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

@@ -18,5 +18,6 @@ var searchData=
   ['str_5freplace',['str_replace',['../string_8cpp.html#a59e97473f5ff50f48050142219004cee',1,'str_replace(string &amp;str, const string &amp;from, const string &amp;to):&#160;string.cpp'],['../string_8h.html#a59e97473f5ff50f48050142219004cee',1,'str_replace(string &amp;str, const string &amp;from, const string &amp;to):&#160;string.cpp']]],
   ['string_5fto_5fdouble',['string_to_double',['../string_8h.html#a7f1d2b89dd423a67e9d78f8bee202604',1,'string.h']]],
   ['string_5fto_5fint',['string_to_int',['../string_8h.html#a1bed6776e744849ee9c92ee93f389ed4',1,'string.h']]],
+  ['strinttostring',['strIntToString',['../class_tests.html#addf6ec587c7ee94f329f5798de13c181',1,'Tests']]],
   ['symboldisplay',['symbolDisplay',['../namespace_polynomials.html#adf9b49394b6221149a877bdcb379eb43',1,'Polynomials']]]
 ];

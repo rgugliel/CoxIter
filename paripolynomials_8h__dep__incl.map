@@ -1,5 +1,8 @@
 <map id="paripolynomials.h" name="paripolynomials.h">
-<area shape="rect" id="node2" href="$growthrate_8h.html" title="growthrate.h" alt="" coords="12,80,107,107"/>
-<area shape="rect" id="node4" href="$paripolynomials_8cpp.html" title="paripolynomials.cpp" alt="" coords="131,80,268,107"/>
+<area shape="rect" id="node2" href="$growthrate_8h.html" title="growthrate.h" alt="" coords="67,80,161,107"/>
+<area shape="rect" id="node7" href="$paripolynomials_8cpp.html" title="paripolynomials.cpp" alt="" coords="185,80,323,107"/>
 <area shape="rect" id="node3" href="$growthrate_8cpp.html" title="growthrate.cpp" alt="" coords="5,155,113,181"/>
+<area shape="rect" id="node4" href="$tests_8h.html" title="tests.h" alt="" coords="137,155,200,181"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="main.cpp" alt="" coords="81,229,155,256"/>
+<area shape="rect" id="node6" href="$tests_8cpp.html" title="tests.cpp" alt="" coords="180,229,256,256"/>
 </map>

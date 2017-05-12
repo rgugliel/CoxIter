@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="toc"><h3>Table of Contents</h3>
 <ul><li class="level1"><a href="#main_infosGens">General information</a></li>
 <li class="level1"><a href="#main_infosInstall">Installing CoxIter</a></li>
+<li class="level1"><a href="#main_infosTesting">Testing CoxIter</a></li>
 <li class="level1"><a href="#main_infosUpdate">Updating CoxIter</a></li>
 <li class="level1"><a href="#sec_toc">Table of contents</a></li>
 </ul>
@@ -123,6 +124,10 @@ Installing CoxIter</h1>
 </ul>
 </li>
 </ul>
+<h1><a class="anchor" id="main_infosTesting"></a>
+Testing CoxIter</h1>
+<p>To test <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a>, browse to "the testing/build/" folder and type the following commands: </p><div class="fragment"><div class="line">tar -xf ../../graphs/testing_index2.tar.gz --directory ../../graphs/</div><div class="line">cmake ../</div><div class="line">make</div><div class="line">./tests</div></div><!-- fragment --><p> The tests should take several minutes to complete.</p>
+<p>More information are available here: <a href="https://github.com/rgugliel/CoxIter/blob/master/testing/README.md">https://github.com/rgugliel/CoxIter/blob/master/testing/README.md</a></p>
 <h1><a class="anchor" id="main_infosUpdate"></a>
 Updating CoxIter</h1>
 <p>Under Linux and OSX, open a terminal and browse to your <a class="el" href="class_cox_iter.html" title="Main class for the work. ">CoxIter</a> directory. Then, type the following: </p><div class="fragment"><div class="line">git pull origin master</div><div class="line">cd build</div><div class="line">cmake ../</div><div class="line">make</div></div><!-- fragment --><p> That's it.</p>
@@ -135,7 +140,7 @@ Table of contents</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 16 2017 11:27:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 12 2017 15:04:18 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

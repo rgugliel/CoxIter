@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['of',['of',['../class_tests.html#a3f5eaa8a721d3c224cef21ec7b7c65bd',1,'Tests']]],
   ['omp_5fget_5fmax_5fthreads',['omp_get_max_threads',['../coxiter_8h.html#a2384f5fed79c84c48b8ff36677f424dd',1,'coxiter.h']]],
   ['omp_5fget_5fthread_5fnum',['omp_get_thread_num',['../coxiter_8h.html#a7ecd9a09bf2a55b6feffb28d349669fd',1,'coxiter.h']]],
   ['operator_21_3d',['operator!=',['../class_m_p_z__rational.html#a20c4464a377c4c589017597bd3cd30d4',1,'MPZ_rational::operator!=()'],['../class_number__template.html#af2cbb81e74f903c2274b523e03abf223',1,'Number_template::operator!=()'],['../class_rational.html#abbc9c1fb4b975c6613b2e7b98177d3b5',1,'Rational::operator!=()']]],

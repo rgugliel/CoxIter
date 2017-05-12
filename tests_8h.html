@@ -24,7 +24,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_39dc0668bd5a501998f94e8b4e546c71.html">media</a></li><li class="navelem"><a class="el" href="dir_2cd97c3d53a8b736a367b7f703129166.html">Data</a></li><li class="navelem"><a class="el" href="dir_2a4d21a58ec6c880978269b6e66b52a4.html">Rafael</a></li><li class="navelem"><a class="el" href="dir_d50a6021c5e79a5f5d9aeee48d2bf074.html">phd</a></li><li class="navelem"><a class="el" href="dir_4645ae5cda0a69477e67f0c6ece60ea0.html">codes</a></li><li class="navelem"><a class="el" href="dir_3cfc5aaa6a21a79cb58f2e0e47dbdcab.html">C++</a></li><li class="navelem"><a class="el" href="dir_13dee911b2f8f6670f795dae42abb7b8.html">CoxIter</a></li><li class="navelem"><a class="el" href="dir_ddf0dd0c2eaddff821e15fb7d182cfd6.html">tools</a></li><li class="navelem"><a class="el" href="dir_4be536f76e82ca80766bf0a056c1ed3a.html">tests</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_39dc0668bd5a501998f94e8b4e546c71.html">media</a></li><li class="navelem"><a class="el" href="dir_2cd97c3d53a8b736a367b7f703129166.html">Data</a></li><li class="navelem"><a class="el" href="dir_2a4d21a58ec6c880978269b6e66b52a4.html">Rafael</a></li><li class="navelem"><a class="el" href="dir_d50a6021c5e79a5f5d9aeee48d2bf074.html">phd</a></li><li class="navelem"><a class="el" href="dir_4645ae5cda0a69477e67f0c6ece60ea0.html">codes</a></li><li class="navelem"><a class="el" href="dir_3cfc5aaa6a21a79cb58f2e0e47dbdcab.html">C++</a></li><li class="navelem"><a class="el" href="dir_13dee911b2f8f6670f795dae42abb7b8.html">CoxIter</a></li><li class="navelem"><a class="el" href="dir_4d0569440b8c05f4cbc47d14064d5b68.html">testing</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -94,43 +94,42 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">tests.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="coxiter_8h_source.html">../../coxiter.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="growthrate_8h_source.html">../../growthrate.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="signature_8h_source.html">../../signature.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="regexp_8h_source.html">../../lib/regexp.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="arithmeticity_8h_source.html">../../arithmeticity.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="mpz__rational_8h_source.html">../../lib/numbers/mpz_rational.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="coxiter_8h_source.html">../coxiter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="growthrate_8h_source.html">../growthrate.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="signature_8h_source.html">../signature.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="regexp_8h_source.html">../lib/regexp.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="arithmeticity_8h_source.html">../arithmeticity.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mpz__rational_8h_source.html">../lib/numbers/mpz_rational.h</a>&quot;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;omp.h&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for tests.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="tests_8h__incl.png" border="0" usemap="#tests_8h" alt=""/></div>
 <map name="tests_8h" id="tests_8h">
-<area shape="rect" id="node2" href="coxiter_8h.html" title="../../coxiter.h" alt="" coords="1179,155,1275,181"/>
-<area shape="rect" id="node15" href="regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="403,453,493,480"/>
-<area shape="rect" id="node32" href="mpz__rational_8h.html" title="lib/numbers/mpz_rational.h" alt="" coords="327,379,505,405"/>
-<area shape="rect" id="node39" href="growthrate_8h.html" title="../../growthrate.h" alt="" coords="743,304,862,331"/>
-<area shape="rect" id="node42" href="signature_8h.html" title="../../signature.h" alt="" coords="2081,379,2191,405"/>
-<area shape="rect" id="node44" href="arithmeticity_8h.html" title="../../arithmeticity.h" alt="" coords="944,80,1072,107"/>
-<area shape="rect" id="node3" href="graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1385,304,1479,331"/>
-<area shape="rect" id="node11" href="graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1290,229,1427,256"/>
-<area shape="rect" id="node12" href="graphs_8product_8h.html" title="graphs.product.h" alt="" coords="1829,379,1947,405"/>
-<area shape="rect" id="node13" href="graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="1668,304,1809,331"/>
-<area shape="rect" id="node19" href="math__tools_8h.html" title="Some mathematical functions. " alt="" coords="1049,379,1164,405"/>
-<area shape="rect" id="node21" href="gmpxx_8h.html" title="gmpxx.h" alt="" coords="517,453,589,480"/>
-<area shape="rect" id="node30" href="polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="1189,379,1307,405"/>
-<area shape="rect" id="node4" href="graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1484,379,1588,405"/>
-<area shape="rect" id="node5" href="graph_8h.html" title="graph.h" alt="" coords="1682,453,1747,480"/>
-<area shape="rect" id="node16" href="pcre_8h.html" title="pcre.h" alt="" coords="172,528,231,555"/>
-<area shape="rect" id="node28" href="mpir_8h.html" title="mpir.h" alt="" coords="679,528,737,555"/>
-<area shape="rect" id="node33" href="number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="195,453,328,480"/>
-<area shape="rect" id="node34" href="string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="613,453,691,480"/>
-<area shape="rect" id="node41" href="paripolynomials_8h.html" title="lib/paripolynomials.h" alt="" coords="733,379,873,405"/>
+<area shape="rect" id="node2" href="coxiter_8h.html" title="../coxiter.h" alt="" coords="1141,155,1225,181"/>
+<area shape="rect" id="node15" href="regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="945,453,1034,480"/>
+<area shape="rect" id="node23" href="mpz__rational_8h.html" title="Rational number. " alt="" coords="1131,379,1309,405"/>
+<area shape="rect" id="node30" href="growthrate_8h.html" title="../growthrate.h" alt="" coords="1855,379,1961,405"/>
+<area shape="rect" id="node33" href="signature_8h.html" title="../signature.h" alt="" coords="2323,453,2421,480"/>
+<area shape="rect" id="node35" href="arithmeticity_8h.html" title="../arithmeticity.h" alt="" coords="1091,80,1207,107"/>
+<area shape="rect" id="node3" href="graphs_8list_8h.html" title="graphs.list.h" alt="" coords="277,304,371,331"/>
+<area shape="rect" id="node11" href="graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="219,229,357,256"/>
+<area shape="rect" id="node12" href="graphs_8product_8h.html" title="graphs.product.h" alt="" coords="398,379,517,405"/>
+<area shape="rect" id="node13" href="graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="483,304,624,331"/>
+<area shape="rect" id="node18" href="math__tools_8h.html" title="Some mathematical functions. " alt="" coords="1715,453,1829,480"/>
+<area shape="rect" id="node21" href="polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="1369,453,1487,480"/>
+<area shape="rect" id="node4" href="graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="144,379,248,405"/>
+<area shape="rect" id="node5" href="graph_8h.html" title="graph.h" alt="" coords="449,453,514,480"/>
+<area shape="rect" id="node24" href="number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="1211,453,1344,480"/>
+<area shape="rect" id="node25" href="string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="691,453,768,480"/>
+<area shape="rect" id="node32" href="paripolynomials_8h.html" title="lib/paripolynomials.h" alt="" coords="1905,453,2045,480"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -138,7 +137,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="tests_8h__dep__incl.png" border="0" usemap="#tests_8hdep" alt=""/></div>
 <map name="tests_8hdep" id="tests_8hdep">
-<area shape="rect" id="node2" href="tests_2main_8cpp.html" title="main.cpp" alt="" coords="5,80,80,107"/>
+<area shape="rect" id="node2" href="main_8cpp.html" title="main.cpp" alt="" coords="5,80,80,107"/>
 <area shape="rect" id="node3" href="tests_8cpp.html" title="tests.cpp" alt="" coords="105,80,181,107"/>
 </map>
 </div>
@@ -148,10 +147,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_test.html">Test</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contient les informations pour réaliser un test.  <a href="struct_test.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains information to perform a test.  <a href="struct_test.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tests.html">Tests</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classe de tests; devrait être appelée sur une grande liste de graphes après chaque modification sur le programme.  <a href="class_tests.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to perform the tests.  <a href="class_tests.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -159,7 +158,7 @@ Classes</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 18 2016 12:09:04 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 12 2017 15:04:18 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

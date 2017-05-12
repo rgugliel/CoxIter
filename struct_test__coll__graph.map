@@ -1,5 +1,4 @@
 <map id="Test" name="Test">
-<area shape="rect" id="node2" href="$class_m_p_z__rational.html" title="MPZ_rational" alt="" coords="99,124,197,151"/>
-<area shape="rect" id="node3" href="$class_number__template.html" title="Number_template" alt="" coords="5,13,131,39"/>
-<area shape="rect" id="node4" href="$class____gmp__expr_3_01mpz__t_00_01mpz__t_01_4.html" title="__gmp_expr\&lt; mpz_t,\l mpz_t \&gt;" alt="" coords="155,5,301,47"/>
+<area shape="rect" id="node2" href="$class_m_p_z__rational.html" title="MPZ_rational" alt="" coords="19,81,117,108"/>
+<area shape="rect" id="node3" href="$class_number__template.html" title="Number_template" alt="" coords="5,5,131,32"/>
 </map>

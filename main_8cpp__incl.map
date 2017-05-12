@@ -1,0 +1,20 @@
+<map id="main.cpp" name="main.cpp">
+<area shape="rect" id="node4" href="$tests_8h.html" title="tests.h" alt="" coords="1747,80,1810,107"/>
+<area shape="rect" id="node5" href="$coxiter_8h.html" title="../coxiter.h" alt="" coords="1259,229,1343,256"/>
+<area shape="rect" id="node17" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="438,528,527,555"/>
+<area shape="rect" id="node25" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="451,453,629,480"/>
+<area shape="rect" id="node32" href="$growthrate_8h.html" title="../growthrate.h" alt="" coords="2111,453,2217,480"/>
+<area shape="rect" id="node35" href="$signature_8h.html" title="../signature.h" alt="" coords="2408,528,2507,555"/>
+<area shape="rect" id="node37" href="$arithmeticity_8h.html" title="../arithmeticity.h" alt="" coords="1374,155,1490,181"/>
+<area shape="rect" id="node6" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1103,379,1196,405"/>
+<area shape="rect" id="node13" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1030,304,1167,331"/>
+<area shape="rect" id="node14" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="929,453,1047,480"/>
+<area shape="rect" id="node15" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="813,379,955,405"/>
+<area shape="rect" id="node20" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="1648,528,1763,555"/>
+<area shape="rect" id="node23" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="1505,528,1623,555"/>
+<area shape="rect" id="node7" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1072,453,1176,480"/>
+<area shape="rect" id="node8" href="$graph_8h.html" title="graph.h" alt="" coords="958,528,1023,555"/>
+<area shape="rect" id="node26" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="229,528,363,555"/>
+<area shape="rect" id="node27" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="552,528,629,555"/>
+<area shape="rect" id="node34" href="$paripolynomials_8h.html" title="lib/paripolynomials.h" alt="" coords="2193,528,2333,555"/>
+</map>

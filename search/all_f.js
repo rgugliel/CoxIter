@@ -1,7 +1,9 @@
 var searchData=
 [
+  ['readme',['README',['../md__media_Data_Rafael_phd_codes_C++_CoxIter_testing_README.html',1,'']]],
   ['rational',['Rational',['../class_rational.html',1,'Rational&lt; T &gt;'],['../class_rational.html#a1c451780c3a8c9d44ea4695707e21429',1,'Rational::Rational()'],['../class_rational.html#a8c4685379199da50b7e71ba814c5ad71',1,'Rational::Rational(T a, T b)'],['../class_rational.html#a1014fdf4680baab821eb09f349a1233d',1,'Rational::Rational(T a)'],['../class_rational.html#a58bdd582df10655d461039274c7b4edb',1,'Rational::Rational(const int &amp;i)']]],
   ['rational_2eh',['rational.h',['../rational_8h.html',1,'']]],
+  ['readgraphsfile',['readGraphsFile',['../class_tests.html#a6fa937084b6d563dd6ec2f8d3811c9f6',1,'Tests']]],
   ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
   ['regerror',['regError',['../class_p_c_r_e_regexp.html#a6096ce5ac53a5b064cb57270f28e15eb',1,'PCRERegexp']]],
   ['regerroroffset',['regErrorOffset',['../class_p_c_r_e_regexp.html#aad0f61c1f596c31fb133afd63ebee9c4',1,'PCRERegexp']]],

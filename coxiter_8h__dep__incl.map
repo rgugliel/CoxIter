@@ -1,9 +1,12 @@
 <map id="coxiter.h" name="coxiter.h">
 <area shape="rect" id="node2" href="$app_8h.html" title="app.h" alt="" coords="115,155,170,181"/>
-<area shape="rect" id="node4" href="$index2_8h.html" title="index2.h" alt="" coords="34,80,105,107"/>
-<area shape="rect" id="node6" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="180,80,284,107"/>
-<area shape="rect" id="node8" href="$coxiter_8cpp.html" title="coxiter.cpp" alt="" coords="309,80,395,107"/>
+<area shape="rect" id="node4" href="$index2_8h.html" title="index2.h" alt="" coords="55,80,126,107"/>
+<area shape="rect" id="node6" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="201,80,305,107"/>
+<area shape="rect" id="node8" href="$tests_8h.html" title="tests.h" alt="" coords="337,155,399,181"/>
+<area shape="rect" id="node11" href="$coxiter_8cpp.html" title="coxiter.cpp" alt="" coords="381,80,467,107"/>
 <area shape="rect" id="node3" href="$app_8cpp.html" title="app.cpp" alt="" coords="109,229,177,256"/>
 <area shape="rect" id="node5" href="$index2_8cpp.html" title="index2.cpp" alt="" coords="5,155,91,181"/>
 <area shape="rect" id="node7" href="$arithmeticity_8cpp.html" title="arithmeticity.cpp" alt="" coords="194,155,313,181"/>
+<area shape="rect" id="node9" href="$main_8cpp.html" title="main.cpp" alt="" coords="380,229,455,256"/>
+<area shape="rect" id="node10" href="$tests_8cpp.html" title="tests.cpp" alt="" coords="279,229,355,256"/>
 </map>
