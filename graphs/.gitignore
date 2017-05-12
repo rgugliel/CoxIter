@@ -1,6 +1,21 @@
 !.gitignore
 
 /*
+!testing_index2.tar.gz
+!16-tum03_236.coxiter
+!10-thierryP_1-10.coxiter
+!6-PauperGamma5.coxiter
+!5-birectified-5-simplex.coxiter
+!4-felikson2007_5.2.1.coxiter
+!4-felikson2007_5.2.2.coxiter
+!4-felikson2007_5.2.3.coxiter
+!4-felikson2007_5.2.7.coxiter
+
 !cocompact/
 !Tumarkin pyramids n+2/
 !Tumarkin simplices/
+!group units qf/
+!non-cocompact n+3 v3/
+!simplices/
+!doubly truncated orthoscheme/
+!constructions/
