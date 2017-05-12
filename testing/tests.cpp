@@ -264,7 +264,7 @@ bool Tests::bRunTests()
 		ci.set_bCheckCocompactness(tests[i].bTestCompacity);
 		ci.set_bCheckCofiniteness(true);
 		
-		if (!ci.bReadGraphFromFile("../../../graphs/" + tests[i].szFile))
+		if (!ci.bReadGraphFromFile("../../graphs/" + tests[i].szFile))
 		{
 			of << "Error\t " << tests[i].szFile << endl;
 			of << "\t\tError when reading file(" << ci.get_strError() << ")" << endl;
