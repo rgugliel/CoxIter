@@ -6,13 +6,13 @@ The file `tests.txt` contains data about a large set of hyperbolic Coxeter group
 # Building
 In `build/` do:
 ```
+tar -xf ../../graphs/testing_index2.tar.gz --directory ../../graphs/
 cmake ../
 make
 ```
 
 # Use
-* First, extract the archive `graphs/testing_index2.tar.gz`
-* In `build/` do:
+In `build/` do:
 ```
 ./tests
 ```
