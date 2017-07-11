@@ -402,6 +402,9 @@ void Tests::bRunTests_growth(const unsigned int& iTestIndex, CoxIter* ci)
 		}
 	}
 	
+	if (grr.iPerron != 1)
+		cout << "INFO: Not a Perron number in " << tests[iTestIndex].szFile << endl;
+	
 	// A small test of the growth series
 	if (ci->get_iIsFiniteCovolume()> 0 )
 	{
