@@ -639,5 +639,5 @@ void App::printHelp() const
 	"\t-g  : growth series\n"
 	"\t-gr : growth rate\n"
 	"\t-s  : signature\n\n"
-	"There is many more options regarding the format of the output and the possible computations.\nThe full documentation is available here:\n\thttps://rgugliel.github.io/CoxIter/" << endl;
+	"There are many more options regarding the format of the output and the possible computations.\nThe full documentation is available here:\n\thttps://rgugliel.github.io/CoxIter/" << endl;
 }
