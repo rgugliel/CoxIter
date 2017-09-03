@@ -63,7 +63,7 @@ GrowthRate_Result GrowthRate::grrComputations(vector< mpz_class > iPolynomial, c
 	
 	// ----------------------------------------------------
 	// Here we know the minimal root and the corresponding polynomial
-	GEN gTemp, gRoot; // Temp variable
+	GEN gTemp, gRoot, gGrowthRateSquared; // Temp variable
 	
 	if (bOnlyGrowthRate)
 	{
@@ -72,6 +72,8 @@ GrowthRate_Result GrowthRate::grrComputations(vector< mpz_class > iPolynomial, c
 		return grr;
 	}
 	
+	gGrowthRateSquared = gmul(gGrowthRate, gGrowthRate);
+
 	// ----------------------------------------------------
 	// Control variables
 	long int iRealRootsCount(sturm(t_POLfactors[ iIndexMaximalRoot ])), iRealRootsFound(0); // Number of real roots and the one detected as such
@@ -105,40 +107,54 @@ GrowthRate_Result GrowthRate::grrComputations(vector< mpz_class > iPolynomial, c
 			iNumberRootsMaybeInsideUnitCircle++;
 		
 		if (mpcmp(absr(gimag(gRoot)), gEpsilon) > 0) // The element is non-real
-			continue;
-		else
 		{
-			// ----------------------------------------
-			// Perron?
+			// We check that |gRoot|^2 + epsilon < gGrowRate^2
+			if (mpcmp(gadd(gTemp, gEpsilon), gGrowthRateSquared) >= 0)
+			{
+				if (mpcmp(gsub(gTemp, gEpsilon), gGrowthRateSquared) >= 0)
+					grr.iPerron = -1; // We cannot decide
+				else
+				{
+					cout << "Growth rate="; output(gGrowthRate); cout << endl;
+					cout << "Current tested root=";
+					output(gRoot);
+					grr.iPerron = 0; // Not Perron
+				}
+			}
+		}
+		else // The root is real
+		{
 			if (mpcmp(greal(gRoot), gen_0) < 0) // If negative
 			{
 				iRealNegativeRootsFound++;
 				
 				// We check that |gRoot| + epsilon < gGrowRate
-				if (mpcmp(gadd(greal(gRoot), gEpsilon), gGrowthRate) >= 0 && grr.iPerron != -1)
+				if (mpcmp(gadd(greal(gRoot), gEpsilon), gGrowthRate) >= 0)
 				{
 					if (mpcmp(gsub(greal(gRoot), gEpsilon), gGrowthRate) < 0)
 						grr.iPerron = -1; // We cannot decide
 					else
 					{
-						cout << "tau1="; output(gGrowthRate); cout << endl;
-						cout << "Peron0;\nroot=";
+						cout << "Growth rate="; output(gGrowthRate); cout << endl;
+						cout << "Current tested root=";
 						output(gRoot);
-						cout << "\ntau2="; output(gGrowthRate); 
-						cout << endl;
 						grr.iPerron = 0; // Not Perron
 					}
 				}
 			}
+			// If positive, nothing to do since we selected the smallest positive root and took the inverse
 			
 			iRealRootsFound++;
 		}
+		
+		if (grr.iPerron < 1) // 0 (not Perron, -1 cannot decide)
+			break;
 	}
 		
-	if (iRealRootsCount != iRealRootsFound)
+	if (grr.iPerron == 1 && iRealRootsCount != iRealRootsFound)
 		throw(string("GrowthRate::grrComputations: Some root have a too small imaginary part"));
 	
-	if (iRealNegativeRootsCount != iRealNegativeRootsFound)
+	if (grr.iPerron == 1 && iRealNegativeRootsCount != iRealNegativeRootsFound)
 		throw(string("GrowthRate::grrComputations: Some negative root is too close to zero"));
 	
 	if (iNumberRootsInsideUnitCircle != iNumberRootsMaybeInsideUnitCircle)
