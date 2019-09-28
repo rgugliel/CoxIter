@@ -26,47 +26,47 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 /*!
  * \file graphs.product.set.h
  * \author Rafael Guglielmetti
- * 
+ *
  * \class GraphsProduct
  * \brief: Un produit de graphess
- * 
+ *
  * Ces produits sont utilisés pour tester la compacité
-*/
+ */
 
+#include <iterator>
 #include <set>
 #include <string>
-#include <iterator>
 
 #include "graph.h"
 #include "graphs.product.h"
 
 using namespace std;
 
-class GraphsProductSet
-{
-	public:
-		unsigned int iRank; ///< Rank of the graph
-		set< Graph*, GraphPtrComp > graphs; ///< Pointeurs vers les graphes qui constituent le produit
-		
-	public:
-		GraphsProductSet();
-		GraphsProductSet(const GraphsProduct& gp);
-		
-		/*!	\fn get_iVertices
-		 * 	\brief Get the list of vertices of the product
-		 * 
-		 * 	\return vertices(vector< unsigned int >)
-		 */
-		vector< short unsigned int > get_iVertices() const;
-		
-		/*!	\fn b_areVerticesSubsetOf
-		 * 	\brief Test if the vertices appear in another Product
-		 * 	\param gp(const GraphsProductSet&): The other product
-		 * 	\return Bool
-		 */
-		bool b_areVerticesSubsetOf(const GraphsProductSet& gp) const;
-		
-	friend ostream& operator<<(ostream &o, const GraphsProductSet& gp);
+class GraphsProductSet {
+public:
+  unsigned int iRank; ///< Rank of the graph
+  set<Graph *, GraphPtrComp>
+      graphs; ///< Pointeurs vers les graphes qui constituent le produit
+
+public:
+  GraphsProductSet();
+  GraphsProductSet(const GraphsProduct &gp);
+
+  /*!	\fn get_iVertices
+   * 	\brief Get the list of vertices of the product
+   *
+   * 	\return vertices(vector< unsigned int >)
+   */
+  vector<short unsigned int> get_iVertices() const;
+
+  /*!	\fn b_areVerticesSubsetOf
+   * 	\brief Test if the vertices appear in another Product
+   * 	\param gp(const GraphsProductSet&): The other product
+   * 	\return Bool
+   */
+  bool b_areVerticesSubsetOf(const GraphsProductSet &gp) const;
+
+  friend ostream &operator<<(ostream &o, const GraphsProductSet &gp);
 };
 
 #endif // GRAPHSPRODUCTSET_H

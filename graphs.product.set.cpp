@@ -22,55 +22,53 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graphs.product.set.h"
 
-GraphsProductSet::GraphsProductSet()
-: iRank(0)
-{
+GraphsProductSet::GraphsProductSet() : iRank(0) {}
+
+GraphsProductSet::GraphsProductSet(const GraphsProduct &gp) {
+  iRank = gp.iRank;
+
+  for (vector<Graph *>::const_iterator it(gp.graphs.begin());
+       it != gp.graphs.end(); ++it)
+    graphs.insert(*it);
 }
 
-GraphsProductSet::GraphsProductSet(const GraphsProduct& gp)
-{
-	iRank = gp.iRank;
-	
-	for (vector< Graph* >::const_iterator it(gp.graphs.begin()); it != gp.graphs.end(); ++it)
-		graphs.insert(*it);
+vector<short unsigned int> GraphsProductSet::get_iVertices() const {
+  vector<short unsigned int> iVertices;
+
+  for (set<Graph *>::const_iterator itProd(graphs.begin());
+       itProd != graphs.end(); ++itProd) {
+    for (vector<short unsigned int>::const_iterator itV(
+             (*itProd)->iVertices.begin());
+         itV != (*itProd)->iVertices.end(); ++itV) {
+      iVertices.push_back(*itV);
+    }
+  }
+
+  return iVertices;
 }
 
-vector< short unsigned int > GraphsProductSet::get_iVertices() const
-{
-	vector< short unsigned int > iVertices;
-	
-	for (set< Graph* >::const_iterator itProd(graphs.begin()); itProd != graphs.end(); ++itProd)
-	{
-		for (vector< short unsigned int >::const_iterator itV((*itProd)->iVertices.begin()); itV != (*itProd)->iVertices.end(); ++itV)
-		{
-			iVertices.push_back(*itV);
-		}
-	}
-	
-	return iVertices;
+bool GraphsProductSet::b_areVerticesSubsetOf(const GraphsProductSet &gp) const {
+  /* NOTE:
+   * We could sort de vectors and use the standard function includes but this is
+   * slower (tested with 17-vinb85).
+   */
+  vector<short unsigned int> iVerticesSmall(get_iVertices()),
+      iVerticesBig(gp.get_iVertices());
+
+  for (vector<short unsigned int>::const_iterator it(iVerticesSmall.begin());
+       it != iVerticesSmall.end(); ++it) {
+    if (find(iVerticesBig.begin(), iVerticesBig.end(), *it) ==
+        iVerticesBig.end())
+      return false;
+  }
+
+  return true;
 }
 
+ostream &operator<<(ostream &o, const GraphsProductSet &gp) {
+  for (set<Graph *>::const_iterator it(gp.graphs.begin());
+       it != gp.graphs.end(); ++it)
+    o << **it;
 
-bool GraphsProductSet::b_areVerticesSubsetOf(const GraphsProductSet& gp) const
-{
-	/* NOTE:
-		* We could sort de vectors and use the standard function includes but this is slower (tested with 17-vinb85).
-	*/
-	vector< short unsigned int > iVerticesSmall(get_iVertices()), iVerticesBig(gp.get_iVertices());
-	
-	for (vector< short unsigned int >::const_iterator it(iVerticesSmall.begin()); it != iVerticesSmall.end(); ++it)
-	{
-		if (find(iVerticesBig.begin(), iVerticesBig.end(), *it) == iVerticesBig.end())
-			return false;
-	}
-	
-	return true;
-}
-
-ostream& operator<<(ostream &o, const GraphsProductSet& gp)
-{
-	for (set< Graph* >::const_iterator it(gp.graphs.begin()); it != gp.graphs.end(); ++it)
-		o << **it;
-	
-	return o;
+  return o;
 }

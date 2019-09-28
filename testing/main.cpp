@@ -20,40 +20,40 @@ You should have received a copy of the GNU General Public License
 along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <iostream>
 #include <chrono>
+#include <iostream>
 
 using namespace std;
 
 #include "tests.h"
 
-int main() 
-{
-	chrono::time_point<chrono::system_clock> timeStart, timeEnd;
+int main() {
+  chrono::time_point<chrono::system_clock> timeStart, timeEnd;
 
-	cout << "Test suite for CoxIter\n" << endl;
-	
-	Tests t;
-	if (!t.readGraphsFile("../tests.txt"))
-	{
-		cout << "Error\n\tCannot read ../tests.txt" << endl;
-		cout << "Aborting" << endl;
-		return 0;
-	}
-	
-	cout <<  "Number of graphs that will be read: " <<  t.get_iTestsCount() <<  endl;
-	
-	timeStart = chrono::system_clock::now();
-	
-	if (!t.bRunTests())
-	{
-		cout << "Error\n\t" << t.get_strError() << endl;
-		cout << "Aborting" << endl;
-		return 0;
-	}
-	
-	timeEnd = chrono::system_clock::now();
-	cout << "Computation time: " << chrono::duration <double, milli>(timeEnd-timeStart).count() / 1000 << "s\n" << endl;
-	
-	return 0;
+  cout << "Test suite for CoxIter\n" << endl;
+
+  Tests t;
+  if (!t.readGraphsFile("../tests.txt")) {
+    cout << "Error\n\tCannot read ../tests.txt" << endl;
+    cout << "Aborting" << endl;
+    return 0;
+  }
+
+  cout << "Number of graphs that will be read: " << t.get_iTestsCount() << endl;
+
+  timeStart = chrono::system_clock::now();
+
+  if (!t.bRunTests()) {
+    cout << "Error\n\t" << t.get_strError() << endl;
+    cout << "Aborting" << endl;
+    return 0;
+  }
+
+  timeEnd = chrono::system_clock::now();
+  cout << "Computation time: "
+       << chrono::duration<double, milli>(timeEnd - timeStart).count() / 1000
+       << "s\n"
+       << endl;
+
+  return 0;
 }
