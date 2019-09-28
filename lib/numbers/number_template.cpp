@@ -24,60 +24,48 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \file number_template.cpp
  * \brief Not really useful
  * \author Rafael Guglielmetti
-*/
+ */
 
 #include "number_template.h"
 
-bool Number_template::operator==(Number_template const &) const
-{
-	return false;
+bool Number_template::operator==(Number_template const &) const {
+  return false;
 }
 
-bool Number_template::operator!=(Number_template const &) const
-{
-	return false;
+bool Number_template::operator!=(Number_template const &) const {
+  return false;
 }
 
-Number_template Number_template::operator+(Number_template const &n) const
-{
-	return *this;
+Number_template Number_template::operator+(Number_template const &n) const {
+  return *this;
 }
 
-Number_template& Number_template::operator+=(Number_template const &n)
-{
-	return *this;
+Number_template &Number_template::operator+=(Number_template const &n) {
+  return *this;
 }
 
-Number_template Number_template::operator-(Number_template const &n) const
-{
-	return *this;
+Number_template Number_template::operator-(Number_template const &n) const {
+  return *this;
 }
 
-Number_template& Number_template::operator-=(Number_template const &n)
-{
-	return *this;
+Number_template &Number_template::operator-=(Number_template const &n) {
+  return *this;
 }
 
-Number_template Number_template::operator*(Number_template const &n) const
-{
-	return *this;
+Number_template Number_template::operator*(Number_template const &n) const {
+  return *this;
 }
 
-Number_template& Number_template::operator*=(Number_template const &n)
-{
-	return *this;
+Number_template &Number_template::operator*=(Number_template const &n) {
+  return *this;
 }
 
-Number_template Number_template::operator/(Number_template const &n) const
-{
-	return *this;
+Number_template Number_template::operator/(Number_template const &n) const {
+  return *this;
 }
 
-Number_template&Number_template:: operator/=(Number_template const &n)
-{
-	return *this;
+Number_template &Number_template::operator/=(Number_template const &n) {
+  return *this;
 }
 
-void Number_template::print(ostream &) const
-{
-}
+void Number_template::print(ostream &) const {}

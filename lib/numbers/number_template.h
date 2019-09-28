@@ -25,7 +25,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \brief Permet d'avoir un type générique (regroupant Number_rational, ...)
  * \author Rafael Guglielmetti
  * \class Number_template number_template.h
-*/
+ */
 
 #ifndef __NUMBER_TEMPLATE_H__
 #define __NUMBER_TEMPLATE_H__
@@ -34,33 +34,32 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace std;
 
-class Number_template
-{
-	public:
-		bool isZero;
-		bool isMinusOne;
-		bool isOne;
-		bool isInt;
+class Number_template {
+public:
+  bool isZero;
+  bool isMinusOne;
+  bool isOne;
+  bool isInt;
 
-	public:
-		virtual bool operator==(Number_template const &) const;
-		virtual bool operator!=(Number_template const &) const;
-		
-		virtual Number_template operator+(Number_template const &n) const;
-		virtual Number_template& operator+=(Number_template const &n);
+public:
+  virtual bool operator==(Number_template const &) const;
+  virtual bool operator!=(Number_template const &) const;
 
-		virtual Number_template operator-(Number_template const &n) const;
-		virtual Number_template& operator-=(Number_template const &n);
-		
-		virtual Number_template operator*(Number_template const &n) const;
-		virtual Number_template& operator*=(Number_template const &n);
+  virtual Number_template operator+(Number_template const &n) const;
+  virtual Number_template &operator+=(Number_template const &n);
 
-		virtual Number_template operator/(Number_template const &n) const;
-		virtual Number_template& operator/=(Number_template const &n);
+  virtual Number_template operator-(Number_template const &n) const;
+  virtual Number_template &operator-=(Number_template const &n);
 
-		virtual void print(ostream &) const;
+  virtual Number_template operator*(Number_template const &n) const;
+  virtual Number_template &operator*=(Number_template const &n);
+
+  virtual Number_template operator/(Number_template const &n) const;
+  virtual Number_template &operator/=(Number_template const &n);
+
+  virtual void print(ostream &) const;
 };
 
-ostream& operator<<(ostream& , Number_template const &);
+ostream &operator<<(ostream &, Number_template const &);
 
 #endif

@@ -23,30 +23,29 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 /*!
  * \file signature.h
  * \author Rafael Guglielmetti
- * 
+ *
  * \class GrowthRate
  * \brief To compute the signature of a matrix (PARI format)
-*/
+ */
 
 #ifndef SIGNATURE_H
 #define SIGNATURE_H
 
+#include <array>
 #include <pari/pari.h>
 #include <string>
-#include <array>
 
 using namespace std;
 
-class Signature
-{
-	private:
-		GEN gEpsilon; ///< Some small number (typically 10^-50)
-		
-	public:
-		Signature();
-		~Signature();
-		
-		array< unsigned int, 3 > iComputeSignature(string strMatrix);
+class Signature {
+private:
+  GEN gEpsilon; ///< Some small number (typically 10^-50)
+
+public:
+  Signature();
+  ~Signature();
+
+  array<unsigned int, 3> iComputeSignature(string strMatrix);
 };
 
 #endif // SIGNATURE_H

@@ -25,10 +25,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \brief To simplify the use of regexp
  * \author Rafael Guglielmetti
  * \class PCRERegexp regexp.h
-*/
+ */
 
-#include <string>
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include <pcre.h>
@@ -38,46 +38,47 @@ using namespace std;
 #ifndef __REGEXP_H__
 #define __REGEXP_H__
 
-#include <stdexcept>      // std::invalid_argument // TODO: remove
+#include <stdexcept> // std::invalid_argument // TODO: remove
 
-typedef vector< vector< string > > PCREResult;
+typedef vector<vector<string>> PCREResult;
 
-class PCRERegexp
-{
-	private:
-		string strError; ///< Eventually, error code
-		bool bClassUsed; ///< True if the class was used
+class PCRERegexp {
+private:
+  string strError; ///< Eventually, error code
+  bool bClassUsed; ///< True if the class was used
 
-		pcre *regexp;
-		const char *regPattern;
-		const char *regSubject;
-		const char *regError;
-		
-		int regErrorOffset;
-		int regSubjectLength;
+  pcre *regexp;
+  const char *regPattern;
+  const char *regSubject;
+  const char *regError;
 
-		int *ovector; ///< Information about the result
-		int iOvectorSize; ///< Size of the ovector array
+  int regErrorOffset;
+  int regSubjectLength;
 
-	public:
-		PCRERegexp(int iOvectorSize = 30);
-		~PCRERegexp();
+  int *ovector;     ///< Information about the result
+  int iOvectorSize; ///< Size of the ovector array
 
-		/*!	\fn preg_match_all
-		* 	\brief As the usual PHP preg_match_all: executes the regexp and fetch all the occurrences
-		* 	\param pattern(const string &) The pattern to search for
-		* 	\param subject(const string &) The input string
-		* 	\param results(PCREResult &) Array of all matches in multi-dimensional array
-		* 	\param optionsCompile(const int&) Options for the regexp. For example: 0, PCRE_CASELESS
-		* 	\return Number of results (unsigned int) or -1 if an error occurred
-		*/
-		int preg_match_all(const string &pattern, const string &subject, PCREResult &results, const int& optionsCompile = 0);
+public:
+  PCRERegexp(int iOvectorSize = 30);
+  ~PCRERegexp();
 
-		/*! \fn get_strError
-		* 	\brief Return the error ccode
-		* 	\return Error code (string)
-		*/
-		string get_strError();
+  /*!	\fn preg_match_all
+   * 	\brief As the usual PHP preg_match_all: executes the regexp and fetch
+   * all the occurrences \param pattern(const string &) The pattern to search
+   * for \param subject(const string &) The input string \param
+   * results(PCREResult &) Array of all matches in multi-dimensional array
+   * 	\param optionsCompile(const int&) Options for the regexp. For example:
+   * 0, PCRE_CASELESS \return Number of results (unsigned int) or -1 if an error
+   * occurred
+   */
+  int preg_match_all(const string &pattern, const string &subject,
+                     PCREResult &results, const int &optionsCompile = 0);
+
+  /*! \fn get_strError
+   * 	\brief Return the error ccode
+   * 	\return Error code (string)
+   */
+  string get_strError();
 };
 
 #endif

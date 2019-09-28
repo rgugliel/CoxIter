@@ -22,53 +22,47 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "signature.h"
 
-Signature::Signature()
-{
-	pari_init(50000000, 2);
-	
-	/* 
-	 * Note: gEpsilon must be BIG compared to the precision up to which we compute the eigenvalues
-	 * */
-	gEpsilon = dbltor(1e-40);
+Signature::Signature() {
+  pari_init(50000000, 2);
+
+  /*
+   * Note: gEpsilon must be BIG compared to the precision up to which we compute
+   * the eigenvalues
+   * */
+  gEpsilon = dbltor(1e-40);
 }
 
-Signature::~Signature()
-{
-	pari_close();
-}
+Signature::~Signature() { pari_close(); }
 
-std::array< unsigned int, int(3) > Signature::iComputeSignature(string strMatrix)
-{
-	array< unsigned int, int(3) > iSignature({0,0,0});
-	GEN gMatrix;
-	
-	long prec;
-	setrealprecision(57, &prec); // increase precision for the gp_read_str
-	
-	pari_CATCH(CATCH_ALL) 
-	{
-		throw(string("Signature::iComputeSignature: Incorrect matrix; check the weights"));
-	}
-	pari_TRY
-	{
-		gMatrix = gp_read_str(strMatrix.c_str());
-	}
-	pari_ENDCATCH
-	
-	GEN gEigenvalues(gel(jacobi(gMatrix, 20), 1)), gTemp;
-	long int iEigenvaluesCount(lg(gEigenvalues));
-	
-	for (long int i(1); i < iEigenvaluesCount; i++)
-	{
-		gTemp = gel(gEigenvalues, i);
-		
-		if (mpcmp(absr(gTemp), gEpsilon) < 0)
-			iSignature[2]++;
-		else if (mpcmp(gadd(gTemp, gEpsilon), gen_0) < 0)
-			iSignature[1]++;
-		else if (mpcmp(gsub(gTemp, gEpsilon), gen_0) > 0)
-			iSignature[0]++;
-	}
-	
-	return iSignature;
+std::array<unsigned int, int(3)>
+Signature::iComputeSignature(string strMatrix) {
+  array<unsigned int, int(3)> iSignature({0, 0, 0});
+  GEN gMatrix;
+
+  long prec;
+  setrealprecision(57, &prec); // increase precision for the gp_read_str
+
+  pari_CATCH(CATCH_ALL) {
+    throw(string(
+        "Signature::iComputeSignature: Incorrect matrix; check the weights"));
+  }
+  pari_TRY { gMatrix = gp_read_str(strMatrix.c_str()); }
+  pari_ENDCATCH
+
+      GEN gEigenvalues(gel(jacobi(gMatrix, 20), 1)),
+      gTemp;
+  long int iEigenvaluesCount(lg(gEigenvalues));
+
+  for (long int i(1); i < iEigenvaluesCount; i++) {
+    gTemp = gel(gEigenvalues, i);
+
+    if (mpcmp(absr(gTemp), gEpsilon) < 0)
+      iSignature[2]++;
+    else if (mpcmp(gadd(gTemp, gEpsilon), gen_0) < 0)
+      iSignature[1]++;
+    else if (mpcmp(gsub(gTemp, gEpsilon), gen_0) > 0)
+      iSignature[0]++;
+  }
+
+  return iSignature;
 }
