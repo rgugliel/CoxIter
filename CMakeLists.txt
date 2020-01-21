@@ -40,6 +40,11 @@ target_link_libraries( coxiter ${PCRE_LIBRARY} )
 
 find_library( GMP_LIBRARY gmp )
 target_link_libraries( coxiter ${GMP_LIBRARY} )
+# find <gmpxx.h> in APPLE
+if( APPLE )
+	set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -I/usr/local/include" )
+	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/include" )
+endif()
 
 find_library( GMP_LIBRARYXX gmpxx )
 target_link_libraries( coxiter ${GMP_LIBRARYXX} )
