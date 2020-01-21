@@ -25,85 +25,92 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graph.h"
 
-#include <vector>
 #include <algorithm>
 #include <iterator>
+#include <vector>
 
 using namespace std;
 
 /*!
  * \file graphs.list.n.h
  * \author Rafael Guglielmetti
- * 
+ *
  * \class GraphsListN
  * \brief Liste des graphes d'une taille donnée
-*/
-class GraphsListN
-{
-	private:
-		vector< Graph > graphs; ///< Liste des graphes trouvés
-		unsigned int iVerticesCount; ///< Nombre de sommets des graphes de la liste
-		
-		vector< string > *ptr_map_vertices_indexToLabel; ///< Pointeur vers la correspondance
-		
-	public:
-		GraphsListN(unsigned int iVerticesCount, vector< string > *ptr_map_vertices_indexToLabel);
-		
-		/*! 	\fn addGraph
-		 * 	\brief Ajoute un graphe à la liste
-		 * 	\param iVertices Sommets du graphe
-		 * 	\param bVerticesLinkable Sommets qui sont liables au graphes
-		 * 	\param iType(const unsigned int &): Type du graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7)
-		 * 	\param bSpherical(bool) True si sphérique, false si euclidien
-		 * 	\param iVertexSupp1 Premier sommet supplémentaire (par exemple pour les B)
-		 *	\param iVertexSupp2 Second sommet supplémentaire (par exemple pour les B)
-		 * 	\param iDataSupp(const unsigned int &): donnée supplémentaire (par exemple, pour le G_2, le poids)
-		 */
-		void addGraph(vector< short unsigned int > iVertices, const vector< bool > &bVerticesLinkable, const unsigned &iType, bool bSpherical, const short unsigned int &iVertexSupp1 = 0, const short unsigned int &iVertexSupp2 = 0, const unsigned int &iDataSupp = 0);
-		
-		/*!	\fn addGraphsList
-		 * 	\brief Concatenate another list to the current list
-		 * 
-		 * 	\param gln(const GraphsListN&) Other list
-		 * 	\return bool (true if success)
-		 */
-		bool addGraphsList(const GraphsListN& gln);
-		
-		/*! 	\fn size
-		 * 	\brief Retourne la taille de la liste de graphes
-		 * 	\return Taille de la liste de graphes (size_t)
-		 */
-		size_t size() const;
-		
-		/*! \fn begin
-		 * \brief Renvoie un pointeur vers le premier élément de la liste
-		 * \return Pointeur vers l'élément (ou 0 si la liste est vide)
-		 */
-		Graph* begin();
-		
-		/*! \fn next
-		 * \brief Renvoie un pointeur vers le prochain élément
-		 * \param iGraphIndex Index du graphe en cours
-		 * \return Pointeur vers l'élément (ou 0 si la fin de la liste est atteinte)
-		 */
-		Graph* next(const size_t &iGraphIndex);
-		
-		/*!	\fn get_iVerticesCount
-		 * 	\brief Return the number of vertices of the graphs of the lsit (this->iVerticesCount)
-		 * 
-		 * 	\return this->iVerticesCount(unsigned int)
-		 */
-		unsigned int get_iVerticesCount() const;
-		
-		/*!	\fn get_graphs
-		 * 	\brief Return the list of graphs
-		 * 
-		 * 	\return this->graphs(vector< Graph >)
-		 */
-		vector< Graph > get_graphs() const;
-		
-	public:
-		friend ostream& operator<<(ostream& , GraphsListN const &);
+ */
+class GraphsListN {
+private:
+  vector<Graph> graphs;        ///< Liste des graphes trouvés
+  unsigned int iVerticesCount; ///< Nombre de sommets des graphes de la liste
+
+  vector<string>
+      *ptr_map_vertices_indexToLabel; ///< Pointeur vers la correspondance
+
+public:
+  GraphsListN(unsigned int iVerticesCount,
+              vector<string> *ptr_map_vertices_indexToLabel);
+
+  /*! 	\fn addGraph
+   * 	\brief Ajoute un graphe à la liste
+   * 	\param iVertices Sommets du graphe
+   * 	\param bVerticesLinkable Sommets qui sont liables au graphes
+   * 	\param iType(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
+   *= (0, 1, 3, 4, 5, 6, 7) \param bSpherical(bool) True si sphérique, false si
+   *euclidien \param iVertexSupp1 Premier sommet supplémentaire (par exemple
+   *pour les B) \param iVertexSupp2 Second sommet supplémentaire (par exemple
+   *pour les B) \param iDataSupp(const unsigned int &): donnée supplémentaire
+   *(par exemple, pour le G_2, le poids)
+   */
+  void addGraph(vector<short unsigned int> iVertices,
+                const vector<bool> &bVerticesLinkable, const unsigned &iType,
+                bool bSpherical, const short unsigned int &iVertexSupp1 = 0,
+                const short unsigned int &iVertexSupp2 = 0,
+                const unsigned int &iDataSupp = 0);
+
+  /*!	\fn addGraphsList
+   * 	\brief Concatenate another list to the current list
+   *
+   * 	\param gln(const GraphsListN&) Other list
+   * 	\return bool (true if success)
+   */
+  bool addGraphsList(const GraphsListN &gln);
+
+  /*! 	\fn size
+   * 	\brief Retourne la taille de la liste de graphes
+   * 	\return Taille de la liste de graphes (size_t)
+   */
+  size_t size() const;
+
+  /*! \fn begin
+   * \brief Renvoie un pointeur vers le premier élément de la liste
+   * \return Pointeur vers l'élément (ou 0 si la liste est vide)
+   */
+  Graph *begin();
+
+  /*! \fn next
+   * \brief Renvoie un pointeur vers le prochain élément
+   * \param iGraphIndex Index du graphe en cours
+   * \return Pointeur vers l'élément (ou 0 si la fin de la liste est atteinte)
+   */
+  Graph *next(const size_t &iGraphIndex);
+
+  /*!	\fn get_iVerticesCount
+   * 	\brief Return the number of vertices of the graphs of the lsit
+   * (this->iVerticesCount)
+   *
+   * 	\return this->iVerticesCount(unsigned int)
+   */
+  unsigned int get_iVerticesCount() const;
+
+  /*!	\fn get_graphs
+   * 	\brief Return the list of graphs
+   *
+   * 	\return this->graphs(vector< Graph >)
+   */
+  vector<Graph> get_graphs() const;
+
+public:
+  friend ostream &operator<<(ostream &, GraphsListN const &);
 };
 
 #endif // GRAPHS_LIST_N_H

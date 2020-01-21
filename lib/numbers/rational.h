@@ -25,7 +25,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \brief Rational numbers (template)
  * \author Rafael Guglielmetti
  * \class Rational rational.h
-*/
+ */
 
 #ifndef __RATIONAL_GENERIC_H__
 #define __RATIONAL_GENERIC_H__
@@ -34,75 +34,70 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace std;
 
-template <typename T>
-class Rational 
-{
-	public:
-		T a;
-		T b;
-		
-	private:
-		// TODO init
-		bool isZero;
-		bool hasDenominatorOne;
-		bool isOne;
-		bool isMinusOne;
+template <typename T> class Rational {
+public:
+  T a;
+  T b;
 
-	private:
-		/*! \fn update
-		 * 	\brief Met à jour les attributs (gcd, isInt, ...)
-		 */
-		void update();
+private:
+  // TODO init
+  bool isZero;
+  bool hasDenominatorOne;
+  bool isOne;
+  bool isMinusOne;
 
-	public:
-		Rational();
-		
-		Rational(T a, T b);
-		Rational(T a);
-		
-		Rational(const int& i);
+private:
+  /*! \fn update
+   * 	\brief Met à jour les attributs (gcd, isInt, ...)
+   */
+  void update();
 
-		bool operator>(Rational const&) const;
-		bool operator<(Rational const&) const;
-		bool operator>=(int const&) const;
-		bool operator==(int const&) const;
-		bool operator==(Rational const&) const;
-		bool operator!=(Rational const&) const;
-		
-		Rational& operator=(long int);
-		
-		Rational operator+(Rational const &n) const;
-		Rational& operator+=(Rational const &n);
+public:
+  Rational();
 
-		Rational operator-(Rational const &n) const;
-		Rational operator-() const;
-		void opp(Rational* &_c) const;
-		Rational& operator-=(Rational const &n);
-		
-		Rational operator*(Rational const &n) const;
-		Rational& operator*=(Rational const &n);
+  Rational(T a, T b);
+  Rational(T a);
 
-		Rational operator/(Rational const &n) const;
-		Rational& operator/=(Rational const &n);
+  Rational(const int &i);
 
-		void print(ostream &) const;	
-		
-		string to_string() const;
-		
-		bool get_hasDenominatorOne() const;
+  bool operator>(Rational const &) const;
+  bool operator<(Rational const &) const;
+  bool operator>=(int const &) const;
+  bool operator==(int const &) const;
+  bool operator==(Rational const &) const;
+  bool operator!=(Rational const &) const;
+
+  Rational &operator=(long int);
+
+  Rational operator+(Rational const &n) const;
+  Rational &operator+=(Rational const &n);
+
+  Rational operator-(Rational const &n) const;
+  Rational operator-() const;
+  void opp(Rational *&_c) const;
+  Rational &operator-=(Rational const &n);
+
+  Rational operator*(Rational const &n) const;
+  Rational &operator*=(Rational const &n);
+
+  Rational operator/(Rational const &n) const;
+  Rational &operator/=(Rational const &n);
+
+  void print(ostream &) const;
+
+  string to_string() const;
+
+  bool get_hasDenominatorOne() const;
 };
 
-template <typename T>
-ostream& operator<<(ostream& , Rational<T> const &);
+template <typename T> ostream &operator<<(ostream &, Rational<T> const &);
 
-template <typename T>
-T abs(const T& r)
-{
-	T rabs(r);
-	if (rabs.a.bIsLessThan(0))
-		rabs.a.multiplyBy(-1);
-	
-	return rabs;
+template <typename T> T abs(const T &r) {
+  T rabs(r);
+  if (rabs.a.bIsLessThan(0))
+    rabs.a.multiplyBy(-1);
+
+  return rabs;
 }
 
 #include "rational.tpp"

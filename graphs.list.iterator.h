@@ -23,17 +23,17 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 /*!
  * \file graphs.list.iterator.h
  * \author Rafael Guglielmetti
- * 
+ *
  * \class GraphsListIterator graphs.list.iterator.h
  * \brief Permet de parcourir une liste de graphes
  * Utilisation (pour un GraphsList *gl)<br>
  * 	GraphsListIterator iter(gl);<br>
-	
-	while (iter.ptr)<br>
-	{<br>
-		cout << "iter; " << *iter.ptr << endl;<br>
-		++iter;<br>
-	}
+        
+        while (iter.ptr)<br>
+        {<br>
+                cout << "iter; " << *iter.ptr << endl;<br>
+                ++iter;<br>
+        }
 */
 
 #ifndef GRAPHS_LIST_ITERATOR_H
@@ -41,54 +41,55 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graphs.list.h"
 
-class GraphsListIterator
-{
-	private:
-		size_t iVCount; ///< Nombre de sommets du graphe courant
-		size_t iGraphIndex; ///< Index du graphe courant
-		
-		GraphsList *graphsList; ///< Pointeur vers la liste de graphes
-		
-		unsigned int iVerticesCountMax;
-		bool bLimitVerticesMax;
-		
-	public:
-		/*!
-		 * \brief Constructeur
-		 * \param gl vers la liste de graphes à considérer
-		 */
-		GraphsListIterator(GraphsList *gl);
-		
-		GraphsListIterator(const GraphsListIterator& gl);
-		
-		/*!
-		 * \brief Constructeur
-		 * \param gl vers la liste de graphes à considérer
-		 * \param iVerticesCountMin(const unsigned int&) Nombre de sommets où l'on commence
-		 * \param iVerticesCountMax(const unsigned int&) Nombre de sommets où l'on s'arrête
-		 */
-		GraphsListIterator(GraphsList *gl, const unsigned int& iVerticesCountMin, const unsigned int& iVerticesCountMax = 0);
-		
-		GraphsListIterator();
-		
-		/*!
-		 *	\brief Déplace ptr vers le prochain graphe
-		 * 
-		 *	Si tous la fin de la liste est atteinte, ptr est mis à 0
-		 * 
-		 * 	\return Pointeur vers le prochain graphe (ou 0 si la fin de la liste a été atteinte)
-		 */
-		Graph* next();
-		
-		/*!	\fn operator++()
-		 * 	\overload ++
-		 *	\brief Appel à next()
-		 */
-		GraphsListIterator& operator++();
-		
-		
-	public:
-		Graph* ptr; ///< Pointeur vers le graphe courant
+class GraphsListIterator {
+private:
+  size_t iVCount;     ///< Nombre de sommets du graphe courant
+  size_t iGraphIndex; ///< Index du graphe courant
+
+  GraphsList *graphsList; ///< Pointeur vers la liste de graphes
+
+  unsigned int iVerticesCountMax;
+  bool bLimitVerticesMax;
+
+public:
+  /*!
+   * \brief Constructeur
+   * \param gl vers la liste de graphes à considérer
+   */
+  GraphsListIterator(GraphsList *gl);
+
+  GraphsListIterator(const GraphsListIterator &gl);
+
+  /*!
+   * \brief Constructeur
+   * \param gl vers la liste de graphes à considérer
+   * \param iVerticesCountMin(const unsigned int&) Nombre de sommets où l'on
+   * commence \param iVerticesCountMax(const unsigned int&) Nombre de sommets où
+   * l'on s'arrête
+   */
+  GraphsListIterator(GraphsList *gl, const unsigned int &iVerticesCountMin,
+                     const unsigned int &iVerticesCountMax = 0);
+
+  GraphsListIterator();
+
+  /*!
+   *	\brief Déplace ptr vers le prochain graphe
+   *
+   *	Si tous la fin de la liste est atteinte, ptr est mis à 0
+   *
+   * 	\return Pointeur vers le prochain graphe (ou 0 si la fin de la liste a
+   *été atteinte)
+   */
+  Graph *next();
+
+  /*!	\fn operator++()
+   * 	\overload ++
+   *	\brief Appel à next()
+   */
+  GraphsListIterator &operator++();
+
+public:
+  Graph *ptr; ///< Pointeur vers le graphe courant
 };
 
 #endif // GRAPHS_LIST_ITERATOR_H
