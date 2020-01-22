@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 3.12)
 
 project(coxiter)
 
@@ -28,11 +28,15 @@ target_link_libraries( coxiter coxiter_graphs )
 # External libraries
 find_package( OpenMP )
 if( OPENMP_FOUND )
-	set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}" )
-	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}" )
-	
-	add_definitions("-fopenmp")
-	add_definitions("-lomp")
+	if( NOT APPLE )
+		set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}" )
+		set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}" )
+
+		add_definitions("-fopenmp")
+		add_definitions("-lomp")
+	else()
+		target_link_libraries( coxiter OpenMP::OpenMP_CXX )
+	endif()
 endif()
 
 find_library( PCRE_LIBRARY pcre )
