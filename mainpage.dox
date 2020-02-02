@@ -128,7 +128,12 @@ xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install cmake graphviz pcre++ pari gmp
 brew install Caskroom/cask/xquartz
+brew install libomp
 \endcode
+
+Please note that it is optional to install libomp on Mac.
+If it is installed, the potential of a multi-core processor can be used.
+CoxIter will compile either way.
 
 Once this is done, we will be able to download and install %CoxIter. Open a terminal in the folder where you want to install %CoxIter and type the following commands: 
 \code
