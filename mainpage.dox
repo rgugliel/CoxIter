@@ -126,9 +126,8 @@ First, open a terminal and enter the following command to install the prerequisi
 \code
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install cmake graphviz pcre++
+brew install cmake graphviz pcre++ pari
 brew install Caskroom/cask/xquartz
-brew install homebrew/x11/pari
 \endcode
 
 Now, download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
