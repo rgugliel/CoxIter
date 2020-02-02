@@ -126,17 +126,8 @@ First, open a terminal and enter the following command to install the prerequisi
 \code
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install cmake graphviz pcre++ pari
+brew install cmake graphviz pcre++ pari gmp
 brew install Caskroom/cask/xquartz
-\endcode
-
-Now, download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
-Extract the downloaded file and open a terminal in GMP folder. Then, use the following commands:
-\code
-./configure
-make
-make check
-sudo make install
 \endcode
 
 Once this is done, we will be able to download and install %CoxIter. Open a terminal in the folder where you want to install %CoxIter and type the following commands: 
