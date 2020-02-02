@@ -17,7 +17,7 @@ The aim of %CoxIter is to provide tools to compute some invariants of hyperbolic
 	It is easy to build %CoxIter. See information there: \ref main_compilation_gnu<br /><br />
 - On OSX<br />
 	It is easy to build %CoxIter. See information there: \ref main_compilation_osx<br />
-	Note that the OSX version si currently slower (approximatively 4 times) than the Linux and Windows version.<br /><br />
+	Note that the OSX version is currently slower (approximatively 4 times) than the Linux and Windows version.<br /><br />
 - On Windows
 	If you just want to use CoxIter, then use the compiled file in the windows/ folder of <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">the latest version</a><br />
 	If you want to build %CoxIter, then you have three choices:
@@ -165,7 +165,7 @@ Then, we need to install CygWin together with the following packages:
 We will suppose that CygWin was installed in "c:/cygwin/". You can choose any path you want but be sure not to include any space.
 
 Once this is done, download PARI (<a href="http://pari.math.u-bordeaux.fr/">http://pari.math.u-bordeaux.fr/</a>) into your CygWin folder (c:/cygwin/home/YOURNAME/) and extract it.
-Then, to install PARI, open the CgyWin terminal, and type the following:
+Then, to install PARI, open the CygWin terminal, and type the following:
 \code
 cd pari
 ./configure
