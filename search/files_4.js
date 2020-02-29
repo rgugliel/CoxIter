@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['index2_2ecpp',['index2.cpp',['../index2_8cpp.html',1,'']]],
-  ['index2_2eh',['index2.h',['../index2_8h.html',1,'']]]
+  ['license_2emd',['LICENSE.md',['../_l_i_c_e_n_s_e_8md.html',1,'']]]
 ];

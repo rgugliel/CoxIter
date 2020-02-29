@@ -1,17 +1,17 @@
 <map id="app.h" name="app.h">
-<area shape="rect" id="node7" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="1171,155,1243,181"/>
-<area shape="rect" id="node32" href="$index2_8h.html" title="index2.h" alt="" coords="1171,80,1242,107"/>
-<area shape="rect" id="node33" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="1633,80,1737,107"/>
-<area shape="rect" id="node8" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="1596,304,1689,331"/>
-<area shape="rect" id="node13" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="1590,229,1727,256"/>
-<area shape="rect" id="node14" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="1270,379,1389,405"/>
-<area shape="rect" id="node15" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="1316,304,1457,331"/>
-<area shape="rect" id="node17" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="37,453,126,480"/>
-<area shape="rect" id="node20" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="784,379,899,405"/>
-<area shape="rect" id="node23" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="974,379,1093,405"/>
-<area shape="rect" id="node25" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="435,379,613,405"/>
-<area shape="rect" id="node9" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="1649,379,1753,405"/>
-<area shape="rect" id="node10" href="$graph_8h.html" title="graph.h" alt="" coords="1421,453,1486,480"/>
-<area shape="rect" id="node26" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="303,453,436,480"/>
-<area shape="rect" id="node27" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="561,453,639,480"/>
+<area shape="rect" id="node7" href="$arithmeticity_8h.html" title="arithmeticity.h" alt="" coords="790,80,894,107"/>
+<area shape="rect" id="node8" href="$coxiter_8h.html" title="coxiter.h" alt="" coords="925,155,997,181"/>
+<area shape="rect" id="node33" href="$index2_8h.html" title="index2.h" alt="" coords="246,80,316,107"/>
+<area shape="rect" id="node9" href="$graphs_8list_8h.html" title="graphs.list.h" alt="" coords="741,304,834,331"/>
+<area shape="rect" id="node14" href="$graphs_8list_8iterator_8h.html" title="graphs.list.iterator.h" alt="" coords="684,229,822,256"/>
+<area shape="rect" id="node15" href="$graphs_8product_8h.html" title="graphs.product.h" alt="" coords="666,379,784,405"/>
+<area shape="rect" id="node16" href="$graphs_8product_8set_8h.html" title="graphs.product.set.h" alt="" coords="270,304,412,331"/>
+<area shape="rect" id="node18" href="$regexp_8h.html" title="To simplify the use of regexp. " alt="" coords="1564,453,1654,480"/>
+<area shape="rect" id="node21" href="$math__tools_8h.html" title="Some mathematical functions. " alt="" coords="860,379,974,405"/>
+<area shape="rect" id="node24" href="$mpz__rational_8h.html" title="Rational number. " alt="" coords="1412,379,1590,405"/>
+<area shape="rect" id="node29" href="$polynomials_8h.html" title="Some mathematical functions regarding polynomials. " alt="" coords="1115,379,1234,405"/>
+<area shape="rect" id="node10" href="$graphs_8list_8n_8h.html" title="graphs.list.n.h" alt="" coords="537,379,641,405"/>
+<area shape="rect" id="node11" href="$graph_8h.html" title="graph.h" alt="" coords="514,453,579,480"/>
+<area shape="rect" id="node25" href="$string_8h.html" title="Quelques fonctions relatives au string. " alt="" coords="1462,453,1540,480"/>
+<area shape="rect" id="node28" href="$number__template_8h.html" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...) " alt="" coords="1729,453,1862,480"/>
 </map>

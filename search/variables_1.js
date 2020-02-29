@@ -17,7 +17,7 @@ var searchData=
   ['bcoutfile',['bCoutFile',['../class_app.html#aed3b63782e64fc1f7b7fa6d8f6eb89ec',1,'App::bCoutFile()'],['../class_cox_iter.html#abb96e97522e41502905a6824969cb687',1,'CoxIter::bCoutFile()']]],
   ['bdebug',['bDebug',['../class_app.html#a43d3865da93bf048976cc0ea6de9e9e9',1,'App::bDebug()'],['../class_cox_iter.html#addbb154d757c42257d6bff5321415911',1,'CoxIter::bDebug()']]],
   ['bdimension_5fguessed',['bDimension_guessed',['../class_cox_iter.html#aae71194ada9737f2bdbbe7ab28814db8',1,'CoxIter']]],
-  ['bedgesvisited',['bEdgesVisited',['../class_arithmeticity.html#afa656f09db2d790adb2c26c483167493',1,'Arithmeticity::bEdgesVisited()'],['../class_cox_iter.html#afc7f4de6fe30f543eb0e410101a29f7a',1,'CoxIter::bEdgesVisited()']]],
+  ['bedgesvisited',['bEdgesVisited',['../class_arithmeticity.html#a82738eb2adb118c7b17a79bc4dc63311',1,'Arithmeticity::bEdgesVisited()'],['../class_cox_iter.html#a8732bee9369a84cc9e6bd43ed25ca8fc',1,'CoxIter::bEdgesVisited()']]],
   ['bgrammatrixfield',['bGramMatrixField',['../class_cox_iter.html#aa3827295baba1d0fc82a6ccb2645573a',1,'CoxIter']]],
   ['bgraphexplored',['bGraphExplored',['../class_cox_iter.html#af0e663ad34f31bd60096fcd6052f61ef',1,'CoxIter']]],
   ['bgraphsproductscomputed',['bGraphsProductsComputed',['../class_cox_iter.html#a37d897db28aa7b5b0f62193dc299a669',1,'CoxIter']]],
@@ -47,7 +47,7 @@ var searchData=
   ['btestfvector',['bTestFVector',['../struct_test.html#ab1d16cb0f78383107f68a9f1688b087d',1,'Test']]],
   ['btestgrowthseries',['bTestGrowthSeries',['../struct_test.html#a285030cfc4a85d47f2cf9ef7959914af',1,'Test']]],
   ['buseopenmp',['bUseOpenMP',['../class_cox_iter.html#a7c7ea0018ce8822bde3621a8359782a1',1,'CoxIter']]],
-  ['bverticeslinkable',['bVerticesLinkable',['../class_graph.html#a7b91d58559d71e3bba218338ab8f68b3',1,'Graph']]],
-  ['bverticesvisited',['bVerticesVisited',['../class_arithmeticity.html#ab6eca83ed9066ae5db07b57ebd2811a1',1,'Arithmeticity::bVerticesVisited()'],['../class_cox_iter.html#a4f0fe93b03a65da5f990ba7e9ba9a58d',1,'CoxIter::bVerticesVisited()']]],
+  ['bverticeslinkable',['bVerticesLinkable',['../class_graph.html#a59d2696b1b964339585defc82c7efe4a',1,'Graph']]],
+  ['bverticesvisited',['bVerticesVisited',['../class_arithmeticity.html#a8e32f5cceaf75237d18ceb8576d4afba',1,'Arithmeticity::bVerticesVisited()'],['../class_cox_iter.html#a4e3cf5c6618bc867144cbaffd2e10968',1,'CoxIter::bVerticesVisited()']]],
   ['bwriteinfo',['bWriteInfo',['../class_cox_iter.html#a2ffcddeed87a1d38e0aaf4513fab56a0',1,'CoxIter']]]
 ];

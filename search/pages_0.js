@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['1_2e2',['1.2',['../md__media_Data_Rafael_phd_codes_C++_CoxIter_CHANGELOG.html',1,'']]]
+  ['1_2e2',['1.2',['../md__media_data__rafael_phd_codes__c_09_09__cox_iter__c_h_a_n_g_e_l_o_g.html',1,'']]]
 ];

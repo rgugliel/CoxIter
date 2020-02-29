@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['of',['of',['../class_tests.html#a3f5eaa8a721d3c224cef21ec7b7c65bd',1,'Tests']]],
-  ['outcout',['outCout',['../class_cox_iter.html#aa015f51ce253e799fddd49870f23cc9f',1,'CoxIter']]],
-  ['ovector',['ovector',['../class_p_c_r_e_regexp.html#a0a9c3f0442fb61317097e1fa6fd260e0',1,'PCRERegexp']]]
+  ['ptr',['ptr',['../class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a',1,'GraphsListIterator']]],
+  ['ptr_5fmap_5fvertices_5findextolabel',['ptr_map_vertices_indexToLabel',['../class_graph.html#a45fbcbe75a806fadf82eeb460871d53f',1,'Graph::ptr_map_vertices_indexToLabel()'],['../class_graphs_list_n.html#a24ef10df1a4beddf40ce4bca879adc8e',1,'GraphsListN::ptr_map_vertices_indexToLabel()']]]
 ];
