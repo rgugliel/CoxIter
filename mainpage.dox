@@ -17,7 +17,7 @@ The aim of %CoxIter is to provide tools to compute some invariants of hyperbolic
 	It is easy to build %CoxIter. See information there: \ref main_compilation_gnu<br /><br />
 - On OSX<br />
 	It is easy to build %CoxIter. See information there: \ref main_compilation_osx<br />
-	Note that the OSX version si currently slower (approximatively 4 times) than the Linux and Windows version.<br /><br />
+	Note that the OSX version is currently slower (approximatively 4 times) than the Linux and Windows version.<br /><br />
 - On Windows
 	If you just want to use CoxIter, then use the compiled file in the windows/ folder of <a href="https://github.com/rgugliel/CoxIter/archive/master.zip">the latest version</a><br />
 	If you want to build %CoxIter, then you have three choices:
@@ -126,19 +126,14 @@ First, open a terminal and enter the following command to install the prerequisi
 \code
 xcode-select --install
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install cmake graphviz pcre++
+brew install cmake graphviz pcre++ pari gmp
 brew install Caskroom/cask/xquartz
-brew install homebrew/x11/pari
+brew install libomp
 \endcode
 
-Now, download the last version of GMP from the <a href="https://gmplib.org/#DOWNLOAD">official website</a>.<br />
-Extract the downloaded file and open a terminal in GMP folder. Then, use the following commands:
-\code
-./configure
-make
-make check
-sudo make install
-\endcode
+Please note that it is optional to install libomp on Mac.
+If it is installed, the potential of a multi-core processor can be used.
+CoxIter will compile either way.
 
 Once this is done, we will be able to download and install %CoxIter. Open a terminal in the folder where you want to install %CoxIter and type the following commands: 
 \code
@@ -165,7 +160,7 @@ Then, we need to install CygWin together with the following packages:
 We will suppose that CygWin was installed in "c:/cygwin/". You can choose any path you want but be sure not to include any space.
 
 Once this is done, download PARI (<a href="http://pari.math.u-bordeaux.fr/">http://pari.math.u-bordeaux.fr/</a>) into your CygWin folder (c:/cygwin/home/YOURNAME/) and extract it.
-Then, to install PARI, open the CgyWin terminal, and type the following:
+Then, to install PARI, open the CygWin terminal, and type the following:
 \code
 cd pari
 ./configure
