@@ -1,5 +1,5 @@
 # CoxIter
-The full documentation is available here: https://rgugliel.github.io/CoxIter/
+The full documentation is available here: https://rgugliel.github.io/CoxIter/index.html
 
 A live demo of CoxIter is available here: https://coxiter.rafaelguglielmetti.ch/
 
