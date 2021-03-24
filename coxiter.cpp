@@ -1512,7 +1512,7 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex) {
     }
   }
 
-  return (bExit ? 0 : 1);
+  return !bExit;
 }
 
 void CoxIter::computeGraphsProducts() {
