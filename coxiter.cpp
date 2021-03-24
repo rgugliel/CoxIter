@@ -1064,9 +1064,9 @@ void CoxIter::printPath() {
   if (path.size() == 1)
     return;
 
-  unsigned int iMax(path.size());
-  for (unsigned int i(0); i < iMax; i++)
-    cout << path[i] << " ; ";
+  for(const auto& p: path)
+    cout << p << " ; ";
+
   cout << endl;
 }
 
