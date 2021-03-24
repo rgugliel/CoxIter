@@ -39,20 +39,20 @@ private:
   string strError; ///< If an error occured, small text.
 
   CoxIter *ci;                 ///< Pointer to the CoxIter object
-  unsigned int iVerticesCount; ///< Number of generators of the group
-  vector<vector<unsigned int>> iCoxeterMatrix; ///< Coxeter matrix of the group
+  unsigned int verticesCount; ///< Number of generators of the group
+  vector<vector<unsigned int>> coxeterMatrix; ///< Coxeter matrix of the group
   vector<unsigned int> iReferencesToLabels;    ///< Correspondence for the new
                                                ///< indices to the old ones
 
   // For the DFS
   vector<vector<bool>> bEdgesVisited; ///< Traversed edges
   vector<bool> bVerticesVisited;      ///<  Taversed vertices
-  vector<unsigned int> iPath;         ///< Current path
+  vector<unsigned int> path;         ///< Current path
 
-  bool bNotArithmetic; ///< True if not arithmetic (i.e. we have to quit the
+  bool notArithmetic; ///< True if not arithmetic (i.e. we have to quit the
                        ///< algorithm)
 
-  bool bListCycles; ///< If true, will list the cycles to be manually tested
+  bool listCycles; ///< If true, will list the cycles to be manually tested
   vector<string> strListCycles; ///< The list
 
 public:
@@ -72,7 +72,7 @@ public:
    * 	\param ci(CoxIter&) The graph
    * 	\param bListCycles_(const bool&) If true, will list the cycles to be
    *manually tested \return True if success, false otherwise. Then, use
-   *ci.get_iIsArithmetic()
+   *ci.get_isArithmetic()
    */
   void test(CoxIter &ci, const bool &bListCycles_);
 
@@ -106,16 +106,16 @@ private:
   /*! 	\fn findCycles
    * 	\brief Look for cycles
    *
-   * 	Update the vector iPath to find cycles
+   * 	Update the vector path to find cycles
    *
    * 	\param iRoot(unsigned int&) Starting vertex
    * 	\param iFrom(unsigned int&) Previoud vertex (if recursive call); iRoot
    * otherwise
    */
-  void findCycles(const unsigned int &iRoot, const unsigned int &iFrom);
+  void findCycles(const unsigned int &root, const unsigned int &from);
 
   /*! 	\fn testCycle
-   * 	\brief Test the cycle in iPath
+   * 	\brief Test the cycle in path
    *
    * 	This function is called by findCycles. Eventually, set bNotArithmetic to
    * true
@@ -124,8 +124,8 @@ private:
 };
 
 struct CycleElement {
-  unsigned int iV1;
-  unsigned int iV2;
+  unsigned int first;
+  unsigned int second;
 };
 
 struct Cycles {};

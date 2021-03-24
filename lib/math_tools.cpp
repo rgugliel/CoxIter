@@ -24,7 +24,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 namespace MathTools {
 
-bool bIsPrime(unsigned int iN) {
+bool isPrime(unsigned int iN) {
   if (iN == 2 || iN == 3)
     return true;
 

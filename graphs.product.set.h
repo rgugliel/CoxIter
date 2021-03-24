@@ -52,12 +52,12 @@ public:
   GraphsProductSet();
   GraphsProductSet(const GraphsProduct &gp);
 
-  /*!	\fn get_iVertices
+  /*!	\fn getvces
    * 	\brief Get the list of vertices of the product
    *
    * 	\return vertices(vector< unsigned int >)
    */
-  vector<short unsigned int> get_iVertices() const;
+  vector<short unsigned int> get_vertices() const;
 
   /*!	\fn b_areVerticesSubsetOf
    * 	\brief Test if the vertices appear in another Product

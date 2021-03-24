@@ -23,8 +23,8 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "index2.h"
 
 Index2::Index2(CoxIter *ci)
-    : ci(ci), iVerticesCount(ci->get_iVerticesCount()), iNewVerticesCount(0),
-      iCox(ci->get_iCoxeterMatrix()) {}
+    : ci(ci), verticesCount(ci->get_verticesCount()), iNewVerticesCount(0),
+      iCox(ci->get_coxeterMatrix()) {}
 
 bool Index2::bIsVertexAdmissible(const string &strVertexName) {
 
@@ -33,11 +33,11 @@ bool Index2::bIsVertexAdmissible(const string &strVertexName) {
     return false;
   }
 
-  unsigned int iV(ci->get_iVertexIndex(strVertexName));
+  unsigned int iV(ci->get_vertexIndex(strVertexName));
 
-  for (unsigned int i(0); i < iVerticesCount; i++) {
+  for (unsigned int i(0); i < verticesCount; i++) {
     if (iCox[iV][i] != 0 && iCox[iV][i] != 1 && (iCox[iV][i] % 2)) {
-      strError = "m(" + strVertexName + "," + ci->get_strVertexLabel(i) +
+      strError = "m(" + strVertexName + "," + ci->get_vertexLabel(i) +
                  ") is not even";
       return false;
     }
@@ -54,22 +54,22 @@ bool Index2::removeVertex(const string &strVertexName) {
   if (!bIsVertexAdmissible(strVertexName))
     return false;
 
-  iVertex = ci->get_iVertexIndex(strVertexName);
+  iVertex = ci->get_vertexIndex(strVertexName);
 
   // Remark: we don't merge the previous and the next loop. Thus, if there is a
   // problem, we do not change the CoxIter object.
 
   // -------------------------------------------------------
   // new vertices
-  for (unsigned int i(0); i < iVerticesCount; i++) {
+  for (unsigned int i(0); i < verticesCount; i++) {
     // If they don't commute, this will add a new vertex
     if (iCox[iVertex][i] != 2) {
       NewVertex nv;
-      nv.iIndex = iVerticesCount + iNewVerticesCount - 1;
+      nv.iIndex = verticesCount + iNewVerticesCount - 1;
 
       nv.iOriginVertex = i;
       nv.strLabel =
-          ci->get_strVertexLabel(iVertex) + "_" + ci->get_strVertexLabel(i);
+          ci->get_vertexLabel(iVertex) + "_" + ci->get_vertexLabel(i);
 
       newVertices.push_back(nv);
       ci->map_vertices_labels_addReference(nv.strLabel);
@@ -82,19 +82,19 @@ bool Index2::removeVertex(const string &strVertexName) {
 
   // -------------------------------------------------------
   // new adjacency matrix
-  for (unsigned int i(0); i <= (iVerticesCount + iNewVerticesCount - 1);
+  for (unsigned int i(0); i <= (verticesCount + iNewVerticesCount - 1);
        i++) // the -1 is for the vertex we removed
   {
     if (i == iVertex)
       continue;
 
     iNewCox.push_back(
-        vector<unsigned int>(iVerticesCount + iNewVerticesCount - 1,
+        vector<unsigned int>(verticesCount + iNewVerticesCount - 1,
                              2)); // TODO: tout construire en une fois
   }
 
   // we fill the old values (upper left square)
-  for (unsigned int i(0); i < iVerticesCount; i++) {
+  for (unsigned int i(0); i < verticesCount; i++) {
     if (i == iVertex)
       continue;
 
@@ -114,7 +114,7 @@ bool Index2::removeVertex(const string &strVertexName) {
     // NewVertex.iOriginVertex
 
     // for every old vertex
-    for (unsigned int i(0); i < iVerticesCount;
+    for (unsigned int i(0); i < verticesCount;
          i++) // Goal: find m(t0 * sj * t0, si)
     {
       if (i == iVertex) // we removed this vertex
@@ -153,7 +153,7 @@ bool Index2::removeVertex(const string &strVertexName) {
     }
   }
 
-  ci->set_iCoxeterMatrix(iNewCox);
+  ci->set_coxeterMatrix(iNewCox);
 
   return true;
 }

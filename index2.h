@@ -47,7 +47,7 @@ class Index2 {
 private:
   CoxIter *ci;
   vector<vector<unsigned int>> iCox; ///< Coxeter matrix
-  unsigned int iVerticesCount; ///< Number of vertices of the starting graph
+  unsigned int verticesCount; ///< Number of vertices of the starting graph
 
   unsigned int iVertex; ///< Index of the vertex
 

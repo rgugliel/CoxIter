@@ -32,19 +32,19 @@ GraphsProductSet::GraphsProductSet(const GraphsProduct &gp) {
     graphs.insert(*it);
 }
 
-vector<short unsigned int> GraphsProductSet::get_iVertices() const {
-  vector<short unsigned int> iVertices;
+vector<short unsigned int> GraphsProductSet::get_vertices() const {
+  vector<short unsigned int> vertices;
 
   for (set<Graph *>::const_iterator itProd(graphs.begin());
        itProd != graphs.end(); ++itProd) {
     for (vector<short unsigned int>::const_iterator itV(
-             (*itProd)->iVertices.begin());
-         itV != (*itProd)->iVertices.end(); ++itV) {
-      iVertices.push_back(*itV);
+             (*itProd)->vertices.begin());
+         itV != (*itProd)->vertices.end(); ++itV) {
+      vertices.push_back(*itV);
     }
   }
 
-  return iVertices;
+  return vertices;
 }
 
 bool GraphsProductSet::b_areVerticesSubsetOf(const GraphsProductSet &gp) const {
@@ -52,13 +52,12 @@ bool GraphsProductSet::b_areVerticesSubsetOf(const GraphsProductSet &gp) const {
    * We could sort de vectors and use the standard function includes but this is
    * slower (tested with 17-vinb85).
    */
-  vector<short unsigned int> iVerticesSmall(get_iVertices()),
-      iVerticesBig(gp.get_iVertices());
+  vector<short unsigned int> verticesSmall(get_vertices()),
+      verticesBig(gp.get_vertices());
 
-  for (vector<short unsigned int>::const_iterator it(iVerticesSmall.begin());
-       it != iVerticesSmall.end(); ++it) {
-    if (find(iVerticesBig.begin(), iVerticesBig.end(), *it) ==
-        iVerticesBig.end())
+  for (vector<short unsigned int>::const_iterator it(verticesSmall.begin());
+       it != verticesSmall.end(); ++it) {
+    if (find(verticesBig.begin(), verticesBig.end(), *it) == verticesBig.end())
       return false;
   }
 

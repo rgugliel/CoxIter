@@ -276,8 +276,8 @@ bool Tests::bRunTests() {
 
     iTestsSucceded["readingGraph"][0]++;
 
-    iDim = ci.get_iDimension();
-    ci.set_iDimension(0);
+    iDim = ci.get_dimension();
+    ci.set_dimension(0);
 
     // ---------------------------------------------
     // Computations
@@ -363,9 +363,9 @@ bool Tests::bRunTests_computations(const unsigned int &iTestIndex,
   }
 
   if (tests[iTestIndex].bTestCompacity)
-    ci->iIsGraphCocompact();
+    ci->isGraphCocompact();
 
-  ci->isFiniteCovolume();
+  ci->checkCovolumeFiniteness();
   ci->bCanBeFiniteCovolume();
   ci->growthSeries();
 
@@ -395,7 +395,7 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     cout << "INFO: Not a Perron number in " << tests[iTestIndex].szFile << endl;
 
   // A small test of the growth series
-  if (ci->get_iIsFiniteCovolume() > 0) {
+  if (ci->get_isFiniteCovolume() > 0) {
     vector<mpz_class> iDenom;
     vector<unsigned int> iCyclotomic;
     bool bReduced;
@@ -418,7 +418,7 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     for (unsigned int j(0); j < iDenom.size(); j++)
       iTotalDenom += iDenom[j];
 
-    if (ci->get_iDimension() %
+    if (ci->get_dimension() %
         2) // n is odd, the denominator should vanish in 1
     {
       if (iTotalDenom == 0) {
@@ -473,8 +473,8 @@ void Tests::bRunTests_signature(const unsigned int &iTestIndex, CoxIter *ci,
     iSignatureComputed = -1;
   }
 
-  if (iSignatureComputed == 1 && ci->get_iDimension()) {
-    if (iSignature[0] != ci->get_iDimension() || iSignature[1] != 1) {
+  if (iSignatureComputed == 1 && ci->get_dimension()) {
+    if (iSignature[0] != ci->get_dimension() || iSignature[1] != 1) {
       iTestsSucceded["signature"][1]++;
       of << "Error\t " << tests[iTestIndex].szFile << endl;
       of << "\t\tSignature computed: (" << iSignature[0] << "," << iSignature[1]
@@ -497,7 +497,7 @@ void Tests::bRunTests_signature(const unsigned int &iTestIndex, CoxIter *ci,
   // ---------------------------------------
   // Guessing the dimension
   if (ci->get_bDimensionGuessed()) {
-    if (iDim == ci->get_iDimension()) {
+    if (iDim == ci->get_dimension()) {
       iTestsSucceded["dimensionGuess"][0]++;
       of << "OK\tDimension guessed\t" << tests[iTestIndex].szFile << endl;
     } else {
@@ -514,7 +514,7 @@ void Tests::bRunTests_arithmeticity(const unsigned int &iTestIndex,
   Arithmeticity arithmeticity;
   arithmeticity.test(*ci, false);
 
-  iArithmeticity = ci->get_iIsArithmetic();
+  iArithmeticity = ci->get_isArithmetic();
   if ((iArithmeticity == 1 && tests[iTestIndex].bIsArithmetic) ||
       (iArithmeticity == 0 && !tests[iTestIndex].bIsArithmetic)) {
     iTestsSucceded["arithmeticity"][0]++;
@@ -529,7 +529,7 @@ void Tests::bRunTests_arithmeticity(const unsigned int &iTestIndex,
 
 void Tests::bRunTests_cocompactness_cofiniteness(const unsigned int &iTestIndex,
                                                  CoxIter *ci) {
-  int iCompacity, iFiniteVolume(ci->isFiniteCovolume());
+  int iCompacity, iFiniteVolume(ci->checkCovolumeFiniteness());
   bool bCanBeFiniteCovolume(ci->bCanBeFiniteCovolume());
 
   if (iFiniteVolume == 1 && !bCanBeFiniteCovolume) {
@@ -554,7 +554,7 @@ void Tests::bRunTests_cocompactness_cofiniteness(const unsigned int &iTestIndex,
   }
 
   if (tests[iTestIndex].bTestCompacity) {
-    iCompacity = ci->get_iIsCocompact();
+    iCompacity = ci->get_isCocompact();
     if ((iCompacity == 1 && tests[iTestIndex].bIsCompact) ||
         (iCompacity == 0 && !tests[iTestIndex].bIsCompact)) {
       iTestsSucceded["cocompactness"][0]++;
@@ -579,7 +579,7 @@ void Tests::bRunTests_Euler(const unsigned int &iTestIndex, CoxIter *ci) {
       iTestsSucceded["euler"][0]++;
       of << "OK\tEuler\t\t\t" << tests[iTestIndex].szFile << endl;
     }
-  } else if (ci->get_iDimension() % 2 && tests[iTestIndex].bIsFiniteVolume) {
+  } else if (ci->get_dimension() % 2 && tests[iTestIndex].bIsFiniteVolume) {
     if (ci->get_brEulerCaracteristic() != 0) {
       iTestsSucceded["euler"][1]++;
       bRunTests_error(iTestIndex, "Euler characteristic", "0",
@@ -592,14 +592,14 @@ void Tests::bRunTests_Euler(const unsigned int &iTestIndex, CoxIter *ci) {
 }
 
 void Tests::bRunTests_FVector(const unsigned int &iTestIndex, CoxIter *ci) {
-  if (ci->get_iIsFiniteCovolume() > 0) {
-    if (ci->get_iFVectorAlternateSum() == (ci->get_iDimension() % 2 ? 2 : 0)) {
+  if (ci->get_isFiniteCovolume() > 0) {
+    if (ci->get_iFVectorAlternateSum() == (ci->get_dimension() % 2 ? 2 : 0)) {
       iTestsSucceded["fvAlt"][0]++;
       of << "OK\tAlt. sum\t\t" << tests[iTestIndex].szFile << endl;
     } else {
       iTestsSucceded["fvAlt"][1]++;
       bRunTests_error(iTestIndex, "alt. sum of components of f-vector",
-                      to_string(ci->get_iDimension() % 2 ? 2 : 0),
+                      to_string(ci->get_dimension() % 2 ? 2 : 0),
                       to_string(ci->get_iFVectorAlternateSum()));
     }
   }

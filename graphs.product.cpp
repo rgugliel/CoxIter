@@ -25,25 +25,25 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 GraphsProduct::GraphsProduct() : iRank(0) {}
 
 vector<vector<short unsigned int>> GraphsProduct::createFootPrint() {
-  vector<vector<short unsigned int>> iGraphsCountByType(8);
+  vector<vector<short unsigned int>> graphsCountByType(8);
 
-  size_t i, j, iMax, iIndex, iGraphsCount(graphs.size());
+  size_t i, j, iMax, iIndex, graphsCount(graphs.size());
 
   // on compte les graphes qui apparaissent
-  for (i = 0; i < iGraphsCount; i++) {
-    iIndex = graphs[i]->iGraphType;
+  for (i = 0; i < graphsCount; i++) {
+    iIndex = graphs[i]->type;
 
     // Si graphe de type G, ce qui compte c'est le poids
-    iMax = (iIndex == 6 && graphs[i]->bSpherical) ? graphs[i]->iDataSupp
-                                                  : graphs[i]->iVertices.size();
+    iMax = (iIndex == 6 && graphs[i]->isSpherical) ? graphs[i]->dataSupp
+                                                  : graphs[i]->vertices.size();
 
-    for (j = iGraphsCountByType[iIndex].size(); j < iMax; j++)
-      iGraphsCountByType[iIndex].push_back(0);
+    for (j = graphsCountByType[iIndex].size(); j < iMax; j++)
+      graphsCountByType[iIndex].push_back(0);
 
-    iGraphsCountByType[iIndex][iMax - 1]++;
+    graphsCountByType[iIndex][iMax - 1]++;
   }
 
-  return iGraphsCountByType;
+  return graphsCountByType;
 }
 
 ostream &operator<<(ostream &o, const GraphsProduct &gp) {

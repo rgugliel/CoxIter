@@ -50,7 +50,7 @@ extern unsigned int iSmallPrimeNumbers[1229];
  * 	\param iN(unsigned int) Integer
  * 	\return True if the number is prime, false otherwise
  */
-bool bIsPrime(unsigned int iN);
+bool isPrime(unsigned int iN);
 
 /*! 	\fn iSQRT
  * 	\brief Compute the integer square root of a positive integer (the

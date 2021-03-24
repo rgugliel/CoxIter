@@ -28,7 +28,6 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
  * \brief Permet de parcourir une liste de graphes
  * Utilisation (pour un GraphsList *gl)<br>
  * 	GraphsListIterator iter(gl);<br>
-        
         while (iter.ptr)<br>
         {<br>
                 cout << "iter; " << *iter.ptr << endl;<br>
@@ -43,12 +42,12 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 class GraphsListIterator {
 private:
-  size_t iVCount;     ///< Nombre de sommets du graphe courant
-  size_t iGraphIndex; ///< Index du graphe courant
+  size_t verticesCount;     ///< Nombre de sommets du graphe courant
+  size_t graphIndex; ///< Index du graphe courant
 
   GraphsList *graphsList; ///< Pointeur vers la liste de graphes
 
-  unsigned int iVerticesCountMax;
+  unsigned int verticesCountMax;
   bool bLimitVerticesMax;
 
 public:
@@ -63,12 +62,12 @@ public:
   /*!
    * \brief Constructeur
    * \param gl vers la liste de graphes à considérer
-   * \param iVerticesCountMin(const unsigned int&) Nombre de sommets où l'on
-   * commence \param iVerticesCountMax(const unsigned int&) Nombre de sommets où
+   * \param verticesCountMin(const unsigned int&) Nombre de sommets où l'on
+   * commence \param verticesCountMax(const unsigned int&) Nombre de sommets où
    * l'on s'arrête
    */
-  GraphsListIterator(GraphsList *gl, const unsigned int &iVerticesCountMin,
-                     const unsigned int &iVerticesCountMax = 0);
+  GraphsListIterator(GraphsList *gl, const unsigned int &verticesCountMin,
+                     const unsigned int &verticesCountMax = 0);
 
   GraphsListIterator();
 

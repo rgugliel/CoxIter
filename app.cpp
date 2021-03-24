@@ -218,7 +218,7 @@ bool App::bReadMainParameters(int argc, char **argv) {
 // forcément premiers entre eux)
 
 void App::extractIndex2Subgroup(CoxIter &ci) {
-  unsigned int iVerticesCountStart(ci.get_iVerticesCount());
+  unsigned int verticesCountStart(ci.get_verticesCount());
 
   if (strIndex2vertex_t0 == "") {
     cout << "Error: A vertex must be given" << endl;
@@ -243,13 +243,13 @@ void App::extractIndex2Subgroup(CoxIter &ci) {
       return;
     }
 
-    if (!ci.get_iDimension()) {
+    if (!ci.get_dimension()) {
       cout << "\tError: The dimension must be specified" << endl;
       return;
     }
 
-    if (ci.get_iCoxeterMatrixEntry(ci.get_iVertexIndex(strIndex2vertex_t0),
-                                   ci.get_iVertexIndex(strIndex2vertex_s0)) >=
+    if (ci.get_coxeterMatrixEntry(ci.get_vertexIndex(strIndex2vertex_t0),
+                                   ci.get_vertexIndex(strIndex2vertex_s0)) >=
         2) {
       cout << "\tError: The two hyperplanes must be (ultra)parallel " << endl;
       return;
@@ -257,8 +257,8 @@ void App::extractIndex2Subgroup(CoxIter &ci) {
 
     ci.IS_computations(strIndex2vertex_t0, strIndex2vertex_s0);
 
-    auto iFVUnits(ci.get_iISFVectorsUnits()),
-        iFVPowers(ci.get_iISFVectorsPowers());
+    auto iFVUnits(ci.get_infSeqFVectorsUnits()),
+        iFVPowers(ci.get_infSeqFVectorsPowers());
 
     cout << "\tf-vector after n doubling:\n\t(" << implode(", ", iFVUnits)
          << ", 1) + 2^(n-1)*(" << implode(", ", iFVPowers) << ", 0)" << endl;
@@ -271,7 +271,7 @@ void App::extractIndex2Subgroup(CoxIter &ci) {
     cout << "\tError: " << idx2.get_strError() << endl;
   else
     cout << "\tNumber of new hyperplanes after first doubling: "
-         << (ci.get_iVerticesCount() - iVerticesCountStart) << endl;
+         << (ci.get_verticesCount() - verticesCountStart) << endl;
 
   cout << endl;
 }
@@ -388,10 +388,10 @@ void App::run() {
     ci.computeGraphsProducts();
   }
 
-  unsigned int iDimension(ci.get_iDimension());
+  unsigned int dimension(ci.get_dimension());
 
   if (bCheckFiniteCovolume)
-    ci.isFiniteCovolume();
+    ci.checkCovolumeFiniteness();
 
   // -----------------------------------------------------------------
   // calcul de la caractéristique d'Euler, f-vecteur et compacité
@@ -412,7 +412,7 @@ void App::run() {
   }
 
   if (bCheckCocompacity)
-    ci.iIsGraphCocompact();
+    ci.isGraphCocompact();
 
   if (bCheckArithmeticity)
     arithmeticity.test(ci, true);
@@ -466,11 +466,11 @@ void App::run() {
   cout << "Information" << endl;
 
   if (ci.get_bDimensionGuessed())
-    cout << "\tGuessed dimension: " << ci.get_iDimension() << endl;
+    cout << "\tGuessed dimension: " << ci.get_dimension() << endl;
 
   cout << "\tCocompact: "
-       << (ci.get_iIsCocompact() >= 0
-               ? (ci.get_iIsCocompact() == 0 ? "no" : "yes")
+       << (ci.get_isCocompact() >= 0
+               ? (ci.get_isCocompact() == 0 ? "no" : "yes")
                : "?")
        << endl;
   if (bCheckCanBeFiniteCovolume)
@@ -478,15 +478,15 @@ void App::run() {
          << (bCanBeFiniteCovolume ? "yes" : "no") << endl;
 
   cout << "\tFinite covolume: "
-       << (ci.get_iIsFiniteCovolume() >= 0
-               ? (ci.get_iIsFiniteCovolume() == 0 ? "no" : "yes")
+       << (ci.get_isFiniteCovolume() >= 0
+               ? (ci.get_isFiniteCovolume() == 0 ? "no" : "yes")
                : "?")
        << endl;
   if (bCheckArithmeticity) {
     cout << "\tArithmetic: ";
-    if (ci.get_iIsArithmetic() == 1)
+    if (ci.get_isArithmetic() == 1)
       cout << "yes" << endl;
-    else if (ci.get_iIsArithmetic() == 0)
+    else if (ci.get_isArithmetic() == 0)
       cout << "no" << endl;
     else
       cout << "?"
@@ -499,16 +499,16 @@ void App::run() {
 
   // f-vector, alternating sum of the components of the f-vector
   if (bComputeEuler && bEulerSuccess) {
-    if (iDimension) {
+    if (dimension) {
       vector<unsigned int> iFVector(ci.get_iFVector());
 
       cout << "\tf-vector: (";
-      for (unsigned int i(0); i <= iDimension; i++)
+      for (unsigned int i(0); i <= dimension; i++)
         cout << (i ? ", " : "") << iFVector[i];
       cout << ")" << endl;
 
       cout << "\tNumber of vertices at infinity: "
-           << ci.get_iVerticesAtInfinityCount() << endl;
+           << ci.get_verticesAtInfinityCount() << endl;
 
       cout << "\tAlternating sum of the components of the f-vector: "
            << ci.get_iFVectorAlternateSum() << endl;
@@ -518,19 +518,19 @@ void App::run() {
   }
 
   // volume
-  if (bComputeEuler && iDimension && bEulerSuccess && !(iDimension % 2) &&
-      ci.get_iIsFiniteCovolume() == 1) {
+  if (bComputeEuler && dimension && bEulerSuccess && !(dimension % 2) &&
+      ci.get_isFiniteCovolume() == 1) {
     cout << "\tCovolume: ";
 
-    MPZ_rational cov((iDimension / 2) % 2 ? -1 : 1);
-    for (unsigned int i(1); i <= iDimension; i++) {
+    MPZ_rational cov((dimension / 2) % 2 ? -1 : 1);
+    for (unsigned int i(1); i <= dimension; i++) {
       cov *= 2;
       cov /= i;
-      if (i <= (iDimension / 2))
+      if (i <= (dimension / 2))
         cov *= i;
     }
 
-    cout << "pi^" << (iDimension / 2) << " * "
+    cout << "pi^" << (dimension / 2) << " * "
          << cov * ci.get_brEulerCaracteristic() << endl;
   }
 
@@ -560,7 +560,7 @@ void App::run() {
 #endif
   }
 
-  if (ci.get_iIsArithmetic() == -1) {
+  if (ci.get_isArithmetic() == -1) {
     vector<string> strCycles(arithmeticity.get_strListCycles());
 
     if (strCycles.size()) {
@@ -573,9 +573,9 @@ void App::run() {
         cout << "with" << endl;
         for (auto it : strWeights)
           cout << "l"
-               << iLinearizationMatrix_row(it.first, ci.get_iVerticesCount())
+               << iLinearizationMatrix_row(it.first, ci.get_verticesCount())
                << "m"
-               << iLinearizationMatrix_col(it.first, ci.get_iVerticesCount())
+               << iLinearizationMatrix_col(it.first, ci.get_verticesCount())
                << " = " << it.second << endl;
       }
     }
