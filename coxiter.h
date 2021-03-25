@@ -965,21 +965,21 @@ public:
   friend ostream &operator<<(ostream &, CoxIter const &);
 };
 
-inline unsigned int iLinearizationMatrix_index(const unsigned int &i,
-                                               const unsigned int &j,
-                                               const unsigned int &n) {
+inline unsigned int linearizationMatrix_index(const unsigned int &i,
+                                              const unsigned int &j,
+                                              const unsigned int &n) {
   return (i * (2 * n - 1 - i) / 2 + j);
 }
 
-inline unsigned int iLinearizationMatrix_row(const unsigned int &k,
-                                             const unsigned int &n) {
-  return ((2 * n + 1 - iSQRTsup((2 * n + 1) * (2 * n + 1) - 8 * k)) / 2);
+inline unsigned int linearizationMatrix_row(const unsigned int &k,
+                                            const unsigned int &n) {
+  return ((2 * n + 1 - sqrtSup((2 * n + 1) * (2 * n + 1) - 8 * k)) / 2);
 }
 
-inline unsigned int iLinearizationMatrix_col(const unsigned int &k,
-                                             const unsigned int &n) {
-  unsigned int iRow(iLinearizationMatrix_row(k, n));
-  return (k - (iRow * (2 * n - 1 - iRow)) / 2);
+inline unsigned int linearizationMatrix_col(const unsigned int &k,
+                                            const unsigned int &n) {
+  unsigned int row(linearizationMatrix_row(k, n));
+  return (k - (row * (2 * n - 1 - row)) / 2);
 }
 
 #endif

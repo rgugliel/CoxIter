@@ -192,48 +192,48 @@ bool dividePolynomialBySymbol(vector<Type> &iPolynomial,
 /*!	\fn dividePolynomialByPolynomial
  * 	\brief Try to make a division
  *
- * 	\param iNumerator(vector< Type >&) The dividend ; updated if the
- * remainder is 0 \param iDenominator(const vector< Type >) The divisor \return
- * bool: True if iNumerator is divisible by iDenominator. In this case,
- * iNumerator is updated to the quotient
+ * 	\param numerator(vector< Type >&) The dividend ; updated if the
+ * remainder is 0 \param denominator(const vector< Type >) The divisor \return
+ * bool: True if numerator is divisible by denominator. In this case,
+ * numerator is updated to the quotient
  */
 template <typename Type>
-bool dividePolynomialByPolynomial(vector<Type> &iNumerator,
-                                  const vector<Type> &iDenominator) {
-  unsigned int dN(iNumerator.size() - 1), dD(iDenominator.size() - 1);
+bool dividePolynomialByPolynomial(vector<Type> &numerator,
+                                  const vector<Type> &denominator) {
+  unsigned int numDeg(numerator.size() - 1), denomDeg(denominator.size() - 1);
 
-  if (dN < dD || (dD == 0 && iDenominator[0] != 0))
+  if (numDeg < denomDeg || (denomDeg == 0 && denominator[0] != 0))
     return false;
 
-  vector<Type> iWorking(iNumerator), iQuotient;
+  vector<Type> working(numerator), quotient;
 
   unsigned int i;
   Type iTemp;
 
-  while (dN >= dD) {
-    if (iWorking[dN] % iDenominator[dD] != 0)
+  while (numDeg >= denomDeg) {
+    if (working[numDeg] % denominator[denomDeg] != 0)
       return false;
 
-    iTemp = iWorking[dN] / iDenominator[dD];
-    iQuotient.insert(iQuotient.begin(), iTemp);
+    iTemp = working[numDeg] / denominator[denomDeg];
+    quotient.insert(quotient.begin(), iTemp);
 
-    for (i = 0; i <= dD; i++)
-      iWorking[dN - i] -= iTemp * iDenominator[dD - i];
+    for (i = 0; i <= denomDeg; i++)
+      working[numDeg - i] -= iTemp * denominator[denomDeg - i];
 
-    dN--;
+    numDeg--;
 
-    while (iWorking[dN] == 0 && dN >= 1 && dN >= dD) {
-      iQuotient.insert(iQuotient.begin(), 0);
-      dN--;
+    while (working[numDeg] == 0 && numDeg >= 1 && numDeg >= denomDeg) {
+      quotient.insert(quotient.begin(), 0);
+      numDeg--;
     }
   }
 
-  for (i = 0; i <= dN; i++) {
-    if (iWorking[i] != 0)
+  for (i = 0; i <= numDeg; i++) {
+    if (working[i] != 0)
       return false;
   }
 
-  iNumerator = iQuotient;
+  numerator = quotient;
 
   return true;
 }

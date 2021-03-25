@@ -44,15 +44,15 @@ using namespace std;
 namespace MathTools {
 extern unsigned int iSmallPrimeNumbers[1229];
 
-/*! \fn bIsPrime
+/*! \fn isPrime
  * 	\brief Test if a number is prime
  * 	Remark: this function could/should be optimized
- * 	\param iN(unsigned int) Integer
+ * 	\param n(unsigned int) Integer
  * 	\return True if the number is prime, false otherwise
  */
-bool isPrime(unsigned int iN);
+bool isPrime(unsigned int n);
 
-/*! 	\fn iSQRT
+/*! 	\fn integerSqrt
  * 	\brief Compute the integer square root of a positive integer (the
  * greatest integer less than or equal to the square root of the given number)
  *
@@ -61,19 +61,19 @@ bool isPrime(unsigned int iN);
  */
 template <typename Type>
 typename std::enable_if<std::is_unsigned<Type>::value, Type>::type
-iSQRT(Type iN) {
+integerSqrt(Type n) {
   Type place =
       (Type)1
       << (sizeof(Type) * 8 -
           2); // calculated by precompiler = same runtime as: place = 0x40000000
-  while (place > iN)
+  while (place > n)
     place /= 4; // optimized by complier as place >>= 2
 
   Type root = 0;
 
   while (place) {
-    if (iN >= root + place) {
-      iN -= root + place;
+    if (n >= root + place) {
+      n -= root + place;
       root += place * 2;
     }
 
@@ -84,31 +84,31 @@ iSQRT(Type iN) {
   return root;
 }
 
-/*! 	\fn iSQRTsup
+/*! 	\fn sqrtSup
  * 	\brief Compute the sup integer square root of a positive integer
  *
- * 	\param iN(unsigned) Integer
- * 	\return ceil(sqrt(iN))
+ * 	\param n(unsigned) Integer
+ * 	\return ceil(sqrt(n))
  */
 template <typename Type>
 typename std::enable_if<std::is_unsigned<Type>::value, Type>::type
-iSQRTsup(Type iN) {
-  if (iN < 2) // 0 or 1
-    return iN;
+sqrtSup(Type n) {
+  if (n < 2) // 0 or 1
+    return n;
 
   Type place =
       (Type)1
       << (sizeof(Type) * 8 -
           2); // calculated by precompiler = same runtime as: place = 0x40000000
-  iN--;
-  while (place > iN)
+  n--;
+  while (place > n)
     place /= 4; // optimized by complier as place >>= 2
 
   Type root = 0;
 
   while (place) {
-    if (iN >= root + place) {
-      iN -= root + place;
+    if (n >= root + place) {
+      n -= root + place;
       root += place * 2;
     }
 
@@ -128,23 +128,23 @@ iSQRTsup(Type iN) {
  */
 template <typename Type>
 vector<typename std::enable_if<std::is_unsigned<Type>::value, Type>::type>
-iListDivisors(const Type &iN, const bool &bNonTrivialOnly = false) {
+iListDivisors(const Type &n, const bool &nonTrivialOnly = false) {
 #ifdef _MSC_VER
-  static vector<vector<Type>> iDivisors_(
+  static vector<vector<Type>> divisors_(
       vector<vector<Type>>(60, vector<Type>(0)));
-  static vector<vector<Type>> iDivisors_bNonTrivialOnly_(
+  static vector<vector<Type>> divisors_bNonTrivialOnly_(
       vector<vector<Type>>(60, vector<Type>(0)));
 
-  if (iN <= 60) {
-    if (bNonTrivialOnly && iDivisors_bNonTrivialOnly_[iN - 1].size())
-      return iDivisors_bNonTrivialOnly_[iN - 1];
+  if (n <= 60) {
+    if (bNonTrivialOnly && divisors_bNonTrivialOnly_[n - 1].size())
+      return divisors_bNonTrivialOnly_[n - 1];
 
-    if (!bNonTrivialOnly && iDivisors_[iN - 1].size())
-      return iDivisors_[iN - 1];
+    if (!bNonTrivialOnly && divisors_[n - 1].size())
+      return divisors_[n - 1];
   }
 #else // Remark: the following two initialisers don't work on Visual C++ 2013
       // and 2015
-  static vector<vector<Type>> iDivisors_ = vector<vector<Type>>(
+  static vector<vector<Type>> divisors_ = vector<vector<Type>>(
       {vector<Type>({1}),
        vector<Type>({1, 2}),
        vector<Type>({1, 3}),
@@ -205,7 +205,7 @@ iListDivisors(const Type &iN, const bool &bNonTrivialOnly = false) {
        vector<Type>({1, 2, 29, 58}),
        vector<Type>({1, 59}),
        vector<Type>({1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60})});
-  static vector<vector<Type>> iDivisors_bNonTrivialOnly_ =
+  static vector<vector<Type>> divisors_nonTrivialOnly_ =
       vector<vector<Type>>({vector<Type>(0),
                             vector<Type>(0),
                             vector<Type>(0),
@@ -267,39 +267,39 @@ iListDivisors(const Type &iN, const bool &bNonTrivialOnly = false) {
                             vector<Type>(0),
                             vector<Type>({2, 3, 4, 5, 6, 10, 12, 15, 20, 30})});
 
-  if (iN <= 60) {
-    if (bNonTrivialOnly)
-      return iDivisors_bNonTrivialOnly_[iN - 1];
+  if (n <= 60) {
+    if (nonTrivialOnly)
+      return divisors_nonTrivialOnly_[n - 1];
     else
-      return iDivisors_[iN - 1];
+      return divisors_[n - 1];
   }
 #endif
 
-  vector<Type> iDivisors;
+  vector<Type> divisors;
 
-  if (!bNonTrivialOnly) {
-    iDivisors.push_back(1);
-    iDivisors.push_back(iN);
+  if (!nonTrivialOnly) {
+    divisors.push_back(1);
+    divisors.push_back(n);
   }
 
-  Type iMax(iSQRT(iN)), iTemp;
-  for (Type i(2); i <= iMax; i++) {
-    if (!(iN % i)) {
-      iTemp = iN / i;
-      iDivisors.push_back(i);
-      if (i != iTemp)
-        iDivisors.push_back(iTemp);
+  Type max(integerSqrt(n)), temp;
+  for (Type i(2); i <= max; i++) {
+    if (!(n % i)) {
+      temp = n / i;
+      divisors.push_back(i);
+      if (i != temp)
+        divisors.push_back(temp);
     }
   }
 
 #ifdef _MSC_VER
-  if (bNonTrivialOnly)
-    iDivisors_bNonTrivialOnly_[iN - 1] = iDivisors;
+  if (nonTrivialOnly)
+    divisors_nonTrivialOnly_[n - 1] = iDivisors;
   else
-    iDivisors_[iN - 1] = iDivisors;
+    divisors_[n - 1] = iDivisors;
 #endif
 
-  return iDivisors;
+  return divisors;
 }
 
 /*! 	\fn ugcd
@@ -321,123 +321,123 @@ ugcd(Type u, Type v) {
   return u;
 }
 
-/*! 	\fn iJacobiSymbol
+/*! 	\fn jacobiSymbol
  * 	\brief Compute the Jacobi symbol of two integers
  *
- * 	\param iA(int) Integer
- *	\param iB(int) Integer
+ * 	\param a(int) Integer
+ *	\param b(int) Integer
  * 	\return The symbol
  */
-int iJacobiSymbol(int iA, unsigned int iB);
+int jacobiSymbol(int a, unsigned int b);
 
-/*! 	\fn iPrimeFactorsWithoutSquares
+/*! 	\fn primeFactorsWithoutSquares
  * 	\brief Return the prime factors dividing the integer
  *
- * 	\param iN(unsigned int) Integer
+ * 	\param n(unsigned int) Integer
  * 	\return Prime factors
  */
-vector<unsigned int> iPrimeFactorsWithoutSquares(unsigned int iN);
+vector<unsigned int> primeFactorsWithoutSquares(unsigned int n);
 
-/*! 	\fn iPrimeFactors
+/*! 	\fn primeFactors
  * 	\brief Return the prime factors dividing the integer
  *
- * 	\param iN Integer
+ * 	\param n Integer
  * 	\return Prime factors
  */
-template <typename Type> vector<Type> iPrimeFactors(const Type &iN) {
-  Type iWork(iN < 0 ? -iN : iN);
-  vector<Type> iPrimes;
+template <typename Type> vector<Type> primeFactors(const Type &n) {
+  Type nWork(n < 0 ? -n : n);
+  vector<Type> primes;
 
-  if (iWork == 1)
+  if (nWork == 1)
     return vector<Type>();
 
-  if (!(iWork % 2)) {
-    iPrimes.push_back(2);
-    iWork /= 2;
+  if (!(nWork % 2)) {
+    primes.push_back(2);
+    nWork /= 2;
 
-    while (!(iWork % 2))
-      iWork /= 2;
+    while (!(nWork % 2))
+      nWork /= 2;
   }
 
-  for (unsigned int i(1); i < 1229 && iWork > 1; i++) {
-    if (!(iWork % iSmallPrimeNumbers[i])) {
-      iPrimes.push_back(iSmallPrimeNumbers[i]);
-      iWork /= iSmallPrimeNumbers[i];
+  for (unsigned int i(1); i < 1229 && nWork > 1; i++) {
+    if (!(nWork % iSmallPrimeNumbers[i])) {
+      primes.push_back(iSmallPrimeNumbers[i]);
+      nWork /= iSmallPrimeNumbers[i];
 
-      while (!(iWork % iSmallPrimeNumbers[i]))
-        iWork /= iSmallPrimeNumbers[i];
+      while (!(nWork % iSmallPrimeNumbers[i]))
+        nWork /= iSmallPrimeNumbers[i];
     }
   }
 
   Type iDivisor(10007);
-  while (iWork > 1) {
-    if (!(iWork % iDivisor)) {
-      iPrimes.push_back(iDivisor);
-      iWork /= iDivisor;
+  while (nWork > 1) {
+    if (!(nWork % iDivisor)) {
+      primes.push_back(iDivisor);
+      nWork /= iDivisor;
 
-      while (!(iWork % iDivisor))
-        iWork /= iDivisor;
+      while (!(nWork % iDivisor))
+        nWork /= iDivisor;
     }
 
     iDivisor += 2;
   }
 
-  return iPrimes;
+  return primes;
 }
 
-/*! 	\fn iPrimeDecomposition
+/*! 	\fn primeDecomposition
  * 	\brief Return the prime decomposition of thee integer
  *
- * 	\param iN(unsigned int) Integer
+ * 	\param n(unsigned int) Integer
  * 	\return Prime decomposition: [ prime ] = power
  */
 template <typename Type>
 typename std::enable_if<std::is_unsigned<Type>::value,
                         map<Type, unsigned int>>::type
-iPrimeDecomposition(Type iN) {
-  map<Type, unsigned int> iPrimes;
+primeDecomposition(Type n) {
+  map<Type, unsigned int> primes;
 
-  if (iN == 1)
+  if (n == 1)
     return map<Type, unsigned int>();
 
-  if (!(iN % 2)) {
-    iPrimes[2] = 1;
-    iN /= 2;
+  if (!(n % 2)) {
+    primes[2] = 1;
+    n /= 2;
 
-    while (!(iN % 2)) {
-      iN /= 2;
-      iPrimes[2]++;
+    while (!(n % 2)) {
+      n /= 2;
+      primes[2]++;
     }
   }
 
-  for (unsigned int i(1); i < 1229 && iN > 1; i++) {
-    if (!(iN % iSmallPrimeNumbers[i])) {
-      iPrimes[iSmallPrimeNumbers[i]] = 1;
-      iN /= iSmallPrimeNumbers[i];
+  for (unsigned int i(1); i < 1229 && n > 1; i++) {
+    if (!(n % iSmallPrimeNumbers[i])) {
+      primes[iSmallPrimeNumbers[i]] = 1;
+      n /= iSmallPrimeNumbers[i];
 
-      while (!(iN % iSmallPrimeNumbers[i])) {
-        iN /= iSmallPrimeNumbers[i];
-        iPrimes[iSmallPrimeNumbers[i]]++;
+      while (!(n % iSmallPrimeNumbers[i])) {
+        n /= iSmallPrimeNumbers[i];
+        primes[iSmallPrimeNumbers[i]]++;
       }
     }
   }
 
   Type iDivisor(10007);
-  while (iN > 1) {
-    if (!(iN % iDivisor)) {
-      iPrimes[iDivisor] = 1;
-      iN /= iDivisor;
+  while (n > 1) {
+    if (!(n % iDivisor)) {
+      primes[iDivisor] = 1;
+      n /= iDivisor;
 
-      while (!(iN % iDivisor)) {
-        iN /= iDivisor;
-        iPrimes[iDivisor]++;
+      while (!(n % iDivisor)) {
+        n /= iDivisor;
+        primes[iDivisor]++;
       }
     }
 
     iDivisor += 2;
   }
 
-  return iPrimes;
+  return primes;
 }
 
 /*! 	\fn iRemoveSquareFactors
@@ -446,98 +446,98 @@ iPrimeDecomposition(Type iN) {
  * 	\param iN(unsigned int) Integer
  * 	\return iN divided by all its squared factors
  */
-template <typename Type> Type iRemoveSquareFactors(Type iN) {
-  Type iWork(iN > 0 ? iN : -iN), iRes(1), iSquare;
+template <typename Type> Type iRemoveSquareFactors(Type n) {
+  Type nWork(n > 0 ? n : -n), res(1), square;
 
-  if (iWork < 3)
-    return iN;
+  if (nWork < 3)
+    return n;
 
-  for (unsigned int i(0); i < 1229 && iWork > 1; i++) {
-    iSquare = iSmallPrimeNumbers[i] * iSmallPrimeNumbers[i];
+  for (unsigned int i(0); i < 1229 && nWork > 1; i++) {
+    square = iSmallPrimeNumbers[i] * iSmallPrimeNumbers[i];
 
-    while (iWork % iSquare == 0)
-      iWork /= iSquare;
+    while (nWork % square == 0)
+      nWork /= square;
 
-    if (iWork % iSmallPrimeNumbers[i] == 0) {
-      iWork /= iSmallPrimeNumbers[i];
-      iRes *= iSmallPrimeNumbers[i];
+    if (nWork % iSmallPrimeNumbers[i] == 0) {
+      nWork /= iSmallPrimeNumbers[i];
+      res *= iSmallPrimeNumbers[i];
     }
   }
 
   Type iDivisor(10007);
-  while (iWork > 1) {
-    iSquare = iDivisor * iDivisor;
+  while (nWork > 1) {
+    square = iDivisor * iDivisor;
 
-    while (iWork % iSquare == 0)
-      iWork /= iSquare;
+    while (nWork % square == 0)
+      nWork /= square;
 
-    if (iWork % iDivisor == 0) {
-      iWork /= iDivisor;
-      iRes *= iDivisor;
+    if (nWork % iDivisor == 0) {
+      nWork /= iDivisor;
+      res *= iDivisor;
     }
 
     iDivisor += 2;
   }
 
-  return (iN < 0 ? -iRes : iRes);
+  return (n < 0 ? -res : res);
 }
 
-/*! 	\fn iCeilQuotient
+/*! 	\fn ceilQuotient
  * 	\brief Compute the ceiling of a quotient
  *
- * 	\param iNumerator(const unsigned int&) Numerator
- * 	\param iDenominator(const unsigned int&) Denominator
- * 	\return ceil(iNumerator / iDenominator)
+ * 	\param numerator(const unsigned int&) Numerator
+ * 	\param denominator(const unsigned int&) Denominator
+ * 	\return ceil(numerator / denominator)
  */
 template <typename Type>
-inline Type iCeilQuotient(const Type &iNumerator, const Type &iDenominator) {
-  return ((iNumerator % iDenominator) ? iNumerator / iDenominator + 1
-                                      : iNumerator / iDenominator);
+inline Type ceilQuotient(const Type &numerator, const Type &denominator) {
+  return ((numerator % denominator) ? numerator / denominator + 1
+                                    : numerator / denominator);
 }
 
-/*! 	\fn iSQRTQuotient
+/*! 	\fn sqrtQuotient
  * 	\brief Compute the greatest integer less than or equal to the square
  * root of the given rational number
  *
- * 	\param iNumerator(const unsigned &) Numerator
- * 	\param iDenominator(const unsigned &) Denominator
- * 	\return ceil(sqrt(iNumerator / iDenominator))
+ * 	\param numerator(const unsigned &) Numerator
+ * 	\param denominator(const unsigned &) Denominator
+ * 	\return ceil(sqrt(numerator / denominator))
  */
 template <typename Type>
 typename std::enable_if<std::is_unsigned<Type>::value, Type>::type
-iSQRTQuotient(const Type &iNumerator, const Type &iDenominator) {
-  Type tRes(iSQRT(iNumerator / iDenominator));
+sqrtQuotient(const Type &numerator, const Type &denominator) {
+  Type tRes(integerSqrt(numerator / denominator));
 
-  while (iDenominator * (tRes + 1) * (tRes + 1) <= iNumerator)
+  while (denominator * (tRes + 1) * (tRes + 1) <= numerator)
     tRes++;
 
   return tRes;
 }
 
-mpz_class iSQRTQuotient(const mpz_class &iNumerator,
-                        const mpz_class &iDenominator);
-mpz_class iSQRTsupQuotient(const mpz_class &iNumerator,
-                           const mpz_class &iDenominator);
+mpz_class sqrtQuotient(const mpz_class &numerator,
+                       const mpz_class &denominator);
+mpz_class sqrtSupQuotient(const mpz_class &numerator,
+                          const mpz_class &denominator);
 
-/*! 	\fn iSQRTsupQuotient
+/*! 	\fn sqrtSupQuotient
  * 	\brief Compute the smalles integer greater than or equal to the square
  * root of the given rational number
  *
- * 	\param iNumerator(const unsigned &) Numerator
- * 	\param iDenominator(const unsigned &) Denominator
- * 	\return ceil(sqrt(iNumerator / iDenominator))
+ * 	\param numerator(const unsigned &) Numerator
+ * 	\param denominator(const unsigned &) Denominator
+ * 	\return ceil(sqrt(numerator / denominator))
  */
 template <typename Type>
 typename std::enable_if<std::is_unsigned<Type>::value, Type>::type
-iSQRTsupQuotient(const Type &iNumerator, const Type &iDenominator) {
-  if (!iNumerator)
+sqrtSupQuotient(const Type &numerator, const Type &denominator) {
+  if (!numerator)
     return 0;
 
-  Type tRes((iNumerator % iDenominator) != 0 ? iNumerator / iDenominator + 1
-                                             : iNumerator / iDenominator);
-  tRes = iSQRTsup(tRes);
+  Type tRes((numerator % denominator) != 0 ? numerator / denominator + 1
+                                           : numerator / denominator);
+  tRes = sqrtSup(tRes);
 
-  while (iNumerator <= iDenominator * (tRes - 1) * (tRes - 1))
+  while (numerator <= denominator * (tRes - 1) * (tRes - 1))
     tRes--;
 
   return tRes;

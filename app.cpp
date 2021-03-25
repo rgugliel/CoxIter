@@ -573,9 +573,9 @@ void App::run() {
         cout << "with" << endl;
         for (auto it : strWeights)
           cout << "l"
-               << iLinearizationMatrix_row(it.first, ci.get_verticesCount())
+               << linearizationMatrix_row(it.first, ci.get_verticesCount())
                << "m"
-               << iLinearizationMatrix_col(it.first, ci.get_verticesCount())
+               << linearizationMatrix_col(it.first, ci.get_verticesCount())
                << " = " << it.second << endl;
       }
     }

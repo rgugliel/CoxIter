@@ -265,7 +265,7 @@ bool CoxIter::parseGraph(istream &streamIn) {
       if (i3 == 1) // Weight of the dotted line given?
       {
         if (regexpRes.size() > 5) {
-          unsigned int iIndex(iLinearizationMatrix_index(
+          unsigned int iIndex(linearizationMatrix_index(
               min(i1, i2), max(i1, i2), verticesCount));
           strWeights[iIndex] = regexpRes[5][0];
         } else
@@ -1144,15 +1144,15 @@ string CoxIter::get_strGrowthSeries() {
 
     strGrowth += "/(" + vector2str(growthSeries_iPolynomialDenominator) + ")";
   } else if (strOuputMathematicalFormat == "gap") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
-    unsigned int iDenominatorSize(growthSeries_iPolynomialDenominator.size());
+    unsigned int cycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int denominatorSize(growthSeries_iPolynomialDenominator.size());
 
     strGrowth += "f := Product([";
-    for (unsigned int i(0); i < iCycloSize; i++)
+    for (unsigned int i(0); i < cycloSize; i++)
       strGrowth +=
           (i ? "," : "") + to_string(growthSeries_iCyclotomicNumerator[i]);
     strGrowth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
-    for (unsigned int i(0); i < iDenominatorSize; i++)
+    for (unsigned int i(0); i < denominatorSize; i++)
       cout << (i ? "," : "") << growthSeries_iPolynomialDenominator[i];
     cout << "], X(Rationals));";
   } else if (strOuputMathematicalFormat == "mathematica") {
@@ -1202,14 +1202,14 @@ void CoxIter::printGrowthSeries() {
     if (bDebug)
       cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
   } else if (strOuputMathematicalFormat == "gap") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
-    unsigned int iDenominatorSize(growthSeries_iPolynomialDenominator.size());
+    unsigned int cycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int denominatorSize(growthSeries_iPolynomialDenominator.size());
 
     cout << "f := Product([";
-    for (unsigned int i(0); i < iCycloSize; i++)
+    for (unsigned int i(0); i < cycloSize; i++)
       cout << (i ? "," : "") << growthSeries_iCyclotomicNumerator[i];
     cout << "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
-    for (unsigned int i(0); i < iDenominatorSize; i++)
+    for (unsigned int i(0); i < denominatorSize; i++)
       cout << (i ? "," : "") << growthSeries_iPolynomialDenominator[i];
     cout << "], X(Rationals));";
 
@@ -2928,7 +2928,7 @@ void CoxIter::printGramMatrix() {
   for (i = 0; i < verticesCount; i++) {
     for (j = 0; j < i; j++) {
       if (coxeterMatrix[i][j] == 1 &&
-          strWeights.find(iLinearizationMatrix_index(j, i, verticesCount)) ==
+          strWeights.find(linearizationMatrix_index(j, i, verticesCount)) ==
               strWeights.end()) {
         cout << "l" << j << "m" << i
              << ": weight of the dotted line between hyperplanes "
@@ -3146,7 +3146,7 @@ string CoxIter::get_strGramMatrix() const {
         strGramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
         map<unsigned int, string>::const_iterator itF(strWeights.find(
-            iLinearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
+            linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
         if (itF != strWeights.end())
           strGramMatrix += itF->second;
@@ -3193,7 +3193,7 @@ string CoxIter::get_strGramMatrix_LaTeX() const {
         strGramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
         map<unsigned int, string>::const_iterator itF(strWeights.find(
-            iLinearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
+            linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
         if (itF != strWeights.end())
           strGramMatrix += itF->second;
@@ -3239,7 +3239,7 @@ string CoxIter::get_strGramMatrix_Mathematica() const {
         strGramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
         map<unsigned int, string>::const_iterator itF(strWeights.find(
-            iLinearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
+            linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
         if (itF != strWeights.end())
           strGramMatrix += itF->second;
@@ -3285,7 +3285,7 @@ string CoxIter::get_strGramMatrix_PARI() const {
         strGramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
         map<unsigned int, string>::const_iterator itF(strWeights.find(
-            iLinearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
+            linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
         if (itF != strWeights.end())
           strGramMatrix += itF->second;
@@ -3330,7 +3330,7 @@ string CoxIter::get_strGramMatrix_GAP() const {
         strGramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
         map<unsigned int, string>::const_iterator itF(strWeights.find(
-            iLinearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
+            linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
         if (itF != strWeights.end())
           strGramMatrix += itF->second;

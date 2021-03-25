@@ -163,8 +163,8 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
 // le vecteur verticesBase contient la base (i.e. sans les 4 extrémités)
 #ifdef _MSC_VER
         vector<short unsigned int> verticesBase;
-        iTemp = verticesCount - 3;
-        for (i = 1; i < iTemp; i++)
+        temp = verticesCount - 3;
+        for (i = 1; i < temp; i++)
           verticesBase.push_back(vertices[i]);
 #else
         vector<short unsigned int> verticesBase(
