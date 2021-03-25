@@ -418,8 +418,7 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     for (unsigned int j(0); j < iDenom.size(); j++)
       iTotalDenom += iDenom[j];
 
-    if (ci->get_dimension() %
-        2) // n is odd, the denominator should vanish in 1
+    if (ci->get_dimension() % 2) // n is odd, the denominator should vanish in 1
     {
       if (iTotalDenom == 0) {
         iTestsSucceded["growthSeriesDenomDimOdd"][0]++;

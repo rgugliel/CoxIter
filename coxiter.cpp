@@ -25,14 +25,15 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 CoxIter::CoxIter()
     : checkCocompactness(false), checkCofiniteness(false), bCoutFile(false),
       bDebug(false), bGramMatrixField(false), isGrowthSeriesComputed(false),
-      hasBoldLine(false), hasDottedLine(false),
-      hasDottedLineWithoutWeight(0), bWriteInfo(false), isGraphExplored(false),
-      isGraphsProductsComputed(false), bUseOpenMP(true), brEulerCaracteristic(0),
-      graphsList_spherical(nullptr), graphsList_euclidean(nullptr),
-      dimension(0), euclideanMaxRankFound(0), sphericalMaxRankFound(0),
-      isDimensionGuessed(false), fVectorAlternateSum(0), isArithmetic(-1),
-      isCocompact(-2), isFiniteCovolume(-2), verticesAtInfinityCount(0),
-      verticesCount(0), outCout(0), sBufOld(0), strError(""),
+      hasBoldLine(false), hasDottedLine(false), hasDottedLineWithoutWeight(0),
+      bWriteInfo(false), isGraphExplored(false),
+      isGraphsProductsComputed(false), bUseOpenMP(true),
+      brEulerCaracteristic(0), graphsList_spherical(nullptr),
+      graphsList_euclidean(nullptr), dimension(0), euclideanMaxRankFound(0),
+      sphericalMaxRankFound(0), isDimensionGuessed(false),
+      fVectorAlternateSum(0), isArithmetic(-1), isCocompact(-2),
+      isFiniteCovolume(-2), verticesAtInfinityCount(0), verticesCount(0),
+      outCout(0), sBufOld(0), strError(""),
       strOuputMathematicalFormat("generic") {
 #ifndef _OPENMP
   this->bUseOpenMP = false;
@@ -44,9 +45,9 @@ CoxIter::CoxIter(const vector<vector<unsigned int>> &iMatrix,
     : checkCocompactness(false), checkCofiniteness(false), bCoutFile(false),
       bGramMatrixField(false), isGraphExplored(false),
       isGraphsProductsComputed(false), isGrowthSeriesComputed(false),
-      hasBoldLine(false), hasDottedLine(false),
-      hasDottedLineWithoutWeight(0), bWriteInfo(false), bDebug(false),
-      bUseOpenMP(true), brEulerCaracteristic(0), graphsList_spherical(nullptr),
+      hasBoldLine(false), hasDottedLine(false), hasDottedLineWithoutWeight(0),
+      bWriteInfo(false), bDebug(false), bUseOpenMP(true),
+      brEulerCaracteristic(0), graphsList_spherical(nullptr),
       graphsList_euclidean(nullptr), dimension(dimension),
       euclideanMaxRankFound(0), sphericalMaxRankFound(0),
       isDimensionGuessed(false), fVectorAlternateSum(0), isCocompact(-1),
@@ -173,7 +174,7 @@ bool CoxIter::parseGraph(istream &streamIn) {
   // ---------------------------------------------------------------------------
   // removed vertices
   vector<unsigned int> verticesShift(verticesFileCount,
-                                      0); // Shifts for the removed vertices
+                                     0); // Shifts for the removed vertices
   unsigned int iTruncCount(0);
 
   if (strVertices.size()) // If we want to specify a subset of the vertices
@@ -317,8 +318,7 @@ bool CoxIter::parseGraph(istream &streamIn) {
   if (bWriteInfo) {
     cout << "Reading graph: " << endl;
     cout << "\tNumber of vertices: " << verticesCount << endl;
-    cout << "\tDimension: " << (dimension ? to_string(dimension) : "?")
-         << endl;
+    cout << "\tDimension: " << (dimension ? to_string(dimension) : "?") << endl;
 
     cout << "\tVertices: ";
     for (vector<string>::const_iterator itStr(
@@ -452,8 +452,7 @@ bool CoxIter::bWriteGraph(const string &strOutFilenameBasis) {
     return false;
   }
 
-  out << verticesCount << (dimension ? " " + to_string(dimension) : "")
-      << endl;
+  out << verticesCount << (dimension ? " " + to_string(dimension) : "") << endl;
   out << "vertices labels: ";
   for (vector<string>::const_iterator it(map_vertices_indexToLabel.begin());
        it != map_vertices_indexToLabel.end(); ++it)
@@ -561,8 +560,8 @@ void CoxIter::exploreGraph() {
   for (i = 0; i < verticesCount; i++) {
     path.clear();
     bVerticesVisited = vector<bool>(verticesCount, false);
-    bEdgesVisited = vector<vector<bool>>(verticesCount,
-                                         vector<bool>(verticesCount, false));
+    bEdgesVisited =
+        vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
 
     DFS(i, i);
   }
@@ -965,7 +964,8 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
   for (unsigned int i(0); i < verticesCount; i++) {
     // si le sommet est pas utilisbale (s'il l'est c'est qu'il n'est pas voisin
     // de la base) ET si y'a un lien
-    if (false == bVerticesLinkable[i] && coxeterMatrix[i][pathTemp[iStart]] == 3) {
+    if (false == bVerticesLinkable[i] &&
+        coxeterMatrix[i][pathTemp[iStart]] == 3) {
       // on va chercher si c'est uniquement à cause d'un des sommets différents
       // de iStart que le sommet n'est pas admissible
       for (j = 0; j < pathSize; j++) {
@@ -1028,8 +1028,8 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
 void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &bVerticesBeginLinkable,
                              vector<short unsigned int> pathTemp,
                              const short unsigned int &iVEnd) {
-  bool isSpherical(pathTemp.size() == 2); // true si sphérique (on cherche F4), false si
-                                // euclidien (on cherche TF4)
+  bool isSpherical(pathTemp.size() == 2); // true si sphérique (on cherche F4),
+                                          // false si euclidien (on cherche TF4)
   unsigned int i, j, iV2(pathTemp[1]);
   vector<bool> bVerticesLinkable;
 
@@ -1041,7 +1041,9 @@ void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &bVerticesBeginLinkable,
         coxeterMatrix[i][iV2] == 2) {
       bVerticesLinkable = bVerticesBeginLinkable;
 
-      if (!isSpherical && coxeterMatrix[pathTemp[2]][i] != 2) // If i is connected to pathTemp[2], this won't work
+      if (!isSpherical &&
+          coxeterMatrix[pathTemp[2]][i] !=
+              2) // If i is connected to pathTemp[2], this won't work
         continue;
 
       for (j = 0; j < verticesCount; j++) {
@@ -1064,7 +1066,7 @@ void CoxIter::printPath() {
   if (path.size() == 1)
     return;
 
-  for(const auto& p: path)
+  for (const auto &p : path)
     cout << p << " ; ";
 
   cout << endl;
@@ -2888,9 +2890,8 @@ void CoxIter::printCoxeterMatrix() {
       cout << (i ? "," : "") << "[";
       for (j = 0; j < verticesCount; j++) {
         cout << (j ? "," : "")
-             << (i == j
-                     ? 1
-                     : (coxeterMatrix[i][j] < 2 ? 0 : coxeterMatrix[i][j]));
+             << (i == j ? 1
+                        : (coxeterMatrix[i][j] < 2 ? 0 : coxeterMatrix[i][j]));
       }
       cout << "]";
     }
@@ -2900,9 +2901,8 @@ void CoxIter::printCoxeterMatrix() {
       cout << "\t";
       for (j = 0; j < verticesCount; j++) {
         cout << (j ? "," : "")
-             << (i == j
-                     ? 1
-                     : (coxeterMatrix[i][j] < 2 ? 0 : coxeterMatrix[i][j]));
+             << (i == j ? 1
+                        : (coxeterMatrix[i][j] < 2 ? 0 : coxeterMatrix[i][j]));
       }
       cout << endl;
     }
@@ -3024,10 +3024,9 @@ vector<vector<unsigned int>> CoxIter::get_coxeterMatrix() const {
 }
 
 unsigned int CoxIter::get_coxeterMatrixEntry(const unsigned int &i,
-                                              const unsigned int &j) const {
+                                             const unsigned int &j) const {
   if (i >= verticesCount || j >= verticesCount)
-    throw(
-        string("CoxIter::get_coxeterMatrixEntry: This entry does not exist"));
+    throw(string("CoxIter::get_coxeterMatrixEntry: This entry does not exist"));
 
   return coxeterMatrix[i][j];
 }
@@ -3055,8 +3054,8 @@ string CoxIter::get_strCoxeterMatrix() const {
 
 vector<vector<string>> CoxIter::get_array_str_2_GramMatrix() const {
   size_t i, j;
-  vector<vector<string>> strGramMatrix(vector<vector<string>>(
-      verticesCount, vector<string>(verticesCount, "")));
+  vector<vector<string>> strGramMatrix(
+      vector<vector<string>>(verticesCount, vector<string>(verticesCount, "")));
 
   for (i = 0; i < verticesCount; i++) {
     for (j = 0; j <= i; j++) {

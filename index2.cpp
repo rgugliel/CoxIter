@@ -37,8 +37,8 @@ bool Index2::bIsVertexAdmissible(const string &strVertexName) {
 
   for (unsigned int i(0); i < verticesCount; i++) {
     if (iCox[iV][i] != 0 && iCox[iV][i] != 1 && (iCox[iV][i] % 2)) {
-      strError = "m(" + strVertexName + "," + ci->get_vertexLabel(i) +
-                 ") is not even";
+      strError =
+          "m(" + strVertexName + "," + ci->get_vertexLabel(i) + ") is not even";
       return false;
     }
   }
@@ -68,8 +68,7 @@ bool Index2::removeVertex(const string &strVertexName) {
       nv.iIndex = verticesCount + iNewVerticesCount - 1;
 
       nv.iOriginVertex = i;
-      nv.strLabel =
-          ci->get_vertexLabel(iVertex) + "_" + ci->get_vertexLabel(i);
+      nv.strLabel = ci->get_vertexLabel(iVertex) + "_" + ci->get_vertexLabel(i);
 
       newVertices.push_back(nv);
       ci->map_vertices_labels_addReference(nv.strLabel);

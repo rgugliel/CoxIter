@@ -173,8 +173,7 @@ unsigned int Arithmeticity::collapseQueues() {
       verticesToRemove.begin(),
       unique(verticesToRemove.begin(), verticesToRemove.end()));
 
-  if (verticesToRemove.size() ==
-      verticesCount) // If we remove all the vertices
+  if (verticesToRemove.size() == verticesCount) // If we remove all the vertices
   {
     coxeterMatrix = vector<vector<unsigned int>>(0, vector<unsigned int>(0));
     verticesCount = 0;
@@ -201,8 +200,8 @@ void Arithmeticity::testCycles() {
   for (unsigned int i(0); i < verticesCount; i++) {
     path.clear();
     bVerticesVisited = vector<bool>(verticesCount, false);
-    bEdgesVisited = vector<vector<bool>>(verticesCount,
-                                         vector<bool>(verticesCount, false));
+    bEdgesVisited =
+        vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
     findCycles(i, i);
 
     if (notArithmetic) {
@@ -289,8 +288,7 @@ void Arithmeticity::testCycle() {
     int dottedCount(coxeterMatrix[path[0]][path[pathSize - 1]] == 1 ? 1 : 0);
     int twoCount(coxeterMatrix[path[0]][path[pathSize - 1]] == 0 ? 1 : 0);
     int sqrt2Count(coxeterMatrix[path[0]][path[pathSize - 1]] == 4 ? 1 : 0);
-    int sqrt3Count(coxeterMatrix[path[0]][path[pathSize - 1]] == 6 ? 1
-                                                                         : 0);
+    int sqrt3Count(coxeterMatrix[path[0]][path[pathSize - 1]] == 6 ? 1 : 0);
 
     for (unsigned int i(1); i < pathSize; i++) {
       if (coxeterMatrix[path[i]][path[i - 1]] == 0)
@@ -322,8 +320,7 @@ void Arithmeticity::testCycle() {
       if (sqrt3Count > 1)
         strTemp +=
             (strTemp == "" ? "" : " * ") + string("3^") +
-            to_string(((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) /
-                      2);
+            to_string(((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2);
 
       if (sqrt2Count % 2)
         strTemp += (strTemp == "" ? "" : " * ") + string("Sqrt[2]");

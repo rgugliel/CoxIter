@@ -109,7 +109,7 @@ public:
 
 private:
   static bool isAnSubAm(const vector<short unsigned int> &iSubV,
-                       const vector<short unsigned int> &iBigV);
+                        const vector<short unsigned int> &iBigV);
 
 public:
   friend ostream &operator<<(ostream &, Graph const &);

@@ -35,7 +35,7 @@ vector<vector<short unsigned int>> GraphsProduct::createFootPrint() {
 
     // Si graphe de type G, ce qui compte c'est le poids
     iMax = (iIndex == 6 && graphs[i]->isSpherical) ? graphs[i]->dataSupp
-                                                  : graphs[i]->vertices.size();
+                                                   : graphs[i]->vertices.size();
 
     for (j = graphsCountByType[iIndex].size(); j < iMax; j++)
       graphsCountByType[iIndex].push_back(0);

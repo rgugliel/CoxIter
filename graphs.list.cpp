@@ -48,8 +48,8 @@ void GraphsList::addGraph(const std::vector<short unsigned int> &vertices,
         (type == 3 && iVCount >= 3) ||
         (type == 4 && iVCount == 5)) // TBn, TCn, TE6
       iVCount += 2;
-    else if ((type == 0 && iDataSupp) || type == 1 || type == 3 ||
-             type == 4 || type == 5 ||
+    else if ((type == 0 && iDataSupp) || type == 1 || type == 3 || type == 4 ||
+             type == 5 ||
              (type == 6 && iDataSupp)) // TAn ou TB3 ou TD4 ou TEn ou TG_2
       iVCount++;
   }

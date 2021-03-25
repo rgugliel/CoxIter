@@ -116,8 +116,8 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
       int iDirection(
           vertices[!iMinIndex ? (verticesCount - 1) : (iMinIndex - 1)] >
                   vertices[iMinIndex == (int)(verticesCount - 1)
-                                ? 0
-                                : (iMinIndex + 1)]
+                               ? 0
+                               : (iMinIndex + 1)]
               ? 1
               : -1);
 
@@ -169,8 +169,8 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
 #else
         vector<short unsigned int> verticesBase(
             vertices.begin() + 1, vertices.begin() + verticesCount -
-                                       3); // ne marche pas sous Visual Studio
-                                           // 2010 & 2012 malheureusement
+                                      3); // ne marche pas sous Visual Studio
+                                          // 2010 & 2012 malheureusement
 #endif
 
         // on regarde si on doit modifier l'ordre
@@ -180,12 +180,10 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
           // ajout des 4 extrémités
           verticesBase.push_back(min(vertices[0], iVertexSupp1));
           verticesBase.push_back(max(vertices[0], iVertexSupp1));
-          verticesBase.insert(
-              verticesBase.begin(),
-              max(vertices[verticesCount - 3], iVertexSupp2));
-          verticesBase.insert(
-              verticesBase.begin(),
-              min(vertices[verticesCount - 3], iVertexSupp2));
+          verticesBase.insert(verticesBase.begin(),
+                              max(vertices[verticesCount - 3], iVertexSupp2));
+          verticesBase.insert(verticesBase.begin(),
+                              min(vertices[verticesCount - 3], iVertexSupp2));
         } else {
           // ajout des 4 extrémités
           verticesBase.push_back(
@@ -193,9 +191,9 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
           verticesBase.push_back(
               max(vertices[verticesCount - 3], iVertexSupp2));
           verticesBase.insert(verticesBase.begin(),
-                               max(vertices[0], iVertexSupp1));
+                              max(vertices[0], iVertexSupp1));
           verticesBase.insert(verticesBase.begin(),
-                               min(vertices[0], iVertexSupp1));
+                              min(vertices[0], iVertexSupp1));
         }
 
         vertices = verticesBase;

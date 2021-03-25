@@ -38,19 +38,19 @@ class Arithmeticity {
 private:
   string strError; ///< If an error occured, small text.
 
-  CoxIter *ci;                 ///< Pointer to the CoxIter object
+  CoxIter *ci;                ///< Pointer to the CoxIter object
   unsigned int verticesCount; ///< Number of generators of the group
   vector<vector<unsigned int>> coxeterMatrix; ///< Coxeter matrix of the group
-  vector<unsigned int> iReferencesToLabels;    ///< Correspondence for the new
-                                               ///< indices to the old ones
+  vector<unsigned int> iReferencesToLabels;   ///< Correspondence for the new
+                                              ///< indices to the old ones
 
   // For the DFS
   vector<vector<bool>> bEdgesVisited; ///< Traversed edges
   vector<bool> bVerticesVisited;      ///<  Taversed vertices
-  vector<unsigned int> path;         ///< Current path
+  vector<unsigned int> path;          ///< Current path
 
   bool notArithmetic; ///< True if not arithmetic (i.e. we have to quit the
-                       ///< algorithm)
+                      ///< algorithm)
 
   bool listCycles; ///< If true, will list the cycles to be manually tested
   vector<string> strListCycles; ///< The list

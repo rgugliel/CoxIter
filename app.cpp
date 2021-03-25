@@ -249,7 +249,7 @@ void App::extractIndex2Subgroup(CoxIter &ci) {
     }
 
     if (ci.get_coxeterMatrixEntry(ci.get_vertexIndex(strIndex2vertex_t0),
-                                   ci.get_vertexIndex(strIndex2vertex_s0)) >=
+                                  ci.get_vertexIndex(strIndex2vertex_s0)) >=
         2) {
       cout << "\tError: The two hyperplanes must be (ultra)parallel " << endl;
       return;

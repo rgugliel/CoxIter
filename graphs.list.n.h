@@ -40,7 +40,7 @@ using namespace std;
  */
 class GraphsListN {
 private:
-  vector<Graph> graphs;        ///< Liste des graphes trouvés
+  vector<Graph> graphs;       ///< Liste des graphes trouvés
   unsigned int verticesCount; ///< Nombre de sommets des graphes de la liste
 
   vector<string>

@@ -26,9 +26,8 @@ Graph::Graph(const vector<short unsigned int> &vertices,
              vector<string> *ptr_map_vertices_indexToLabel,
              const vector<bool> &bVerticesLinkable, const unsigned int &iType,
              const bool &isSpherical, const unsigned int &iDataSupp)
-    : type(iType), vertices(vertices),
-      bVerticesLinkable(bVerticesLinkable), dataSupp(iDataSupp),
-      isSpherical(isSpherical),
+    : type(iType), vertices(vertices), bVerticesLinkable(bVerticesLinkable),
+      dataSupp(iDataSupp), isSpherical(isSpherical),
       ptr_map_vertices_indexToLabel(ptr_map_vertices_indexToLabel),
       b_map_vertices_indexToLabelIsEmpty(
           !ptr_map_vertices_indexToLabel ||
@@ -93,8 +92,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       verticesBigCount(grBig->vertices.size());
 
   if (verticesCount == 1)
-    return (find(grBig->vertices.begin(), grBig->vertices.end(),
-                 vertices[0]) != grBig->vertices.end());
+    return (find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]) !=
+            grBig->vertices.end());
 
   // ---------------------------------------------------------------------
   // A_n < TA_m
@@ -160,8 +159,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
   // A_n < TC_m
   if (type == 0 && grBig->type == 2) {
     return isAnSubAm(vertices,
-                    vector<short unsigned int>(grBig->vertices.begin() + 1,
-                                               grBig->vertices.end() - 1));
+                     vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
@@ -293,14 +292,14 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       return false;
 
     if (isAnSubAm(vertices,
-                 vector<short unsigned int>(grBig->vertices.begin(),
-                                            grBig->vertices.begin() + 3)))
+                  vector<short unsigned int>(grBig->vertices.begin(),
+                                             grBig->vertices.begin() + 3)))
       return true;
 
     if (verticesCount == 2)
       return isAnSubAm(vertices,
-                      vector<short unsigned int>(grBig->vertices.end() - 2,
-                                                 grBig->vertices.end()));
+                       vector<short unsigned int>(grBig->vertices.end() - 2,
+                                                  grBig->vertices.end()));
 
     return false;
   }
@@ -312,8 +311,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       return false;
 
     return isAnSubAm(vertices,
-                    vector<short unsigned int>(grBig->vertices.begin(),
-                                               grBig->vertices.begin() + 2));
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.begin() + 2));
   }
 
   // ---------------------------------------------------------------------
@@ -363,8 +362,7 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       return false;
 
     // [3, ..., 3, 4] < [3, ..., 3, 4]
-    if (vertices[verticesCount - 1] ==
-        grBig->vertices[verticesBigCount - 1])
+    if (vertices[verticesCount - 1] == grBig->vertices[verticesBigCount - 1])
       return (vertices ==
               vector<short unsigned int>(itSearch, grBig->vertices.end()));
 
@@ -406,8 +404,7 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       return false;
 
     // "central" node
-    if (vertices[verticesCount - 3] !=
-        grBig->vertices[verticesBigCount - 3])
+    if (vertices[verticesCount - 3] != grBig->vertices[verticesBigCount - 3])
       return false;
 
     Graph g(vector<short unsigned int>(grBig->vertices.begin() + 1,
@@ -537,9 +534,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
     // -------------------------------------------------
     // first test
-    vector<short unsigned int> iVTemp(grBig->vertices.begin(),
-                                      grBig->vertices.begin() +
-                                          iBigQueueIndex + 1);
+    vector<short unsigned int> iVTemp(
+        grBig->vertices.begin(), grBig->vertices.begin() + iBigQueueIndex + 1);
     iVTemp.push_back(min(grBig->vertices[iBigQueueIndex + 1],
                          grBig->vertices[verticesBigCount - 1]));
     iVTemp.push_back(max(grBig->vertices[iBigQueueIndex + 1],
@@ -604,18 +600,16 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
   // ---------------------------------------------------------------------
   // E_n < TE_7, TE_8
   if (type == 4 && grBig->type == 4) {
-    if (vertices[verticesCount - 1] !=
-        grBig->vertices[verticesBigCount - 1])
+    if (vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
     // E_6, E_7 < TE7
     if (verticesCount <= 7 && verticesBigCount == 8) {
-      vector<short unsigned int> iVBigBasis(grBig->vertices.begin() + 1,
-                                            grBig->vertices.begin() +
-                                                verticesCount);
-      if (isAnSubAm(vector<short unsigned int>(vertices.begin(),
-                                              vertices.end() - 1),
-                   iVBigBasis))
+      vector<short unsigned int> iVBigBasis(
+          grBig->vertices.begin() + 1, grBig->vertices.begin() + verticesCount);
+      if (isAnSubAm(
+              vector<short unsigned int>(vertices.begin(), vertices.end() - 1),
+              iVBigBasis))
         return true;
 
       if (verticesCount == 7 && verticesBigCount == 8) // E_7 < TE_7
@@ -631,9 +625,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       return false;
     } else if (verticesBigCount == 9) // < TE_8
     {
-      vector<short unsigned int> iVBigBasis(grBig->vertices.begin(),
-                                            grBig->vertices.begin() +
-                                                verticesCount - 1);
+      vector<short unsigned int> iVBigBasis(
+          grBig->vertices.begin(), grBig->vertices.begin() + verticesCount - 1);
 
       if (vector<short unsigned int>(vertices.begin(), vertices.end() - 1) ==
           iVBigBasis)
@@ -643,8 +636,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
       {
         reverse(iVBigBasis.begin(), iVBigBasis.end());
 
-        return ((vector<short unsigned int>(
-                     vertices.begin(), vertices.end() - 1) == iVBigBasis));
+        return ((vector<short unsigned int>(vertices.begin(),
+                                            vertices.end() - 1) == iVBigBasis));
       }
 
       return false;
@@ -656,8 +649,8 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
   // F_4 < TF_4
   if (type == 5 && grBig->type == 5) {
     return isAnSubAm(vertices,
-                    vector<short unsigned int>(grBig->vertices.begin() + 1,
-                                               grBig->vertices.end()));
+                     vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                                grBig->vertices.end()));
   }
 
   // ---------------------------------------------------------------------
@@ -706,14 +699,15 @@ bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 }
 
 bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
-  size_t verticesCount(vertices.size()), verticesBigCount(grBig->vertices.size());
+  size_t verticesCount = vertices.size();
+  size_t verticesBigCount = grBig->vertices.size();
 
   if (verticesBigCount < verticesCount)
     return false;
 
   if (verticesCount == 1)
-    return find(grBig->vertices.begin(), grBig->vertices.end(),
-                 vertices[0]) != grBig->vertices.end();
+    return find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]) !=
+           grBig->vertices.end();
 
   // ---------------------------------------------------------------------
   // A_n < A_m
@@ -724,8 +718,8 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
   // A_n < B_m
   if (type == 0 && grBig->type == 1) {
     return isAnSubAm(vertices,
-                    vector<short unsigned int>(grBig->vertices.begin(),
-                                               grBig->vertices.end() - 1));
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
@@ -800,8 +794,8 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
   // A_n < H_m
   if (type == 0 && grBig->type == 7) {
     return isAnSubAm(vertices,
-                    vector<short unsigned int>(grBig->vertices.begin(),
-                                               grBig->vertices.end() - 1));
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
@@ -814,7 +808,7 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
   // B_3 < F_4
   if (type == 1 && grBig->type == 5 && verticesCount == 3) {
     if (vertices == vector<short unsigned int>(grBig->vertices.begin(),
-                                                grBig->vertices.begin() + 3))
+                                               grBig->vertices.begin() + 3))
       return true;
 
     vector<short unsigned int> iVTemp(grBig->vertices.begin() + 1,
@@ -850,10 +844,8 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
     }
 
     // Autres D_n
-    if (vertices[verticesCount - 2] !=
-            grBig->vertices[verticesBigCount - 2] ||
-        vertices[verticesCount - 1] !=
-            grBig->vertices[verticesBigCount - 1])
+    if (vertices[verticesCount - 2] != grBig->vertices[verticesBigCount - 2] ||
+        vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
     vector<short unsigned int> iVTemp1(vertices.begin(),
@@ -901,14 +893,12 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
   // ---------------------------------------------------------------------
   // E_n < E_m
   if (type == 4 && grBig->type == 4) {
-    if (vertices[verticesCount - 1] !=
-        grBig->vertices[verticesBigCount - 1])
+    if (vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
     vector<short unsigned int> iVTemp1(vertices.begin(), vertices.end() - 1);
-    vector<short unsigned int> iVTemp2(grBig->vertices.begin(),
-                                       grBig->vertices.begin() +
-                                           verticesCount - 1);
+    vector<short unsigned int> iVTemp2(
+        grBig->vertices.begin(), grBig->vertices.begin() + verticesCount - 1);
 
     if (iVTemp1 == iVTemp2)
       return true;
@@ -934,8 +924,8 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // G_m < G_m
-  if (type == 6 && grBig->type == 6 &&
-      dataSupp == grBig->dataSupp && vertices == grBig->vertices) {
+  if (type == 6 && grBig->type == 6 && dataSupp == grBig->dataSupp &&
+      vertices == grBig->vertices) {
     return ((vertices[0] == grBig->vertices[verticesBigCount - 2] &&
              vertices[1] == grBig->vertices[verticesBigCount - 1]) ||
             (vertices[0] == grBig->vertices[verticesBigCount - 1] &&
@@ -955,15 +945,15 @@ bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
   // H_3 < H_4
   if (type == 7 && grBig->type == 7) {
     return (vector<short unsigned int>(grBig->vertices.begin() + 1,
-                                       grBig->vertices.begin() +
-                                           verticesCount + 1) == vertices);
+                                       grBig->vertices.begin() + verticesCount +
+                                           1) == vertices);
   }
 
   return false;
 }
 
 bool Graph::isAnSubAm(const vector<short unsigned int> &iSubV,
-                     const vector<short unsigned int> &iBigV) {
+                      const vector<short unsigned int> &iBigV) {
   vector<short unsigned int>::const_iterator itBig, itSub,
       it(find(iBigV.begin(), iBigV.end(), iSubV[0]));
 

@@ -65,9 +65,8 @@ public:
    * le G_2, le poids)
    */
   void addGraph(const vector<short unsigned int> &vertices,
-                const vector<bool> &bVerticesLinkable,
-                const unsigned int &type, bool isSpherical,
-                const unsigned int &iVertexSupp1 = 0,
+                const vector<bool> &bVerticesLinkable, const unsigned int &type,
+                bool isSpherical, const unsigned int &iVertexSupp1 = 0,
                 const unsigned int &iVertexSupp2 = 0,
                 const unsigned int &iDataSupp = 0);
 
@@ -91,11 +90,12 @@ public:
   Graph *next(size_t &iVCount, size_t &graphIndex);
 
 public: // Remark: this is public for read-only purpose!
-  vector<GraphsListN> graphs; ///< List of list of graphs (by number of vertices)
+  vector<GraphsListN>
+      graphs; ///< List of list of graphs (by number of vertices)
   vector<size_t> graphsCount; ///< Number of graphs (by number of vertices)
 
-  size_t totalGraphsCount;   ///< Total number of graphs
-  size_t verticesCount; ///< Maximum number of vertices in the graphs
+  size_t totalGraphsCount; ///< Total number of graphs
+  size_t verticesCount;    ///< Maximum number of vertices in the graphs
 
 public:
   friend ostream &operator<<(ostream &, GraphsList const &);

@@ -42,8 +42,8 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 class GraphsListIterator {
 private:
-  size_t verticesCount;     ///< Nombre de sommets du graphe courant
-  size_t graphIndex; ///< Index du graphe courant
+  size_t verticesCount; ///< Nombre de sommets du graphe courant
+  size_t graphIndex;    ///< Index du graphe courant
 
   GraphsList *graphsList; ///< Pointeur vers la liste de graphes
 
