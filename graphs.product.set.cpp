@@ -25,7 +25,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 GraphsProductSet::GraphsProductSet() : iRank(0) {}
 
 GraphsProductSet::GraphsProductSet(const GraphsProduct &gp) {
-  iRank = gp.iRank;
+  iRank = gp.rank;
 
   for (vector<Graph *>::const_iterator it(gp.graphs.begin());
        it != gp.graphs.end(); ++it)

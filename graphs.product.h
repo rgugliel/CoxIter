@@ -46,16 +46,16 @@ using namespace std;
 
 class GraphsProduct {
 public:
-  vector<Graph *>
-      graphs;         ///< Pointeurs vers les graphes qui constituent le produit
-  unsigned int iRank; ///< Rank of the product
+  vector<Graph *> graphs; ///< Pointers to the graphs of the product
+  unsigned int rank;      ///< Rank of the product
 
 public:
   GraphsProduct();
 
   /*! \fn createFootPrint
-   * 	\brief Pour un graphe, crée le "footprint", c'est-à-dire la clé utilisée
-   * dans la map CoxIter.graphsProductsCount \return Clé pour la map
+   * 	\brief Create a footprint for the graph.
+   *  This footprint is used as a key for the map CoxIter.graphsProductsCount
+   *  \return The footprint of the graph
    */
   vector<vector<short unsigned int>> createFootPrint();
 

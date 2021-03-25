@@ -1604,7 +1604,7 @@ void CoxIter::computeGraphsProducts(
   unsigned int graphRank(0);
   vector<vector<short unsigned int>> vFootPrintTest;
 
-  while (grIt.ptr && (gp.iRank + graphRank <= maximalSubgraphRank)) {
+  while (grIt.ptr && (gp.rank + graphRank <= maximalSubgraphRank)) {
     // ---------------------------------------------------
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
@@ -1621,7 +1621,7 @@ void CoxIter::computeGraphsProducts(
       // taille du graphe courant
       graphRank = isSpherical ? grIt.ptr->vertices.size()
                               : (grIt.ptr->vertices.size() - 1);
-      gp.iRank += graphRank;
+      gp.rank += graphRank;
 
       // Create the footprint of the product. The goal is to decide if we
       // already have this product
@@ -1634,51 +1634,50 @@ void CoxIter::computeGraphsProducts(
           {
             if (isSpherical) {
               // Keeping track of spherical subgraphs
-              if ((gp.iRank == (dimension - 1) || gp.iRank == dimension))
-                graphsProducts[gp.iRank + 1 - dimension].push_back(
+              if ((gp.rank == (dimension - 1) || gp.rank == dimension))
+                graphsProducts[gp.rank + 1 - dimension].push_back(
                     GraphsProductSet(gp));
             }
 
             // Euclidean subgraphs
-            if (!isSpherical && gp.iRank == (dimension - 1) &&
-                checkCofiniteness)
+            if (!isSpherical && gp.rank == (dimension - 1) && checkCofiniteness)
               graphsProducts[2].push_back(GraphsProductSet(gp));
           } else {
             if (isSpherical) {
-              if (gp.iRank == sphericalMaxRankFound + 1) {
+              if (gp.rank == sphericalMaxRankFound + 1) {
                 graphsProducts[0] = graphsProducts[1];
                 graphsProducts[1].clear();
                 graphsProducts[1].push_back(GraphsProductSet(gp));
-              } else if (gp.iRank > sphericalMaxRankFound + 1) {
+              } else if (gp.rank > sphericalMaxRankFound + 1) {
                 graphsProducts[0].clear();
                 graphsProducts[1].clear();
                 graphsProducts[1].push_back(GraphsProductSet(gp));
-              } else if (gp.iRank + 1 >= sphericalMaxRankFound)
-                graphsProducts[gp.iRank + 1 - sphericalMaxRankFound].push_back(
+              } else if (gp.rank + 1 >= sphericalMaxRankFound)
+                graphsProducts[gp.rank + 1 - sphericalMaxRankFound].push_back(
                     GraphsProductSet(gp));
             } else {
               if (checkCofiniteness) {
-                if (gp.iRank > euclideanMaxRankFound)
+                if (gp.rank > euclideanMaxRankFound)
                   graphsProducts[2].clear();
 
-                if (gp.iRank >= euclideanMaxRankFound)
+                if (gp.rank >= euclideanMaxRankFound)
                   graphsProducts[2].push_back(GraphsProductSet(gp));
               }
             }
           }
         }
 
-        if (isSpherical && gp.iRank >= sphericalMaxRankFound)
-          sphericalMaxRankFound = gp.iRank;
+        if (isSpherical && gp.rank >= sphericalMaxRankFound)
+          sphericalMaxRankFound = gp.rank;
 
-        if (!isSpherical && gp.iRank >= euclideanMaxRankFound)
-          euclideanMaxRankFound = gp.iRank;
+        if (!isSpherical && gp.rank >= euclideanMaxRankFound)
+          euclideanMaxRankFound = gp.rank;
 
-        if ((*graphsProductsCount)[gp.iRank].find(vFootPrintTest) ==
-            (*graphsProductsCount)[gp.iRank].end())
-          (*graphsProductsCount)[gp.iRank][vFootPrintTest] = 1;
+        if ((*graphsProductsCount)[gp.rank].find(vFootPrintTest) ==
+            (*graphsProductsCount)[gp.rank].end())
+          (*graphsProductsCount)[gp.rank][vFootPrintTest] = 1;
         else
-          (*graphsProductsCount)[gp.iRank][vFootPrintTest]++;
+          (*graphsProductsCount)[gp.rank][vFootPrintTest]++;
       }
 
       // mise à jour des sommets que l'on ne peut plus prendre
@@ -1700,7 +1699,7 @@ void CoxIter::computeGraphsProducts(
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
         bGPVerticesNonLinkable[*iIt] = false;
 
-      gp.iRank -= graphRank;
+      gp.rank -= graphRank;
 
       // le graphe est enlevé
       gp.graphs.pop_back();
@@ -1775,7 +1774,7 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
   vector<short unsigned int> flaggedVertices;
   unsigned int graphRank(0);
 
-  while (grIt.ptr && (gp.iRank + graphRank <= maximalSubgraphRank)) {
+  while (grIt.ptr && (gp.rank + graphRank <= maximalSubgraphRank)) {
     // ---------------------------------------------------
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
@@ -1792,11 +1791,11 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
       // taille du graphe courant
       graphRank = isSpherical ? grIt.ptr->vertices.size()
                               : (grIt.ptr->vertices.size() - 1);
-      gp.iRank += graphRank;
+      gp.rank += graphRank;
 
 #pragma omp critical
       {
-        if (isSpherical || gp.iRank == (dimension - 1)) {
+        if (isSpherical || gp.rank == (dimension - 1)) {
           bool bSpecialIn_t0(false), bSpecialIn_s0(false);
           unsigned int iNonCommute_t0(0), iNonCommute_s0(0);
           for (auto g : gp.graphs) {
@@ -1815,26 +1814,26 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
 
           if (!bSpecialIn_t0 && !bSpecialIn_s0) {
             if (!iNonCommute_t0 && !iNonCommute_s0)
-              infSeqFVectorsUnits[isSpherical ? dimension - gp.iRank : 0]++;
+              infSeqFVectorsUnits[isSpherical ? dimension - gp.rank : 0]++;
             else if (iNonCommute_t0 && iNonCommute_s0)
-              infSeqFVectorsPowers[isSpherical ? dimension - gp.iRank : 0] += 2;
+              infSeqFVectorsPowers[isSpherical ? dimension - gp.rank : 0] += 2;
             else if (iNonCommute_t0 && !iNonCommute_s0) {
-              infSeqFVectorsUnits[isSpherical ? dimension - gp.iRank : 0]++;
-              infSeqFVectorsPowers[isSpherical ? dimension - gp.iRank : 0]++;
+              infSeqFVectorsUnits[isSpherical ? dimension - gp.rank : 0]++;
+              infSeqFVectorsPowers[isSpherical ? dimension - gp.rank : 0]++;
             } else
-              infSeqFVectorsPowers[isSpherical ? dimension - gp.iRank : 0]++;
+              infSeqFVectorsPowers[isSpherical ? dimension - gp.rank : 0]++;
           } else if (!bSpecialIn_t0 && bSpecialIn_s0) {
             if (!iNonCommute_s0)
-              infSeqFVectorsUnits[isSpherical ? dimension - gp.iRank : 0] += 2;
+              infSeqFVectorsUnits[isSpherical ? dimension - gp.rank : 0] += 2;
             else {
-              infSeqFVectorsUnits[isSpherical ? dimension - gp.iRank : 0]++;
-              infSeqFVectorsPowers[isSpherical ? dimension - gp.iRank : 0]++;
+              infSeqFVectorsUnits[isSpherical ? dimension - gp.rank : 0]++;
+              infSeqFVectorsPowers[isSpherical ? dimension - gp.rank : 0]++;
             }
           } else if (bSpecialIn_t0 && !bSpecialIn_s0) {
             if (iNonCommute_t0)
-              infSeqFVectorsPowers[isSpherical ? dimension - gp.iRank : 0]++;
+              infSeqFVectorsPowers[isSpherical ? dimension - gp.rank : 0]++;
           } else
-            infSeqFVectorsUnits[isSpherical ? dimension - gp.iRank : 0]++;
+            infSeqFVectorsUnits[isSpherical ? dimension - gp.rank : 0]++;
         }
       }
 
@@ -1856,7 +1855,7 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
         bGPVerticesNonLinkable[*iIt] = false;
 
-      gp.iRank -= graphRank;
+      gp.rank -= graphRank;
 
       // le graphe est enlevé
       gp.graphs.pop_back();
@@ -1949,7 +1948,7 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
   vector<short unsigned int> flaggedVertices;
   unsigned int graphGrank(0);
 
-  while (grIt.ptr && (gp.iRank + graphGrank <= verticesCount)) {
+  while (grIt.ptr && (gp.rank + graphGrank <= verticesCount)) {
     // ---------------------------------------------------
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
@@ -1965,11 +1964,11 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
 
       // taille du graphe courant
       graphGrank = grIt.ptr->vertices.size() - 1;
-      gp.iRank += graphGrank;
+      gp.rank += graphGrank;
 
 #pragma omp critical
       {
-        if (gp.iRank == (dimension - 1))
+        if (gp.rank == (dimension - 1))
           graphsProducts_bCanBeFiniteCovolume[0].push_back(
               GraphsProductSet(gp));
       }
@@ -1993,7 +1992,7 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
         bGPVerticesNonLinkable[*iIt] = false;
 
-      gp.iRank -= graphGrank;
+      gp.rank -= graphGrank;
 
       // le graphe est enlevé
       gp.graphs.pop_back();
@@ -2097,7 +2096,7 @@ void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
   vector<short unsigned int> flaggedVertices;
   unsigned int graphRank(0);
 
-  while (grIt.ptr && (gp.iRank + graphRank <= verticesCount)) {
+  while (grIt.ptr && (gp.rank + graphRank <= verticesCount)) {
     // ---------------------------------------------------
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
@@ -2113,12 +2112,12 @@ void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
 
       // taille du graphe courant
       graphRank = grIt.ptr->vertices.size() - 1;
-      gp.iRank += graphRank;
+      gp.rank += graphRank;
 
 #pragma omp critical
       {
-        if (2 <= gp.iRank && gp.iRank <= (dimension - 1))
-          graphsProducts_bCanBeFiniteCovolume[gp.iRank].push_back(
+        if (2 <= gp.rank && gp.rank <= (dimension - 1))
+          graphsProducts_bCanBeFiniteCovolume[gp.rank].push_back(
               GraphsProductSet(gp));
       }
 
@@ -2141,7 +2140,7 @@ void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
         bGPVerticesNonLinkable[*iIt] = false;
 
-      gp.iRank -= graphRank;
+      gp.rank -= graphRank;
 
       // le graphe est enlevé
       gp.graphs.pop_back();

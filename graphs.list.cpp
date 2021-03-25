@@ -92,9 +92,8 @@ Graph *GraphsList::next(size_t &iVCount, size_t &graphIndex) {
 }
 
 ostream &operator<<(ostream &o, const GraphsList &g) {
-  unsigned int iMax(g.graphs.size());
-  for (unsigned int i(0); i < iMax; ++i)
-    o << g.graphs[i];
+  for (const auto &graph : g.graphs)
+    o << graph;
 
   return o;
 }
