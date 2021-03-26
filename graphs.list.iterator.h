@@ -48,7 +48,7 @@ private:
   GraphsList *graphsList; ///< Pointeur vers la liste de graphes
 
   unsigned int verticesCountMax;
-  bool bLimitVerticesMax;
+  bool limitMaxVertices;
 
 public:
   /*!

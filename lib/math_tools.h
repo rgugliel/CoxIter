@@ -123,7 +123,7 @@ sqrtSup(Type n) {
  * 	\brief Return the list of the divisors of a (small) number
  * 	Rermark: this function could/should be optimized
  * 	\param iN(const Type&) Integer
- * 	\param bNonTrivialOnly(const bool&) If true, does not return 1 and iN
+ * 	\param nonTrivialOnly(const bool&) If true, does not return 1 and iN
  * 	\return The list of divisors
  */
 template <typename Type>
@@ -132,14 +132,14 @@ listDivisors(const Type &n, const bool &nonTrivialOnly = false) {
 #ifdef _MSC_VER
   static vector<vector<Type>> divisors_(
       vector<vector<Type>>(60, vector<Type>(0)));
-  static vector<vector<Type>> divisors_bNonTrivialOnly_(
+  static vector<vector<Type>> divisors_nonTrivialOnly_(
       vector<vector<Type>>(60, vector<Type>(0)));
 
   if (n <= 60) {
-    if (bNonTrivialOnly && divisors_bNonTrivialOnly_[n - 1].size())
-      return divisors_bNonTrivialOnly_[n - 1];
+    if (nonTrivialOnly && divisors_nonTrivialOnly_[n - 1].size())
+      return divisors_nonTrivialOnly_[n - 1];
 
-    if (!bNonTrivialOnly && divisors_[n - 1].size())
+    if (!nonTrivialOnly && divisors_[n - 1].size())
       return divisors_[n - 1];
   }
 #else // Remark: the following two initialisers don't work on Visual C++ 2013

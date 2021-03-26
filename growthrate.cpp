@@ -55,7 +55,7 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> polynomial,
   grr.perron = 1;
   grr.pisot = -1; // Not decided yed
   grr.salem = -1; // Not decided yed
-  grr.strGrowthRate = GENtostr(gGrowthRate);
+  grr.growthRate = GENtostr(gGrowthRate);
 
   // ----------------------------------------------------
   // Here we know the minimal root and the corresponding polynomial
@@ -71,26 +71,25 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> polynomial,
 
   // ----------------------------------------------------
   // Control variables
-  long int realRootsCount(sturm(t_POLfactors[iIndexMaximalRoot]));
+  long int realRootsCount(sturm(t_POLfactors[indexMaximalRoot]));
   long int realRootsFound(
       0); // Number of real roots and the one detected as such
   long int realNegativeRootsCount(
-      sturmpart(t_POLfactors[iIndexMaximalRoot], NULL, gen_0));
+      sturmpart(t_POLfactors[indexMaximalRoot], NULL, gen_0));
   long int realNegativeRootsFound(
       0); // Number of negative real roots and the one detected as such
   long int rootsOnUnitCircle(
-      iNumberRootsUnitCircle(t_POLfactors[iIndexMaximalRoot]));
+      numberRootsUnitCircle(t_POLfactors[indexMaximalRoot]));
   long int rootsOnUnitCircleFound(0);
   long int numberRootsInsideUnitCircle(0);
   long int numberRootsMaybeInsideUnitCircle(0);
 
   if (rootsOnUnitCircle == -1 ||
-      degree(t_POLfactors[iIndexMaximalRoot]) %
+      degree(t_POLfactors[indexMaximalRoot]) %
           2)       // The polynomial is not palindromic or the degree is odd
     grr.salem = 0; // Not Salem
   else
-    grr.salem =
-        degree(t_POLfactors[iIndexMaximalRoot]) - 2 == rootsOnUnitCircle;
+    grr.salem = degree(t_POLfactors[indexMaximalRoot]) - 2 == rootsOnUnitCircle;
 
   unsigned long rootsCount(lg(gMaximalRoots));
 
@@ -181,7 +180,7 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> polynomial,
 
   if (grr.pisot == -1)
     grr.pisot = numberRootsInsideUnitCircle ==
-                        (degree(t_POLfactors[iIndexMaximalRoot]) - 1)
+                        (degree(t_POLfactors[indexMaximalRoot]) - 1)
                     ? 1
                     : 0;
 
@@ -263,7 +262,7 @@ void GrowthRate::minimalRoot() {
 
       // Greather than the greatest?
       if (mpcmp(gGrowthRate, greal(gTemp)) < 0) {
-        iIndexMaximalRoot = j;
+        indexMaximalRoot = j;
         gGrowthRate = greal(gTemp);
         gMaximalRoots = gRoots;
       }
@@ -278,7 +277,7 @@ void GrowthRate::minimalRoot() {
   gerepileall(ltop, 2, &gMaximalRoots, &gGrowthRate);
 }
 
-long int GrowthRate::iNumberRootsUnitCircle(GEN gPol) {
+long int GrowthRate::numberRootsUnitCircle(GEN gPol) {
   pari_sp ltop = avma;
   if (cmp_RgX(gPol, RgX_recip(gPol)) !=
       0) // If the polynomial is not palindromic

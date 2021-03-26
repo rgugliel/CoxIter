@@ -49,7 +49,7 @@ struct GrowthRate_Result {
   int perron;
   int pisot;
   int salem;
-  string strGrowthRate;
+  string growthRate;
   bool isComputed;
 };
 
@@ -61,7 +61,7 @@ private:
 
   GEN gGrowthRate;   ///< Maximal positive root of the polynomial
   GEN gMaximalRoots; ///< Roots of the polynomial which has the maximal root
-  long int iIndexMaximalRoot; ///< Factor which contains the minimal root
+  long int indexMaximalRoot; ///< Factor which contains the minimal root
 
   GEN gEpsilon;           ///< Some small number (typically 10^-50)
   long int pariPrecision; ///< Given as prec (typically 8)
@@ -83,16 +83,16 @@ private:
 
   /*!	\fn minimalRoot()
    * 	Find which fact has the smallest (positive, <1) real root and store the
-   * index into iIndexMinimalRoot
+   * index into indexMinimalRoot
    */
   void minimalRoot();
 
-  /*!	\fn iNumberRootsUnitCircle(GEN gPol);
+  /*!	\fn numberRootsUnitCircle(GEN gPol);
    * 	For a palindromic polynomial, try to compute the number of zeros on the
    * unit circle \param gPol (GEN, PARI polynomial) \return Number of roots on
    * the unit circle of -1 if we cannot decide
    */
-  long int iNumberRootsUnitCircle(GEN gPol);
+  long int numberRootsUnitCircle(GEN gPol);
 };
 
 #endif // GROWTHRATE_H

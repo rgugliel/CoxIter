@@ -109,13 +109,13 @@ void explode(const string &separator, string source,
     results.push_back(abs(stoi(source)));
 }
 
-string implode(const string &strSeparator, const vector<string> &strVector) {
+string implode(const string &separator, const vector<string> &vector) {
   ostringstream oStr;
-  string strRes;
+  string res;
 
-  copy(strVector.begin(), strVector.end(),
-       ostream_iterator<string>(oStr, strSeparator.c_str()));
+  copy(vector.begin(), vector.end(),
+       ostream_iterator<string>(oStr, separator.c_str()));
 
-  strRes = oStr.str();
-  return strRes.substr(0, strRes.size() - strSeparator.size());
+  res = oStr.str();
+  return res.substr(0, res.size() - separator.size());
 }

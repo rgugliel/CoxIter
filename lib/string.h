@@ -68,7 +68,8 @@ vector<string> explode(const string &separator, string source);
         *
         * \param[in] source Chaîne de caractères sur laquelle on travaille
         * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par référence)
+        * \param[out] results Tableau auquel sont ajoutés les résultats (par
+   référence)
         * \return vector<string>: void
 
         Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
@@ -83,7 +84,8 @@ void explode(const string &separator, string source, vector<string> &results);
         *
         * \param[in] source Chaîne de caractères sur laquelle on travaille
         * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par référence)
+        * \param[out] results Tableau auquel sont ajoutés les résultats (par
+   référence)
         * \return vector<string>: void
 
         Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
@@ -98,10 +100,12 @@ void explode(const string &separator, string source, vector<int> &results);
         *
         * \param[in] source Chaîne de caractères sur laquelle on travaille
         * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par référence)
+        * \param[out] results Tableau auquel sont ajoutés les résultats (par
+   référence)
         * \return vector<string>: void
 
-        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un tableau
+        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
+   tableau
 */
 void explode(const string &separator, string source,
              vector<unsigned int> &results);
@@ -110,31 +114,31 @@ void explode(const string &separator, string source,
  * 	\fn implode
  * 	\brief Implode function (as in the PHP language)
  *
- * 	\param strSeparator(const string &) Separator
- * 	\param strVector(const vector< string >&) Vector to implode
+ * 	\param separator(const string &) Separator
+ * 	\param vector(const vector< string >&) Vector to implode
  * 	\return Imploded string
  */
-string implode(const string &strSeparator, const vector<string> &strVector);
+string implode(const string &separator, const vector<string> &vector);
 
 /*!
  * 	\fn implode
  * 	\brief Implode function (as in the PHP language)
  *
- * 	\param strSeparator(const string &) Separator
+ * 	\param separator(const string &) Separator
  * 	\param v(const vector<T>&) Vector to implode
  * 	\return Imploded string
  */
 template <typename T>
 typename std::enable_if<std::is_arithmetic<T>::value, string>::type
-implode(const string &strSeparator, const vector<T> &v) {
-  vector<string> strVector;
+implode(const string &separator, const vector<T> &v) {
+  vector<string> result;
   for (const auto &element : v)
-    strVector.push_back(to_string(element));
+    result.push_back(to_string(element));
 
-  return implode(strSeparator, strVector);
+  return implode(separator, result);
 }
 
-int string_to_int(const string &strNumber);
-double string_to_double(const string &strNumber);
+int string_to_int(const string &number);
+double string_to_double(const string &number);
 
 #endif

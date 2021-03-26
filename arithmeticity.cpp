@@ -27,14 +27,14 @@ Arithmeticity::Arithmeticity()
 
 Arithmeticity::~Arithmeticity() {}
 
-void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
+void Arithmeticity::test(CoxIter &ci_, const bool &listCycles_) {
   ci = &ci_;
-  listCycles = bListCycles_;
-  strListCycles.clear();
+  listCycles = listCycles_;
+  allCycles.clear();
   if (ci->get_isCocompact() !=
       0) // If the graph is cocompact (1) or if we don't know (-1)
   {
-    strError = "GROUP COCOMPACTNESS";
+    error = "GROUP COCOMPACTNESS";
     ci->set_isArithmetic(-1);
     return;
   }
@@ -49,7 +49,7 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
 
   // ------------------------------------------------------
   // Cycles consisting of two elements
-  bool bSQRT2(false), bSQRT3(false);
+  bool isSqrt2(false), isSqrt3(false);
 
   for (i = 0; i < verticesCount; i++) {
     referencesToLabels.push_back(i);
@@ -71,16 +71,16 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
       }
 
       if (coxeterMatrix[i][j] == 4)
-        bSQRT2 = true;
+        isSqrt2 = true;
       else if (coxeterMatrix[i][j] == 6)
-        bSQRT3 = true;
+        isSqrt3 = true;
       else if (coxeterMatrix[i][j] == 1) {
-        string strC("4 * " + string("l") + to_string(j) + "m" + to_string(i) +
-                    "^2");
+        string cycle("4 * " + string("l") + to_string(j) + "m" + to_string(i) +
+                     "^2");
 
-        auto it(lower_bound(strListCycles.begin(), strListCycles.end(), strC));
-        if (it == strListCycles.end() || *it != strC)
-          strListCycles.insert(it, strC);
+        auto it(lower_bound(allCycles.begin(), allCycles.end(), cycle));
+        if (it == allCycles.end() || *it != cycle)
+          allCycles.insert(it, cycle);
       }
     }
   }
@@ -89,7 +89,7 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
   // Here, we know that m_{ij} \in {2,3,4,6,infty}
 
   // If true, the group is arithmetic
-  if (!bSQRT2 && !bSQRT3 && !ci->get_bHasDottedLine()) {
+  if (!isSqrt2 && !isSqrt3 && !ci->get_hasDottedLine()) {
     ci->set_isArithmetic(1);
     return;
   }
@@ -199,8 +199,8 @@ unsigned int Arithmeticity::collapseQueues() {
 void Arithmeticity::testCycles() {
   for (unsigned int i(0); i < verticesCount; i++) {
     path.clear();
-    bVerticesVisited = vector<bool>(verticesCount, false);
-    bEdgesVisited =
+    visitedVertices = vector<bool>(verticesCount, false);
+    visitedEdges =
         vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
     findCycles(i, i);
 
@@ -210,7 +210,7 @@ void Arithmeticity::testCycles() {
     }
   }
 
-  if (!ci->get_bHasDottedLine())
+  if (!ci->get_hasDottedLine())
     ci->set_isArithmetic(1);
   else
     ci->set_isArithmetic(-1);
@@ -222,7 +222,7 @@ void Arithmeticity::findCycles(const unsigned int &root,
 
   for (unsigned int i(path[0]); i < verticesCount; i++) {
     // If i is a neighbour and if we did not visit this edge
-    if (coxeterMatrix[root][i] != 2 && !bEdgesVisited[root][i]) {
+    if (coxeterMatrix[root][i] != 2 && !visitedEdges[root][i]) {
       if (i == path[0]) {
         if (path[1] <
             path[path.size() - 1]) // We do not to test each cycle twice
@@ -242,7 +242,7 @@ void Arithmeticity::findCycles(const unsigned int &root,
           return;
         }
       } else if (find(path.begin(), path.end(), i) == path.end()) {
-        bEdgesVisited[root][i] = bEdgesVisited[i][root] = true;
+        visitedEdges[root][i] = visitedEdges[i][root] = true;
         findCycles(i, root);
 
         if (notArithmetic)
@@ -252,7 +252,7 @@ void Arithmeticity::findCycles(const unsigned int &root,
   }
 
   if (from != root)
-    bEdgesVisited[root][from] = bEdgesVisited[from][root] = false;
+    visitedEdges[root][from] = visitedEdges[from][root] = false;
 
   path.pop_back();
 }
@@ -261,27 +261,25 @@ void Arithmeticity::testCycle() {
   unsigned int pathSize(path.size());
 
   if (!listCycles) {
-    bool bNumberSQRT2Even(
-        coxeterMatrix[path[0]][path[pathSize - 1]] == 4 ? false : true),
-        bNumberSQRT3Even(
-            coxeterMatrix[path[0]][path[pathSize - 1]] == 6 ? false : true);
+    bool isSqrt2CountEven = coxeterMatrix[path[0]][path[pathSize - 1]] != 4;
+    bool isSqrt3CountEven = coxeterMatrix[path[0]][path[pathSize - 1]] != 6;
 
     for (unsigned int i(1); i < pathSize; i++) {
       if (coxeterMatrix[path[i]][path[i - 1]] == 4)
-        bNumberSQRT2Even = bNumberSQRT2Even ? false : true;
+        isSqrt2CountEven = isSqrt2CountEven ? false : true;
       else if (coxeterMatrix[path[i]][path[i - 1]] == 6)
-        bNumberSQRT3Even = bNumberSQRT3Even ? false : true;
+        isSqrt3CountEven = isSqrt3CountEven ? false : true;
       else if (coxeterMatrix[path[i]][path[i - 1]] ==
                1) // Because of the dotted line we cannot say anything for this
                   // cycle
         return;
     }
 
-    if (coxeterMatrix[path[0]][path[pathSize - 1]] ==
-        1) // Because of the dotted line we cannot say anything for this cycle
+    // Because of the dotted line we cannot say anything for this cycle
+    if (coxeterMatrix[path[0]][path[pathSize - 1]] == 1)
       return;
 
-    notArithmetic = !bNumberSQRT2Even || !bNumberSQRT3Even;
+    notArithmetic = !isSqrt2CountEven || !isSqrt3CountEven;
   } else {
     unsigned int pathSize(path.size());
 
@@ -306,7 +304,7 @@ void Arithmeticity::testCycle() {
     if (dottedCount == 0)
       notArithmetic = (sqrt2Count % 2) || (sqrt3Count % 2);
     else {
-      string strTemp;
+      string temp;
 
       twoCount += dottedCount;
 
@@ -314,45 +312,43 @@ void Arithmeticity::testCycle() {
         twoCount += ((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2;
 
       if (twoCount)
-        strTemp +=
-            (strTemp == "" ? "" : " * ") + string("2^") + to_string(twoCount);
+        temp += (temp == "" ? "" : " * ") + string("2^") + to_string(twoCount);
 
       if (sqrt3Count > 1)
-        strTemp +=
-            (strTemp == "" ? "" : " * ") + string("3^") +
-            to_string(((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2);
+        temp += (temp == "" ? "" : " * ") + string("3^") +
+                to_string(((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2);
 
       if (sqrt2Count % 2)
-        strTemp += (strTemp == "" ? "" : " * ") + string("Sqrt[2]");
+        temp += (temp == "" ? "" : " * ") + string("Sqrt[2]");
 
       if (sqrt3Count % 2)
-        strTemp += (strTemp == "" ? "" : " * ") + string("Sqrt[3]");
+        temp += (temp == "" ? "" : " * ") + string("Sqrt[3]");
 
       for (unsigned int i(1); i < pathSize; i++) {
         if (coxeterMatrix[path[i]][path[i - 1]] == 1)
-          strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                     to_string(min(referencesToLabels[path[i]],
-                                   referencesToLabels[path[i - 1]])) +
-                     "m" +
-                     to_string(max(referencesToLabels[path[i]],
-                                   referencesToLabels[path[i - 1]]));
+          temp += (temp == "" ? "" : " * ") + string("l") +
+                  to_string(min(referencesToLabels[path[i]],
+                                referencesToLabels[path[i - 1]])) +
+                  "m" +
+                  to_string(max(referencesToLabels[path[i]],
+                                referencesToLabels[path[i - 1]]));
       }
 
       if (coxeterMatrix[path[0]][path[pathSize - 1]] == 1)
-        strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                   to_string(min(referencesToLabels[path[0]],
-                                 referencesToLabels[path[pathSize - 1]])) +
-                   "m" +
-                   to_string(max(referencesToLabels[path[0]],
-                                 referencesToLabels[path[pathSize - 1]]));
+        temp += (temp == "" ? "" : " * ") + string("l") +
+                to_string(min(referencesToLabels[path[0]],
+                              referencesToLabels[path[pathSize - 1]])) +
+                "m" +
+                to_string(max(referencesToLabels[path[0]],
+                              referencesToLabels[path[pathSize - 1]]));
 
-      auto it(lower_bound(strListCycles.begin(), strListCycles.end(), strTemp));
-      if (it == strListCycles.end() || *it != strTemp)
-        strListCycles.insert(it, strTemp);
+      const auto it(lower_bound(allCycles.begin(), allCycles.end(), temp));
+      if (it == allCycles.end() || *it != temp)
+        allCycles.insert(it, temp);
     }
   }
 }
 
-vector<string> Arithmeticity::get_strListCycles() { return strListCycles; }
+vector<string> Arithmeticity::get_allCycles() { return allCycles; }
 
-string Arithmeticity::get_strError() { return strError; }
+string Arithmeticity::get_error() { return error; }

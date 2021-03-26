@@ -55,47 +55,47 @@ using namespace std;
 
 class App {
 private:
-  bool bCheckArithmeticity; ///< If we want to whether the group is arithmetic
-                            ///< or not
-  bool bCheckCanBeFiniteCovolume; ///< If we want to check whether the group can
-                                  ///< be of finite volume or not
-  bool bCheckCocompacity;         ///< If we want to check whether the group is
-                                  ///< cocompact or not
-  bool bCheckFiniteCovolume;      ///< If we want to check whether the group has
-                                  ///< finite covolume or not
-  bool bComputeGrowthSeries;      ///< If we want compute the growth series
-  bool bComputeGrowthRate;        ///< If we want to compute the growth rate
-  bool bComputeEuler;       ///< If we want to compute the Euler characteristic
-  bool bComputeSignature;   ///< If we want to compute the signature
-  bool debug;               ///< Display additional information
-  bool bIndex2;             ///< Trying to extract an index two subroup?
-  bool bOpenMP;             ///< Use OpenMP
-  bool bPrintCoxeterGraph;  ///< Print the Coxeter graph?
-  bool bPrintCoxeterMatrix; ///< Print the Coxeter matrix?
-  bool bPrintGramMatrix;    ///< Print the Gram matrix?
+  bool checkArithmeticity; ///< If we want to whether the group is arithmetic
+                           ///< or not
+  bool checkCanBeFiniteCovolume; ///< If we want to check whether the group can
+                                 ///< be of finite volume or not
+  bool checkCocompacity;         ///< If we want to check whether the group is
+                                 ///< cocompact or not
+  bool checkFiniteCovolume;      ///< If we want to check whether the group has
+                                 ///< finite covolume or not
+  bool computeGrowthSeries;      ///< If we want compute the growth series
+  bool computeGrowthRate;        ///< If we want to compute the growth rate
+  bool computeEuler;       ///< If we want to compute the Euler characteristic
+  bool computeSignature;   ///< If we want to compute the signature
+  bool debug;              ///< Display additional information
+  bool bIndex2;            ///< Trying to extract an index two subroup?
+  bool useOpenMP;          ///< Use OpenMP
+  bool printCoxeterGraph;  ///< Print the Coxeter graph?
+  bool printCoxeterMatrix; ///< Print the Coxeter matrix?
+  bool printGramMatrix;    ///< Print the Gram matrix?
   bool bPrintHelp; ///< If we want to print help (option or by default depending
                    ///< on the error)
-  string strOuputMathematicalFormat; ///< Format of output: generic,
-                                     ///< mathematica, pari
-  vector<string> strVerticesRemove;  ///< The vertices we want to remove
-  vector<string> strVertices;        ///< If we specify the vertices
-  string strIndex2vertex_t0; ///< Reflexion and glueing with respect to the
-                             ///< hyperplane corresponding to t0
-  string strIndex2vertex_s0; ///< If we want to compute the f-vector of the
-                             ///< corresponding infinite sequence
+  string ouputMathematicalFormat;  ///< Format of output: generic,
+                                   ///< mathematica, pari
+  vector<string> verticesToRemove; ///< The vertices we want to remove
+  vector<string> vertices;         ///< If we specify the vertices
+  string index2vertex_t0; ///< Reflexion and glueing with respect to the
+                          ///< hyperplane corresponding to t0
+  string index2vertex_s0; ///< If we want to compute the f-vector of the
+                          ///< corresponding infinite sequence
 
 public:
   bool bCoutFile;          ///< If the output is redirected to a file
   bool bOutputGraphToDraw; ///< If we write the graph in a file, to use graphviz
   bool bOutputGraph; ///< If we write the graph in a file, to use with CoxIter
-  string strInFilename;       ///< Path to the graph
-  string strOutFilenameBasis; ///< Path to the file for the output (+ .output,
-                              ///< .graphviz, .coxiter)
+  string inFilename; ///< Path to the graph
+  string outFilenameBasis; ///< Path to the file for the output (+ .output,
+                           ///< .graphviz, .coxiter)
 
 public:
   App();
 
-  bool bReadMainParameters(int argc, char **argv);
+  bool readMainParameters(int argc, char **argv);
   void run();
   void printHelp() const;
 

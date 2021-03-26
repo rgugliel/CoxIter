@@ -44,8 +44,8 @@ typedef vector<vector<string>> PCREResult;
 
 class PCRERegexp {
 private:
-  string strError; ///< Eventually, error code
-  bool bClassUsed; ///< True if the class was used
+  string error;     ///< Eventually, error code
+  bool isClassUsed; ///< True if the class was used
 
   pcre *regexp;
   const char *regPattern;
@@ -74,11 +74,11 @@ public:
   int preg_match_all(const string &pattern, const string &subject,
                      PCREResult &results, const int &optionsCompile = 0);
 
-  /*! \fn get_strError
+  /*! \fn get_error
    * 	\brief Return the error ccode
    * 	\return Error code (string)
    */
-  string get_strError();
+  string get_error();
 };
 
 #endif

@@ -38,15 +38,15 @@ using namespace std;
 #include "coxiter.h"
 
 struct NewVertex {
-  string strLabel;
-  unsigned int iIndex;
-  unsigned int iOriginVertex;
+  string label;
+  unsigned int index;
+  unsigned int originVertex;
 };
 
 class Index2 {
 private:
   CoxIter *ci;
-  vector<vector<unsigned int>> iCox; ///< Coxeter matrix
+  vector<vector<unsigned int>> coxeterMatrix; ///< Coxeter matrix
   unsigned int verticesCount; ///< Number of vertices of the starting graph
 
   unsigned int vertex; ///< Index of the vertex
@@ -55,16 +55,16 @@ private:
   vector<vector<unsigned int>> iNewCox; ///< New Coxeter matrix
   unsigned int iNewVerticesCount;
 
-  string strError;
+  string error;
 
 public:
   Index2(CoxIter *ci);
 
-  bool bIsVertexAdmissible(const string &strVertexName);
-  bool removeVertex(const string &strVertexName);
+  bool isVertexAdmissible(const string &vertexLabel);
+  bool removeVertex(const string &vertexLabel);
   void printMatrix(vector<vector<unsigned int>> *iMatrix);
 
-  string get_strError() const;
+  string get_error() const;
 };
 
 #endif // __INDEX2_H__

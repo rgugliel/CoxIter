@@ -41,7 +41,7 @@ Graph *GraphsListN::begin() {
 }
 
 void GraphsListN::addGraph(vector<short unsigned int> vertices,
-                           const vector<bool> &bVerticesLinkable,
+                           const vector<bool> &linkableVertices,
                            const unsigned int &type, bool isSpherical,
                            const short unsigned int &vertexSupp1,
                            const short unsigned int &vertexSupp2,
@@ -283,7 +283,7 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
     }
   }
 
-  Graph g(vertices, ptr_map_vertices_indexToLabel, bVerticesLinkable, type,
+  Graph g(vertices, ptr_map_vertices_indexToLabel, linkableVertices, type,
           isSpherical, dataSupp);
 
   auto it(lower_bound(graphs.begin(), graphs.end(), g));

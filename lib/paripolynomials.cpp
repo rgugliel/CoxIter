@@ -26,11 +26,11 @@ namespace PariPolynomials {
 GEN vector2t_POL(const vector<int> &iCoefficients) // [i] = x^i
 {
   unsigned int iSize(iCoefficients.size());
-  const long iVar = 0; // Polynomial variable
+  const long polVariable = 0; // Polynomial variable
 
   GEN pol(
       cgetg(iSize + 2, t_POL)); // iSize coefficients, sign and variable number
-  pol[1] = evalsigne(1) | evalvarn(iVar) |
+  pol[1] = evalsigne(1) | evalvarn(polVariable) |
            evallgefint(iSize + 2); // not equal to zero, variable, coefficients
 
   for (unsigned int i(0); i < iSize; i++)
@@ -42,11 +42,11 @@ GEN vector2t_POL(const vector<int> &iCoefficients) // [i] = x^i
 GEN vector2t_POL(const vector<mpz_class> &iCoefficients) // [i] = x^i
 {
   unsigned int iSize(iCoefficients.size());
-  const long iVar = 0; // Polynomial variable
+  const long polVariable = 0; // Polynomial variable
 
   GEN pol(
       cgetg(iSize + 2, t_POL)); // iSize coefficients, sign and variable number
-  pol[1] = evalsigne(1) | evalvarn(iVar) |
+  pol[1] = evalsigne(1) | evalvarn(polVariable) |
            evallgefint(iSize + 2); // not equal to zero, variable, coefficients
 
   for (unsigned int i(0); i < iSize; i++) {
@@ -61,12 +61,12 @@ GEN vector2t_POL(const vector<mpz_class> &iCoefficients) // [i] = x^i
 }
 
 vector<long int> t_POL2vector(GEN poly) {
-  unsigned int iSize(lg(poly));
-  vector<long int> iV;
+  unsigned int size(lg(poly));
+  vector<long int> coeffs;
 
-  for (unsigned int i(2); i < iSize; i++)
-    iV.push_back(gtolong(gel(poly, i)));
+  for (unsigned int i(2); i < size; i++)
+    coeffs.push_back(gtolong(gel(poly, i)));
 
-  return iV;
+  return coeffs;
 }
 } // namespace PariPolynomials

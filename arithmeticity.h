@@ -36,7 +36,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 class Arithmeticity {
 private:
-  string strError; ///< If an error occured, small text.
+  string error; ///< If an error occured, small text.
 
   CoxIter *ci;                ///< Pointer to the CoxIter object
   unsigned int verticesCount; ///< Number of generators of the group
@@ -45,15 +45,15 @@ private:
                                               ///< indices to the old ones
 
   // For the DFS
-  vector<vector<bool>> bEdgesVisited; ///< Traversed edges
-  vector<bool> bVerticesVisited;      ///<  Taversed vertices
-  vector<unsigned int> path;          ///< Current path
+  vector<vector<bool>> visitedEdges; ///< Traversed edges
+  vector<bool> visitedVertices;      ///<  Taversed vertices
+  vector<unsigned int> path;         ///< Current path
 
   bool notArithmetic; ///< True if not arithmetic (i.e. we have to quit the
                       ///< algorithm)
 
   bool listCycles; ///< If true, will list the cycles to be manually tested
-  vector<string> strListCycles; ///< The list
+  vector<string> allCycles; ///< The list
 
 public:
   /*! \fn Arithmeticity()
@@ -70,25 +70,25 @@ public:
    *	\brief Test the arithmeticity of a graph
    *
    * 	\param ci(CoxIter&) The graph
-   * 	\param bListCycles_(const bool&) If true, will list the cycles to be
+   * 	\param listCycles_(const bool&) If true, will list the cycles to be
    *manually tested \return True if success, false otherwise. Then, use
    *ci.get_isArithmetic()
    */
-  void test(CoxIter &ci, const bool &bListCycles_);
+  void test(CoxIter &ci, const bool &listCycles_);
 
-  /*!	\fn get_strListCycles
+  /*!	\fn get_allCycles
    *	\brief Return the list of cycles
    *
    *	\return List (vector<string>)
    */
-  vector<string> get_strListCycles();
+  vector<string> get_allCycles();
 
-  /*!	\fn get_strError
+  /*!	\fn get_error
    *	\brief Return the error code
    *
    *	\return Error code (string)
    */
-  string get_strError();
+  string get_error();
 
 private:
   /*!	\fn collapseQueues
@@ -117,7 +117,7 @@ private:
   /*! \fn testCycle
    * 	\brief Test the cycle in path
    *
-   * 	This function is called by findCycles. Eventually, set bNotArithmetic to
+   * 	This function is called by findCycles. Eventually, set notArithmetic to
    * true
    */
   void testCycle();

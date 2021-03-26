@@ -53,7 +53,7 @@ public:
   /*! 	\fn addGraph
    * 	\brief Ajoute un graphe à la liste
    * 	\param vertices Sommets du graphe
-   * 	\param bVerticesLinkable Sommets qui sont liables au graphes
+   * 	\param linkableVertices Sommets qui sont liables au graphes
    * 	\param type(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
    *= (0, 1, 3, 4, 5, 6, 7)
    *  \param isSpherical(bool) True si sphérique, false si euclidien
@@ -63,7 +63,7 @@ public:
    *pour le G_2, le poids)
    */
   void addGraph(vector<short unsigned int> vertices,
-                const vector<bool> &bVerticesLinkable, const unsigned &type,
+                const vector<bool> &linkableVertices, const unsigned &type,
                 bool isSpherical, const short unsigned int &vertexSupp1 = 0,
                 const short unsigned int &vertexSupp2 = 0,
                 const unsigned int &dataSupp = 0);

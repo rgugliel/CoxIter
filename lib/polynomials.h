@@ -52,15 +52,15 @@ namespace Polynomials {
  */
 template <typename Type>
 void polynomialDisplay(const vector<Type> &polynomial) {
-  bool bFirst(true);
+  bool isFirst(true);
   unsigned int iSize(polynomial.size());
 
   for (unsigned int i(0); i < iSize; i++) {
     if (polynomial[i] != 0) {
-      if (bFirst) {
+      if (isFirst) {
         cout << polynomial[i]
              << (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
-        bFirst = false;
+        isFirst = false;
       } else {
         if ((polynomial[i] != 1 && polynomial[i] != -1) || !i)
           cout << (polynomial[i] > 0 ? " + " : " - ") << abs(polynomial[i])
@@ -78,15 +78,15 @@ void polynomialDisplay(const vector<Type> &polynomial) {
  * 	\param symbol(const vector< int >& symbol) Integer
  */
 template <typename Type> void symbolDisplay(const vector<Type> &symbol) {
-  bool bFirst(true);
+  bool isFirst(true);
   unsigned int iSize(symbol.size());
 
   cout << "[";
   for (unsigned int i(0); i < iSize; i++) {
     if (symbol[i]) {
       for (unsigned int j(0); j < symbol[i]; j++) {
-        cout << (bFirst ? "" : ",") << i;
-        bFirst = false;
+        cout << (isFirst ? "" : ",") << i;
+        isFirst = false;
       }
     }
   }

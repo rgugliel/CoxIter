@@ -43,8 +43,8 @@ class Graph {
 public:
   vector<short unsigned int> vertices; ///< Vertices of the graph
   vector<bool>
-      bVerticesLinkable; ///< A quels sommets on peut lier le graphe { sommets }
-                         ///< \ { sommets du graphes et leurs voisins)
+      linkableVertices; ///< A quels sommets on peut lier le graphe { sommets }
+                        ///< \ { sommets du graphes et leurs voisins)
 
   unsigned int type; ///< Type of the graph: A=0, B=1, ...
 
@@ -63,7 +63,7 @@ public:
    * 	\param vertices(const vector<short unsigned int>&) Sommets composant le
    * graphe \param ptr_map_vertices_indexToLabel(vector< string > *) Pointeur
    * vers la correspondance index --> label des sommets \param
-   * bVerticesLinkable(const vector< bool >&) Ce à quoi le graphe est liable
+   * linkableVertices(const vector< bool >&) Ce à quoi le graphe est liable
    * 	\param type (const unsigned int &) Type du graphe: A=0, B=1, ...
    * 	\param isSpherical(const bool& ) True si sphérique, false si euclidien
    * 	\param dataSupp(const unsigned int &) Eventuelle information
@@ -71,7 +71,7 @@ public:
    */
   Graph(const vector<short unsigned int> &vertices,
         vector<string> *ptr_map_vertices_indexToLabel,
-        const vector<bool> &bVerticesLinkable, const unsigned int &type,
+        const vector<bool> &linkableVertices, const unsigned int &type,
         const bool &isSpherical, const unsigned int &dataSupp = 0);
 
   /*! \fn isSubgraphOf
@@ -82,7 +82,7 @@ public:
    *	\return True if the *this is a subgraph of the graph given in parameter,
    *false otherwise
    */
-  bool bIsSubgraphOf(const Graph *grBig) const;
+  bool isSubgraphOf(const Graph *grBig) const;
 
   /*! \fn isSubgraphOf_spherical_spherical
    * 	\brief Test if a graph (spherical) is a subgraph of another graph
@@ -108,8 +108,8 @@ public:
   friend bool operator<(const Graph &g1, const Graph &g2);
 
 private:
-  static bool isAnSubAm(const vector<short unsigned int> &iSubV,
-                        const vector<short unsigned int> &iBigV);
+  static bool isAnSubAm(const vector<short unsigned int> &subGraphVertices,
+                        const vector<short unsigned int> &bigGraphVertices);
 
 public:
   friend ostream &operator<<(ostream &, Graph const &);

@@ -41,12 +41,11 @@ class GraphsList {
 public:
   /*! 	\fn GraphsList
    * 	\brief Crée la liste de graphes
-   * 	\param verticesCount Nombre de sommets du graphe lu
+   * 	\param maxVertices Nombre de sommets du graphe lu
    * 	\param ptr_map_vertices_indexToLabel(vector< string > *) Pointeur vers
    * la correspondance index --> label des sommets
    */
-  GraphsList(size_t verticesCount,
-             vector<string> *ptr_map_vertices_indexToLabel);
+  GraphsList(size_t maxVertices, vector<string> *ptr_map_vertices_indexToLabel);
 
   /*!
    * 	\fn addGraph
@@ -54,7 +53,7 @@ public:
    *
    * 	\param vertices(const vector< unsigned int > &): tableau contenant les
    * sommets
-   *  \param bVerticesLinkable(const vector< bool > &): sommets qui sont
+   *  \param linkableVertices(const vector< bool > &): sommets qui sont
    * liables (ou non) au graphe
    *  \param type(const unsigned int &): Type du
    * graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7)
@@ -68,7 +67,7 @@ public:
    * pour le G_2, le poids)
    */
   void addGraph(const vector<short unsigned int> &vertices,
-                const vector<bool> &bVerticesLinkable, const unsigned int &type,
+                const vector<bool> &linkableVertices, const unsigned int &type,
                 bool isSpherical, const unsigned int &vertexSupp1 = 0,
                 const unsigned int &vertexSupp2 = 0,
                 const unsigned int &dataSupp = 0);
@@ -83,14 +82,14 @@ public:
   /*!	\fn next
    * 	\brief Retourne un pointeur sur l'élément suivant de la liste
    *
-   * 	\param iVCount(size_t &): Nombre de sommets du graphe actuel
+   * 	\param verticesCount(size_t &): Nombre de sommets du graphe actuel
    * 	\param graphIndex(size_t &): Index du graphe actuel (i.e. position dans
-   * la liste des graphes de taille iVCount)
+   * la liste des graphes de taille verticesCount)
    *
    * 	\return Pointeur sur le graphe (Graph *) ou 0 si la fin de la liste est
    * atteinte
    */
-  Graph *next(size_t &iVCount, size_t &graphIndex);
+  Graph *next(size_t &verticesCount, size_t &graphIndex);
 
 public: // Remark: this is public for read-only purpose!
   vector<GraphsListN>
@@ -98,7 +97,7 @@ public: // Remark: this is public for read-only purpose!
   vector<size_t> graphsCount; ///< Number of graphs (by number of vertices)
 
   size_t totalGraphsCount; ///< Total number of graphs
-  size_t verticesCount;    ///< Maximum number of vertices in the graphs
+  size_t maxVertices;      ///< Maximum number of vertices in the graphs
 
 public:
   friend ostream &operator<<(ostream &, GraphsList const &);

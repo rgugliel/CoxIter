@@ -23,9 +23,9 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "graphs.list.iterator.h"
 
 GraphsListIterator::GraphsListIterator(GraphsList *gl)
-    : bLimitVerticesMax(false), graphsList(gl),
+    : limitMaxVertices(false), graphsList(gl),
       verticesCountMax(
-          0) // The value 0 has no effect because of bLimitVerticesMax(false)
+          0) // The value 0 has no effect because of limitVerticesMax(false)
 {
   ptr = graphsList->begin();
   if (ptr) {
@@ -37,14 +37,14 @@ GraphsListIterator::GraphsListIterator(GraphsList *gl)
 GraphsListIterator::GraphsListIterator(const GraphsListIterator &gl)
     : verticesCount(gl.verticesCount), graphIndex(gl.graphIndex),
       graphsList(gl.graphsList), verticesCountMax(gl.verticesCountMax),
-      bLimitVerticesMax(gl.bLimitVerticesMax), ptr(gl.ptr) {}
+      limitMaxVertices(gl.limitMaxVertices), ptr(gl.ptr) {}
 
 GraphsListIterator::GraphsListIterator(GraphsList *gl,
                                        const unsigned int &verticesCountMin,
                                        const unsigned int &verticesCountMax)
-    : verticesCountMax(verticesCountMax), bLimitVerticesMax(false) {
+    : verticesCountMax(verticesCountMax), limitMaxVertices(false) {
   if (verticesCountMax && verticesCountMin <= verticesCountMax)
-    bLimitVerticesMax = true;
+    limitMaxVertices = true;
 
   graphsList = gl;
 
@@ -70,7 +70,7 @@ GraphsListIterator::GraphsListIterator() {}
 Graph *GraphsListIterator::next() {
   ptr = graphsList->next(verticesCount, graphIndex);
 
-  if (bLimitVerticesMax && verticesCount > verticesCountMax)
+  if (limitMaxVertices && verticesCount > verticesCountMax)
     return 0;
 
   return ptr;

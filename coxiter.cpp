@@ -27,16 +27,15 @@ CoxIter::CoxIter()
       debug(false), isGramMatrixFieldKnown(false),
       isGrowthSeriesComputed(false), hasBoldLine(false), hasDottedLine(false),
       hasDottedLineWithoutWeight(0), bWriteInfo(false), isGraphExplored(false),
-      isGraphsProductsComputed(false), bUseOpenMP(true),
-      brEulerCaracteristic(0), graphsList_spherical(nullptr),
-      graphsList_euclidean(nullptr), dimension(0), euclideanMaxRankFound(0),
-      sphericalMaxRankFound(0), isDimensionGuessed(false),
-      fVectorAlternateSum(0), isArithmetic(-1), isCocompact(-2),
-      isFiniteCovolume(-2), verticesAtInfinityCount(0), verticesCount(0),
-      outCout(0), sBufOld(0), strError(""),
-      strOuputMathematicalFormat("generic") {
+      isGraphsProductsComputed(false), useOpenMP(true), brEulerCaracteristic(0),
+      graphsList_spherical(nullptr), graphsList_euclidean(nullptr),
+      dimension(0), euclideanMaxRankFound(0), sphericalMaxRankFound(0),
+      isDimensionGuessed(false), fVectorAlternateSum(0), isArithmetic(-1),
+      isCocompact(-2), isFiniteCovolume(-2), verticesAtInfinityCount(0),
+      verticesCount(0), outCout(0), sBufOld(0), error(""),
+      ouputMathematicalFormat("generic") {
 #ifndef _OPENMP
-  this->bUseOpenMP = false;
+  this->useOpenMP = false;
 #endif
 }
 
@@ -46,13 +45,12 @@ CoxIter::CoxIter(const vector<vector<unsigned int>> &matrix,
       isGramMatrixFieldKnown(false), isGraphExplored(false),
       isGraphsProductsComputed(false), isGrowthSeriesComputed(false),
       hasBoldLine(false), hasDottedLine(false), hasDottedLineWithoutWeight(0),
-      bWriteInfo(false), debug(false), bUseOpenMP(true),
-      brEulerCaracteristic(0), graphsList_spherical(nullptr),
-      graphsList_euclidean(nullptr), dimension(dimension),
-      euclideanMaxRankFound(0), sphericalMaxRankFound(0),
+      bWriteInfo(false), debug(false), useOpenMP(true), brEulerCaracteristic(0),
+      graphsList_spherical(nullptr), graphsList_euclidean(nullptr),
+      dimension(dimension), euclideanMaxRankFound(0), sphericalMaxRankFound(0),
       isDimensionGuessed(false), fVectorAlternateSum(0), isCocompact(-1),
       isFiniteCovolume(-1), verticesAtInfinityCount(0), verticesCount(0),
-      outCout(0), sBufOld(0), strError(""), strOuputMathematicalFormat("") {
+      outCout(0), sBufOld(0), error(""), ouputMathematicalFormat("") {
   verticesCount = matrix.size();
 
   initializations();
@@ -62,7 +60,7 @@ CoxIter::CoxIter(const vector<vector<unsigned int>> &matrix,
   maximalSubgraphRank = dimension ? dimension : verticesCount;
 
 #ifndef _OPENMP
-  this->bUseOpenMP = false;
+  this->useOpenMP = false;
 #endif
 }
 
@@ -90,7 +88,7 @@ bool CoxIter::bRunAllComputations() {
   if (!isGraphsProductsComputed)
     computeGraphsProducts();
 
-  if (!bEulerCharacteristicFVector())
+  if (!computeEulerCharacteristicFVector())
     return false;
 
   if (checkCofiniteness)
@@ -104,7 +102,7 @@ bool CoxIter::bRunAllComputations() {
 
 #ifndef _COMPILE_WITHOUT_REGEXP_
 bool CoxIter::parseGraph(istream &streamIn) {
-  string strLine;
+  string line;
   PCRERegexp regexp;
   PCREResult regexpRes;
 
@@ -112,54 +110,52 @@ bool CoxIter::parseGraph(istream &streamIn) {
   // index of the current row
   unsigned int i, i1, i2, i3, verticesFileCount, rowIndex(1);
 
-  vector<unsigned int>::const_iterator it;
-
   vector<unsigned int> orders; // orders found
 
   // ---------------------------------------------------------------------------
   // Reading the number of vertices and, eventually, dimension
-  if (getline(streamIn, strLine)) {
-    if (regexp.preg_match_all("([[:digit:]]+)[[:space:]]?([[:digit:]]*)",
-                              strLine, regexpRes) == 1) {
+  if (getline(streamIn, line)) {
+    if (regexp.preg_match_all("([[:digit:]]+)[[:space:]]?([[:digit:]]*)", line,
+                              regexpRes) == 1) {
       verticesFileCount = verticesCount = stoi(regexpRes[1][0]);
       dimension = regexpRes[2][0] != "" ? stoi(regexpRes[2][0]) : 0;
     } else {
-      strError = "First line with number of vertices missing";
+      error = "First line with number of vertices missing";
       return false;
     }
   } else {
-    strError = "EMPTY_FILE";
+    error = "EMPTY_FILE";
     return false;
   }
 
   // ---------------------------------------------------------------------------
   // first line
-  if (!getline(streamIn, strLine)) {
-    strError = "EMPTY_FILE";
+  if (!getline(streamIn, line)) {
+    error = "EMPTY_FILE";
     return false;
   }
 
   // names of the vertices
   if (regexp.preg_match_all("^vertices labels:[[:space:]]?([[:alnum:]-_ ]+)$",
-                            strLine, regexpRes)) {
-    vector<string> strVL(explode(" ", regexpRes[1][0]));
-    if (strVL.size() != verticesFileCount) {
-      strError = "VERTICES_LABEL_COUNT";
+                            line, regexpRes)) {
+    vector<string> elements(explode(" ", regexpRes[1][0]));
+    if (elements.size() != verticesFileCount) {
+      error = "VERTICES_LABEL_COUNT";
       return false;
     }
 
     for (i = 0; i < verticesFileCount; i++) {
-      map_vertices_labelToIndex[strVL[i]] = i;
-      map_vertices_indexToLabel.push_back(strVL[i]);
+      map_vertices_labelToIndex[elements[i]] = i;
+      map_vertices_indexToLabel.push_back(elements[i]);
     }
 
     if (map_vertices_labelToIndex.size() != verticesFileCount) {
-      strError = "VERTICES_LABEL_COUNT";
+      error = "VERTICES_LABEL_COUNT";
       return false;
     }
 
-    if (!getline(streamIn, strLine)) {
-      strError = "EMPTY_FILE";
+    if (!getline(streamIn, line)) {
+      error = "EMPTY_FILE";
       return false;
     }
   } else {
@@ -177,20 +173,18 @@ bool CoxIter::parseGraph(istream &streamIn) {
                                      0); // Shifts for the removed vertices
   unsigned int truncCount(0);
 
-  if (strVertices.size()) // If we want to specify a subset of the vertices
+  if (vertices.size()) // If we want to specify a subset of the vertices
   {
-    auto strAllVertices(map_vertices_indexToLabel);
-    sort(strAllVertices.begin(), strAllVertices.end());
+    auto allVertices(map_vertices_indexToLabel);
+    sort(allVertices.begin(), allVertices.end());
 
-    set_difference(strAllVertices.begin(), strAllVertices.end(),
-                   strVertices.begin(), strVertices.end(),
-                   std::back_inserter(strVerticesRemove));
-    sort(strVerticesRemove.begin(), strVerticesRemove.end());
+    set_difference(allVertices.begin(), allVertices.end(), vertices.begin(),
+                   vertices.end(), std::back_inserter(verticesToRemove));
+    sort(verticesToRemove.begin(), verticesToRemove.end());
   }
 
-  for (vector<string>::const_iterator itStr(strVerticesRemove.begin());
-       itStr != strVerticesRemove.end(); ++itStr) {
-    if (*itStr == "dotted" &&
+  for (const auto &vertexToRemove : verticesToRemove) {
+    if (vertexToRemove == "dotted" &&
         map_vertices_labelToIndex.find("dotted") ==
             map_vertices_labelToIndex.end()) // remove dotted edges?
     {
@@ -198,15 +192,16 @@ bool CoxIter::parseGraph(istream &streamIn) {
       continue;
     }
 
-    if (map_vertices_labelToIndex.find(*itStr) ==
+    if (map_vertices_labelToIndex.find(vertexToRemove) ==
         map_vertices_labelToIndex.end()) {
-      strError = "This vertex does not exist: " + *itStr;
+      error = "This vertex does not exist: " + vertexToRemove;
       return false;
     }
 
     truncCount++;
 
-    for (i = map_vertices_labelToIndex[*itStr]; i < verticesFileCount; i++)
+    for (i = map_vertices_labelToIndex[vertexToRemove]; i < verticesFileCount;
+         i++)
       verticesShift[i]++;
   }
   verticesCount -= truncCount;
@@ -224,16 +219,16 @@ bool CoxIter::parseGraph(istream &streamIn) {
     if (regexp.preg_match_all(
             "([[:alnum:]_-]+)[[:space:]]([[:alnum:]_-]+)[[:space:]]([[:digit:]]"
             "+)([[:space:]]+#[[:space:]]*([^\n]+))?",
-            strLine, regexpRes)) {
+            line, regexpRes)) {
       if (map_vertices_labelToIndex.find(regexpRes[1][0]) ==
           map_vertices_labelToIndex.end()) {
-        strError = "The following vertex is unknown: " + regexpRes[1][0];
+        error = "The following vertex is unknown: " + regexpRes[1][0];
         return false;
       }
 
       if (map_vertices_labelToIndex.find(regexpRes[2][0]) ==
           map_vertices_labelToIndex.end()) {
-        strError = "The following vertex is unknown: " + regexpRes[2][0];
+        error = "The following vertex is unknown: " + regexpRes[2][0];
         return false;
       }
 
@@ -247,9 +242,9 @@ bool CoxIter::parseGraph(istream &streamIn) {
       rowIndex++;
 
       // Removed vertex?
-      if (binary_search(strVerticesRemove.begin(), strVerticesRemove.end(),
+      if (binary_search(verticesToRemove.begin(), verticesToRemove.end(),
                         regexpRes[1][0]) ||
-          binary_search(strVerticesRemove.begin(), strVerticesRemove.end(),
+          binary_search(verticesToRemove.begin(), verticesToRemove.end(),
                         regexpRes[2][0]))
         continue;
 
@@ -267,15 +262,15 @@ bool CoxIter::parseGraph(istream &streamIn) {
         if (regexpRes.size() > 5) {
           unsigned int index(linearizationMatrix_index(min(i1, i2), max(i1, i2),
                                                        verticesCount));
-          strWeights[index] = regexpRes[5][0];
+          weightsDotted[index] = regexpRes[5][0];
         } else
           hasDottedLineWithoutWeight = 1;
       }
 
       // si on avait déjà cette arête avec un ordre différent
       if (coxeterMatrix[i1][i2] != 2 && coxeterMatrix[i1][i2] != i3) {
-        strError = "Edge has multiple orders (" + regexpRes[1][0] + "," +
-                   regexpRes[2][0] + ")";
+        error = "Edge has multiple orders (" + regexpRes[1][0] + "," +
+                regexpRes[2][0] + ")";
         return false;
       }
 
@@ -286,15 +281,15 @@ bool CoxIter::parseGraph(istream &streamIn) {
         hasDottedLine = true;
       else if (i3 == 0)
         hasBoldLine = true;
-    } else if (strLine != "") {
+    } else if (line != "") {
       if (bWriteInfo)
         cout << "Unread line (incorrect format): "
-             << "#" << strLine << "#" << rowIndex << endl;
+             << "#" << line << "#" << rowIndex << endl;
 
       rowIndex++;
       continue;
     }
-  } while (getline(streamIn, strLine));
+  } while (getline(streamIn, line));
 
   // ---------------------------------------------------------------------------
   // Labels and co
@@ -331,33 +326,32 @@ bool CoxIter::parseGraph(istream &streamIn) {
 
   // ---------------------------------------------------------------------------
   // Field generated by the entries of the Gram matrix
-  for (it = orders.begin(); it != orders.end(); ++it) {
-    if (*it == 1) // dotted line
+  bool hasDottedLine = false;
+  for (const auto &order : orders) {
+    if (order == 1) { // dotted line
+      hasDottedLine = true;
       break;
-    else if (*it == 4)
-      strGramMatrixField +=
-          (strGramMatrixField == "" ? "sqrt(2)" : ", sqrt(2)");
-    else if (*it == 5)
-      strGramMatrixField +=
-          (strGramMatrixField == "" ? "sqrt(5)" : ", sqrt(5)");
-    else if (*it == 6)
-      strGramMatrixField +=
-          (strGramMatrixField == "" ? "sqrt(3)" : ", sqrt(3)");
-    else if (*it >= 7) // le static_cast est là pour VC++
-      strGramMatrixField +=
-          (strGramMatrixField == ""
-               ? "cos(pi/" + to_string(static_cast<long long>(*it)) + ")"
-               : ", cos(pi/" + to_string(static_cast<long long>(*it)) + ")");
+    } else if (order == 4)
+      gramMatrixField += (gramMatrixField == "" ? "sqrt(2)" : ", sqrt(2)");
+    else if (order == 5)
+      gramMatrixField += (gramMatrixField == "" ? "sqrt(5)" : ", sqrt(5)");
+    else if (order == 6)
+      gramMatrixField += (gramMatrixField == "" ? "sqrt(3)" : ", sqrt(3)");
+    else if (order >= 7) // le static_cast est là pour VC++
+      gramMatrixField +=
+          (gramMatrixField == ""
+               ? "cos(pi/" + to_string(static_cast<long long>(order)) + ")"
+               : ", cos(pi/" + to_string(static_cast<long long>(order)) + ")");
   }
 
-  if (it == orders.end()) {
-    strGramMatrixField =
-        strGramMatrixField == "" ? "Q" : ("Q[" + strGramMatrixField + "]");
+  if (!hasDottedLine) {
+    gramMatrixField =
+        gramMatrixField == "" ? "Q" : ("Q[" + gramMatrixField + "]");
     isGramMatrixFieldKnown = true;
 
     if (bWriteInfo)
       cout << "\tField generated by the entries of the Gram matrix: "
-           << strGramMatrixField << endl;
+           << gramMatrixField << endl;
   } else {
     if (bWriteInfo)
       cout << "\tField generated by the entries of the Gram matrix: ?" << endl;
@@ -369,12 +363,12 @@ bool CoxIter::parseGraph(istream &streamIn) {
   return true;
 }
 
-bool CoxIter::bReadGraphFromFile(const string &strInputFilename) {
+bool CoxIter::readGraphFromFile(const string &inputFilename) {
   // ---------------------------------------------------------------------------
   // try to open the file
-  ifstream fileIn(strInputFilename.c_str());
+  ifstream fileIn(inputFilename.c_str());
   if (fileIn.fail()) {
-    strError = "Cannot open file";
+    error = "Cannot open file";
     return false;
   }
 
@@ -409,8 +403,8 @@ void CoxIter::initializations() {
   // initializations
   coxeterMatrix = vector<vector<unsigned int>>(
       verticesCount, vector<unsigned int>(verticesCount, 2));
-  bVerticesVisited = vector<bool>(verticesCount, false);
-  bEdgesVisited =
+  visitedVertices = vector<bool>(verticesCount, false);
+  visitedEdges =
       vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
 
   graphsList_spherical =
@@ -437,18 +431,18 @@ void CoxIter::initializations() {
   }
 }
 
-bool CoxIter::bWriteGraph(const string &strOutFilenameBasis) {
-  if (strOutFilenameBasis == "") {
-    strError = "No file specified for writing the graph";
+bool CoxIter::writeGraph(const string &outFilenameBasis) {
+  if (outFilenameBasis == "") {
+    error = "No file specified for writing the graph";
     return false;
   }
 
   map_vertices_labels_create();
 
-  string strFilename(strOutFilenameBasis + ".coxiter");
-  ofstream out(strFilename.c_str());
+  string filename(outFilenameBasis + ".coxiter");
+  ofstream out(filename.c_str());
   if (!out.is_open()) {
-    strError = "Cannot open the file for writing the graph";
+    error = "Cannot open the file for writing the graph";
     return false;
   }
 
@@ -493,22 +487,22 @@ void CoxIter::map_vertices_labels_reinitialize() {
   }
 }
 
-bool CoxIter::bWriteGraphToDraw(const string &strOutFilenameBasis) {
+bool CoxIter::writeGraphToDraw(const string &outFilenameBasis) {
   unsigned int i, j;
 
   map_vertices_labels_create();
 
   // ----------------------------------------------------------------------
   // ouverture du fichier
-  if (strOutFilenameBasis == "") {
-    strError = "No file specified for writing the graph";
+  if (outFilenameBasis == "") {
+    error = "No file specified for writing the graph";
     return false;
   }
 
-  string strFilename(strOutFilenameBasis + ".graphviz");
-  ofstream out(strFilename.c_str());
+  string filename(outFilenameBasis + ".graphviz");
+  ofstream out(filename.c_str());
   if (!out.is_open()) {
-    strError = "Cannot open the file for writing the graph";
+    error = "Cannot open the file for writing the graph";
     return false;
   }
 
@@ -559,8 +553,8 @@ void CoxIter::exploreGraph() {
 
   for (i = 0; i < verticesCount; i++) {
     path.clear();
-    bVerticesVisited = vector<bool>(verticesCount, false);
-    bEdgesVisited =
+    visitedVertices = vector<bool>(verticesCount, false);
+    visitedEdges =
         vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
 
     DFS(i, i);
@@ -568,18 +562,18 @@ void CoxIter::exploreGraph() {
 
   // -------------------------------------------------------------------
   // recherche des A_1, G_2^k avec k >= 4, F_4
-  vector<bool> bVerticesLinkable, bVerticesLinkableTemp;
+  vector<bool> linkableVertices, linkableVerticesTemp;
   for (i = 0; i < verticesCount; i++) {
-    bVerticesLinkable = vector<bool>(verticesCount, true);
+    linkableVertices = vector<bool>(verticesCount, true);
     for (j = 0; j < verticesCount; j++) {
       if (coxeterMatrix[i][j] != 2)
-        bVerticesLinkable[j] = false;
+        linkableVertices[j] = false;
     }
 
     // ajout du sommet (A_1)
-    bVerticesLinkable[i] = false;
+    linkableVertices[i] = false;
     graphsList_spherical->addGraph(vector<short unsigned int>(1, i),
-                                   bVerticesLinkable, 0, true);
+                                   linkableVertices, 0, true);
 
     // on regarde si on trouve avec ce sommet: Gn, TA1 ,TC2
     for (j = 0; j < verticesCount; j++) {
@@ -591,17 +585,17 @@ void CoxIter::exploreGraph() {
           vertices.push_back(i);
           vertices.push_back(j);
 
-          bVerticesLinkableTemp = bVerticesLinkable;
+          linkableVerticesTemp = linkableVertices;
           for (k = 0; k < verticesCount; k++) {
             if (coxeterMatrix[j][k] != 2)
-              bVerticesLinkableTemp[k] = false;
+              linkableVerticesTemp[k] = false;
           }
 
           if (coxeterMatrix[i][j]) // ici, c'est un graphe sphérique
-            graphsList_spherical->addGraph(vertices, bVerticesLinkableTemp, 6,
+            graphsList_spherical->addGraph(vertices, linkableVerticesTemp, 6,
                                            true, 0, 0, coxeterMatrix[i][j]);
           else // ici, graphe euclidien (TA1)
-            graphsList_euclidean->addGraph(vertices, bVerticesLinkableTemp, 0,
+            graphsList_euclidean->addGraph(vertices, linkableVerticesTemp, 0,
                                            false, 0, 0, 0);
         }
 
@@ -611,16 +605,16 @@ void CoxIter::exploreGraph() {
           for (k = 0; k < verticesCount; k++) {
             if (coxeterMatrix[k][j] == 4 && i != k &&
                 coxeterMatrix[i][k] == 2) {
-              bVerticesLinkableTemp = bVerticesLinkable;
+              linkableVerticesTemp = linkableVertices;
               for (l = 0; l < verticesCount; l++) {
                 if (coxeterMatrix[k][l] != 2)
-                  bVerticesLinkableTemp[l] = false;
+                  linkableVerticesTemp[l] = false;
                 if (coxeterMatrix[j][l] != 2)
-                  bVerticesLinkableTemp[l] = false;
+                  linkableVerticesTemp[l] = false;
               }
 
               graphsList_euclidean->addGraph(vector<short unsigned int>(1, j),
-                                             bVerticesLinkableTemp, 2, false, i,
+                                             linkableVerticesTemp, 2, false, i,
                                              k);
             }
           }
@@ -641,22 +635,22 @@ void CoxIter::DFS(unsigned int root, unsigned int from) {
 
   /*
    * 	We don't want cycles
-   * 		We mark neighbours of iFrom as visited (to avoir cycles)
+   * 		We mark neighbours of from as visited (to avoir cycles)
    * 		We stock this in verticesVisited to restore it at the end
    */
-  vector<unsigned int> visitedVertices;
+  vector<unsigned int> visitedVerticesIdx;
 
   if (root != from) {
     for (i = 0; i < verticesCount; i++) {
       if (coxeterMatrix[from][i] != 2) {
-        if (!bVerticesVisited[i])
-          visitedVertices.push_back(i);
+        if (!visitedVertices[i])
+          visitedVerticesIdx.push_back(i);
 
-        bVerticesVisited[i] = true;
+        visitedVertices[i] = true;
       }
     }
   } else
-    bVerticesVisited[root] = true; // obviously...
+    visitedVertices[root] = true; // obviously...
 
   // -------------------------------------------------------------------
   // DFS
@@ -665,9 +659,9 @@ void CoxIter::DFS(unsigned int root, unsigned int from) {
   for (i = 0; i < verticesCount; i++) {
     // if we have an edge AND if i was not traversed AND if the edge (root,i)
     // was not traversed
-    if (coxeterMatrix[root][i] == 3 && !bVerticesVisited[i] &&
-        !bEdgesVisited[root][i]) {
-      bEdgesVisited[root][i] = bEdgesVisited[i][root] = true;
+    if (coxeterMatrix[root][i] == 3 && !visitedVertices[i] &&
+        !visitedEdges[root][i]) {
+      visitedEdges[root][i] = visitedEdges[i][root] = true;
       subcall = true;
       DFS(i, root);
     }
@@ -675,13 +669,13 @@ void CoxIter::DFS(unsigned int root, unsigned int from) {
 
   // -------------------------------------------------------------------
   // un-initializations
-  for (const auto &visitedVertex : visitedVertices)
-    bVerticesVisited[visitedVertex] = false;
+  for (const auto &visitedVertex : visitedVerticesIdx)
+    visitedVertices[visitedVertex] = false;
 
-  bVerticesVisited[root] = false;
+  visitedVertices[root] = false;
 
   if (from != root) // If it is a recursive call
-    bEdgesVisited[root][from] = bEdgesVisited[from][root] = false;
+    visitedEdges[root][from] = visitedEdges[from][root] = false;
 
   // If DFS was not called, then the path is maximal
   if (!subcall)
@@ -692,22 +686,22 @@ void CoxIter::DFS(unsigned int root, unsigned int from) {
 
 void CoxIter::addGraphsFromPath() {
   // sommets que l'on ne peut pas lier au graphe (n sommets);
-  vector<bool> bVerticesLinkable(verticesCount, true);
+  vector<bool> linkableVertices(verticesCount, true);
 
   // sommets que l'on ne peut pas lier au graphe (n-1 sommets), sommets que l'on
   // ne peut pas lier au graphe (n-2 sommets)
-  vector<bool> bVerticesLinkable_0_nMin1(verticesCount, true),
-      bVerticesLinkable_0_nMin2(verticesCount, true);
+  vector<bool> linkableVertices_0_nMin1(verticesCount, true),
+      linkableVertices_0_nMin2(verticesCount, true);
 
   // sommets que l'on ne peut pas lier au graphe (1 --> n), sommets que l'on ne
   // peut pas lier au graphe (1 --> n-1), , sommets que l'on ne peut pas lier au
   // graphe (2 --> n)
-  vector<bool> bVerticesLinkable_1_n(verticesCount, true),
-      bVerticesLinkable_1_nMin1(verticesCount, true),
-      bVerticesLinkable_2_n(verticesCount, true);
+  vector<bool> linkableVertices_1_n(verticesCount, true),
+      linkableVertices_1_nMin1(verticesCount, true),
+      linkableVertices_2_n(verticesCount, true);
 
   // vecteur temporaire
-  vector<bool> bVerticesLinkableTemp, bVerticesLinkableTempTemp;
+  vector<bool> linkableVerticesTemp, linkableVerticesTempTemp;
 
   // chemin en cours de construction
   vector<short unsigned int> pathTemp;
@@ -722,49 +716,49 @@ void CoxIter::addGraphsFromPath() {
     // mise à jour des voisinages occupés
     for (j = 0; j < verticesCount; j++) {
       if (coxeterMatrix[path[i]][j] != 2)
-        bVerticesLinkable[j] = false;
+        linkableVertices[j] = false;
 
       if (i >= 1 && coxeterMatrix[path[i]][j] != 2)
-        bVerticesLinkable_1_n[j] = false;
+        linkableVertices_1_n[j] = false;
 
       if (i >= 2 && coxeterMatrix[path[i]][j] != 2)
-        bVerticesLinkable_2_n[j] = false;
+        linkableVertices_2_n[j] = false;
 
       if (i >= 1 && coxeterMatrix[path[i - 1]][j] != 2)
-        bVerticesLinkable_0_nMin1[j] = false;
+        linkableVertices_0_nMin1[j] = false;
 
       if (i >= 2 && coxeterMatrix[path[i - 1]][j] != 2)
-        bVerticesLinkable_1_nMin1[j] = false;
+        linkableVertices_1_nMin1[j] = false;
 
       if (i >= 2 && coxeterMatrix[path[i - 2]][j] != 2)
-        bVerticesLinkable_0_nMin2[j] = false;
+        linkableVertices_0_nMin2[j] = false;
     }
 
     // --------------------------------------------------------------------
     // An
     if (i != 0) // on ajoute pas les sommets
-      graphsList_spherical->addGraph(pathTemp, bVerticesLinkable, 0, true);
+      graphsList_spherical->addGraph(pathTemp, linkableVertices, 0, true);
 
     // --------------------------------------------------------------------
     // TAn, n >= 2
     if (i >= 1) {
-      bVerticesLinkable_1_nMin1[pathTemp[i - 1]] = false;
+      linkableVertices_1_nMin1[pathTemp[i - 1]] = false;
 
       for (j = 0; j < verticesCount; j++) {
         // si la partie centrale ne pose pas de problème ET qu'on est lié à
         // chaque extrémité
-        if (bVerticesLinkable_1_nMin1[j] && !bVerticesLinkable[j] &&
+        if (linkableVertices_1_nMin1[j] && !linkableVertices[j] &&
             coxeterMatrix[j][pathTemp[0]] == 3 &&
             coxeterMatrix[j][pathTemp[i]] == 3) {
           // mise à jour des linkables avec le somme trouvé
-          bVerticesLinkableTemp = bVerticesLinkable;
+          linkableVerticesTemp = linkableVertices;
           for (k = 0; k < verticesCount; k++) {
             if (coxeterMatrix[k][j] != 2)
-              bVerticesLinkableTemp[k] = false;
+              linkableVerticesTemp[k] = false;
           }
 
           graphsList_euclidean->addGraph(
-              pathTemp, bVerticesLinkableTemp, 0, false, j, 0,
+              pathTemp, linkableVerticesTemp, 0, false, j, 0,
               1); // TODO OPTIMIZATION modifier ce 1 (relatif à une meilleure
                   // valeur que "0" par défaut pour les dernières variables)
         }
@@ -774,7 +768,7 @@ void CoxIter::addGraphsFromPath() {
     // --------------------------------------------------------------------
     // Dn, TBn, TDn
     if (i >= 2) {
-      bVerticesLinkable_0_nMin2[pathTemp[i - 2]] = false;
+      linkableVertices_0_nMin2[pathTemp[i - 2]] = false;
 
       // --------------------------------------------------------------------
       // Dn, TBn (n >= 4), TDn (n >= 4)
@@ -784,15 +778,14 @@ void CoxIter::addGraphsFromPath() {
         // interdit ET pas lien entre deux extrémités
         if (coxeterMatrix[j][pathTemp[i - 1]] == 3 &&
             (pathTemp[i - 1] != j && pathTemp[i] != j) &&
-            bVerticesLinkable_0_nMin2[j] &&
-            coxeterMatrix[j][pathTemp[i]] == 2) {
-          bVerticesLinkableTemp = bVerticesLinkable;
+            linkableVertices_0_nMin2[j] && coxeterMatrix[j][pathTemp[i]] == 2) {
+          linkableVerticesTemp = linkableVertices;
           for (k = 0; k < verticesCount; k++) {
             if (coxeterMatrix[k][j] != 2)
-              bVerticesLinkableTemp[k] = false;
+              linkableVerticesTemp[k] = false;
           }
 
-          graphsList_spherical->addGraph(pathTemp, bVerticesLinkableTemp, 3,
+          graphsList_spherical->addGraph(pathTemp, linkableVerticesTemp, 3,
                                          true, j); // Dn
 
           // --------------------------------------------------------------------
@@ -800,18 +793,17 @@ void CoxIter::addGraphsFromPath() {
           // une arrête au 2ème sommet)
           for (k = 0; k < verticesCount; k++) {
             if (k != pathTemp[0] && k != j && k != pathTemp[i] &&
-                coxeterMatrix[pathTemp[1]][k] == 3 &&
-                bVerticesLinkable_2_n[k] &&
+                coxeterMatrix[pathTemp[1]][k] == 3 && linkableVertices_2_n[k] &&
                 coxeterMatrix[pathTemp[0]][k] == 2 &&
                 coxeterMatrix[k][j] == 2) {
-              bVerticesLinkableTempTemp = bVerticesLinkableTemp;
+              linkableVerticesTempTemp = linkableVerticesTemp;
               for (l = 0; l < verticesCount; l++) {
                 if (coxeterMatrix[k][l] != 2)
-                  bVerticesLinkableTempTemp[l] = false;
+                  linkableVerticesTempTemp[l] = false;
               }
 
-              graphsList_euclidean->addGraph(
-                  pathTemp, bVerticesLinkableTempTemp, 3, false, k, j); // TDn
+              graphsList_euclidean->addGraph(pathTemp, linkableVerticesTempTemp,
+                                             3, false, k, j); // TDn
             }
           }
 
@@ -819,17 +811,16 @@ void CoxIter::addGraphsFromPath() {
           // ici, on va tenter de trouver un TB_n (n >= 4) (i.e. prolonger par
           // une arête de poids 4 à gauche)
           for (k = 0; k < verticesCount; k++) {
-            if (coxeterMatrix[pathTemp[0]][k] == 4 &&
-                bVerticesLinkable_1_n[k] && coxeterMatrix[j][k] == 2) {
-              bVerticesLinkableTempTemp = bVerticesLinkableTemp;
+            if (coxeterMatrix[pathTemp[0]][k] == 4 && linkableVertices_1_n[k] &&
+                coxeterMatrix[j][k] == 2) {
+              linkableVerticesTempTemp = linkableVerticesTemp;
               for (l = 0; l < verticesCount; l++) {
                 if (coxeterMatrix[k][l] != 2)
-                  bVerticesLinkableTempTemp[l] = false;
+                  linkableVerticesTempTemp[l] = false;
               }
 
-              graphsList_euclidean->addGraph(pathTemp,
-                                             bVerticesLinkableTempTemp, 1,
-                                             false, j, k, 1); // TBn
+              graphsList_euclidean->addGraph(pathTemp, linkableVerticesTempTemp,
+                                             1, false, j, k, 1); // TBn
             }
           }
         }
@@ -840,13 +831,13 @@ void CoxIter::addGraphsFromPath() {
           if (coxeterMatrix[pathTemp[1]][j] == 4 &&
               coxeterMatrix[pathTemp[0]][j] == 2 &&
               coxeterMatrix[pathTemp[2]][j] == 2) {
-            bVerticesLinkableTemp = bVerticesLinkable;
+            linkableVerticesTemp = linkableVertices;
             for (k = 0; k < verticesCount; k++) {
               if (coxeterMatrix[k][j] != 2)
-                bVerticesLinkableTemp[k] = false;
+                linkableVerticesTemp[k] = false;
             }
 
-            graphsList_euclidean->addGraph(pathTemp, bVerticesLinkableTemp, 1,
+            graphsList_euclidean->addGraph(pathTemp, linkableVerticesTemp, 1,
                                            false, j); // TB3
           }
         }
@@ -856,7 +847,7 @@ void CoxIter::addGraphsFromPath() {
     // --------------------------------------------------------------------
     // E6, E7, E8, TE6, TE7, TE8
     if (i >= 4 && i <= 7) {
-      AnToEn_AnToTEn(pathTemp, bVerticesLinkable);
+      AnToEn_AnToTEn(pathTemp, linkableVertices);
     }
 
     // --------------------------------------------------------------------
@@ -876,42 +867,42 @@ void CoxIter::addGraphsFromPath() {
         if (((coxeterMatrix[path[i]][j] == 4) ||
              (coxeterMatrix[path[i]][j] == 5 && (i == 1 || i == 2)) ||
              (coxeterMatrix[path[i]][j] == 6 && i == 1)) &&
-            bVerticesLinkable_0_nMin1[j]) {
+            linkableVertices_0_nMin1[j]) {
           iOrder = coxeterMatrix[path[i]][j];
-          bVerticesLinkableTemp = bVerticesLinkable;
+          linkableVerticesTemp = linkableVertices;
           for (k = 0; k < verticesCount; k++) {
             if (coxeterMatrix[k][j] != 2)
-              bVerticesLinkableTemp[k] = false;
+              linkableVerticesTemp[k] = false;
           }
 
           if (coxeterMatrix[path[i]][j] < 6) // sphérique
-            graphsList_spherical->addGraph(pathTemp, bVerticesLinkableTemp,
+            graphsList_spherical->addGraph(pathTemp, linkableVerticesTemp,
                                            (iOrder == 4 ? 1 : 7), true, j);
           else
-            graphsList_euclidean->addGraph(pathTemp, bVerticesLinkableTemp, 6,
+            graphsList_euclidean->addGraph(pathTemp, linkableVerticesTemp, 6,
                                            false, j, 0, 1);
 
-          auto bVerticesLinkableTemp_bck(
-              bVerticesLinkableTemp); // Contains info for: pathTemp + j
+          auto linkableVerticesTemp_bck(
+              linkableVerticesTemp); // Contains info for: pathTemp + j
 
           // ------------------------------------------
           // on va tenter de prolonger cela en un TCn, n \geq 3
           if (coxeterMatrix[path[i]][j] == 4) {
             for (k = 0; k < verticesCount; k++) {
               if (coxeterMatrix[k][pathTemp[0]] == 4 && k != j &&
-                  bVerticesLinkable_1_n[k] && coxeterMatrix[k][j] == 2) {
+                  linkableVertices_1_n[k] && coxeterMatrix[k][j] == 2) {
                 // Additional info for vertex k
                 for (l = 0; l < verticesCount; l++) {
                   if (coxeterMatrix[k][l] != 2)
-                    bVerticesLinkableTemp[l] = false;
+                    linkableVerticesTemp[l] = false;
                 }
 
-                graphsList_euclidean->addGraph(pathTemp, bVerticesLinkableTemp,
+                graphsList_euclidean->addGraph(pathTemp, linkableVerticesTemp,
                                                2, false, k, j);
 
-                bVerticesLinkableTemp =
-                    bVerticesLinkableTemp_bck; // Restoring to info of pathTemp
-                                               // and j
+                linkableVerticesTemp =
+                    linkableVerticesTemp_bck; // Restoring to info of pathTemp
+                                              // and j
               }
             }
           }
@@ -920,18 +911,18 @@ void CoxIter::addGraphsFromPath() {
           // ici, on a un B3, que l'on va tenter de prolonger en F4 ou un B4 que
           // l'on va tenter de prolonger en un TF4
           if ((i == 1 || i == 2) && coxeterMatrix[path[i]][j] == 4)
-            B3ToF4_B4ToTF4(bVerticesLinkable_0_nMin1, pathTemp, j);
+            B3ToF4_B4ToTF4(linkableVertices_0_nMin1, pathTemp, j);
 
         } // if (((coxeterMatrix[ path[i] ][j] == 4) || (coxeterMatrix[
           // path[i] ][j] == 5 && (i == 1 || i == 2)) || (coxeterMatrix[
-          // path[i] ][j] == 6 && i == 1)) && bVerticesLinkable_0_nMin1[j])
+          // path[i] ][j] == 6 && i == 1)) && linkableVertices_0_nMin1[j])
       }
     }
   }
 }
 
 void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
-                             const vector<bool> &bVerticesLinkable) {
+                             const vector<bool> &linkableVertices) {
   unsigned int pathSize(pathTemp.size());
 
   /*
@@ -943,18 +934,18 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
   unsigned int iStart(isSpherical || pathSize == 8 ? 2 : 3);
 
   // E6, E7, E8, \tilde E8
-  AnToEn_AnToTEn(pathTemp, bVerticesLinkable, isSpherical, iStart);
+  AnToEn_AnToTEn(pathTemp, linkableVertices, isSpherical, iStart);
 
   if (pathSize == 7) // \tile E7
-    AnToEn_AnToTEn(pathTemp, bVerticesLinkable, false, 3);
+    AnToEn_AnToTEn(pathTemp, linkableVertices, false, 3);
 }
 
 void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
-                             const vector<bool> &bVerticesLinkable,
+                             const vector<bool> &linkableVertices,
                              const bool &isSpherical,
                              const short unsigned int &start) {
   unsigned int pathSize(pathTemp.size()), j, k, l;
-  vector<bool> bVerticesLinkableTemp, bVerticesLinkableTempTemp;
+  vector<bool> linkableVerticesTemp, linkableVerticesTempTemp;
 
   /*
    * 	Ici, on a donc un An (n=5, 6 ou 7) avec 1 -- 2 -- 3 -- 4 -- 5 ...
@@ -963,7 +954,7 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
   for (unsigned int i(0); i < verticesCount; i++) {
     // si le sommet est pas utilisbale (s'il l'est c'est qu'il n'est pas voisin
     // de la base) ET si y'a un lien
-    if (false == bVerticesLinkable[i] &&
+    if (false == linkableVertices[i] &&
         coxeterMatrix[i][pathTemp[start]] == 3) {
       // on va chercher si c'est uniquement à cause d'un des sommets différents
       // de iStart que le sommet n'est pas admissible
@@ -974,33 +965,33 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
 
       if (j == pathSize) // admissible
       {
-        bVerticesLinkableTemp = bVerticesLinkable;
+        linkableVerticesTemp = linkableVertices;
         for (k = 0; k < verticesCount; k++) {
           if (coxeterMatrix[i][k] != 2)
-            bVerticesLinkableTemp[k] = false;
+            linkableVerticesTemp[k] = false;
         }
 
         if (isSpherical) {
-          graphsList_spherical->addGraph(pathTemp, bVerticesLinkableTemp, 4,
+          graphsList_spherical->addGraph(pathTemp, linkableVerticesTemp, 4,
                                          true, i); // En
 
           // on a un E6 qu'on va tenter de prolonger en un TE6
           if (pathSize == 5) {
             for (j = 0; j < verticesCount; j++) {
-              if (coxeterMatrix[i][j] == 3 && bVerticesLinkable[j]) {
-                bVerticesLinkableTempTemp = bVerticesLinkableTemp;
+              if (coxeterMatrix[i][j] == 3 && linkableVertices[j]) {
+                linkableVerticesTempTemp = linkableVerticesTemp;
                 for (l = 0; l < verticesCount; l++) {
                   if (coxeterMatrix[j][l] != 2)
-                    bVerticesLinkableTempTemp[l] = false;
+                    linkableVerticesTempTemp[l] = false;
                 }
 
                 graphsList_euclidean->addGraph(
-                    pathTemp, bVerticesLinkableTempTemp, 4, false, i, j); // En
+                    pathTemp, linkableVerticesTempTemp, 4, false, i, j); // En
               }
             }
           }
         } else
-          graphsList_euclidean->addGraph(pathTemp, bVerticesLinkableTemp, 4,
+          graphsList_euclidean->addGraph(pathTemp, linkableVerticesTemp, 4,
                                          false, i); // TEn
       }
     }
@@ -1020,25 +1011,25 @@ void CoxIter::AnToEn_AnToTEn(const vector<short unsigned int> &pathTemp,
  * 													            4
  *
  * 		Paramètres:
- * 			bVerticesBeginLinkable: ce qui est linkable à cause du
+ * 			linkableVerticesStart: ce qui est linkable à cause du
  * premier (deux premiers) sommet(s) pathTemp: deux(trois) premiers sommets
  * endVertex: 3ème(4ème) sommet
  * */
-void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &bVerticesBeginLinkable,
+void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &linkableVerticesStart,
                              vector<short unsigned int> pathTemp,
                              const short unsigned int &endVertex) {
   bool isSpherical(pathTemp.size() == 2); // true si sphérique (on cherche F4),
                                           // false si euclidien (on cherche TF4)
-  unsigned int i, j, iV2(pathTemp[1]);
-  vector<bool> bVerticesLinkable;
+  unsigned int i, j, v2(pathTemp[1]);
+  vector<bool> linkableVertices;
 
   pathTemp.push_back(endVertex);
 
   // on va parcourir les sommets et regarder les voisins de poids 3 de endVertex
   for (i = 0; i < verticesCount; i++) {
-    if (coxeterMatrix[endVertex][i] == 3 && bVerticesBeginLinkable[i] &&
-        coxeterMatrix[i][iV2] == 2) {
-      bVerticesLinkable = bVerticesBeginLinkable;
+    if (coxeterMatrix[endVertex][i] == 3 && linkableVerticesStart[i] &&
+        coxeterMatrix[i][v2] == 2) {
+      linkableVertices = linkableVerticesStart;
 
       if (!isSpherical &&
           coxeterMatrix[pathTemp[2]][i] !=
@@ -1046,16 +1037,16 @@ void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &bVerticesBeginLinkable,
         continue;
 
       for (j = 0; j < verticesCount; j++) {
-        if (coxeterMatrix[j][iV2] != 2 || coxeterMatrix[j][endVertex] != 2 ||
+        if (coxeterMatrix[j][v2] != 2 || coxeterMatrix[j][endVertex] != 2 ||
             coxeterMatrix[j][i] != 2)
-          bVerticesLinkable[j] = false;
+          linkableVertices[j] = false;
       }
 
       if (isSpherical)
-        graphsList_spherical->addGraph(pathTemp, bVerticesLinkable, 5, true,
+        graphsList_spherical->addGraph(pathTemp, linkableVertices, 5, true,
                                        i); // Fn
       else
-        graphsList_euclidean->addGraph(pathTemp, bVerticesLinkable, 5, false,
+        graphsList_euclidean->addGraph(pathTemp, linkableVertices, 5, false,
                                        i); // TFn
     }
   }
@@ -1079,30 +1070,30 @@ void CoxIter::printPath() {
  * tools/polynomials.h TODO
  */
 string vector2str(const vector<mpz_class> &polynomial) {
-  bool bFirst(true);
-  unsigned int iSize(polynomial.size());
-  string strRes;
+  bool isFirst(true);
+  unsigned int size(polynomial.size());
+  string result;
   mpz_class mpzTemp;
 
-  for (unsigned int i(0); i < iSize; i++) {
+  for (unsigned int i(0); i < size; i++) {
     if (polynomial[i] != 0) {
-      if (bFirst) {
-        strRes += polynomial[i].get_str() +
+      if (isFirst) {
+        result += polynomial[i].get_str() +
                   (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
-        bFirst = false;
+        isFirst = false;
       } else {
         if ((polynomial[i] != 1 && polynomial[i] != -1) || !i) {
           mpzTemp = abs(polynomial[i]);
-          strRes += (polynomial[i] > 0 ? " + " : " - ") + mpzTemp.get_str() +
+          result += (polynomial[i] > 0 ? " + " : " - ") + mpzTemp.get_str() +
                     (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
         } else
-          strRes += (polynomial[i] > 0 ? " + " : " - ") +
+          result += (polynomial[i] > 0 ? " + " : " - ") +
                     string(i > 1 ? "x^" + to_string(i) : "x");
       }
     }
   }
 
-  return strRes;
+  return result;
 }
 
 const vector<vector<GraphsProductSet>> *
@@ -1110,85 +1101,81 @@ CoxIter::get_ptr_graphsProducts() const {
   return &graphsProducts;
 }
 
-string CoxIter::get_strGrowthSeries_raw() {
-  string strGrowth;
+string CoxIter::get_growthSeries_raw() {
+  string growth;
 
-  if (strOuputMathematicalFormat == "generic") {
-    strGrowth = "g(x) = (" + growthSeries_raw + ")^-1;";
-  } else if (strOuputMathematicalFormat == "mathematica") {
-    strGrowth = "Symb[s_, x_] := Product[Sum[x^i, {i, 0, s[[i]] - 1}], {i, 1, "
-                "Length[s]}];\n";
-    strGrowth += "g[x_] := (" + growthSeries_raw + ")^-1;";
-  } else if (strOuputMathematicalFormat == "pari") {
-    strGrowth = "Symb = (S, y) -> prod(i=1, length(S), sum(i=0,S[i]-1,y^i));\n";
-    strGrowth += "g(x) = (" + growthSeries_raw + ")^-1;";
+  if (ouputMathematicalFormat == "generic") {
+    growth = "g(x) = (" + growthSeries_raw + ")^-1;";
+  } else if (ouputMathematicalFormat == "mathematica") {
+    growth = "Symb[s_, x_] := Product[Sum[x^i, {i, 0, s[[i]] - 1}], {i, 1, "
+             "Length[s]}];\n";
+    growth += "g[x_] := (" + growthSeries_raw + ")^-1;";
+  } else if (ouputMathematicalFormat == "pari") {
+    growth = "Symb = (S, y) -> prod(i=1, length(S), sum(i=0,S[i]-1,y^i));\n";
+    growth += "g(x) = (" + growthSeries_raw + ")^-1;";
   }
 
-  return strGrowth;
+  return growth;
 }
 
-string CoxIter::get_strGrowthSeries() {
-  string strGrowth;
+string CoxIter::get_growthSeries() {
+  string growth;
 
-  if (strOuputMathematicalFormat == "generic") {
-    strGrowth = "f(x) = ";
+  if (ouputMathematicalFormat == "generic") {
+    growth = "f(x) = ";
     if (growthSeries_cyclotomicNumerator.size()) {
-      strGrowth += "C(";
+      growth += "C(";
       unsigned int max(growthSeries_cyclotomicNumerator.size());
       for (unsigned int i(0); i < max; i++)
-        strGrowth +=
+        growth +=
             (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
 
-      strGrowth += ")";
+      growth += ")";
     }
 
-    strGrowth += "/(" + vector2str(growthSeries_polynomialDenominator) + ")";
-  } else if (strOuputMathematicalFormat == "gap") {
+    growth += "/(" + vector2str(growthSeries_polynomialDenominator) + ")";
+  } else if (ouputMathematicalFormat == "gap") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
     unsigned int denominatorSize(growthSeries_polynomialDenominator.size());
 
-    strGrowth += "f := Product([";
+    growth += "f := Product([";
     for (unsigned int i(0); i < cycloSize; i++)
-      strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
-    strGrowth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
+      growth += (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
+
+    growth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
     for (unsigned int i(0); i < denominatorSize; i++)
       cout << (i ? "," : "") << growthSeries_polynomialDenominator[i];
 
     cout << "], X(Rationals));";
-  } else if (strOuputMathematicalFormat == "mathematica") {
+  } else if (ouputMathematicalFormat == "mathematica") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
 
-    strGrowth =
+    growth =
         "Cyclo[s_, x_] := Product[Cyclotomic[s[[i]], x], {i, 1, Length[s]}];";
 
-    strGrowth += "f[x_] := Cyclo[{";
+    growth += "f[x_] := Cyclo[{";
     for (unsigned int i(0); i < cycloSize; i++)
-      strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
+      growth += (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
 
-    strGrowth +=
-        "},x]/(" + vector2str(growthSeries_polynomialDenominator) + ");";
-  } else if (strOuputMathematicalFormat == "pari") {
+    growth += "},x]/(" + vector2str(growthSeries_polynomialDenominator) + ");";
+  } else if (ouputMathematicalFormat == "pari") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
-    strGrowth = "Cyclo = (S, y) -> prod(i=1, length(S), polcyclo(S[i],y));\n";
-    strGrowth += "f(x) = Cyclo([";
+    growth = "Cyclo = (S, y) -> prod(i=1, length(S), polcyclo(S[i],y));\n";
+    growth += "f(x) = Cyclo([";
     for (unsigned int i(0); i < cycloSize; i++)
-      strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
+      growth += (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
 
-    strGrowth +=
-        "],x)/(" + vector2str(growthSeries_polynomialDenominator) + ");";
+    growth += "],x)/(" + vector2str(growthSeries_polynomialDenominator) + ");";
   }
 
-  return strGrowth;
+  return growth;
 }
 
 void CoxIter::printGrowthSeries() {
   if (!isGrowthSeriesComputed)
     growthSeries();
 
-  if (strOuputMathematicalFormat == "generic") {
+  if (ouputMathematicalFormat == "generic") {
     cout << "f(x) = ";
     if (growthSeries_cyclotomicNumerator.size()) {
       cout << "C(";
@@ -1205,7 +1192,7 @@ void CoxIter::printGrowthSeries() {
 
     if (debug)
       cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
-  } else if (strOuputMathematicalFormat == "gap") {
+  } else if (ouputMathematicalFormat == "gap") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
     unsigned int denominatorSize(growthSeries_polynomialDenominator.size());
 
@@ -1221,7 +1208,7 @@ void CoxIter::printGrowthSeries() {
 
     if (debug)
       cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
-  } else if (strOuputMathematicalFormat == "mathematica") {
+  } else if (ouputMathematicalFormat == "mathematica") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
 
     cout
@@ -1243,7 +1230,7 @@ void CoxIter::printGrowthSeries() {
 
     if (debug)
       cout << "\ng[x_] := (" << growthSeries_raw << ")^-1;";
-  } else if (strOuputMathematicalFormat == "pari") {
+  } else if (ouputMathematicalFormat == "pari") {
     unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
 
     cout << "Cyclo = (S, y) -> prod(i=1, length(S), polcyclo(S[i],y));" << endl;
@@ -1299,7 +1286,7 @@ int CoxIter::isGraphCocompact() {
 
   // ----------------------------------------------------
   // the test
-  if (bUseOpenMP && verticesCount >= 15)
+  if (useOpenMP && verticesCount >= 15)
     isCocompact = isGraph_cocompact_finiteVolume_parallel(1) ? 1 : 0;
   else
     isCocompact = isGraph_cocompact_finiteVolume_sequential(1) ? 1 : 0;
@@ -1346,7 +1333,7 @@ int CoxIter::checkCovolumeFiniteness() {
 
   // ----------------------------------------------------
   // the test
-  if (bUseOpenMP && verticesCount >= 15)
+  if (useOpenMP && verticesCount >= 15)
     isFiniteCovolume = isGraph_cocompact_finiteVolume_parallel(2) ? 1 : 0;
   else
     isFiniteCovolume = isGraph_cocompact_finiteVolume_sequential(2) ? 1 : 0;
@@ -1382,7 +1369,7 @@ bool CoxIter::isGraph_cocompact_finiteVolume_sequential(unsigned int index) {
       for (const auto &graphSub : diffSubNotBig) {
         for (itGBig = diffBigNotSub.begin(); itGBig != diffBigNotSub.end();
              ++itGBig) {
-          if (graphSub->bIsSubgraphOf(*itGBig))
+          if (graphSub->isSubgraphOf(*itGBig))
             break;
         }
 
@@ -1432,7 +1419,7 @@ bool CoxIter::isGraph_cocompact_finiteVolume_parallel(unsigned int index) {
 
   bool isExtendable, exit(false);
 
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     {
@@ -1460,7 +1447,7 @@ bool CoxIter::isGraph_cocompact_finiteVolume_parallel(unsigned int index) {
             for (const auto &graphSub : diffSubNotBig) {
               for (itGBig = diffBigNotSub.begin();
                    itGBig != diffBigNotSub.end(); ++itGBig) {
-                if (graphSub->bIsSubgraphOf(*itGBig))
+                if (graphSub->isSubgraphOf(*itGBig))
                   break;
               }
 
@@ -1525,21 +1512,21 @@ void CoxIter::computeGraphsProducts() {
   }
 
   graphsProducts = vector<vector<GraphsProductSet>>(3);
-  vector<bool> bGPVerticesNonLinkable(vector<bool>(verticesCount, false));
+  vector<bool> gpNonLinkableVertices(vector<bool>(verticesCount, false));
   GraphsProduct gp; ///< Current graphs product
 
   // --------------------------------------------------------------
   // produits de graphes sphériques
   GraphsListIterator grIt_spherical(this->graphsList_spherical);
 
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_spherical.ptr) {
-#pragma omp task firstprivate(grIt_spherical, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_spherical, gpNonLinkableVertices, gp)
       {
         computeGraphsProducts(grIt_spherical, &graphsProductsCount_spherical,
-                              true, gp, bGPVerticesNonLinkable);
+                              true, gp, gpNonLinkableVertices);
       }
 
       ++grIt_spherical;
@@ -1554,14 +1541,14 @@ void CoxIter::computeGraphsProducts() {
   }
 
   GraphsListIterator grIt_euclidean(this->graphsList_euclidean);
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_euclidean.ptr) {
-#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_euclidean, gpNonLinkableVertices, gp)
       {
         computeGraphsProducts(grIt_euclidean, &graphsProductsCount_euclidean,
-                              false, gp, bGPVerticesNonLinkable);
+                              false, gp, gpNonLinkableVertices);
       }
 
       ++grIt_euclidean;
@@ -1598,7 +1585,7 @@ void CoxIter::computeGraphsProducts(
     vector<map<vector<vector<short unsigned int>>, unsigned int>>
         *graphsProductsCount,
     const bool &isSpherical, GraphsProduct &gp,
-    vector<bool> &bGPVerticesNonLinkable) {
+    vector<bool> &gpNonLinkableVertices) {
   vector<short unsigned int>::iterator iIt;
   vector<short unsigned int> flaggedVertices;
   unsigned int graphRank(0);
@@ -1609,7 +1596,7 @@ void CoxIter::computeGraphsProducts(
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
          ++iIt) {
-      if (bGPVerticesNonLinkable[*iIt]) // si pas linkable
+      if (gpNonLinkableVertices[*iIt]) // si pas linkable
         break;
     }
 
@@ -1682,22 +1669,22 @@ void CoxIter::computeGraphsProducts(
 
       // mise à jour des sommets que l'on ne peut plus prendre
       for (unsigned int i = 0; i < verticesCount; i++) {
-        if (!grIt.ptr->bVerticesLinkable[i] && !bGPVerticesNonLinkable[i]) {
+        if (!grIt.ptr->linkableVertices[i] && !gpNonLinkableVertices[i]) {
           flaggedVertices.push_back(i);
-          bGPVerticesNonLinkable[i] = true;
+          gpNonLinkableVertices[i] = true;
         }
       }
 
       // récursion
       computeGraphsProducts(++grIt, graphsProductsCount, isSpherical, gp,
-                            bGPVerticesNonLinkable);
+                            gpNonLinkableVertices);
 
       // -----------------------------------------------
       // dé-initialisations
 
       // on remet la liste à son état d'avant la récursion
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
-        bGPVerticesNonLinkable[*iIt] = false;
+        gpNonLinkableVertices[*iIt] = false;
 
       gp.rank -= graphRank;
 
@@ -1727,21 +1714,21 @@ void CoxIter::IS_computations(const string &t0, const string &s0) {
   if (!isGraphsProductsComputed)
     computeGraphsProducts();
 
-  vector<bool> bGPVerticesNonLinkable(vector<bool>(verticesCount, false));
+  vector<bool> gpNonLinkableVertices(vector<bool>(verticesCount, false));
   GraphsProduct gp; ///< Current graphs product
 
   // --------------------------------------------------------------
   // produits de graphes sphériques
   GraphsListIterator grIt_spherical(this->graphsList_spherical);
 
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_spherical.ptr) {
-#pragma omp task firstprivate(grIt_spherical, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_spherical, gpNonLinkableVertices, gp)
       {
         computeGraphsProducts_IS(grIt_spherical, true, gp,
-                                 bGPVerticesNonLinkable);
+                                 gpNonLinkableVertices);
       }
 
       ++grIt_spherical;
@@ -1751,14 +1738,14 @@ void CoxIter::IS_computations(const string &t0, const string &s0) {
   // --------------------------------------------------------------
   // produits de graphes euclidiens
   GraphsListIterator grIt_euclidean(this->graphsList_euclidean);
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_euclidean.ptr) {
-#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_euclidean, gpNonLinkableVertices, gp)
       {
         computeGraphsProducts_IS(grIt_euclidean, false, gp,
-                                 bGPVerticesNonLinkable);
+                                 gpNonLinkableVertices);
       }
 
       ++grIt_euclidean;
@@ -1769,7 +1756,7 @@ void CoxIter::IS_computations(const string &t0, const string &s0) {
 void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
                                        const bool &isSpherical,
                                        GraphsProduct &gp,
-                                       vector<bool> &bGPVerticesNonLinkable) {
+                                       vector<bool> &gpNonLinkableVertices) {
   vector<short unsigned int>::iterator iIt;
   vector<short unsigned int> flaggedVertices;
   unsigned int graphRank(0);
@@ -1779,7 +1766,7 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
          ++iIt) {
-      if (bGPVerticesNonLinkable[*iIt]) // si pas linkable
+      if (gpNonLinkableVertices[*iIt]) // si pas linkable
         break;
     }
 
@@ -1840,21 +1827,21 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
 
       // mise à jour des sommets que l'on ne peut plus prendre
       for (unsigned int i = 0; i < verticesCount; i++) {
-        if (!grIt.ptr->bVerticesLinkable[i] && !bGPVerticesNonLinkable[i]) {
+        if (!grIt.ptr->linkableVertices[i] && !gpNonLinkableVertices[i]) {
           flaggedVertices.push_back(i);
-          bGPVerticesNonLinkable[i] = true;
+          gpNonLinkableVertices[i] = true;
         }
       }
 
       // récursion
-      computeGraphsProducts_IS(++grIt, isSpherical, gp, bGPVerticesNonLinkable);
+      computeGraphsProducts_IS(++grIt, isSpherical, gp, gpNonLinkableVertices);
 
       // -----------------------------------------------
       // dé-initialisations
 
       // on remet la liste à son état d'avant la récursion
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
-        bGPVerticesNonLinkable[*iIt] = false;
+        gpNonLinkableVertices[*iIt] = false;
 
       gp.rank -= graphRank;
 
@@ -1868,33 +1855,33 @@ void CoxIter::computeGraphsProducts_IS(GraphsListIterator grIt,
   }
 }
 
-bool CoxIter::bCanBeFiniteCovolume() {
+bool CoxIter::canBeFiniteCovolume() {
   // -----------------------------------------------------------
   // Some verifications
   if (!dimension)
-    throw(string("CoxIter::bCanBeFiniteCovolume: Dimension not specified"));
+    throw(string("CoxIter::canBeFiniteCovolume: Dimension not specified"));
 
   if (!isGraphExplored)
     exploreGraph();
 
   // -----------------------------------------------------------
   // Initializations
-  graphsProducts_bCanBeFiniteCovolume = vector<vector<GraphsProductSet>>(1);
+  graphsProducts_canBeFiniteCovolume = vector<vector<GraphsProductSet>>(1);
 
   GraphsListIterator grIt_euclidean(this->graphsList_euclidean);
-  vector<bool> bGPVerticesNonLinkable(vector<bool>(verticesCount, false));
+  vector<bool> gpNonLinkableVertices(vector<bool>(verticesCount, false));
   GraphsProduct gp; ///< Current graphs product
 
 // -----------------------------------------------------------
 // We find the products of euclidean graphs
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_euclidean.ptr) {
-#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_euclidean, gpNonLinkableVertices, gp)
       {
-        bCanBeFiniteCovolume_computeGraphsProducts(grIt_euclidean, gp,
-                                                   bGPVerticesNonLinkable);
+        canBeFiniteCovolume_computeGraphsProducts(grIt_euclidean, gp,
+                                                  gpNonLinkableVertices);
       }
 
       ++grIt_euclidean;
@@ -1906,27 +1893,27 @@ bool CoxIter::bCanBeFiniteCovolume() {
   // subgraph of an affine graph of rank n-1
   grIt_euclidean = GraphsListIterator(
       GraphsListIterator(this->graphsList_euclidean, 3)); // TODO: partir à 2?
-  bool bCanBeExtended;
+  bool canBeExtended;
 
   while (grIt_euclidean.ptr) {
-    bCanBeExtended = false;
+    canBeExtended = false;
     for (auto graphProd :
-         graphsProducts_bCanBeFiniteCovolume[0]) // TODO OPTIMIZATION
-                                                 // paralleliser?
+         graphsProducts_canBeFiniteCovolume[0]) // TODO OPTIMIZATION
+                                                // paralleliser?
     {
       for (auto gr : graphProd.graphs) {
         // For two affine graphs G1 and G2, G1 is a subgraph of G2 iff G1=G2
         if (*grIt_euclidean.ptr == *gr) {
-          bCanBeExtended = true;
+          canBeExtended = true;
           break;
         }
       }
 
-      if (bCanBeExtended)
+      if (canBeExtended)
         break;
     }
 
-    if (!bCanBeExtended) {
+    if (!canBeExtended) {
       if (debug) {
         cout << "Can be of finite covolume: no" << endl;
         cout << "\tCannot extend the affine graph: " << endl;
@@ -1942,9 +1929,9 @@ bool CoxIter::bCanBeFiniteCovolume() {
   return true;
 }
 
-void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
+void CoxIter::canBeFiniteCovolume_computeGraphsProducts(
     GraphsListIterator grIt, GraphsProduct &gp,
-    vector<bool> &bGPVerticesNonLinkable) {
+    vector<bool> &gpNonLinkableVertices) {
   vector<short unsigned int>::iterator iIt;
   vector<short unsigned int> flaggedVertices;
   unsigned int graphGrank(0);
@@ -1954,7 +1941,7 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
          ++iIt) {
-      if (bGPVerticesNonLinkable[*iIt]) // si pas linkable
+      if (gpNonLinkableVertices[*iIt]) // si pas linkable
         break;
     }
 
@@ -1970,28 +1957,27 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
 #pragma omp critical
       {
         if (gp.rank == (dimension - 1))
-          graphsProducts_bCanBeFiniteCovolume[0].push_back(
-              GraphsProductSet(gp));
+          graphsProducts_canBeFiniteCovolume[0].push_back(GraphsProductSet(gp));
       }
 
       // mise à jour des sommets que l'on ne peut plus prendre
       for (unsigned int i = 0; i < verticesCount; i++) {
-        if (!grIt.ptr->bVerticesLinkable[i] && !bGPVerticesNonLinkable[i]) {
+        if (!grIt.ptr->linkableVertices[i] && !gpNonLinkableVertices[i]) {
           flaggedVertices.push_back(i);
-          bGPVerticesNonLinkable[i] = true;
+          gpNonLinkableVertices[i] = true;
         }
       }
 
       // récursion
-      bCanBeFiniteCovolume_computeGraphsProducts(++grIt, gp,
-                                                 bGPVerticesNonLinkable);
+      canBeFiniteCovolume_computeGraphsProducts(++grIt, gp,
+                                                gpNonLinkableVertices);
 
       // -----------------------------------------------
       // dé-initialisations
 
       // on remet la liste à son état d'avant la récursion
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
-        bGPVerticesNonLinkable[*iIt] = false;
+        gpNonLinkableVertices[*iIt] = false;
 
       gp.rank -= graphGrank;
 
@@ -2005,36 +1991,36 @@ void CoxIter::bCanBeFiniteCovolume_computeGraphsProducts(
   }
 }
 
-vector<vector<short unsigned int>> CoxIter::bCanBeFiniteCovolume_complete() {
+vector<vector<short unsigned int>> CoxIter::canBeFiniteCovolume_complete() {
   // -----------------------------------------------------------
   // Some verifications
   if (!dimension)
     throw(string(
-        "CoxIter::bCanBeFiniteCovolume_complete: Dimension not specified"));
+        "CoxIter::canBeFiniteCovolume_complete: Dimension not specified"));
 
   if (!isGraphExplored)
     exploreGraph();
 
   // -----------------------------------------------------------
   // Initializations
-  graphsProducts_bCanBeFiniteCovolume =
+  graphsProducts_canBeFiniteCovolume =
       vector<vector<GraphsProductSet>>(dimension + 1);
 
   GraphsListIterator grIt_euclidean(this->graphsList_euclidean);
-  vector<bool> bGPVerticesNonLinkable(vector<bool>(verticesCount, false));
+  vector<bool> gpNonLinkableVertices(vector<bool>(verticesCount, false));
   GraphsProduct gp; ///< Current graphs product
 
 // -----------------------------------------------------------
 // We find the products of euclidean graphs
-#pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
+#pragma omp parallel if (useOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     while (grIt_euclidean.ptr) {
 
-#pragma omp task firstprivate(grIt_euclidean, bGPVerticesNonLinkable, gp)
+#pragma omp task firstprivate(grIt_euclidean, gpNonLinkableVertices, gp)
       {
-        bCanBeFiniteCovolume_complete_computeGraphsProducts(
-            grIt_euclidean, gp, bGPVerticesNonLinkable);
+        canBeFiniteCovolume_complete_computeGraphsProducts(
+            grIt_euclidean, gp, gpNonLinkableVertices);
       }
 
       ++grIt_euclidean;
@@ -2046,42 +2032,42 @@ vector<vector<short unsigned int>> CoxIter::bCanBeFiniteCovolume_complete() {
   // -----------------------------------------------------------
   // Check the condition: every connected affine graph of rank at least 2 is a
   // subgraph of an affine graph of rank n-1
-  bool bCanBeExtended, bSubproduct, bFound;
+  bool canBeExtended, isSubproduct, found;
 
   for (unsigned int i(2); i < dimension - 1; i++) {
-    for (auto gpSmall : graphsProducts_bCanBeFiniteCovolume[i]) {
+    for (auto gpSmall : graphsProducts_canBeFiniteCovolume[i]) {
       // If gpSmall is not a subgraph of gpBig for every gpBig (affine of rank
       // dimension-1), then the graph is not of finite covolume
-      bCanBeExtended = false;
+      canBeExtended = false;
 
-      for (auto gpBig : graphsProducts_bCanBeFiniteCovolume[dimension - 1]) {
+      for (auto gpBig : graphsProducts_canBeFiniteCovolume[dimension - 1]) {
         // First test
         if (!gpSmall.areVerticesSubsetOf(gpBig))
           continue;
 
-        bSubproduct = true;
+        isSubproduct = true;
         for (auto gSmall : gpSmall.graphs) {
-          bFound = false;
+          found = false;
           for (auto gBig : gpBig.graphs) {
             if (*gSmall == *gBig) {
-              bFound = true;
+              found = true;
               break;
             }
           }
 
-          if (!bFound) {
-            bSubproduct = false;
+          if (!found) {
+            isSubproduct = false;
             break;
           }
         }
 
-        if (bSubproduct) {
-          bCanBeExtended = true;
+        if (isSubproduct) {
+          canBeExtended = true;
           break;
         }
       }
 
-      if (!bCanBeExtended) {
+      if (!canBeExtended) {
         graphsNotExtendable.push_back(gpSmall.get_vertices());
       }
     }
@@ -2090,9 +2076,9 @@ vector<vector<short unsigned int>> CoxIter::bCanBeFiniteCovolume_complete() {
   return graphsNotExtendable;
 }
 
-void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
+void CoxIter::canBeFiniteCovolume_complete_computeGraphsProducts(
     GraphsListIterator grIt, GraphsProduct &gp,
-    vector<bool> &bGPVerticesNonLinkable) {
+    vector<bool> &gpNonLinkableVertices) {
   vector<short unsigned int>::iterator iIt;
   vector<short unsigned int> flaggedVertices;
   unsigned int graphRank(0);
@@ -2102,7 +2088,7 @@ void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
     // est ce que le graphe est admissible?
     for (iIt = grIt.ptr->vertices.begin(); iIt != grIt.ptr->vertices.end();
          ++iIt) {
-      if (bGPVerticesNonLinkable[*iIt]) // si pas linkable
+      if (gpNonLinkableVertices[*iIt]) // si pas linkable
         break;
     }
 
@@ -2118,28 +2104,28 @@ void CoxIter::bCanBeFiniteCovolume_complete_computeGraphsProducts(
 #pragma omp critical
       {
         if (2 <= gp.rank && gp.rank <= (dimension - 1))
-          graphsProducts_bCanBeFiniteCovolume[gp.rank].push_back(
+          graphsProducts_canBeFiniteCovolume[gp.rank].push_back(
               GraphsProductSet(gp));
       }
 
       // mise à jour des sommets que l'on ne peut plus prendre
       for (unsigned int i = 0; i < verticesCount; i++) {
-        if (!grIt.ptr->bVerticesLinkable[i] && !bGPVerticesNonLinkable[i]) {
+        if (!grIt.ptr->linkableVertices[i] && !gpNonLinkableVertices[i]) {
           flaggedVertices.push_back(i);
-          bGPVerticesNonLinkable[i] = true;
+          gpNonLinkableVertices[i] = true;
         }
       }
 
       // récursion
-      bCanBeFiniteCovolume_complete_computeGraphsProducts(
-          ++grIt, gp, bGPVerticesNonLinkable);
+      canBeFiniteCovolume_complete_computeGraphsProducts(++grIt, gp,
+                                                         gpNonLinkableVertices);
 
       // -----------------------------------------------
       // dé-initialisations
 
       // on remet la liste à son état d'avant la récursion
       for (iIt = flaggedVertices.begin(); iIt != flaggedVertices.end(); ++iIt)
-        bGPVerticesNonLinkable[*iIt] = false;
+        gpNonLinkableVertices[*iIt] = false;
 
       gp.rank -= graphRank;
 
@@ -2239,7 +2225,7 @@ void CoxIter::growthSeries_mergeTerms(vector<mpz_class> &polynomial,
 }
 
 void CoxIter::growthSeries() {
-  if (!bUseOpenMP || verticesCount < 10)
+  if (!useOpenMP || verticesCount < 10)
     growthSeries_sequential();
   else
     growthSeries_parallel();
@@ -2261,10 +2247,10 @@ void CoxIter::growthSeries_details() {
 
   growthSeries_raw = "1";
 
-  string strGrowth_temp, strSymbol;
+  string growthTemp, symbol;
 
   for (unsigned int size(1); size < sizeMax; size++) {
-    strGrowth_temp = "";
+    growthTemp = "";
 
     for (const auto &product :
          graphsProductsCount_spherical[size]) // For each product of that size
@@ -2273,26 +2259,25 @@ void CoxIter::growthSeries_details() {
       // Preliminary stuff
 
       // We compute the symbol and the exponent of this product
-      growthSeries_symbolExponentFromProduct(product.first, strSymbol,
-                                             exponent);
+      growthSeries_symbolExponentFromProduct(product.first, symbol, exponent);
 
       mpz_class biTemp((int)product.second * ((size % 2) ? -1 : 1));
 
-      strGrowth_temp +=
-          (strGrowth_temp == "" ? "" : " + ") +
+      growthTemp +=
+          (growthTemp == "" ? "" : " + ") +
           (product.second == 1 ? "" : to_string(product.second) + " * ") +
           "x^" + to_string(exponent) + "/";
 
-      if (strOuputMathematicalFormat == "mathematica")
-        strGrowth_temp += "Symb[{" + strSymbol + "},x]";
-      else if (strOuputMathematicalFormat == "pari")
-        strGrowth_temp += "Symb([" + strSymbol + "],x)";
+      if (ouputMathematicalFormat == "mathematica")
+        growthTemp += "Symb[{" + symbol + "},x]";
+      else if (ouputMathematicalFormat == "pari")
+        growthTemp += "Symb([" + symbol + "],x)";
       else
-        strGrowth_temp += "[" + strSymbol + "]";
+        growthTemp += "[" + symbol + "]";
     }
 
-    if (strGrowth_temp != "")
-      growthSeries_raw += ((size % 2) ? " - (" : " + (") + strGrowth_temp + ")";
+    if (growthTemp != "")
+      growthSeries_raw += ((size % 2) ? " - (" : " + (") + growthTemp + ")";
   }
 }
 
@@ -2574,11 +2559,11 @@ vector<mpz_class> CoxIter::get_growthSeries_denominator() {
 }
 
 void CoxIter::growthSeries_symbolExponentFromProduct(
-    const vector<vector<short unsigned int>> &product, string &strSymbol,
+    const vector<vector<short unsigned int>> &product, string &symbol,
     unsigned int &exponent) const {
   short unsigned int j, jMax, k;
 
-  vector<unsigned int> symbol;
+  vector<unsigned int> symbols;
   exponent = 0;
 
   for (unsigned int i(0); i < 8;
@@ -2645,21 +2630,21 @@ void CoxIter::growthSeries_symbolExponentFromProduct(
       }
 
       for (k = 0; k < product[i][j]; k++)
-        symbol.insert(symbol.end(), symbolTemp.begin(), symbolTemp.end());
+        symbols.insert(symbols.end(), symbolTemp.begin(), symbolTemp.end());
     }
   }
 
-  sort(symbol.begin(), symbol.end());
+  sort(symbols.begin(), symbols.end());
 
-  strSymbol = implode(",", symbol);
+  symbol = implode(",", symbols);
 }
 
 void CoxIter::growthSeries_symbolExponentFromProduct(
     const vector<vector<short unsigned int>> &product,
-    vector<unsigned int> &symbol, unsigned int &exponent) const {
+    vector<unsigned int> &symbols, unsigned int &exponent) const {
   unsigned int j, jMax, k;
 
-  symbol.clear();
+  symbols.clear();
   exponent = 0;
 
   for (unsigned int i(0); i < 8;
@@ -2726,16 +2711,16 @@ void CoxIter::growthSeries_symbolExponentFromProduct(
       }
 
       for (auto symb : symbolTemp) {
-        for (k = symbol.size(); k <= symb; k++)
-          symbol.push_back(0);
+        for (k = symbols.size(); k <= symb; k++)
+          symbols.push_back(0);
 
-        symbol[symb] += product[i][j];
+        symbols[symb] += product[i][j];
       }
     }
   }
 }
 
-bool CoxIter::bEulerCharacteristicFVector() {
+bool CoxIter::computeEulerCharacteristicFVector() {
   // variables de boucles
   size_t i, j, k, max;
   map<vector<vector<short unsigned int>>, unsigned int>::iterator itMap;
@@ -2743,7 +2728,7 @@ bool CoxIter::bEulerCharacteristicFVector() {
   mpz_class biTemp, biOrderTemp;
   MPZ_rational brAlternateTemp;
 
-  bool bPositive(true);
+  bool isTermPositive(true);
 
   fVector = vector<unsigned int>(dimension + 1, 0);
   int fVectorIndex(dimension);
@@ -2752,7 +2737,7 @@ bool CoxIter::bEulerCharacteristicFVector() {
 
   fVectorAlternateSum = 0;
   brEulerCaracteristic = 1;
-  strEulerCharacteristic_computations = "1";
+  eulerCharacteristic_computations = "1";
 
   if (debug)
     cout << "\nProducts of spherical graphs" << endl;
@@ -2805,12 +2790,12 @@ bool CoxIter::bEulerCharacteristicFVector() {
 
     currentVerticesCount++;
 
-    if (bPositive)
+    if (isTermPositive)
       brEulerCaracteristic += brAlternateTemp;
     else
       brEulerCaracteristic -= brAlternateTemp;
 
-    bPositive = !bPositive;
+    isTermPositive = !isTermPositive;
     fVectorIndex--;
   }
 
@@ -2875,8 +2860,8 @@ void CoxIter::printCoxeterMatrix() {
   cout << endl;
 
   unsigned int i, j;
-  if (strOuputMathematicalFormat == "mathematica" ||
-      strOuputMathematicalFormat == "gap") {
+  if (ouputMathematicalFormat == "mathematica" ||
+      ouputMathematicalFormat == "gap") {
     cout << "\t[";
     for (i = 0; i < verticesCount; i++) {
       cout << (i ? "," : "") << "[";
@@ -2902,27 +2887,27 @@ void CoxIter::printCoxeterMatrix() {
 }
 
 void CoxIter::printCoxeterGraph() {
-  cout << "Coxeter graph:\n\t[" << get_strCoxeterGraph() << "]\n" << endl;
+  cout << "Coxeter graph:\n\t[" << get_coxeterGraph() << "]\n" << endl;
 }
 
 void CoxIter::printGramMatrix() {
-  if (strOuputMathematicalFormat == "gap")
+  if (ouputMathematicalFormat == "gap")
     printGramMatrix_GAP();
-  else if (strOuputMathematicalFormat == "latex")
+  else if (ouputMathematicalFormat == "latex")
     printGramMatrix_LaTeX();
-  else if (strOuputMathematicalFormat == "mathematica")
+  else if (ouputMathematicalFormat == "mathematica")
     printGramMatrix_Mathematica();
-  else if (strOuputMathematicalFormat == "pari")
+  else if (ouputMathematicalFormat == "pari")
     printGramMatrix_PARI();
   else
-    cout << "Gram matrix  \n\t" << get_strGramMatrix() << "\n" << endl;
+    cout << "Gram matrix  \n\t" << get_gramMatrix() << "\n" << endl;
 
   unsigned int i, j;
   for (i = 0; i < verticesCount; i++) {
     for (j = 0; j < i; j++) {
       if (coxeterMatrix[i][j] == 1 &&
-          strWeights.find(linearizationMatrix_index(j, i, verticesCount)) ==
-              strWeights.end()) {
+          weightsDotted.find(linearizationMatrix_index(j, i, verticesCount)) ==
+              weightsDotted.end()) {
         cout << "l" << j << "m" << i
              << ": weight of the dotted line between hyperplanes "
              << map_vertices_indexToLabel[j] << " and "
@@ -2935,23 +2920,21 @@ void CoxIter::printGramMatrix() {
 }
 
 void CoxIter::printGramMatrix_GAP() {
-  cout << "Gram matrix (GAP): \n\t" << get_strGramMatrix_GAP() << "\n" << endl;
+  cout << "Gram matrix (GAP): \n\t" << get_gramMatrix_GAP() << "\n" << endl;
 }
 
 void CoxIter::printGramMatrix_Mathematica() {
-  cout << "Gram matrix (Mathematica): \n\t" << get_strGramMatrix_Mathematica()
+  cout << "Gram matrix (Mathematica): \n\t" << get_gramMatrix_Mathematica()
        << "\n"
        << endl;
 }
 
 void CoxIter::printGramMatrix_PARI() {
-  cout << "Gram matrix (PARI): \n\t" << get_strGramMatrix_PARI() << "\n"
-       << endl;
+  cout << "Gram matrix (PARI): \n\t" << get_gramMatrix_PARI() << "\n" << endl;
 }
 
 void CoxIter::printGramMatrix_LaTeX() {
-  cout << "Gram matrix (LaTeX): \n\t" << get_strGramMatrix_LaTeX() << "\n"
-       << endl;
+  cout << "Gram matrix (LaTeX): \n\t" << get_gramMatrix_LaTeX() << "\n" << endl;
 }
 
 void CoxIter::printEdgesVisitedMatrix() {
@@ -2960,15 +2943,15 @@ void CoxIter::printEdgesVisitedMatrix() {
 
   for (i = 0; i < verticesCount; i++) {
     for (j = 0; j < verticesCount; j++)
-      cout << (bEdgesVisited[i][j] ? 1 : 0) << " ";
+      cout << (visitedEdges[i][j] ? 1 : 0) << " ";
     cout << endl;
   }
 }
 
-bool CoxIter::bIsVertexValid(const string &strVertexLabel) const {
+bool CoxIter::isVertexValid(const string &vertexLabel) const {
   return (find(map_vertices_indexToLabel.begin(),
                map_vertices_indexToLabel.end(),
-               strVertexLabel) != map_vertices_indexToLabel.end());
+               vertexLabel) != map_vertices_indexToLabel.end());
 }
 
 void CoxIter::map_vertices_labels_removeReference(const unsigned int &index) {
@@ -2982,27 +2965,27 @@ void CoxIter::map_vertices_labels_removeReference(const unsigned int &index) {
   map_vertices_indexToLabel.erase(map_vertices_indexToLabel.begin() + index);
 }
 
-void CoxIter::map_vertices_labels_addReference(const string &strLabel) {
-  map_vertices_labelToIndex[strLabel] = map_vertices_indexToLabel.size();
-  map_vertices_indexToLabel.push_back(strLabel);
+void CoxIter::map_vertices_labels_addReference(const string &label) {
+  map_vertices_labelToIndex[label] = map_vertices_indexToLabel.size();
+  map_vertices_indexToLabel.push_back(label);
 }
 
 // ##################################################################################################################################3
 // Accesseurs
-unsigned int CoxIter::get_vertexIndex(const string &strVertexLabel) const {
+unsigned int CoxIter::get_vertexIndex(const string &vertexLabel) const {
   map<string, unsigned int>::const_iterator it(
-      map_vertices_labelToIndex.find(strVertexLabel));
+      map_vertices_labelToIndex.find(vertexLabel));
 
   if (it == map_vertices_labelToIndex.end())
     throw(string("CoxIter::get_bertexIndex: Invalid vertex name: " +
-                 strVertexLabel));
+                 vertexLabel));
 
   return it->second;
 }
 
 string CoxIter::get_vertexLabel(const unsigned int &vertex) const {
   if (vertex >= verticesCount)
-    throw(string("CoxIter::get_strVertexLabel: Invalid vertex index"));
+    throw(string("CoxIter::get_vertexLabel: Invalid vertex index"));
 
   return map_vertices_indexToLabel[vertex];
 }
@@ -3023,78 +3006,78 @@ unsigned int CoxIter::get_coxeterMatrixEntry(const unsigned int &i,
   return coxeterMatrix[i][j];
 }
 
-std::map<unsigned int, string> CoxIter::get_strWeights() const {
-  return strWeights;
+std::map<unsigned int, string> CoxIter::get_weights() const {
+  return weightsDotted;
 }
 
-string CoxIter::get_strCoxeterMatrix() const {
-  string strCox;
+string CoxIter::get_CoxeterMatrixString() const {
+  string acc;
 
   for (vector<vector<unsigned int>>::const_iterator itRow(
            coxeterMatrix.begin());
        itRow != coxeterMatrix.end(); ++itRow) {
     if (itRow != coxeterMatrix.begin())
-      strCox += "\n";
+      acc += "\n";
 
     for (vector<unsigned int>::const_iterator itCol(itRow->begin());
          itCol != itRow->end(); ++itCol)
-      strCox += (itCol == itRow->begin() ? "" : ",") + to_string(*itCol);
+      acc += (itCol == itRow->begin() ? "" : ",") + to_string(*itCol);
   }
 
-  return strCox;
+  return acc;
 }
 
 vector<vector<string>> CoxIter::get_array_str_2_GramMatrix() const {
   size_t i, j;
-  vector<vector<string>> strGramMatrix(
+  auto gramMatrix(
       vector<vector<string>>(verticesCount, vector<string>(verticesCount, "")));
 
   for (i = 0; i < verticesCount; i++) {
     for (j = 0; j <= i; j++) {
       if (i == j)
-        strGramMatrix[i][i] = "2";
+        gramMatrix[i][i] = "2";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix[i][j] = "-2";
+        gramMatrix[i][j] = "-2";
       else if (coxeterMatrix[i][j] == 1)
-        strGramMatrix[i][j] =
-            "2*l" + to_string(static_cast<long long>(min(i, j))) + "m" +
-            to_string(static_cast<long long>(max(i, j)));
+        gramMatrix[i][j] = "2*l" +
+                           to_string(static_cast<long long>(min(i, j))) + "m" +
+                           to_string(static_cast<long long>(max(i, j)));
       else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix[i][j] = "0";
+          gramMatrix[i][j] = "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix[i][j] = "-1";
+          gramMatrix[i][j] = "-1";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix[i][j] = "-sqrt(2)";
+          gramMatrix[i][j] = "-sqrt(2)";
         else if (coxeterMatrix[i][j] == 5)
-          strGramMatrix[i][j] = "-(1+sqrt(5))/2";
+          gramMatrix[i][j] = "-(1+sqrt(5))/2";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix[i][j] = "-sqrt(3)";
+          gramMatrix[i][j] = "-sqrt(3)";
         else
-          strGramMatrix[i][j] =
+          gramMatrix[i][j] =
               "-2*cos(%pi/" +
               to_string(static_cast<long long>(coxeterMatrix[i][j])) + ")";
       }
 
-      strGramMatrix[j][i] = strGramMatrix[i][j];
+      gramMatrix[j][i] = gramMatrix[i][j];
     }
   }
 
-  return strGramMatrix;
+  return gramMatrix;
 }
 
-string CoxIter::get_strCoxeterGraph() const {
+string CoxIter::get_coxeterGraph() const {
   unsigned int i, j;
   vector<unsigned int> usedVertices;
 
-  string strCoxeterGraph(""), strTemp;
+  string coxeterGraph(""), temp;
 
   for (i = 0; i < verticesCount; i++) {
-    strTemp = "";
+    temp = "";
     for (j = i + 1; j < verticesCount; j++) {
       if (coxeterMatrix[i][j] != 2) {
-        strTemp += (strTemp == "" ? "[" : ",[") + to_string(j + 1) + "," +
-                   to_string(coxeterMatrix[i][j]) + "]";
+        temp += (temp == "" ? "[" : ",[") + to_string(j + 1) + "," +
+                to_string(coxeterMatrix[i][j]) + "]";
 
         auto it(lower_bound(usedVertices.begin(), usedVertices.end(), j));
         if (it == usedVertices.end() || !(*it == j))
@@ -3102,270 +3085,269 @@ string CoxIter::get_strCoxeterGraph() const {
       }
     }
 
-    if (strTemp != "") {
+    if (temp != "") {
       auto it(lower_bound(usedVertices.begin(), usedVertices.end(), i));
       if (it == usedVertices.end() || !(*it == i))
         usedVertices.insert(it, i);
 
-      strCoxeterGraph += (strCoxeterGraph == "" ? "[" : ",[") +
-                         to_string(i + 1) + "," + strTemp + "]";
+      coxeterGraph += (coxeterGraph == "" ? "[" : ",[") + to_string(i + 1) +
+                      "," + temp + "]";
     }
   }
 
   for (i = 0; i < verticesCount;
        i++) // We display the non-used (i.e. disconnected) vertices
   {
-    auto it(lower_bound(usedVertices.begin(), usedVertices.end(), i));
+    const auto it(lower_bound(usedVertices.begin(), usedVertices.end(), i));
     if (it == usedVertices.end() || !(*it == i))
-      strCoxeterGraph += ",[" + to_string(i + 1) + "]";
+      coxeterGraph += ",[" + to_string(i + 1) + "]";
   }
 
-  return strCoxeterGraph;
+  return coxeterGraph;
 }
 
-string CoxIter::get_strGramMatrix() const {
+string CoxIter::get_gramMatrix() const {
   size_t i, j;
-  string strGramMatrix("");
+  string gramMatrix("");
 
   for (i = 0; i < verticesCount; i++) {
-    strGramMatrix += (i ? ", [" : "[ ");
+    gramMatrix += (i ? ", [" : "[ ");
     for (j = 0; j < verticesCount; j++) {
       if (j > 0)
-        strGramMatrix += ", ";
+        gramMatrix += ", ";
 
       if (i == j)
-        strGramMatrix += "1";
+        gramMatrix += "1";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix += "-1";
+        gramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
-        map<unsigned int, string>::const_iterator itF(strWeights.find(
+        const auto itF(weightsDotted.find(
             linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
-        if (itF != strWeights.end())
-          strGramMatrix += itF->second;
+        if (itF != weightsDotted.end())
+          gramMatrix += itF->second;
         else
-          strGramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
-                           "m" + to_string(static_cast<long long>(max(i, j)));
+          gramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
+                        "m" + to_string(static_cast<long long>(max(i, j)));
       } else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix += "0";
+          gramMatrix += "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix += "-1/2";
+          gramMatrix += "-1/2";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix += "-sqrt(2)/2";
+          gramMatrix += "-sqrt(2)/2";
         else if (coxeterMatrix[i][j] == 5)
-          strGramMatrix += "-(1+sqrt(5))/4";
+          gramMatrix += "-(1+sqrt(5))/4";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix += "-sqrt(3)/2";
+          gramMatrix += "-sqrt(3)/2";
         else
-          strGramMatrix +=
-              "-cos(%pi/" +
-              to_string(static_cast<long long>(coxeterMatrix[i][j])) + ")";
+          gramMatrix += "-cos(%pi/" +
+                        to_string(static_cast<long long>(coxeterMatrix[i][j])) +
+                        ")";
       }
     }
-    strGramMatrix += "]";
+    gramMatrix += "]";
   }
 
-  return strGramMatrix;
+  return gramMatrix;
 }
 
-string CoxIter::get_strGramMatrix_LaTeX() const {
+string CoxIter::get_gramMatrix_LaTeX() const {
   size_t i, j;
 
-  string strGramMatrix("G = \\left(\\begin{array}{*{" +
-                       to_string(verticesCount) + "}{c}}");
+  string gramMatrix("G = \\left(\\begin{array}{*{" + to_string(verticesCount) +
+                    "}{c}}");
   for (i = 0; i < verticesCount; i++) {
-    strGramMatrix += (i ? "\\\\" : "");
+    gramMatrix += (i ? "\\\\" : "");
     for (j = 0; j < verticesCount; j++) {
       if (j > 0)
-        strGramMatrix += " & ";
+        gramMatrix += " & ";
 
       if (i == j)
-        strGramMatrix += "1";
+        gramMatrix += "1";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix += "-1";
+        gramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
-        map<unsigned int, string>::const_iterator itF(strWeights.find(
+        map<unsigned int, string>::const_iterator itF(weightsDotted.find(
             linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
-        if (itF != strWeights.end())
-          strGramMatrix += itF->second;
+        if (itF != weightsDotted.end())
+          gramMatrix += itF->second;
         else
-          strGramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
-                           "m" + to_string(static_cast<long long>(max(i, j)));
+          gramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
+                        "m" + to_string(static_cast<long long>(max(i, j)));
       } else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix += "0";
+          gramMatrix += "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix += "-\\frac{1}{2}";
+          gramMatrix += "-\\frac{1}{2}";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix += "-\\frac{\\sqrt 2}{2}";
+          gramMatrix += "-\\frac{\\sqrt 2}{2}";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix += "-\\frac{\\sqrt 3}{2}";
+          gramMatrix += "-\\frac{\\sqrt 3}{2}";
         else
-          strGramMatrix +=
-              "-\\cos\\big(\\frac{\\pi}{" +
-              to_string(static_cast<long long>(coxeterMatrix[i][j])) +
-              "}\\big)";
+          gramMatrix += "-\\cos\\big(\\frac{\\pi}{" +
+                        to_string(static_cast<long long>(coxeterMatrix[i][j])) +
+                        "}\\big)";
       }
     }
   }
 
-  strGramMatrix += "\\end{array} \\right)";
+  gramMatrix += "\\end{array} \\right)";
 
-  return strGramMatrix;
+  return gramMatrix;
 }
 
-string CoxIter::get_strGramMatrix_Mathematica() const {
+string CoxIter::get_gramMatrix_Mathematica() const {
   size_t i, j;
 
-  string strGramMatrix("G := {");
+  string gramMatrix("G := {");
   for (i = 0; i < verticesCount; i++) {
-    strGramMatrix += (i ? ", {" : "{ ");
+    gramMatrix += (i ? ", {" : "{ ");
     for (j = 0; j < verticesCount; j++) {
       if (j > 0)
-        strGramMatrix += ", ";
+        gramMatrix += ", ";
 
       if (i == j)
-        strGramMatrix += "1";
+        gramMatrix += "1";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix += "-1";
+        gramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
-        map<unsigned int, string>::const_iterator itF(strWeights.find(
+        map<unsigned int, string>::const_iterator itF(weightsDotted.find(
             linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
-        if (itF != strWeights.end())
-          strGramMatrix += itF->second;
+        if (itF != weightsDotted.end())
+          gramMatrix += itF->second;
         else
-          strGramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
-                           "m" + to_string(static_cast<long long>(max(i, j)));
+          gramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
+                        "m" + to_string(static_cast<long long>(max(i, j)));
       } else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix += "0";
+          gramMatrix += "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix += "-1/2";
+          gramMatrix += "-1/2";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix += "-Sqrt[2]/2";
+          gramMatrix += "-Sqrt[2]/2";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix += "-Sqrt[3]/2";
+          gramMatrix += "-Sqrt[3]/2";
         else
-          strGramMatrix +=
-              "-Cos[Pi/" +
-              to_string(static_cast<long long>(coxeterMatrix[i][j])) + "]";
+          gramMatrix += "-Cos[Pi/" +
+                        to_string(static_cast<long long>(coxeterMatrix[i][j])) +
+                        "]";
       }
     }
-    strGramMatrix += "}";
+    gramMatrix += "}";
   }
 
-  strGramMatrix += "};";
+  gramMatrix += "};";
 
-  return strGramMatrix;
+  return gramMatrix;
 }
 
-string CoxIter::get_strGramMatrix_PARI() const {
+string CoxIter::get_gramMatrix_PARI() const {
   size_t i, j;
-  string strGramMatrix("G = [");
+  string gramMatrix("G = [");
 
   for (i = 0; i < verticesCount; i++) {
-    strGramMatrix += (i ? "; " : " ");
+    gramMatrix += (i ? "; " : " ");
     for (j = 0; j < verticesCount; j++) {
       if (j > 0)
-        strGramMatrix += ", ";
+        gramMatrix += ", ";
 
       if (i == j)
-        strGramMatrix += "1";
+        gramMatrix += "1";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix += "-1";
+        gramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
-        map<unsigned int, string>::const_iterator itF(strWeights.find(
+        map<unsigned int, string>::const_iterator itF(weightsDotted.find(
             linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
-        if (itF != strWeights.end())
-          strGramMatrix += itF->second;
+        if (itF != weightsDotted.end())
+          gramMatrix += itF->second;
         else
-          strGramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
-                           "m" + to_string(static_cast<long long>(max(i, j)));
+          gramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
+                        "m" + to_string(static_cast<long long>(max(i, j)));
       } else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix += "0";
+          gramMatrix += "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix += "-1/2";
+          gramMatrix += "-1/2";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix += "-sqrt(2)/2";
+          gramMatrix += "-sqrt(2)/2";
         else if (coxeterMatrix[i][j] == 5)
-          strGramMatrix += "-(1+sqrt(5))/4";
+          gramMatrix += "-(1+sqrt(5))/4";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix += "-sqrt(3)/2";
+          gramMatrix += "-sqrt(3)/2";
         else
-          strGramMatrix +=
-              "-cos(Pi/" +
-              to_string(static_cast<long long>(coxeterMatrix[i][j])) + ")";
+          gramMatrix += "-cos(Pi/" +
+                        to_string(static_cast<long long>(coxeterMatrix[i][j])) +
+                        ")";
       }
     }
   }
 
-  return (strGramMatrix + "];");
+  return (gramMatrix + "];");
 }
 
-string CoxIter::get_strGramMatrix_GAP() const {
+string CoxIter::get_gramMatrix_GAP() const {
   size_t i, j;
-  string strGramMatrix("G := [ [");
+  string gramMatrix("G := [ [");
 
   for (i = 0; i < verticesCount; i++) {
-    strGramMatrix += (i ? "], [" : " ");
+    gramMatrix += (i ? "], [" : " ");
     for (j = 0; j < verticesCount; j++) {
       if (j > 0)
-        strGramMatrix += ", ";
+        gramMatrix += ", ";
 
       if (i == j)
-        strGramMatrix += "1";
+        gramMatrix += "1";
       else if (coxeterMatrix[i][j] == 0)
-        strGramMatrix += "-1";
+        gramMatrix += "-1";
       else if (coxeterMatrix[i][j] == 1) {
-        map<unsigned int, string>::const_iterator itF(strWeights.find(
+        const auto itF(weightsDotted.find(
             linearizationMatrix_index(min(i, j), max(i, j), verticesCount)));
 
-        if (itF != strWeights.end())
-          strGramMatrix += itF->second;
+        if (itF != weightsDotted.end())
+          gramMatrix += itF->second;
         else
-          strGramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
-                           "m" + to_string(static_cast<long long>(max(i, j)));
+          gramMatrix += "l" + to_string(static_cast<long long>(min(i, j))) +
+                        "m" + to_string(static_cast<long long>(max(i, j)));
       } else {
         if (coxeterMatrix[i][j] == 2)
-          strGramMatrix += "0";
+          gramMatrix += "0";
         else if (coxeterMatrix[i][j] == 3)
-          strGramMatrix += "-1/2";
+          gramMatrix += "-1/2";
         else if (coxeterMatrix[i][j] == 4)
-          strGramMatrix += "-Sqrt(2)/2";
+          gramMatrix += "-Sqrt(2)/2";
         else if (coxeterMatrix[i][j] == 5)
-          strGramMatrix += "-(1+Sqrt(5))/4";
+          gramMatrix += "-(1+Sqrt(5))/4";
         else if (coxeterMatrix[i][j] == 6)
-          strGramMatrix += "-Sqrt(3)/2";
+          gramMatrix += "-Sqrt(3)/2";
         else
-          strGramMatrix +=
-              "-Cos(FLOAT.PI/" +
-              to_string(static_cast<long long>(coxeterMatrix[i][j])) + ")";
+          gramMatrix += "-Cos(FLOAT.PI/" +
+                        to_string(static_cast<long long>(coxeterMatrix[i][j])) +
+                        ")";
       }
     }
   }
 
-  return (strGramMatrix + "] ];");
+  return (gramMatrix + "] ];");
 }
 
-string CoxIter::get_strGramMatrixField() const {
-  return (isGramMatrixFieldKnown ? strGramMatrixField : "");
+string CoxIter::get_gramMatrixField() const {
+  return (isGramMatrixFieldKnown ? gramMatrixField : "");
 }
 
 MPZ_rational CoxIter::get_brEulerCaracteristic() const {
   return brEulerCaracteristic;
 }
 
-string CoxIter::get_strEulerCaracteristic() const {
+string CoxIter::get_eulerCaracteristicString() const {
   return brEulerCaracteristic.to_string();
 }
 
-string CoxIter::get_strEulerCharacteristic_computations() const {
-  return strEulerCharacteristic_computations;
+string CoxIter::get_eulerCharacteristic_computations() const {
+  return eulerCharacteristic_computations;
 }
 
 int CoxIter::get_fVectorAlternateSum() const { return fVectorAlternateSum; }
@@ -3390,7 +3372,7 @@ unsigned int CoxIter::get_verticesAtInfinityCount() const {
   return verticesAtInfinityCount;
 }
 
-unsigned int CoxIter::get_iIrreducibleSphericalGraphsCount() const {
+unsigned int CoxIter::get_irreducibleSphericalGraphsCount() const {
   return graphsList_spherical->totalGraphsCount;
 }
 
@@ -3414,13 +3396,13 @@ unsigned int CoxIter::get_dimension() const { return dimension; }
 
 bool CoxIter::get_dimensionGuessed() const { return isDimensionGuessed; }
 
-string CoxIter::get_strError() const { return strError; }
+string CoxIter::get_error() const { return error; }
 
 unsigned int CoxIter::get_verticesCount() const { return verticesCount; }
 
-bool CoxIter::get_bHasDottedLine() const { return hasDottedLine; }
+bool CoxIter::get_hasDottedLine() const { return hasDottedLine; }
 
-int CoxIter::get_iHasDottedLineWithoutWeight() const {
+int CoxIter::get_hasDottedLineWithoutWeight() const {
   return hasDottedLineWithoutWeight;
 }
 
@@ -3462,13 +3444,13 @@ void CoxIter::set_debug(const bool &value) { debug = value; }
 
 void CoxIter::set_useOpenMP(const bool &value) {
 #ifdef _OPENMP
-  bUseOpenMP = value;
+  useOpenMP = value;
 #endif
 }
 
-void CoxIter::set_sdtoutToFile(const string &strFilename) {
-  string strOutputCoutFilename(strFilename);
-  outCout = new ofstream(strOutputCoutFilename.c_str());
+void CoxIter::set_sdtOutToFile(const string &filename) {
+  string outputCoutFilename(filename);
+  outCout = new ofstream(outputCoutFilename.c_str());
 
   if (outCout->is_open()) {
     sBufOld = cout.rdbuf(outCout->rdbuf());
@@ -3482,7 +3464,7 @@ void CoxIter::set_dimension(const unsigned int &dimension_) {
 }
 
 void CoxIter::set_coxeterMatrix(const vector<vector<unsigned int>> &iMat) {
-  strWeights.clear();
+  weightsDotted.clear();
   verticesCount = iMat.size();
 
   initializations();
@@ -3501,23 +3483,21 @@ void CoxIter::set_coxeterMatrix(const vector<vector<unsigned int>> &iMat) {
   maximalSubgraphRank = dimension ? dimension : verticesCount;
 }
 
-void CoxIter::set_strOuputMathematicalFormat(const string &strO) {
-  strOuputMathematicalFormat = strO;
+void CoxIter::set_ouputMathematicalFormat(const string &format) {
+  ouputMathematicalFormat = format;
 }
 
-void CoxIter::set_strVerticesToConsider(
-    const vector<string> &strVerticesToConsider) {
-  strVertices = strVerticesToConsider;
-  sort(strVertices.begin(), strVertices.end());
-  strVertices = vector<string>(strVertices.begin(),
-                               unique(strVertices.begin(), strVertices.end()));
+void CoxIter::set_verticesToConsider(const vector<string> &verticesToConsider) {
+  vertices = verticesToConsider;
+  sort(vertices.begin(), vertices.end());
+  vertices = vector<string>(vertices.begin(),
+                            unique(vertices.begin(), vertices.end()));
 }
 
-void CoxIter::set_strVerticesToRemove(
-    const vector<string> &strVerticesRemove_) {
-  strVerticesRemove = strVerticesRemove_;
-  sort(strVerticesRemove.begin(), strVerticesRemove.end());
-  strVerticesRemove = vector<string>(
-      strVerticesRemove.begin(),
-      unique(strVerticesRemove.begin(), strVerticesRemove.end()));
+void CoxIter::set_verticesToRemove(const vector<string> &verticesToRemove_) {
+  verticesToRemove = verticesToRemove_;
+  sort(verticesToRemove.begin(), verticesToRemove.end());
+  verticesToRemove =
+      vector<string>(verticesToRemove.begin(),
+                     unique(verticesToRemove.begin(), verticesToRemove.end()));
 }
