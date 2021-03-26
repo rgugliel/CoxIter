@@ -49,7 +49,7 @@ private:
   vector<vector<unsigned int>> iCox; ///< Coxeter matrix
   unsigned int verticesCount; ///< Number of vertices of the starting graph
 
-  unsigned int iVertex; ///< Index of the vertex
+  unsigned int vertex; ///< Index of the vertex
 
   vector<NewVertex> newVertices;
   vector<vector<unsigned int>> iNewCox; ///< New Coxeter matrix

@@ -53,22 +53,25 @@ public:
    * 	\brief Ajoute un graphe
    *
    * 	\param vertices(const vector< unsigned int > &): tableau contenant les
-   * sommets \param bVerticesLinkable(const vector< bool > &): sommets qui sont
-   * liables (ou non) au graphe \param iType(const unsigned int &): Type du
-   * graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7) \param
-   * isSpherical(bool): true si graphe sphérique, false sinon \param
-   * iVertexSupp1(const unsigned int &): éventuellement, premier sommet
+   * sommets
+   *  \param bVerticesLinkable(const vector< bool > &): sommets qui sont
+   * liables (ou non) au graphe
+   *  \param type(const unsigned int &): Type du
+   * graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7)
+   *  \param isSpherical(bool): true si graphe sphérique, false sinon
+   *  \param vertexSupp1(const unsigned int &): éventuellement, premier sommet
    * supplémentaire (dans le cas du Dn, par exemple) // TODO: valeur par défaut
-   * meilleure que 0? \param iVertexSupp2(const unsigned int &): éventuellement,
-   * deuxième sommet supplémentaire (dans le cas du Dn, par exemple) \param
-   * iDataSupp(const unsigned int &): donnée supplémentaire (par exemple, pour
-   * le G_2, le poids)
+   * meilleure que 0?
+   *  \param vertexSupp2(const unsigned int &): éventuellement,
+   * deuxième sommet supplémentaire (dans le cas du Dn, par exemple)
+   *  \param dataSupp(const unsigned int &): donnée supplémentaire (par exemple,
+   * pour le G_2, le poids)
    */
   void addGraph(const vector<short unsigned int> &vertices,
                 const vector<bool> &bVerticesLinkable, const unsigned int &type,
-                bool isSpherical, const unsigned int &iVertexSupp1 = 0,
-                const unsigned int &iVertexSupp2 = 0,
-                const unsigned int &iDataSupp = 0);
+                bool isSpherical, const unsigned int &vertexSupp1 = 0,
+                const unsigned int &vertexSupp2 = 0,
+                const unsigned int &dataSupp = 0);
 
   /*!	\fn begin
    * 	\brief Retourne un pointeur sur le premier graphe de la liste

@@ -128,7 +128,7 @@ sqrtSup(Type n) {
  */
 template <typename Type>
 vector<typename std::enable_if<std::is_unsigned<Type>::value, Type>::type>
-iListDivisors(const Type &n, const bool &nonTrivialOnly = false) {
+listDivisors(const Type &n, const bool &nonTrivialOnly = false) {
 #ifdef _MSC_VER
   static vector<vector<Type>> divisors_(
       vector<vector<Type>>(60, vector<Type>(0)));

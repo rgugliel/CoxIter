@@ -96,19 +96,19 @@ template <typename Type> void symbolDisplay(const vector<Type> &symbol) {
 /*! 	\fn polynomialDotSymbol
  * 	\brief Multiply a polynomial by a symbol
  * 	\param polynomial(const vector< Type >& polynomial) The polynomial
- * 	\param iSymbol(const unsigned int&) The symbol
+ * 	\param symbol(const unsigned int&) The symbol
  */
 template <typename Type>
-void polynomialDotSymbol(vector<Type> &polynomial,
-                         const unsigned int &iSymbol) {
+void polynomialDotSymbol(vector<Type> &polynomial, const unsigned int &symbol) {
   vector<Type> polynomialBackup(polynomial);
   unsigned int polynomialDegree(polynomial.size() - 1);
 
-  for (unsigned int i(1); i < iSymbol - 1; i++)
+  for (unsigned int i(1); i < symbol - 1; i++)
     polynomial.push_back(0);
+
   polynomial.push_back(polynomial[polynomialDegree]);
 
-  if (polynomialDegree < iSymbol) {
+  if (polynomialDegree < symbol) {
     for (unsigned int i(1); i <= polynomialDegree; i++)
       polynomial[i] = polynomial[i - 1] + polynomialBackup[i];
 
@@ -117,27 +117,27 @@ void polynomialDotSymbol(vector<Type> &polynomial,
 
     for (unsigned int i(1); i <= polynomialDegree;
          i++) // TODO: gérer degré plus petit que symbole
-      polynomial[polynomialDegree + iSymbol - i - 1] =
-          polynomial[polynomialDegree + iSymbol - i] +
+      polynomial[polynomialDegree + symbol - i - 1] =
+          polynomial[polynomialDegree + symbol - i] +
           polynomialBackup[polynomialDegree - i];
   } else {
-    for (unsigned int i(1); i < iSymbol; i++)
+    for (unsigned int i(1); i < symbol; i++)
       polynomial[i] = polynomial[i - 1] + polynomialBackup[i];
 
-    for (unsigned int i(iSymbol); i < polynomialDegree; i++)
-      polynomial[i] = polynomial[i - 1] - polynomialBackup[i - iSymbol] +
+    for (unsigned int i(symbol); i < polynomialDegree; i++)
+      polynomial[i] = polynomial[i - 1] - polynomialBackup[i - symbol] +
                       polynomialBackup[i];
 
-    for (unsigned int i(1); i < iSymbol && i <= polynomialDegree; i++)
-      polynomial[polynomialDegree + iSymbol - i - 1] =
-          polynomial[polynomialDegree + iSymbol - i] +
+    for (unsigned int i(1); i < symbol && i <= polynomialDegree; i++)
+      polynomial[polynomialDegree + symbol - i - 1] =
+          polynomial[polynomialDegree + symbol - i] +
           polynomialBackup[polynomialDegree - i];
   }
 }
 
 template <typename Type>
 bool dividePolynomialBySymbol(vector<Type> &polynomial,
-                              const unsigned int &iSymbol) {
+                              const unsigned int &symbol) {
   unsigned int polynomialDegree(polynomial.size() - 1);
 
   // Removing eventual 0
@@ -146,45 +146,45 @@ bool dividePolynomialBySymbol(vector<Type> &polynomial,
 
   vector<Type> iWorking(polynomial.begin(),
                         polynomial.begin() + polynomialDegree + 1);
-  vector<Type> iQuotient;
+  vector<Type> quotient;
 
   unsigned int i;
-  Type iTemp;
+  Type temp;
 
-  if (polynomialDegree < iSymbol - 1)
+  if (polynomialDegree < symbol - 1)
     return false;
 
-  while (polynomialDegree >= iSymbol) {
-    iTemp = iWorking[polynomialDegree];
-    iQuotient.insert(iQuotient.begin(), iTemp);
+  while (polynomialDegree >= symbol) {
+    temp = iWorking[polynomialDegree];
+    quotient.insert(quotient.begin(), temp);
 
-    for (i = 0; i < iSymbol; i++)
-      iWorking[polynomialDegree - i] -= iTemp;
+    for (i = 0; i < symbol; i++)
+      iWorking[polynomialDegree - i] -= temp;
 
     polynomialDegree--;
 
     while (iWorking[polynomialDegree] == 0 && polynomialDegree >= 1) {
-      iQuotient.insert(iQuotient.begin(), 0);
+      quotient.insert(quotient.begin(), 0);
       polynomialDegree--;
     }
   }
 
-  if (polynomialDegree < iSymbol - 1) {
+  if (polynomialDegree < symbol - 1) {
     for (i = 0; i <= polynomialDegree; i++) {
       if (iWorking[i] != 0)
         return false;
     }
   }
 
-  iTemp = iWorking[polynomialDegree];
-  iQuotient.insert(iQuotient.begin(), iTemp);
+  temp = iWorking[polynomialDegree];
+  quotient.insert(quotient.begin(), temp);
 
   for (i = 0; i < polynomialDegree; i++) {
-    if (iWorking[i] != iTemp)
+    if (iWorking[i] != temp)
       return false;
   }
 
-  polynomial = iQuotient;
+  polynomial = quotient;
 
   return true;
 }
@@ -208,17 +208,17 @@ bool dividePolynomialByPolynomial(vector<Type> &numerator,
   vector<Type> working(numerator), quotient;
 
   unsigned int i;
-  Type iTemp;
+  Type temp;
 
   while (numDeg >= denomDeg) {
     if (working[numDeg] % denominator[denomDeg] != 0)
       return false;
 
-    iTemp = working[numDeg] / denominator[denomDeg];
-    quotient.insert(quotient.begin(), iTemp);
+    temp = working[numDeg] / denominator[denomDeg];
+    quotient.insert(quotient.begin(), temp);
 
     for (i = 0; i <= denomDeg; i++)
-      working[numDeg - i] -= iTemp * denominator[denomDeg - i];
+      working[numDeg - i] -= temp * denominator[denomDeg - i];
 
     numDeg--;
 

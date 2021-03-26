@@ -24,34 +24,34 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 Graph::Graph(const vector<short unsigned int> &vertices,
              vector<string> *ptr_map_vertices_indexToLabel,
-             const vector<bool> &bVerticesLinkable, const unsigned int &iType,
-             const bool &isSpherical, const unsigned int &iDataSupp)
-    : type(iType), vertices(vertices), bVerticesLinkable(bVerticesLinkable),
-      dataSupp(iDataSupp), isSpherical(isSpherical),
+             const vector<bool> &bVerticesLinkable, const unsigned int &type,
+             const bool &isSpherical, const unsigned int &dataSupp)
+    : type(type), vertices(vertices), bVerticesLinkable(bVerticesLinkable),
+      dataSupp(dataSupp), isSpherical(isSpherical),
       ptr_map_vertices_indexToLabel(ptr_map_vertices_indexToLabel),
       b_map_vertices_indexToLabelIsEmpty(
           !ptr_map_vertices_indexToLabel ||
           ptr_map_vertices_indexToLabel->size() == 0) {}
 
 ostream &operator<<(ostream &o, const Graph &g) {
-  unsigned int iMax(g.vertices.size()), i;
+  unsigned int verticesCount(g.vertices.size()), i;
 
   // -----------------------------------------------------------------------
   // Nom du graphe
   o << "\t\t" << (g.isSpherical ? "" : "T") << (char)(g.type + 65)
-    << (g.isSpherical ? iMax : iMax - 1) << " ; ";
+    << (g.isSpherical ? verticesCount : verticesCount - 1) << " ; ";
 
   // -----------------------------------------------------------------------
   // sommets qui constituent le graphe
-  for (i = 0; i < iMax; i++) {
+  for (i = 0; i < verticesCount; i++) {
     if (g.b_map_vertices_indexToLabelIsEmpty)
       o << (g.vertices[i] + 1) << " ";
     else
       o << ((*g.ptr_map_vertices_indexToLabel)[g.vertices[i]]) << " ";
 
-    if (((g.type == 3 || g.type == 4) && i == (iMax - 2)) ||
+    if (((g.type == 3 || g.type == 4) && i == (verticesCount - 2)) ||
         ((g.type == 1 && !g.isSpherical) &&
-         (i == (iMax - 2) || i == 0))) // (Dn ou En) ou (\tilde Bn)
+         (i == (verticesCount - 2) || i == 0))) // (Dn ou En) ou (\tilde Bn)
       o << "| ";
   }
 

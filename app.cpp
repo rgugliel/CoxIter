@@ -27,7 +27,7 @@ App::App()
       bCheckCanBeFiniteCovolume(false), bCheckCocompacity(false),
       bCheckFiniteCovolume(false), bCheckArithmeticity(false),
       bComputeEuler(true), bComputeGrowthRate(false),
-      bComputeGrowthSeries(false), bComputeSignature(false), bDebug(false),
+      bComputeGrowthSeries(false), bComputeSignature(false), debug(false),
       bIndex2(false), bOpenMP(true), bPrintCoxeterGraph(false),
       bPrintCoxeterMatrix(false), bPrintGramMatrix(false), bPrintHelp(false),
       strOuputMathematicalFormat("generic") {}
@@ -71,7 +71,7 @@ bool App::bReadMainParameters(int argc, char **argv) {
       bCoutFile = true;
       szPrevType = "cf";
     } else if (szTemp == "-debug") {
-      bDebug = true;
+      debug = true;
       szPrevType = "debug";
     } else if (szTemp == "-drawgraph" || szTemp == "-dg") // output
     {
@@ -172,9 +172,9 @@ bool App::bReadMainParameters(int argc, char **argv) {
   // Choosing the vertices
   PCRERegexp regexp;
   PCREResult regexpRes;
-  int iRegexpCount;
+  int regexpCount;
 
-  if ((iRegexpCount =
+  if ((regexpCount =
            regexp.preg_match_all("-S=\\{([[:alnum:][:space:],_-]+)\\}",
                                  strParams, regexpRes, PCRE_CASELESS)) > 0) {
     str_replace(regexpRes[1][0], " ", "");
@@ -183,16 +183,16 @@ bool App::bReadMainParameters(int argc, char **argv) {
 
     for (unsigned int i(0); i < strVCount; i++)
       strVertices.push_back(strV[i]);
-  } else if ((iRegexpCount =
+  } else if ((regexpCount =
                   regexp.preg_match_all("-S=([[:alnum:],_-]+)", strParams,
                                         regexpRes, PCRE_CASELESS)) > 0) {
-    for (int i(0); i < iRegexpCount; i++)
+    for (int i(0); i < regexpCount; i++)
       strVertices.push_back(regexpRes[1][i]);
   }
 
   // --------------------------------------------------
   // Index2
-  if ((iRegexpCount =
+  if ((regexpCount =
            regexp.preg_match_all("-is=\\[?([[:alnum:],_-]+)\\]?", strParams,
                                  regexpRes, PCRE_CASELESS)) > 0) {
     str_replace(regexpRes[1][0], " ", "");
@@ -203,7 +203,7 @@ bool App::bReadMainParameters(int argc, char **argv) {
 
     str_replace(strParams, regexpRes[0][0], "");
     bIndex2 = true;
-  } else if ((iRegexpCount = regexp.preg_match_all(
+  } else if ((regexpCount = regexp.preg_match_all(
                   "(-gbd|-index2) ([[:alnum:]_-]+)", strParams, regexpRes,
                   PCRE_CASELESS)) > 0) {
     strIndex2vertex_t0 = regexpRes[2][0];
@@ -257,11 +257,11 @@ void App::extractIndex2Subgroup(CoxIter &ci) {
 
     ci.IS_computations(strIndex2vertex_t0, strIndex2vertex_s0);
 
-    auto iFVUnits(ci.get_infSeqFVectorsUnits()),
-        iFVPowers(ci.get_infSeqFVectorsPowers());
+    auto fVUnits(ci.get_infSeqFVectorsUnits());
+    auto fVPowers(ci.get_infSeqFVectorsPowers());
 
-    cout << "\tf-vector after n doubling:\n\t(" << implode(", ", iFVUnits)
-         << ", 1) + 2^(n-1)*(" << implode(", ", iFVPowers) << ", 0)" << endl;
+    cout << "\tf-vector after n doubling:\n\t(" << implode(", ", fVUnits)
+         << ", 1) + 2^(n-1)*(" << implode(", ", fVPowers) << ", 0)" << endl;
   } else
     cout << "Index two subgroup:" << endl;
 
@@ -288,9 +288,9 @@ void App::run() {
       bSignatureComputed(false);
 
   CoxIter ci;
-  ci.set_bCheckCocompactness(bCheckCocompacity);
-  ci.set_bCheckCofiniteness(bCheckFiniteCovolume);
-  ci.set_bDebug(bDebug);
+  ci.set_checkCocompactness(bCheckCocompacity);
+  ci.set_checkCofiniteness(bCheckFiniteCovolume);
+  ci.set_debug(debug);
   ci.set_bWriteInfo(true);
   ci.set_strOuputMathematicalFormat(strOuputMathematicalFormat);
   ci.set_strVerticesToConsider(strVertices);
@@ -303,12 +303,12 @@ void App::run() {
 
 #ifdef _COMPILE_WITH_PARI_
   GrowthRate_Result grr;
-  grr.bComputed = false;
-  grr.iPerron = -1;
-  grr.iPisot = -1;
-  grr.iSalem = -1;
+  grr.isComputed = false;
+  grr.perron = -1;
+  grr.pisot = -1;
+  grr.salem = -1;
 
-  array<unsigned int, 3> iSignature;
+  array<unsigned int, 3> signature;
 #endif
 
   if (isatty(fileno(stdin)) == 0) {
@@ -428,7 +428,7 @@ void App::run() {
 #ifdef _COMPILE_WITH_PARI_
     try {
       Signature s;
-      iSignature = s.iComputeSignature(ci.get_strGramMatrix_PARI());
+      signature = s.iComputeSignature(ci.get_strGramMatrix_PARI());
       bSignatureComputed = true;
     } catch (const string &strE) {
       cout << "\n---------------------------------------------------------"
@@ -465,7 +465,7 @@ void App::run() {
   // Affichage des informations
   cout << "Information" << endl;
 
-  if (ci.get_bDimensionGuessed())
+  if (ci.get_dimensionGuessed())
     cout << "\tGuessed dimension: " << ci.get_dimension() << endl;
 
   cout << "\tCocompact: "
@@ -500,18 +500,18 @@ void App::run() {
   // f-vector, alternating sum of the components of the f-vector
   if (bComputeEuler && bEulerSuccess) {
     if (dimension) {
-      vector<unsigned int> iFVector(ci.get_iFVector());
+      const auto fVector(ci.get_fVector());
 
       cout << "\tf-vector: (";
       for (unsigned int i(0); i <= dimension; i++)
-        cout << (i ? ", " : "") << iFVector[i];
+        cout << (i ? ", " : "") << fVector[i];
       cout << ")" << endl;
 
       cout << "\tNumber of vertices at infinity: "
            << ci.get_verticesAtInfinityCount() << endl;
 
       cout << "\tAlternating sum of the components of the f-vector: "
-           << ci.get_iFVectorAlternateSum() << endl;
+           << ci.get_fVectorAlternateSum() << endl;
     }
 
     cout << "\tEuler characteristic: " << ci.get_brEulerCaracteristic() << endl;
@@ -536,8 +536,8 @@ void App::run() {
 
   if (bSignatureComputed) {
 #ifdef _COMPILE_WITH_PARI_
-    cout << "\tSignature (numerically): " << iSignature[0] << ","
-         << iSignature[1] << "," << iSignature[2] << endl;
+    cout << "\tSignature (numerically): " << signature[0] << "," << signature[1]
+         << "," << signature[2] << endl;
 #endif
   }
 
@@ -547,15 +547,15 @@ void App::run() {
     cout << endl;
 
 #ifdef _COMPILE_WITH_PARI_
-    if (bComputeGrowthRate && grr.bComputed && ci.get_bGrowthSeriesReduced()) {
+    if (bComputeGrowthRate && grr.isComputed &&
+        ci.get_isGrowthSeriesReduced()) {
       cout << "\nGrowth rate: " << grr.strGrowthRate << endl;
       cout << "\tPerron number: "
-           << (grr.iPerron < 0 ? "?" : (grr.iPerron > 0 ? "yes" : "no"))
-           << endl;
+           << (grr.perron < 0 ? "?" : (grr.perron > 0 ? "yes" : "no")) << endl;
       cout << "\tPisot number: "
-           << (grr.iPisot < 0 ? "?" : (grr.iPisot > 0 ? "yes" : "no")) << endl;
+           << (grr.pisot < 0 ? "?" : (grr.pisot > 0 ? "yes" : "no")) << endl;
       cout << "\tSalem number: "
-           << (grr.iSalem < 0 ? "?" : (grr.iSalem > 0 ? "yes" : "no")) << endl;
+           << (grr.salem < 0 ? "?" : (grr.salem > 0 ? "yes" : "no")) << endl;
     }
 #endif
   }

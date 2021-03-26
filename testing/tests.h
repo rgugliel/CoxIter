@@ -55,8 +55,8 @@ struct Test {
   bool bTestEuler;       ///< If we have to check the Euler characteristic
   MPZ_rational brResult; ///< Theoretical Euler characteristic
 
-  bool bTestFVector;             ///< If we have to check the f-vector
-  vector<unsigned int> iFVector; ///< Theoretical value
+  bool bTestFVector;            ///< If we have to check the f-vector
+  vector<unsigned int> fVector; ///< Theoretical value
 
   bool bTestCompacity;     ///< True if we test the cocompacity
   bool bIsCompact;         ///< True if the group is cocompact, false otherwise

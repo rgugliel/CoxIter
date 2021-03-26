@@ -54,18 +54,19 @@ public:
    * 	\brief Ajoute un graphe à la liste
    * 	\param vertices Sommets du graphe
    * 	\param bVerticesLinkable Sommets qui sont liables au graphes
-   * 	\param iType(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
-   *= (0, 1, 3, 4, 5, 6, 7) \param isSpherical(bool) True si sphérique, false si
-   *euclidien \param iVertexSupp1 Premier sommet supplémentaire (par exemple
-   *pour les B) \param iVertexSupp2 Second sommet supplémentaire (par exemple
-   *pour les B) \param iDataSupp(const unsigned int &): donnée supplémentaire
-   *(par exemple, pour le G_2, le poids)
+   * 	\param type(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
+   *= (0, 1, 3, 4, 5, 6, 7)
+   *  \param isSpherical(bool) True si sphérique, false si euclidien
+   *  \param vertexSupp1 Premier sommet supplémentaire (par exemple pour les B)
+   *  \param vertexSupp2 Second sommet supplémentaire (par exemple pour les B)
+   *  \param dataSupp(const unsigned int &): donnée supplémentaire (par exemple,
+   *pour le G_2, le poids)
    */
   void addGraph(vector<short unsigned int> vertices,
                 const vector<bool> &bVerticesLinkable, const unsigned &type,
-                bool isSpherical, const short unsigned int &iVertexSupp1 = 0,
-                const short unsigned int &iVertexSupp2 = 0,
-                const unsigned int &iDataSupp = 0);
+                bool isSpherical, const short unsigned int &vertexSupp1 = 0,
+                const short unsigned int &vertexSupp2 = 0,
+                const unsigned int &dataSupp = 0);
 
   /*!	\fn addGraphsList
    * 	\brief Concatenate another list to the current list

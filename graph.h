@@ -64,15 +64,15 @@ public:
    * graphe \param ptr_map_vertices_indexToLabel(vector< string > *) Pointeur
    * vers la correspondance index --> label des sommets \param
    * bVerticesLinkable(const vector< bool >&) Ce à quoi le graphe est liable
-   * 	\param iType (const unsigned int &) Type du graphe: A=0, B=1, ...
+   * 	\param type (const unsigned int &) Type du graphe: A=0, B=1, ...
    * 	\param isSpherical(const bool& ) True si sphérique, false si euclidien
-   * 	\param iDataSupp(const unsigned int &) Eventuelle information
+   * 	\param dataSupp(const unsigned int &) Eventuelle information
    * supplémentaire, par exemple poids pour le G2
    */
   Graph(const vector<short unsigned int> &vertices,
         vector<string> *ptr_map_vertices_indexToLabel,
-        const vector<bool> &bVerticesLinkable, const unsigned int &iType,
-        const bool &isSpherical, const unsigned int &iDataSupp = 0);
+        const vector<bool> &bVerticesLinkable, const unsigned int &type,
+        const bool &isSpherical, const unsigned int &dataSupp = 0);
 
   /*! \fn isSubgraphOf
    * 	\brief Test if a graph (spherical) is a subgraph of another graph

@@ -43,9 +43,9 @@ Graph *GraphsListN::begin() {
 void GraphsListN::addGraph(vector<short unsigned int> vertices,
                            const vector<bool> &bVerticesLinkable,
                            const unsigned int &type, bool isSpherical,
-                           const short unsigned int &iVertexSupp1,
-                           const short unsigned int &iVertexSupp2,
-                           const unsigned int &iDataSupp) {
+                           const short unsigned int &vertexSupp1,
+                           const short unsigned int &vertexSupp2,
+                           const unsigned int &dataSupp) {
   unsigned int short temp, i;
 
   if (isSpherical) {
@@ -56,13 +56,13 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
         reverse(vertices.begin(), vertices.end());
     } else if (type == 1) // Bn
     {
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
     } else if (type == 3) // Dn
     {
       if (verticesCount > 4) {
         temp = vertices[verticesCount - 2];
-        vertices[verticesCount - 2] = min(temp, iVertexSupp1);
-        vertices.push_back(max(temp, iVertexSupp1));
+        vertices[verticesCount - 2] = min(temp, vertexSupp1);
+        vertices.push_back(max(temp, vertexSupp1));
       } else {
         if (vertices[0] > vertices[2]) {
           temp = vertices[0];
@@ -70,15 +70,15 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
           vertices[2] = temp;
         }
 
-        if (iVertexSupp1 < vertices[0]) {
+        if (vertexSupp1 < vertices[0]) {
           vertices.push_back(vertices[2]);
           vertices[2] = vertices[0];
-          vertices[0] = iVertexSupp1;
-        } else if (iVertexSupp1 < vertices[2]) {
+          vertices[0] = vertexSupp1;
+        } else if (vertexSupp1 < vertices[2]) {
           vertices.push_back(vertices[2]);
-          vertices[2] = iVertexSupp1;
+          vertices[2] = vertexSupp1;
         } else
-          vertices.push_back(iVertexSupp1);
+          vertices.push_back(vertexSupp1);
       }
     } else if (type == 4) // En
     {
@@ -86,22 +86,22 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
         if (vertices.front() > vertices.back())
           reverse(vertices.begin(), vertices.end());
       }
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
     } else if (type == 5) // Fn
     {
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
       if (vertices.front() > vertices.back())
         reverse(vertices.begin(), vertices.end());
     } else if (type == 7) // Hn
     {
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
     }
   } else {
-    if (type == 0 && iDataSupp) {
+    if (type == 0 && dataSupp) {
       int iMinIndex(0);
       unsigned int iMinValue(vertices[0]);
 
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
       vector<short unsigned int> verticesTemp(vertices);
 
       // on répère le sommet avec l'indice le plus petit
@@ -141,19 +141,19 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
         vertices[2] = temp;
         vertices[0] = i;
 
-        vertices.insert(vertices.begin(), iVertexSupp1);
+        vertices.insert(vertices.begin(), vertexSupp1);
       } else // autres \tilde Bn
       {
-        temp = min(vertices[verticesCount - 3], iVertexSupp1);
-        vertices.push_back(max(vertices[verticesCount - 3], iVertexSupp1));
+        temp = min(vertices[verticesCount - 3], vertexSupp1);
+        vertices.push_back(max(vertices[verticesCount - 3], vertexSupp1));
         vertices[verticesCount - 3] = temp;
 
-        vertices.insert(vertices.begin(), iVertexSupp2);
+        vertices.insert(vertices.begin(), vertexSupp2);
       }
     } else if (type == 2) // \tilde Cn
     {
-      vertices.insert(vertices.begin(), iVertexSupp1);
-      vertices.push_back(iVertexSupp2);
+      vertices.insert(vertices.begin(), vertexSupp1);
+      vertices.push_back(vertexSupp2);
 
       if (vertices[0] > vertices[verticesCount - 1])
         reverse(vertices.begin(), vertices.end());
@@ -178,22 +178,20 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
           reverse(verticesBase.begin(), verticesBase.end());
 
           // ajout des 4 extrémités
-          verticesBase.push_back(min(vertices[0], iVertexSupp1));
-          verticesBase.push_back(max(vertices[0], iVertexSupp1));
+          verticesBase.push_back(min(vertices[0], vertexSupp1));
+          verticesBase.push_back(max(vertices[0], vertexSupp1));
           verticesBase.insert(verticesBase.begin(),
-                              max(vertices[verticesCount - 3], iVertexSupp2));
+                              max(vertices[verticesCount - 3], vertexSupp2));
           verticesBase.insert(verticesBase.begin(),
-                              min(vertices[verticesCount - 3], iVertexSupp2));
+                              min(vertices[verticesCount - 3], vertexSupp2));
         } else {
           // ajout des 4 extrémités
-          verticesBase.push_back(
-              min(vertices[verticesCount - 3], iVertexSupp2));
-          verticesBase.push_back(
-              max(vertices[verticesCount - 3], iVertexSupp2));
+          verticesBase.push_back(min(vertices[verticesCount - 3], vertexSupp2));
+          verticesBase.push_back(max(vertices[verticesCount - 3], vertexSupp2));
           verticesBase.insert(verticesBase.begin(),
-                              max(vertices[0], iVertexSupp1));
+                              max(vertices[0], vertexSupp1));
           verticesBase.insert(verticesBase.begin(),
-                              min(vertices[0], iVertexSupp1));
+                              min(vertices[0], vertexSupp1));
         }
 
         vertices = verticesBase;
@@ -202,8 +200,8 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
         vector<short unsigned int> verticesTemp(4, 0);
         verticesTemp[0] = vertices[0];
         verticesTemp[1] = vertices[2];
-        verticesTemp[2] = iVertexSupp1;
-        verticesTemp[3] = iVertexSupp2;
+        verticesTemp[2] = vertexSupp1;
+        verticesTemp[3] = vertexSupp2;
         sort(verticesTemp.begin(), verticesTemp.end());
         verticesTemp.push_back(vertices[1]);
         vertices = verticesTemp;
@@ -215,20 +213,20 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
         // TODO: refaire l'encodage de ce graphe et modifer la fonction
         // bIsSubgraphOf_spherical_euclidean?
         vector<short unsigned int> verticesTemp;
-        unsigned int iMin(min(min(vertices[1], vertices[3]), iVertexSupp1));
+        unsigned int iMin(min(min(vertices[1], vertices[3]), vertexSupp1));
 
         if (iMin == vertices[1]) {
           verticesTemp.push_back(vertices[0]);
           verticesTemp.push_back(vertices[1]);
 
-          if (min(vertices[3], iVertexSupp1) == vertices[3]) {
+          if (min(vertices[3], vertexSupp1) == vertices[3]) {
             verticesTemp.push_back(vertices[3]);
             verticesTemp.push_back(vertices[4]);
-            verticesTemp.push_back(iVertexSupp1);
-            verticesTemp.push_back(iVertexSupp2);
+            verticesTemp.push_back(vertexSupp1);
+            verticesTemp.push_back(vertexSupp2);
           } else {
-            verticesTemp.push_back(iVertexSupp1);
-            verticesTemp.push_back(iVertexSupp2);
+            verticesTemp.push_back(vertexSupp1);
+            verticesTemp.push_back(vertexSupp2);
             verticesTemp.push_back(vertices[3]);
             verticesTemp.push_back(vertices[4]);
           }
@@ -236,20 +234,20 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
           verticesTemp.push_back(vertices[4]);
           verticesTemp.push_back(vertices[3]);
 
-          if (min(vertices[1], iVertexSupp1) == vertices[1]) {
+          if (min(vertices[1], vertexSupp1) == vertices[1]) {
             verticesTemp.push_back(vertices[1]);
             verticesTemp.push_back(vertices[0]);
-            verticesTemp.push_back(iVertexSupp1);
-            verticesTemp.push_back(iVertexSupp2);
+            verticesTemp.push_back(vertexSupp1);
+            verticesTemp.push_back(vertexSupp2);
           } else {
-            verticesTemp.push_back(iVertexSupp1);
-            verticesTemp.push_back(iVertexSupp2);
+            verticesTemp.push_back(vertexSupp1);
+            verticesTemp.push_back(vertexSupp2);
             verticesTemp.push_back(vertices[1]);
             verticesTemp.push_back(vertices[0]);
           }
         } else {
-          verticesTemp.push_back(iVertexSupp2);
-          verticesTemp.push_back(iVertexSupp1);
+          verticesTemp.push_back(vertexSupp2);
+          verticesTemp.push_back(vertexSupp1);
 
           if (min(vertices[1], vertices[3]) == vertices[1]) {
             verticesTemp.push_back(vertices[1]);
@@ -272,21 +270,21 @@ void GraphsListN::addGraph(vector<short unsigned int> vertices,
             vertices.back()) // la base du \tilde E7 est symétrique
           reverse(vertices.begin(), vertices.end());
 
-        vertices.push_back(iVertexSupp1);
+        vertices.push_back(vertexSupp1);
       } else // TE8
       {
-        vertices.push_back(iVertexSupp1);
+        vertices.push_back(vertexSupp1);
       }
     } else if (type == 5) {
-      vertices.push_back(iVertexSupp1);
-    } else if (type == 6 && iDataSupp) // \tilde G_2
+      vertices.push_back(vertexSupp1);
+    } else if (type == 6 && dataSupp) // \tilde G_2
     {
-      vertices.push_back(iVertexSupp1);
+      vertices.push_back(vertexSupp1);
     }
   }
 
   Graph g(vertices, ptr_map_vertices_indexToLabel, bVerticesLinkable, type,
-          isSpherical, iDataSupp);
+          isSpherical, dataSupp);
 
   auto it(lower_bound(graphs.begin(), graphs.end(), g));
   if (it == graphs.end() || !(*it == g))
@@ -309,10 +307,9 @@ vector<Graph> GraphsListN::get_graphs() const { return graphs; }
 
 ostream &operator<<(ostream &o, const GraphsListN &g) {
   o << "\tGraphs of rank " << g.verticesCount << endl;
-  unsigned int iMax(g.graphs.size());
 
-  for (unsigned int i(0); i < iMax; ++i)
-    o << g.graphs[i];
+  for (const auto &graph : g.graphs)
+    o << graph;
 
   return o;
 }

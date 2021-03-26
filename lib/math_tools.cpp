@@ -42,7 +42,7 @@ bool isPrime(unsigned int n) {
 
 int jacobiSymbol(int a_, unsigned b) {
   int jacobi(1);
-  unsigned int a, iTemp;
+  unsigned int a, temp;
 
   if (!b)
     throw(string("Second argument of Jacobi symbol has to be positive."));
@@ -86,9 +86,9 @@ int jacobiSymbol(int a_, unsigned b) {
         return jacobi;
     }
 
-    iTemp = a;
+    temp = a;
     a = b;
-    b = iTemp;
+    b = temp;
 
     if (a % 4 == 3 && b % 4 == 3)
       jacobi = -jacobi;

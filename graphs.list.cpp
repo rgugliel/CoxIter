@@ -35,28 +35,28 @@ GraphsList::GraphsList(size_t verticesCount,
 void GraphsList::addGraph(const std::vector<short unsigned int> &vertices,
                           const std::vector<bool> &bVerticesLinkable,
                           const unsigned int &type, bool isSpherical,
-                          const unsigned int &iVertexSupp1,
-                          const unsigned int &iVertexSupp2,
-                          const unsigned int &iDataSupp) {
+                          const unsigned int &vertexSupp1,
+                          const unsigned int &vertexSupp2,
+                          const unsigned int &dataSupp) {
   size_t sizeTemp, iVCount(vertices.size());
 
   if (isSpherical) {
     if (type == 1 || type == 3 || type == 4 || type == 5 || type == 7)
       iVCount++;
   } else {
-    if ((type == 1 && iVCount >= 3 && iDataSupp) || type == 2 ||
+    if ((type == 1 && iVCount >= 3 && dataSupp) || type == 2 ||
         (type == 3 && iVCount >= 3) ||
         (type == 4 && iVCount == 5)) // TBn, TCn, TE6
       iVCount += 2;
-    else if ((type == 0 && iDataSupp) || type == 1 || type == 3 || type == 4 ||
+    else if ((type == 0 && dataSupp) || type == 1 || type == 3 || type == 4 ||
              type == 5 ||
-             (type == 6 && iDataSupp)) // TAn ou TB3 ou TD4 ou TEn ou TG_2
+             (type == 6 && dataSupp)) // TAn ou TB3 ou TD4 ou TEn ou TG_2
       iVCount++;
   }
 
   sizeTemp = graphs[iVCount].size();
   graphs[iVCount].addGraph(vertices, bVerticesLinkable, type, isSpherical,
-                           iVertexSupp1, iVertexSupp2, iDataSupp);
+                           vertexSupp1, vertexSupp2, dataSupp);
   if (sizeTemp != graphs[iVCount].size()) {
     totalGraphsCount++;
     graphsCount[iVCount]++;

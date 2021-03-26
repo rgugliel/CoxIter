@@ -41,7 +41,7 @@ private:
   CoxIter *ci;                ///< Pointer to the CoxIter object
   unsigned int verticesCount; ///< Number of generators of the group
   vector<vector<unsigned int>> coxeterMatrix; ///< Coxeter matrix of the group
-  vector<unsigned int> iReferencesToLabels;   ///< Correspondence for the new
+  vector<unsigned int> referencesToLabels;    ///< Correspondence for the new
                                               ///< indices to the old ones
 
   // For the DFS
@@ -103,18 +103,18 @@ private:
    */
   void testCycles();
 
-  /*! 	\fn findCycles
+  /*! \fn findCycles
    * 	\brief Look for cycles
    *
    * 	Update the vector path to find cycles
    *
-   * 	\param iRoot(unsigned int&) Starting vertex
-   * 	\param iFrom(unsigned int&) Previoud vertex (if recursive call); iRoot
+   * 	\param root(unsigned int&) Starting vertex
+   * 	\param from(unsigned int&) Previoud vertex (if recursive call); root
    * otherwise
    */
   void findCycles(const unsigned int &root, const unsigned int &from);
 
-  /*! 	\fn testCycle
+  /*! \fn testCycle
    * 	\brief Test the cycle in path
    *
    * 	This function is called by findCycles. Eventually, set bNotArithmetic to

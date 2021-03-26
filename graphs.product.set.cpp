@@ -22,10 +22,10 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graphs.product.set.h"
 
-GraphsProductSet::GraphsProductSet() : iRank(0) {}
+GraphsProductSet::GraphsProductSet() : rank(0) {}
 
 GraphsProductSet::GraphsProductSet(const GraphsProduct &gp) {
-  iRank = gp.rank;
+  rank = gp.rank;
 
   for (vector<Graph *>::const_iterator it(gp.graphs.begin());
        it != gp.graphs.end(); ++it)
@@ -47,7 +47,7 @@ vector<short unsigned int> GraphsProductSet::get_vertices() const {
   return vertices;
 }
 
-bool GraphsProductSet::b_areVerticesSubsetOf(const GraphsProductSet &gp) const {
+bool GraphsProductSet::areVerticesSubsetOf(const GraphsProductSet &gp) const {
   /* NOTE:
    * We could sort de vectors and use the standard function includes but this is
    * slower (tested with 17-vinb85).

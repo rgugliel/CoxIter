@@ -54,7 +54,7 @@ bool Index2::removeVertex(const string &strVertexName) {
   if (!bIsVertexAdmissible(strVertexName))
     return false;
 
-  iVertex = ci->get_vertexIndex(strVertexName);
+  vertex = ci->get_vertexIndex(strVertexName);
 
   // Remark: we don't merge the previous and the next loop. Thus, if there is a
   // problem, we do not change the CoxIter object.
@@ -63,12 +63,12 @@ bool Index2::removeVertex(const string &strVertexName) {
   // new vertices
   for (unsigned int i(0); i < verticesCount; i++) {
     // If they don't commute, this will add a new vertex
-    if (iCox[iVertex][i] != 2) {
+    if (iCox[vertex][i] != 2) {
       NewVertex nv;
       nv.iIndex = verticesCount + iNewVerticesCount - 1;
 
       nv.iOriginVertex = i;
-      nv.strLabel = ci->get_vertexLabel(iVertex) + "_" + ci->get_vertexLabel(i);
+      nv.strLabel = ci->get_vertexLabel(vertex) + "_" + ci->get_vertexLabel(i);
 
       newVertices.push_back(nv);
       ci->map_vertices_labels_addReference(nv.strLabel);
@@ -77,14 +77,14 @@ bool Index2::removeVertex(const string &strVertexName) {
     }
   }
 
-  ci->map_vertices_labels_removeReference(iVertex);
+  ci->map_vertices_labels_removeReference(vertex);
 
   // -------------------------------------------------------
   // new adjacency matrix
   for (unsigned int i(0); i <= (verticesCount + iNewVerticesCount - 1);
        i++) // the -1 is for the vertex we removed
   {
-    if (i == iVertex)
+    if (i == vertex)
       continue;
 
     iNewCox.push_back(
@@ -94,13 +94,12 @@ bool Index2::removeVertex(const string &strVertexName) {
 
   // we fill the old values (upper left square)
   for (unsigned int i(0); i < verticesCount; i++) {
-    if (i == iVertex)
+    if (i == vertex)
       continue;
 
     for (unsigned int j(0); j <= i; j++)
-      iNewCox[i > iVertex ? i - 1 : i][j > iVertex ? j - 1 : j] =
-          iNewCox[j > iVertex ? j - 1 : j][i > iVertex ? i - 1 : i] =
-              iCox[i][j];
+      iNewCox[i > vertex ? i - 1 : i][j > vertex ? j - 1 : j] =
+          iNewCox[j > vertex ? j - 1 : j][i > vertex ? i - 1 : i] = iCox[i][j];
   }
 
   // -------------------------------------------------------
@@ -116,20 +115,20 @@ bool Index2::removeVertex(const string &strVertexName) {
     for (unsigned int i(0); i < verticesCount;
          i++) // Goal: find m(t0 * sj * t0, si)
     {
-      if (i == iVertex) // we removed this vertex
+      if (i == vertex) // we removed this vertex
         continue;
 
       if ((*itNew).iOriginVertex == i) // m(t0 * si * t0, si) = m(t0, si) / 2
-        iWeight = iCox[iVertex][i] == 0 || iCox[iVertex][i] == 1
-                      ? iCox[iVertex][i]
-                      : iCox[iVertex][i] / 2;
+        iWeight = iCox[vertex][i] == 0 || iCox[vertex][i] == 1
+                      ? iCox[vertex][i]
+                      : iCox[vertex][i] / 2;
       else {
-        if (iCox[i][iVertex] ==
+        if (iCox[i][vertex] ==
             2) // If si commutes with t0, then m(t0 * sj * t0, si) = m(sj, si)
           iWeight = iCox[(*itNew).iOriginVertex][i];
-        else if (iCox[(*itNew).iOriginVertex][iVertex] != 2) {
-          if (iCox[iVertex][i] == 4 &&
-              iCox[iVertex][(*itNew).iOriginVertex] == 4 &&
+        else if (iCox[(*itNew).iOriginVertex][vertex] != 2) {
+          if (iCox[vertex][i] == 4 &&
+              iCox[vertex][(*itNew).iOriginVertex] == 4 &&
               iCox[i][(*itNew).iOriginVertex] == 2)
             iWeight = 0;
           else
@@ -138,8 +137,8 @@ bool Index2::removeVertex(const string &strVertexName) {
           throw(string("Index2::removeVertex: Error")); // TODO: idem
       }
 
-      iNewCox[i > iVertex ? i - 1 : i][(*itNew).iIndex] = iWeight;
-      iNewCox[(*itNew).iIndex][i > iVertex ? i - 1 : i] = iWeight;
+      iNewCox[i > vertex ? i - 1 : i][(*itNew).iIndex] = iWeight;
+      iNewCox[(*itNew).iIndex][i > vertex ? i - 1 : i] = iWeight;
     }
 
     // for every new vertex t0 * si * t0

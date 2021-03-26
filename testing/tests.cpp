@@ -96,8 +96,6 @@ bool Tests::readGraphsFile(string strInput) {
       test.growthSeries_polynomialDenominator = vector<mpz_class>(1, 0);
       test.growthSeries_cyclotomicNumerator.clear();
 
-      vector<unsigned int> iTemp;
-
       if (regexpRes[1][0] != "") // Cyclotomic factors
         explode(",", regexpRes[1][0], test.growthSeries_cyclotomicNumerator);
 
@@ -140,12 +138,12 @@ bool Tests::readGraphsFile(string strInput) {
                               regexpRes) != 0) {
       str_replace(szLineWork, "(" + regexpRes[1][0] + ")", " ");
       vector<string> strFVector(explode(",", regexpRes[1][0]));
-      test.iFVector = vector<unsigned int>(0);
+      test.fVector = vector<unsigned int>(0);
       test.bTestFVector = true;
 
       for (vector<string>::const_iterator strIt(strFVector.begin());
            strIt != strFVector.end(); ++strIt)
-        test.iFVector.push_back(stoi(*strIt));
+        test.fVector.push_back(stoi(*strIt));
     }
 
     // --------------------------------------------------------
@@ -226,7 +224,7 @@ bool Tests::bRunTests() {
   // Let's compute
   CoxIter ci;
 
-  int i, iMax(tests.size());
+  int i, testsCount(tests.size());
   unsigned int iDim, iBarWidth(70);
   double dProgressStep(.02), dProgressNext(dProgressStep);
 
@@ -239,11 +237,11 @@ bool Tests::bRunTests() {
   cout << "] " << 0 << " %\r";
   cout.flush();
 
-  for (i = 0; i < iMax; i++) {
+  for (i = 0; i < testsCount; i++) {
     // ---------------------------------------------
     // Progression bar
-    if ((double)(i + 1) / iMax > dProgressNext) {
-      double dProgress((double)(i + 1) / iMax);
+    if ((double)(i + 1) / testsCount > dProgressNext) {
+      double dProgress((double)(i + 1) / testsCount);
 
       unsigned int iPos(iBarWidth * dProgress);
       for (unsigned int j(0); j < iBarWidth; ++j) {
@@ -264,8 +262,8 @@ bool Tests::bRunTests() {
     // Computations
     ci = CoxIter();
 
-    ci.set_bCheckCocompactness(tests[i].bTestCompacity);
-    ci.set_bCheckCofiniteness(true);
+    ci.set_checkCocompactness(tests[i].bTestCompacity);
+    ci.set_checkCofiniteness(true);
 
     if (!ci.bReadGraphFromFile("../../graphs/" + tests[i].szFile)) {
       of << "Error\t " << tests[i].szFile << endl;
@@ -391,16 +389,16 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     }
   }
 
-  if (grr.iPerron != 1)
+  if (grr.perron != 1)
     cout << "INFO: Not a Perron number in " << tests[iTestIndex].szFile << endl;
 
   // A small test of the growth series
   if (ci->get_isFiniteCovolume() > 0) {
     vector<mpz_class> denom;
     vector<unsigned int> cyclotomic;
-    bool bReduced;
+    bool isReduced;
 
-    ci->get_growthSeries(cyclotomic, denom, bReduced);
+    ci->get_growthSeries(cyclotomic, denom, isReduced);
 
     if (tests[iTestIndex].bTestGrowthSeries) {
       if (tests[iTestIndex].growthSeries_cyclotomicNumerator == cyclotomic &&
@@ -495,7 +493,7 @@ void Tests::bRunTests_signature(const unsigned int &iTestIndex, CoxIter *ci,
 
   // ---------------------------------------
   // Guessing the dimension
-  if (ci->get_bDimensionGuessed()) {
+  if (ci->get_dimensionGuessed()) {
     if (iDim == ci->get_dimension()) {
       iTestsSucceded["dimensionGuess"][0]++;
       of << "OK\tDimension guessed\t" << tests[iTestIndex].szFile << endl;
@@ -508,21 +506,21 @@ void Tests::bRunTests_signature(const unsigned int &iTestIndex, CoxIter *ci,
 
 void Tests::bRunTests_arithmeticity(const unsigned int &iTestIndex,
                                     CoxIter *ci) {
-  int iArithmeticity;
+  int isArithmetic;
 
   Arithmeticity arithmeticity;
   arithmeticity.test(*ci, false);
 
-  iArithmeticity = ci->get_isArithmetic();
-  if ((iArithmeticity == 1 && tests[iTestIndex].bIsArithmetic) ||
-      (iArithmeticity == 0 && !tests[iTestIndex].bIsArithmetic)) {
+  isArithmetic = ci->get_isArithmetic();
+  if ((isArithmetic == 1 && tests[iTestIndex].bIsArithmetic) ||
+      (isArithmetic == 0 && !tests[iTestIndex].bIsArithmetic)) {
     iTestsSucceded["arithmeticity"][0]++;
     of << "OK\tArithmeticity\t\t" << tests[iTestIndex].szFile << endl;
   } else {
     iTestsSucceded["arithmeticity"][1]++;
     bRunTests_error(iTestIndex, "arithmeticity",
                     tests[iTestIndex].bIsArithmetic ? "yes" : "no",
-                    strIntToString(iArithmeticity));
+                    strIntToString(isArithmetic));
   }
 }
 
@@ -592,26 +590,26 @@ void Tests::bRunTests_Euler(const unsigned int &iTestIndex, CoxIter *ci) {
 
 void Tests::bRunTests_FVector(const unsigned int &iTestIndex, CoxIter *ci) {
   if (ci->get_isFiniteCovolume() > 0) {
-    if (ci->get_iFVectorAlternateSum() == (ci->get_dimension() % 2 ? 2 : 0)) {
+    if (ci->get_fVectorAlternateSum() == (ci->get_dimension() % 2 ? 2 : 0)) {
       iTestsSucceded["fvAlt"][0]++;
       of << "OK\tAlt. sum\t\t" << tests[iTestIndex].szFile << endl;
     } else {
       iTestsSucceded["fvAlt"][1]++;
       bRunTests_error(iTestIndex, "alt. sum of components of f-vector",
                       to_string(ci->get_dimension() % 2 ? 2 : 0),
-                      to_string(ci->get_iFVectorAlternateSum()));
+                      to_string(ci->get_fVectorAlternateSum()));
     }
   }
 
   if (tests[iTestIndex].bTestFVector) {
-    if (ci->get_iFVector() == tests[iTestIndex].iFVector) {
+    if (ci->get_fVector() == tests[iTestIndex].fVector) {
       iTestsSucceded["fv"][0]++;
       of << "OK\tf-vector\t\t" << tests[iTestIndex].szFile << endl;
     } else {
       iTestsSucceded["fv"][1]++;
       bRunTests_error(iTestIndex, "f-vector",
-                      implode(",", tests[iTestIndex].iFVector),
-                      implode(",", ci->get_iFVector()));
+                      implode(",", tests[iTestIndex].fVector),
+                      implode(",", ci->get_fVector()));
     }
   }
 }

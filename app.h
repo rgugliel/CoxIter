@@ -67,7 +67,7 @@ private:
   bool bComputeGrowthRate;        ///< If we want to compute the growth rate
   bool bComputeEuler;       ///< If we want to compute the Euler characteristic
   bool bComputeSignature;   ///< If we want to compute the signature
-  bool bDebug;              ///< Display additional information
+  bool debug;               ///< Display additional information
   bool bIndex2;             ///< Trying to extract an index two subroup?
   bool bOpenMP;             ///< Use OpenMP
   bool bPrintCoxeterGraph;  ///< Print the Coxeter graph?

@@ -44,7 +44,7 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
   coxeterMatrix = ci->get_coxeterMatrix();
 
   verticesCount = ci->get_verticesCount();
-  iReferencesToLabels.clear();
+  referencesToLabels.clear();
   notArithmetic = false;
 
   // ------------------------------------------------------
@@ -52,7 +52,7 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
   bool bSQRT2(false), bSQRT3(false);
 
   for (i = 0; i < verticesCount; i++) {
-    iReferencesToLabels.push_back(i);
+    referencesToLabels.push_back(i);
 
     for (j = 0; j < i; j++) {
       if (i == j)
@@ -61,7 +61,7 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
       if (coxeterMatrix[i][j] != 1 && coxeterMatrix[i][j] != 0 &&
           coxeterMatrix[i][j] != 2 && coxeterMatrix[i][j] != 3 &&
           coxeterMatrix[i][j] != 4 && coxeterMatrix[i][j] != 6) {
-        if (ci->get_bDebug())
+        if (ci->get_debug())
           cout << "\tNot arithmetic: 2*G(" << ci->get_vertexLabel(i) << ","
                << ci->get_vertexLabel(j) << ") = pi/" << coxeterMatrix[i][j]
                << endl;
@@ -112,7 +112,7 @@ unsigned int Arithmeticity::collapseQueues() {
   vector<unsigned int> neighboursCount(
       verticesCount, 0); // For each vertex, number of neighbours
   unsigned int i, j, k;
-  unsigned int iPreviousVertex, iCurrrentVertex;
+  unsigned int previousVertex, currrentVertex;
 
   // ------------------------------------------------------
   // We count the number of neighbours of each vertex
@@ -131,31 +131,31 @@ unsigned int Arithmeticity::collapseQueues() {
       verticesToRemove.push_back(i);
 
       // vertex next to the queue
-      for (iCurrrentVertex = 0; iCurrrentVertex < verticesCount;
-           iCurrrentVertex++) {
-        if (coxeterMatrix[i][iCurrrentVertex] != 2 &&
-            neighboursCount[iCurrrentVertex] == 2) {
-          verticesToRemove.push_back(iCurrrentVertex);
+      for (currrentVertex = 0; currrentVertex < verticesCount;
+           currrentVertex++) {
+        if (coxeterMatrix[i][currrentVertex] != 2 &&
+            neighboursCount[currrentVertex] == 2) {
+          verticesToRemove.push_back(currrentVertex);
           break;
         }
       }
 
-      if (iCurrrentVertex ==
+      if (currrentVertex ==
           verticesCount) // If we cannot remove more than one vertex
         continue;
 
-      iPreviousVertex = i;
+      previousVertex = i;
 
       // Here: i ------- iCurrentVertex
 
       // We continue the path
       while (true) {
         for (k = 0; k < verticesCount; k++) {
-          if (coxeterMatrix[iCurrrentVertex][k] != 2 &&
-              neighboursCount[k] == 2 && k != iPreviousVertex) {
+          if (coxeterMatrix[currrentVertex][k] != 2 &&
+              neighboursCount[k] == 2 && k != previousVertex) {
             verticesToRemove.push_back(k);
-            iPreviousVertex = iCurrrentVertex;
-            iCurrrentVertex = k;
+            previousVertex = currrentVertex;
+            currrentVertex = k;
             break;
           }
         }
@@ -185,7 +185,7 @@ unsigned int Arithmeticity::collapseQueues() {
   for (vector<unsigned int>::const_iterator it(verticesToRemove.begin());
        it != verticesToRemove.end(); ++it) {
     coxeterMatrix.erase(coxeterMatrix.begin() + *it);
-    iReferencesToLabels.erase(iReferencesToLabels.begin() + *it);
+    referencesToLabels.erase(referencesToLabels.begin() + *it);
 
     for (vector<vector<unsigned int>>::iterator itRow(coxeterMatrix.begin());
          itRow != coxeterMatrix.end(); ++itRow)
@@ -216,34 +216,34 @@ void Arithmeticity::testCycles() {
     ci->set_isArithmetic(-1);
 }
 
-void Arithmeticity::findCycles(const unsigned int &iRoot,
-                               const unsigned int &iFrom) {
-  path.push_back(iRoot); // We add the vertex to the path
+void Arithmeticity::findCycles(const unsigned int &root,
+                               const unsigned int &from) {
+  path.push_back(root); // We add the vertex to the path
 
   for (unsigned int i(path[0]); i < verticesCount; i++) {
     // If i is a neighbour and if we did not visit this edge
-    if (coxeterMatrix[iRoot][i] != 2 && !bEdgesVisited[iRoot][i]) {
+    if (coxeterMatrix[root][i] != 2 && !bEdgesVisited[root][i]) {
       if (i == path[0]) {
         if (path[1] <
             path[path.size() - 1]) // We do not to test each cycle twice
           testCycle();
 
         if (notArithmetic) {
-          if (ci->get_bDebug()) {
+          if (ci->get_debug()) {
             cout << "\tNot arithmetic\n\t\tCycle: ";
             for (vector<unsigned int>::const_iterator it(path.begin());
                  it != path.end();
                  ++it) // We display the components of the cycle
               cout << (it == path.begin() ? "" : ", ")
-                   << ci->get_vertexLabel(iReferencesToLabels[*it]);
+                   << ci->get_vertexLabel(referencesToLabels[*it]);
             cout << endl;
           }
 
           return;
         }
       } else if (find(path.begin(), path.end(), i) == path.end()) {
-        bEdgesVisited[iRoot][i] = bEdgesVisited[i][iRoot] = true;
-        findCycles(i, iRoot);
+        bEdgesVisited[root][i] = bEdgesVisited[i][root] = true;
+        findCycles(i, root);
 
         if (notArithmetic)
           return;
@@ -251,8 +251,8 @@ void Arithmeticity::findCycles(const unsigned int &iRoot,
     }
   }
 
-  if (iFrom != iRoot)
-    bEdgesVisited[iRoot][iFrom] = bEdgesVisited[iFrom][iRoot] = false;
+  if (from != root)
+    bEdgesVisited[root][from] = bEdgesVisited[from][root] = false;
 
   path.pop_back();
 }
@@ -331,20 +331,20 @@ void Arithmeticity::testCycle() {
       for (unsigned int i(1); i < pathSize; i++) {
         if (coxeterMatrix[path[i]][path[i - 1]] == 1)
           strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                     to_string(min(iReferencesToLabels[path[i]],
-                                   iReferencesToLabels[path[i - 1]])) +
+                     to_string(min(referencesToLabels[path[i]],
+                                   referencesToLabels[path[i - 1]])) +
                      "m" +
-                     to_string(max(iReferencesToLabels[path[i]],
-                                   iReferencesToLabels[path[i - 1]]));
+                     to_string(max(referencesToLabels[path[i]],
+                                   referencesToLabels[path[i - 1]]));
       }
 
       if (coxeterMatrix[path[0]][path[pathSize - 1]] == 1)
         strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                   to_string(min(iReferencesToLabels[path[0]],
-                                 iReferencesToLabels[path[pathSize - 1]])) +
+                   to_string(min(referencesToLabels[path[0]],
+                                 referencesToLabels[path[pathSize - 1]])) +
                    "m" +
-                   to_string(max(iReferencesToLabels[path[0]],
-                                 iReferencesToLabels[path[pathSize - 1]]));
+                   to_string(max(referencesToLabels[path[0]],
+                                 referencesToLabels[path[pathSize - 1]]));
 
       auto it(lower_bound(strListCycles.begin(), strListCycles.end(), strTemp));
       if (it == strListCycles.end() || *it != strTemp)

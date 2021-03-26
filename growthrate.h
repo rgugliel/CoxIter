@@ -46,11 +46,11 @@ using namespace std;
 using namespace PariPolynomials;
 
 struct GrowthRate_Result {
-  int iPerron;
-  int iPisot;
-  int iSalem;
+  int perron;
+  int pisot;
+  int salem;
   string strGrowthRate;
-  bool bComputed;
+  bool isComputed;
 };
 
 class GrowthRate {
@@ -63,15 +63,15 @@ private:
   GEN gMaximalRoots; ///< Roots of the polynomial which has the maximal root
   long int iIndexMaximalRoot; ///< Factor which contains the minimal root
 
-  GEN gEpsilon;            ///< Some small number (typically 10^-50)
-  long int iPariPrecision; ///< Given as prec (typically 8)
+  GEN gEpsilon;           ///< Some small number (typically 10^-50)
+  long int pariPrecision; ///< Given as prec (typically 8)
 
 public:
   GrowthRate();
   ~GrowthRate();
 
   GrowthRate_Result grrComputations(vector<mpz_class> polynomial,
-                                    const bool &bOnlyGrowthRate = false);
+                                    const bool &onlyGrowthRate = false);
 
 private:
   /*!	\fn irreducibleFactors(const vector< mpz_class >& polynomial)
