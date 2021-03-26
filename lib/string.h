@@ -41,8 +41,8 @@ using namespace std;
  * \fn void str_replace(string &str, const string &from, const string &to)
  * \brief Rechercher remplacer
  *
- * \param[out] str Chaîne dans laquelle se fait la recherche/remplacement
- * \param[in] from Chaîne à rechercher
+ * \param[out] str ChaÃ®ne dans laquelle se fait la recherche/remplacement
+ * \param[in] from ChaÃ®ne Ã  rechercher
  * \param[in] to Ce par quoi on remplace
  * \return void
  */
@@ -50,13 +50,13 @@ void str_replace(string &str, const string &from, const string &to);
 
 /**
         * \fn vector<string> explode(string source, const string &separator);
-        * \brief Équivalent de la fonction explode de PHP
+        * \brief Ã‰quivalent de la fonction explode de PHP
         *
-        * \param[in] source Chaîne de caractères sur laquelle on travaille
-        * \param[in] separator Séparateur
-        * \return vector<string>: Tableau contenant les résultats
+        * \param[in] source ChaÃ®ne de caractÃ¨res sur laquelle on travaille
+        * \param[in] separator SÃ©parateur
+        * \return vector<string>: Tableau contenant les rÃ©sultats
 
-        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
+        Prend une string ainsi qu'un sÃ©parateur et dÃ©coupe la chaÃ®ne vers un
    tableau
 */
 vector<string> explode(const string &separator, string source);
@@ -64,15 +64,14 @@ vector<string> explode(const string &separator, string source);
 /**
         * \fn vector<string> explode(string source, const string &separator,
    vector<string> &results);
-        * \brief Équivalent de la fonction explode en C++
+        * \brief Ã‰quivalent de la fonction explode en C++
         *
-        * \param[in] source Chaîne de caractères sur laquelle on travaille
-        * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par
-   référence)
+        * \param[in] source ChaÃ®ne de caractÃ¨res sur laquelle on travaille
+        * \param[in] separator SÃ©parateur
+        * \param[out] results Tableau auquel sont ajoutÃ©s les rÃ©sultats (par rÃ©fÃ©rence)
         * \return vector<string>: void
 
-        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
+        Prend une string ainsi qu'un sÃ©parateur et dÃ©coupe la chaÃ®ne vers un
    tableau
 */
 void explode(const string &separator, string source, vector<string> &results);
@@ -80,15 +79,14 @@ void explode(const string &separator, string source, vector<string> &results);
 /**
         * \fn vector<string> explode(string source, const string &separator,
    vector<int> &results);
-        * \brief Équivalent de la fonction explode en C++
+        * \brief Ã‰quivalent de la fonction explode en C++
         *
-        * \param[in] source Chaîne de caractères sur laquelle on travaille
-        * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par
-   référence)
+        * \param[in] source ChaÃ®ne de caractÃ¨res sur laquelle on travaille
+        * \param[in] separator SÃ©parateur
+        * \param[out] results Tableau auquel sont ajoutÃ©s les rÃ©sultats (par rÃ©fÃ©rence)
         * \return vector<string>: void
 
-        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
+        Prend une string ainsi qu'un sÃ©parateur et dÃ©coupe la chaÃ®ne vers un
    tableau
 */
 void explode(const string &separator, string source, vector<int> &results);
@@ -96,16 +94,14 @@ void explode(const string &separator, string source, vector<int> &results);
 /**
         * \fn vector<string> explode(string source, const string &separator,
    vector<unsigned int> &results);
-        * \brief Équivalent de la fonction explode en C++
+        * \brief Ã‰quivalent de la fonction explode en C++
         *
-        * \param[in] source Chaîne de caractères sur laquelle on travaille
-        * \param[in] separator Séparateur
-        * \param[out] results Tableau auquel sont ajoutés les résultats (par
-   référence)
+        * \param[in] source ChaÃ®ne de caractÃ¨res sur laquelle on travaille
+        * \param[in] separator SÃ©parateur
+        * \param[out] results Tableau auquel sont ajoutÃ©s les rÃ©sultats (par rÃ©fÃ©rence)
         * \return vector<string>: void
 
-        Prend une string ainsi qu'un séparateur et découpe la chaîne vers un
-   tableau
+        Prend une string ainsi qu'un sÃ©parateur et dÃ©coupe la chaÃ®ne vers un tableau
 */
 void explode(const string &separator, string source,
              vector<unsigned int> &results);
@@ -125,16 +121,15 @@ string implode(const string &strSeparator, const vector<string> &strVector);
  * 	\brief Implode function (as in the PHP language)
  *
  * 	\param strSeparator(const string &) Separator
- * 	\param iVector(const vector< int >&) Vector to implode
+ * 	\param v(const vector<T>&) Vector to implode
  * 	\return Imploded string
  */
 template <typename T>
 typename std::enable_if<std::is_arithmetic<T>::value, string>::type
-implode(const string &strSeparator, const vector<T> &iVector) {
+implode(const string &strSeparator, const vector<T> &v) {
   vector<string> strVector;
-  for (typename vector<T>::const_iterator it(iVector.begin());
-       it != iVector.end(); ++it)
-    strVector.push_back(to_string(*it));
+  for (const auto &element : v)
+    strVector.push_back(to_string(element));
 
   return implode(strSeparator, strVector);
 }
