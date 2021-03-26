@@ -887,21 +887,21 @@ private:
   mpz_class i_orderFiniteSubgraph(const unsigned int &iType,
                                   const unsigned int &iDataSupp);
 
-  /*!	\fn b_isGraph_cocompact_finiteVolume_parallel
+  /*!	\fn isGraph_cocompact_finiteVolume_parallel
    * 	\brief Check whether the graph is cocompact or not or has finite
    * covolume or not Called by: isGraphCocompact and isFiniteCovolume \param
    * iIndex(unsigned int): 1 if test for compacity, 2 if test for the finite
    * covolume \return True or false
    */
-  bool b_isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex);
+  bool isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex);
 
-  /*!	\fn b_isGraph_cocompact_finiteVolume_sequential
+  /*!	\fn isGraph_cocompact_finiteVolume_sequential
    * 	\brief Check whether the graph is cocompact or not or has finite
    * covolume or not Called by: isGraphCocompact and isFiniteCovolume \param
    * iIndex(unsigned int): 1 if test for compacity, 2 if test for the finite
    * covolume \return True or false
    */
-  bool b_isGraph_cocompact_finiteVolume_sequential(unsigned int iIndex);
+  bool isGraph_cocompact_finiteVolume_sequential(unsigned int iIndex);
 
   /*!	\fn growthSeries_symbolExponentFromProduct(const vector< vector<short
    * unsigned int> >& iProduct, vector<unsigned int>& iSymbol, unsigned int&

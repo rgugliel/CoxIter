@@ -265,9 +265,9 @@ bool CoxIter::parseGraph(istream &streamIn) {
       if (i3 == 1) // Weight of the dotted line given?
       {
         if (regexpRes.size() > 5) {
-          unsigned int iIndex(linearizationMatrix_index(
-              min(i1, i2), max(i1, i2), verticesCount));
-          strWeights[iIndex] = regexpRes[5][0];
+          unsigned int index(linearizationMatrix_index(min(i1, i2), max(i1, i2),
+                                                       verticesCount));
+          strWeights[index] = regexpRes[5][0];
         } else
           hasDottedLineWithoutWeight = 1;
       }
@@ -1294,9 +1294,9 @@ int CoxIter::isGraphCocompact() {
   // ----------------------------------------------------
   // the test
   if (bUseOpenMP && verticesCount >= 15)
-    isCocompact = b_isGraph_cocompact_finiteVolume_parallel(1) ? 1 : 0;
+    isCocompact = isGraph_cocompact_finiteVolume_parallel(1) ? 1 : 0;
   else
-    isCocompact = b_isGraph_cocompact_finiteVolume_sequential(1) ? 1 : 0;
+    isCocompact = isGraph_cocompact_finiteVolume_sequential(1) ? 1 : 0;
 
   return isCocompact;
 }
@@ -1329,7 +1329,7 @@ int CoxIter::checkCovolumeFiniteness() {
 
   /*
    * The duplication of the data is not beautiful but it allows
-   * us to simplify the code of the function b_isGraph_cocompact_finiteVolume.
+   * us to simplify the code of the function isGraph_cocompact_finiteVolume.
    * Moreover, we want the program to be quick but memory is not really an
    * issue.
    *
@@ -1341,72 +1341,70 @@ int CoxIter::checkCovolumeFiniteness() {
   // ----------------------------------------------------
   // the test
   if (bUseOpenMP && verticesCount >= 15)
-    isFiniteCovolume = b_isGraph_cocompact_finiteVolume_parallel(2) ? 1 : 0;
+    isFiniteCovolume = isGraph_cocompact_finiteVolume_parallel(2) ? 1 : 0;
   else
-    isFiniteCovolume = b_isGraph_cocompact_finiteVolume_sequential(2) ? 1 : 0;
+    isFiniteCovolume = isGraph_cocompact_finiteVolume_sequential(2) ? 1 : 0;
 
   return isFiniteCovolume;
 }
 
-bool CoxIter::b_isGraph_cocompact_finiteVolume_sequential(unsigned int iIndex) {
-  unsigned int iExtendedCount, iMax(graphsProducts[0].size()), i;
+bool CoxIter::isGraph_cocompact_finiteVolume_sequential(unsigned int index) {
+  unsigned int extendedCount;
 
-  vector<Graph *> vDiffSubNotBig, vDiffBigNotSub;
-  vector<Graph *>::const_iterator itGSub, itGBig;
+  vector<Graph *> diffSubNotBig, diffBigNotSub;
+  vector<Graph *>::const_iterator itGBig;
 
-  bool bExtendable;
+  bool isExtendable;
 
-  for (i = 0; i < iMax; i++) {
-    iExtendedCount = 0;
+  for (const auto &sphericalProductsCodim1 : graphsProducts[0]) {
+    extendedCount = 0;
 
-    for (vector<GraphsProductSet>::const_iterator gpBig(
-             graphsProducts[iIndex].begin());
-         gpBig != graphsProducts[iIndex].end(); ++gpBig) {
-      vDiffSubNotBig.clear();
-      vDiffBigNotSub.clear();
+    for (const auto &gpBig : graphsProducts[index]) {
+      diffSubNotBig.clear();
+      diffBigNotSub.clear();
 
-      set_difference(graphsProducts[0][i].graphs.begin(),
-                     graphsProducts[0][i].graphs.end(), gpBig->graphs.begin(),
-                     gpBig->graphs.end(), back_inserter(vDiffSubNotBig));
-      set_difference(gpBig->graphs.begin(), gpBig->graphs.end(),
-                     graphsProducts[0][i].graphs.begin(),
-                     graphsProducts[0][i].graphs.end(),
-                     back_inserter(vDiffBigNotSub));
+      set_difference(sphericalProductsCodim1.graphs.begin(),
+                     sphericalProductsCodim1.graphs.end(), gpBig.graphs.begin(),
+                     gpBig.graphs.end(), back_inserter(diffSubNotBig));
 
-      bExtendable = true;
-      for (itGSub = vDiffSubNotBig.begin(); itGSub != vDiffSubNotBig.end();
-           ++itGSub) {
-        for (itGBig = vDiffBigNotSub.begin(); itGBig != vDiffBigNotSub.end();
+      set_difference(gpBig.graphs.begin(), gpBig.graphs.end(),
+                     sphericalProductsCodim1.graphs.begin(),
+                     sphericalProductsCodim1.graphs.end(),
+                     back_inserter(diffBigNotSub));
+
+      isExtendable = true;
+      for (const auto &graphSub : diffSubNotBig) {
+        for (itGBig = diffBigNotSub.begin(); itGBig != diffBigNotSub.end();
              ++itGBig) {
-          if ((*itGSub)->bIsSubgraphOf(*itGBig))
+          if (graphSub->bIsSubgraphOf(*itGBig))
             break;
         }
 
-        if (itGBig == vDiffBigNotSub.end()) {
-          bExtendable = false;
+        if (itGBig == diffBigNotSub.end()) {
+          isExtendable = false;
           break;
         }
       }
 
-      if (bExtendable)
-        iExtendedCount++;
+      if (isExtendable)
+        extendedCount++;
     }
 
-    if (iExtendedCount != 2) {
+    if (extendedCount != 2) {
       if (bDebug) {
         cout << "----------------------------------------------------------"
              << endl;
-        cout << (iIndex == 1 ? "Compactness" : "Finite covolume") << " test"
+        cout << (index == 1 ? "Compactness" : "Finite covolume") << " test"
              << endl;
         cout << "Trying to extend the product: " << endl;
-        cout << graphsProducts[0][i] << endl;
-        cout << "Succeeded in " << iExtendedCount << " ways instead of 2"
+        cout << sphericalProductsCodim1 << endl;
+        cout << "Succeeded in " << extendedCount << " ways instead of 2"
              << endl;
 
         for (vector<GraphsProductSet>::const_iterator gpBig(
-                 graphsProducts[iIndex].begin());
-             gpBig != graphsProducts[iIndex].end(); ++gpBig) {
-          if (graphsProducts[0][i].b_areVerticesSubsetOf(*gpBig))
+                 graphsProducts[index].begin());
+             gpBig != graphsProducts[index].end(); ++gpBig) {
+          if (sphericalProductsCodim1.b_areVerticesSubsetOf(*gpBig))
             cout << "Candidate: \n" << *gpBig << endl;
         }
         cout << "----------------------------------------------------------"
@@ -1420,77 +1418,73 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_sequential(unsigned int iIndex) {
   return 1;
 }
 
-bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex) {
-  unsigned int iExtendedCount, iMax(graphsProducts[0].size()), i;
+bool CoxIter::isGraph_cocompact_finiteVolume_parallel(unsigned int index) {
+  unsigned int extendedCount, max(graphsProducts[0].size()), i;
 
-  vector<Graph *> vDiffSubNotBig, vDiffBigNotSub;
-  vector<Graph *>::const_iterator itGSub, itGBig;
+  vector<Graph *> diffSubNotBig, diffBigNotSub;
+  vector<Graph *>::const_iterator itGBig;
 
-  bool bExtendable, bExit(false);
+  bool isExtendable, exit(false);
 
 #pragma omp parallel if (bUseOpenMP && verticesCount >= 15)
   {
 #pragma omp single nowait
     {
-      for (i = 0; i < iMax && !bExit; i++) {
-#pragma omp task private(itGBig, itGSub, bExtendable, vDiffSubNotBig,          \
-                         vDiffBigNotSub, iExtendedCount)                       \
-    shared(iMax, iIndex, bExit) firstprivate(i)
+      for (i = 0; i < max && !exit; i++) {
+#pragma omp task private(itGBig, isExtendable, diffSubNotBig, diffBigNotSub,   \
+                         extendedCount) shared(max, index, exit)               \
+    firstprivate(i)
         {
-          iExtendedCount = 0;
+          extendedCount = 0;
 
-          for (vector<GraphsProductSet>::const_iterator gpBig(
-                   graphsProducts[iIndex].begin());
-               gpBig != graphsProducts[iIndex].end(); ++gpBig) {
-            vDiffSubNotBig.clear();
-            vDiffBigNotSub.clear();
+          for (const auto &gpBig : graphsProducts[index]) {
+            diffSubNotBig.clear();
+            diffBigNotSub.clear();
             set_difference(graphsProducts[0][i].graphs.begin(),
                            graphsProducts[0][i].graphs.end(),
-                           gpBig->graphs.begin(), gpBig->graphs.end(),
-                           back_inserter(vDiffSubNotBig));
-            set_difference(gpBig->graphs.begin(), gpBig->graphs.end(),
+                           gpBig.graphs.begin(), gpBig.graphs.end(),
+                           back_inserter(diffSubNotBig));
+
+            set_difference(gpBig.graphs.begin(), gpBig.graphs.end(),
                            graphsProducts[0][i].graphs.begin(),
                            graphsProducts[0][i].graphs.end(),
-                           back_inserter(vDiffBigNotSub));
+                           back_inserter(diffBigNotSub));
 
-            bExtendable = true;
-            for (itGSub = vDiffSubNotBig.begin();
-                 itGSub != vDiffSubNotBig.end(); ++itGSub) {
-              for (itGBig = vDiffBigNotSub.begin();
-                   itGBig != vDiffBigNotSub.end(); ++itGBig) {
-                if ((*itGSub)->bIsSubgraphOf(*itGBig))
+            isExtendable = true;
+            for (const auto &graphSub : diffSubNotBig) {
+              for (itGBig = diffBigNotSub.begin();
+                   itGBig != diffBigNotSub.end(); ++itGBig) {
+                if (graphSub->bIsSubgraphOf(*itGBig))
                   break;
               }
 
-              if (itGBig == vDiffBigNotSub.end()) {
-                bExtendable = false;
+              if (itGBig == diffBigNotSub.end()) {
+                isExtendable = false;
                 break;
               }
             }
 
-            if (bExtendable)
-              iExtendedCount++;
+            if (isExtendable)
+              extendedCount++;
           }
 
-          if (iExtendedCount != 2) {
+          if (extendedCount != 2) {
             if (bDebug) {
 #pragma omp critical
               {
                 cout << "------------------------------------------------------"
                         "----"
                      << endl;
-                cout << (iIndex == 1 ? "Compactness" : "Finite covolume")
+                cout << (index == 1 ? "Compactness" : "Finite covolume")
                      << " test" << endl;
                 cout << "Trying to extend the product: " << endl;
                 cout << graphsProducts[0][i] << endl;
-                cout << "Succeeded in " << iExtendedCount
-                     << " ways instead of 2" << endl;
+                cout << "Succeeded in " << extendedCount << " ways instead of 2"
+                     << endl;
 
-                for (vector<GraphsProductSet>::const_iterator gpBig(
-                         graphsProducts[iIndex].begin());
-                     gpBig != graphsProducts[iIndex].end(); ++gpBig) {
-                  if (graphsProducts[0][i].b_areVerticesSubsetOf(*gpBig))
-                    cout << "Candidate: \n" << *gpBig << endl;
+                for (const auto &gpBig : graphsProducts[index]) {
+                  if (graphsProducts[0][i].b_areVerticesSubsetOf(gpBig))
+                    cout << "Candidate: \n" << gpBig << endl;
                 }
                 cout << "------------------------------------------------------"
                         "----"
@@ -1499,17 +1493,17 @@ bool CoxIter::b_isGraph_cocompact_finiteVolume_parallel(unsigned int iIndex) {
             }
 
 #pragma omp atomic write
-            bExit = true;
+            exit = true;
           }
         }
 
-        if (bExit)
+        if (exit)
           break;
       }
     }
   }
 
-  return !bExit;
+  return !exit;
 }
 
 void CoxIter::computeGraphsProducts() {
