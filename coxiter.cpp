@@ -1074,30 +1074,30 @@ void CoxIter::printPath() {
 
 /*! 	\fn vector2str
  * 	\brief Vector --> string
- * 	\param iPolynomial(const vector< mpz_class >& iPolynomial) Polynomial
+ * 	\param polynomial(const vector< mpz_class >& polynomial) Polynomial
  *
  * 	\remark: When mpz_class will have a to_string(mpz) we'll move that to
  * tools/polynomials.h TODO
  */
-string vector2str(const vector<mpz_class> &iPolynomial) {
+string vector2str(const vector<mpz_class> &polynomial) {
   bool bFirst(true);
-  unsigned int iSize(iPolynomial.size());
+  unsigned int iSize(polynomial.size());
   string strRes;
   mpz_class mpzTemp;
 
   for (unsigned int i(0); i < iSize; i++) {
-    if (iPolynomial[i] != 0) {
+    if (polynomial[i] != 0) {
       if (bFirst) {
-        strRes += iPolynomial[i].get_str() +
+        strRes += polynomial[i].get_str() +
                   (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
         bFirst = false;
       } else {
-        if ((iPolynomial[i] != 1 && iPolynomial[i] != -1) || !i) {
-          mpzTemp = abs(iPolynomial[i]);
-          strRes += (iPolynomial[i] > 0 ? " + " : " - ") + mpzTemp.get_str() +
+        if ((polynomial[i] != 1 && polynomial[i] != -1) || !i) {
+          mpzTemp = abs(polynomial[i]);
+          strRes += (polynomial[i] > 0 ? " + " : " - ") + mpzTemp.get_str() +
                     (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
         } else
-          strRes += (iPolynomial[i] > 0 ? " + " : " - ") +
+          strRes += (polynomial[i] > 0 ? " + " : " - ") +
                     string(i > 1 ? "x^" + to_string(i) : "x");
       }
     }
@@ -1133,30 +1133,30 @@ string CoxIter::get_strGrowthSeries() {
 
   if (strOuputMathematicalFormat == "generic") {
     strGrowth = "f(x) = ";
-    if (growthSeries_iCyclotomicNumerator.size()) {
+    if (growthSeries_cyclotomicNumerator.size()) {
       strGrowth += "C(";
-      unsigned int iMax(growthSeries_iCyclotomicNumerator.size());
+      unsigned int iMax(growthSeries_cyclotomicNumerator.size());
       for (unsigned int i(0); i < iMax; i++)
         strGrowth +=
-            (i ? "," : "") + to_string(growthSeries_iCyclotomicNumerator[i]);
+            (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
       strGrowth += ")";
     }
 
-    strGrowth += "/(" + vector2str(growthSeries_iPolynomialDenominator) + ")";
+    strGrowth += "/(" + vector2str(growthSeries_polynomialDenominator) + ")";
   } else if (strOuputMathematicalFormat == "gap") {
-    unsigned int cycloSize(growthSeries_iCyclotomicNumerator.size());
-    unsigned int denominatorSize(growthSeries_iPolynomialDenominator.size());
+    unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
+    unsigned int denominatorSize(growthSeries_polynomialDenominator.size());
 
     strGrowth += "f := Product([";
     for (unsigned int i(0); i < cycloSize; i++)
       strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_iCyclotomicNumerator[i]);
+          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
     strGrowth += "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
     for (unsigned int i(0); i < denominatorSize; i++)
-      cout << (i ? "," : "") << growthSeries_iPolynomialDenominator[i];
+      cout << (i ? "," : "") << growthSeries_polynomialDenominator[i];
     cout << "], X(Rationals));";
   } else if (strOuputMathematicalFormat == "mathematica") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int iCycloSize(growthSeries_cyclotomicNumerator.size());
 
     strGrowth =
         "Cyclo[s_, x_] := Product[Cyclotomic[s[[i]], x], {i, 1, Length[s]}];";
@@ -1164,18 +1164,18 @@ string CoxIter::get_strGrowthSeries() {
     strGrowth += "f[x_] := Cyclo[{";
     for (unsigned int i(0); i < iCycloSize; i++)
       strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_iCyclotomicNumerator[i]);
+          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
     strGrowth +=
-        "},x]/(" + vector2str(growthSeries_iPolynomialDenominator) + ");";
+        "},x]/(" + vector2str(growthSeries_polynomialDenominator) + ");";
   } else if (strOuputMathematicalFormat == "pari") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int iCycloSize(growthSeries_cyclotomicNumerator.size());
     strGrowth = "Cyclo = (S, y) -> prod(i=1, length(S), polcyclo(S[i],y));\n";
     strGrowth += "f(x) = Cyclo([";
     for (unsigned int i(0); i < iCycloSize; i++)
       strGrowth +=
-          (i ? "," : "") + to_string(growthSeries_iCyclotomicNumerator[i]);
+          (i ? "," : "") + to_string(growthSeries_cyclotomicNumerator[i]);
     strGrowth +=
-        "],x)/(" + vector2str(growthSeries_iPolynomialDenominator) + ");";
+        "],x)/(" + vector2str(growthSeries_polynomialDenominator) + ");";
   }
 
   return strGrowth;
@@ -1187,36 +1187,36 @@ void CoxIter::printGrowthSeries() {
 
   if (strOuputMathematicalFormat == "generic") {
     cout << "f(x) = ";
-    if (growthSeries_iCyclotomicNumerator.size()) {
+    if (growthSeries_cyclotomicNumerator.size()) {
       cout << "C(";
-      unsigned int iMax(growthSeries_iCyclotomicNumerator.size());
+      unsigned int iMax(growthSeries_cyclotomicNumerator.size());
       for (unsigned int i(0); i < iMax; i++)
-        cout << (i ? "," : "") << growthSeries_iCyclotomicNumerator[i];
+        cout << (i ? "," : "") << growthSeries_cyclotomicNumerator[i];
       cout << ")";
     }
 
     cout << "/(";
-    Polynomials::polynomialDisplay(growthSeries_iPolynomialDenominator);
+    Polynomials::polynomialDisplay(growthSeries_polynomialDenominator);
     cout << ")";
 
     if (bDebug)
       cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
   } else if (strOuputMathematicalFormat == "gap") {
-    unsigned int cycloSize(growthSeries_iCyclotomicNumerator.size());
-    unsigned int denominatorSize(growthSeries_iPolynomialDenominator.size());
+    unsigned int cycloSize(growthSeries_cyclotomicNumerator.size());
+    unsigned int denominatorSize(growthSeries_polynomialDenominator.size());
 
     cout << "f := Product([";
     for (unsigned int i(0); i < cycloSize; i++)
-      cout << (i ? "," : "") << growthSeries_iCyclotomicNumerator[i];
+      cout << (i ? "," : "") << growthSeries_cyclotomicNumerator[i];
     cout << "], i -> CyclotomicPolynomial(Rationals,i))/ValuePol([";
     for (unsigned int i(0); i < denominatorSize; i++)
-      cout << (i ? "," : "") << growthSeries_iPolynomialDenominator[i];
+      cout << (i ? "," : "") << growthSeries_polynomialDenominator[i];
     cout << "], X(Rationals));";
 
     if (bDebug)
       cout << "\ng(x) = (" << growthSeries_raw << ")^-1;";
   } else if (strOuputMathematicalFormat == "mathematica") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int iCycloSize(growthSeries_cyclotomicNumerator.size());
 
     cout
         << "Cyclo[s_, x_] := Product[Cyclotomic[s[[i]], x], {i, 1, Length[s]}];"
@@ -1228,17 +1228,17 @@ void CoxIter::printGrowthSeries() {
 
     cout << "f[x_] := Cyclo[{";
     for (unsigned int i(0); i < iCycloSize; i++)
-      cout << (i ? "," : "") << growthSeries_iCyclotomicNumerator[i];
+      cout << (i ? "," : "") << growthSeries_cyclotomicNumerator[i];
     cout << "},x]";
 
     cout << "/(";
-    Polynomials::polynomialDisplay(growthSeries_iPolynomialDenominator);
+    Polynomials::polynomialDisplay(growthSeries_polynomialDenominator);
     cout << ");";
 
     if (bDebug)
       cout << "\ng[x_] := (" << growthSeries_raw << ")^-1;";
   } else if (strOuputMathematicalFormat == "pari") {
-    unsigned int iCycloSize(growthSeries_iCyclotomicNumerator.size());
+    unsigned int iCycloSize(growthSeries_cyclotomicNumerator.size());
 
     cout << "Cyclo = (S, y) -> prod(i=1, length(S), polcyclo(S[i],y));" << endl;
     if (bDebug)
@@ -1247,9 +1247,9 @@ void CoxIter::printGrowthSeries() {
 
     cout << "f(x) = Cyclo([";
     for (unsigned int i(0); i < iCycloSize; i++)
-      cout << (i ? "," : "") << growthSeries_iCyclotomicNumerator[i];
+      cout << (i ? "," : "") << growthSeries_cyclotomicNumerator[i];
     cout << "],x)/(";
-    Polynomials::polynomialDisplay(growthSeries_iPolynomialDenominator);
+    Polynomials::polynomialDisplay(growthSeries_polynomialDenominator);
     cout << ");";
 
     if (bDebug)
@@ -2182,7 +2182,7 @@ mpz_class CoxIter::i_orderFiniteSubgraph(const unsigned int &iType,
   return 0;
 }
 
-void CoxIter::growthSeries_mergeTerms(vector<mpz_class> &iPolynomial,
+void CoxIter::growthSeries_mergeTerms(vector<mpz_class> &polynomial,
                                       vector<unsigned int> &iSymbol,
                                       vector<mpz_class> iTemp_polynomial,
                                       const vector<unsigned int> &iTemp_symbol,
@@ -2200,7 +2200,7 @@ void CoxIter::growthSeries_mergeTerms(vector<mpz_class> &iPolynomial,
   for (unsigned int i(1); i <= iTemp_symbol_max; i++) {
     for (unsigned int j(i > iSymbol_max ? 1 : iSymbol[i] + 1);
          j <= iTemp_symbol[i]; j++)
-      Polynomials::polynomialDotSymbol(iPolynomial, i);
+      Polynomials::polynomialDotSymbol(polynomial, i);
   }
 
   // Second step to compute the lcm of the two symbols
@@ -2214,25 +2214,25 @@ void CoxIter::growthSeries_mergeTerms(vector<mpz_class> &iPolynomial,
   }
 
   // we eventually add some zeroes
-  if (iPolynomial.size() < iTemp_polynomial.size())
-    iPolynomial.insert(iPolynomial.end(),
-                       iTemp_polynomial.size() - iPolynomial.size(), 0);
+  if (polynomial.size() < iTemp_polynomial.size())
+    polynomial.insert(polynomial.end(),
+                      iTemp_polynomial.size() - polynomial.size(), 0);
 
   unsigned int iTempPolynomialDegree(iTemp_polynomial.size() - 1);
 
   // Addition of the two numerators
   for (unsigned int i(0); i <= iTempPolynomialDegree; i++)
-    iPolynomial[i] += iTemp_polynomial[i] * biTemp;
+    polynomial[i] += iTemp_polynomial[i] * biTemp;
 
   // ----------------------------------------------------
   // Final stuff
   iSymbol = iTemp_symbolDenominatorTemp;
 
   // We remove final 0
-  while (iPolynomial[iTempPolynomialDegree] == 0)
+  while (polynomial[iTempPolynomialDegree] == 0)
     iTempPolynomialDegree--;
-  iPolynomial.erase(iPolynomial.begin() + iTempPolynomialDegree + 1,
-                    iPolynomial.end());
+  polynomial.erase(polynomial.begin() + iTempPolynomialDegree + 1,
+                   polynomial.end());
 }
 
 void CoxIter::growthSeries() {
@@ -2308,8 +2308,8 @@ void CoxIter::growthSeries_sequential() {
   unsigned int iExponent;       // Temporary exponent
 
   vector<unsigned int> growthSeries_iSymbolNumerator;
-  growthSeries_iPolynomialDenominator = vector<mpz_class>(1, 1);
-  growthSeries_iCyclotomicNumerator.clear();
+  growthSeries_polynomialDenominator = vector<mpz_class>(1, 1);
+  growthSeries_cyclotomicNumerator.clear();
   growthSeries_bFractionReduced = true;
 
   vector<unsigned int> iSymbolDenominatorTemp;
@@ -2343,7 +2343,7 @@ void CoxIter::growthSeries_sequential() {
       // Update
       /*
        * We have here the current rational function:
-       * growthSeries_iPolynomialDenominator / iSymbolDenominator We want to add
+       * growthSeries_polynomialDenominator / iSymbolDenominator We want to add
        * the rational function: (-1)^iSize * iProduct.second * x^iExponent /
        * iSymbol
        */
@@ -2355,7 +2355,7 @@ void CoxIter::growthSeries_sequential() {
                                 ? 1
                                 : growthSeries_iSymbolNumerator[i] + 1);
              j <= iSymbol[i]; j++)
-          Polynomials::polynomialDotSymbol(growthSeries_iPolynomialDenominator,
+          Polynomials::polynomialDotSymbol(growthSeries_polynomialDenominator,
                                            i);
       }
 
@@ -2374,17 +2374,17 @@ void CoxIter::growthSeries_sequential() {
       }
 
       // we eventually add some zeroes
-      if (growthSeries_iPolynomialDenominator.size() < iTempPolynomial.size())
-        growthSeries_iPolynomialDenominator.insert(
-            growthSeries_iPolynomialDenominator.end(),
-            iTempPolynomial.size() - growthSeries_iPolynomialDenominator.size(),
+      if (growthSeries_polynomialDenominator.size() < iTempPolynomial.size())
+        growthSeries_polynomialDenominator.insert(
+            growthSeries_polynomialDenominator.end(),
+            iTempPolynomial.size() - growthSeries_polynomialDenominator.size(),
             0);
 
       unsigned int iTempPolynomialDegree(iTempPolynomial.size() - 1);
 
       // Addition of the two numerators
       for (unsigned int i(0); i <= iTempPolynomialDegree; i++)
-        growthSeries_iPolynomialDenominator[i] += iTempPolynomial[i] * biTemp;
+        growthSeries_polynomialDenominator[i] += iTempPolynomial[i] * biTemp;
 
       // ----------------------------------------------------
       // Final stuff
@@ -2392,18 +2392,18 @@ void CoxIter::growthSeries_sequential() {
       iSymbolDenominatorMax = growthSeries_iSymbolNumerator.size() - 1;
 
       // We remove final 0
-      while (growthSeries_iPolynomialDenominator[iTempPolynomialDegree] == 0)
+      while (growthSeries_polynomialDenominator[iTempPolynomialDegree] == 0)
         iTempPolynomialDegree--;
-      growthSeries_iPolynomialDenominator.erase(
-          growthSeries_iPolynomialDenominator.begin() + iTempPolynomialDegree +
+      growthSeries_polynomialDenominator.erase(
+          growthSeries_polynomialDenominator.begin() + iTempPolynomialDegree +
               1,
-          growthSeries_iPolynomialDenominator.end());
+          growthSeries_polynomialDenominator.end());
     }
   }
 
   // --------------------------------------------------------------
   // Symbols --> Cyclotomic polynomials
-  vector<unsigned int> iCyclotomicTemp;
+  vector<unsigned int> cyclotomicTemp;
 
   for (unsigned int i(iSymbolDenominatorMax); i >= 2; i--) {
     if (growthSeries_iSymbolNumerator[i]) {
@@ -2411,23 +2411,24 @@ void CoxIter::growthSeries_sequential() {
       iDivisors.push_back(i);
 
       for (unsigned int j(1); j <= growthSeries_iSymbolNumerator[i]; j++)
-        iCyclotomicTemp.insert(iCyclotomicTemp.end(), iDivisors.begin(),
-                               iDivisors.end());
+        cyclotomicTemp.insert(cyclotomicTemp.end(), iDivisors.begin(),
+                              iDivisors.end());
     }
   }
 
   // --------------------------------------------------------------
   // Simplifications
-  unsigned int iCyclotomicTempSize(iCyclotomicTemp.size()),
-      iCyclotomicMax(Polynomials::iCyclotomicPolynomials.size() - 1);
-  for (unsigned int i(0); i < iCyclotomicTempSize; i++) {
-    if (iCyclotomicMax < iCyclotomicTemp[i] ||
-        !Polynomials::dividePolynomialByPolynomial(
-            growthSeries_iPolynomialDenominator,
-            Polynomials::iCyclotomicPolynomials[iCyclotomicTemp[i]]))
-      growthSeries_iCyclotomicNumerator.push_back(iCyclotomicTemp[i]);
+  unsigned int cyclotomicTempSize(cyclotomicTemp.size()),
+      cyclotomicMax(Polynomials::cyclotomicPolynomials.size() - 1);
 
-    if (iCyclotomicMax < iCyclotomicTemp[i])
+  for (unsigned int i(0); i < cyclotomicTempSize; i++) {
+    if (cyclotomicMax < cyclotomicTemp[i] ||
+        !Polynomials::dividePolynomialByPolynomial(
+            growthSeries_polynomialDenominator,
+            Polynomials::cyclotomicPolynomials[cyclotomicTemp[i]]))
+      growthSeries_cyclotomicNumerator.push_back(cyclotomicTemp[i]);
+
+    if (cyclotomicMax < cyclotomicTemp[i])
       growthSeries_bFractionReduced = false;
   }
 
@@ -2441,8 +2442,8 @@ void CoxIter::growthSeries_sequential() {
                                           iSymbolDenominatorMax + 1,
                                       growthSeries_iSymbolNumerator.end());
 
-  sort(growthSeries_iCyclotomicNumerator.begin(),
-       growthSeries_iCyclotomicNumerator.end());
+  sort(growthSeries_cyclotomicNumerator.begin(),
+       growthSeries_cyclotomicNumerator.end());
 
   isGrowthSeriesComputed = true;
 }
@@ -2456,8 +2457,8 @@ void CoxIter::growthSeries_parallel() {
 
   unsigned int iSizeMax(graphsProductsCount_spherical.size());
 
-  growthSeries_iPolynomialDenominator.clear();
-  growthSeries_iCyclotomicNumerator.clear();
+  growthSeries_polynomialDenominator.clear();
+  growthSeries_cyclotomicNumerator.clear();
   growthSeries_bFractionReduced = true;
 
   // -----------------------------------------------------------------
@@ -2471,16 +2472,16 @@ void CoxIter::growthSeries_parallel() {
   // Shared and local variables
   int iOMPMaxThreads(omp_get_max_threads());
 
-  vector<vector<mpz_class>> gs_iPolynomialDenominator(iOMPMaxThreads,
-                                                      vector<mpz_class>(1, 0));
+  vector<vector<mpz_class>> gs_polynomialDenominator(iOMPMaxThreads,
+                                                     vector<mpz_class>(1, 0));
   vector<vector<unsigned int>> gs_iSymbolNumerator(iOMPMaxThreads,
                                                    vector<unsigned int>(0));
 
-  gs_iPolynomialDenominator[0][0] =
+  gs_polynomialDenominator[0][0] =
       1; // Master thread, empty set --> trivial subgroup
 
 #pragma omp parallel for default(none)                                         \
-    shared(iSizeMax, gs_iSymbolNumerator, gs_iPolynomialDenominator) private(  \
+    shared(iSizeMax, gs_iSymbolNumerator, gs_polynomialDenominator) private(   \
         iExponent, iSymbol, iThreadId, iTemp_symbolDenominatorTemp)            \
         schedule(static, 1)
   for (unsigned int iSize = iSizeMax - 1; iSize >= 1; iSize--) // For each size
@@ -2501,7 +2502,7 @@ void CoxIter::growthSeries_parallel() {
       vector<mpz_class> iTemp_polynomial(vector<mpz_class>(iExponent, 0));
       iTemp_polynomial.push_back(1); // x^iExponent
 
-      growthSeries_mergeTerms(gs_iPolynomialDenominator[iThreadId],
+      growthSeries_mergeTerms(gs_polynomialDenominator[iThreadId],
                               gs_iSymbolNumerator[iThreadId], iTemp_polynomial,
                               iSymbol, biTemp);
     }
@@ -2509,17 +2510,17 @@ void CoxIter::growthSeries_parallel() {
 
   // --------------------------------------------------------------
   // Reduction
-  growthSeries_iPolynomialDenominator = gs_iPolynomialDenominator[0];
+  growthSeries_polynomialDenominator = gs_polynomialDenominator[0];
   for (int iThread(1); iThread < iOMPMaxThreads; iThread++) {
     if (gs_iSymbolNumerator[iThread].size())
       growthSeries_mergeTerms(
-          growthSeries_iPolynomialDenominator, gs_iSymbolNumerator[0],
-          gs_iPolynomialDenominator[iThread], gs_iSymbolNumerator[iThread]);
+          growthSeries_polynomialDenominator, gs_iSymbolNumerator[0],
+          gs_polynomialDenominator[iThread], gs_iSymbolNumerator[iThread]);
   }
 
   // --------------------------------------------------------------
   // Symbols --> Cyclotomic polynomials
-  vector<unsigned int> iCyclotomicTemp;
+  vector<unsigned int> cyclotomicTemp;
   unsigned int iSymbolDenominatorMax(gs_iSymbolNumerator[0].size() - 1);
 
   for (unsigned int i(iSymbolDenominatorMax); i >= 2; i--) {
@@ -2528,41 +2529,41 @@ void CoxIter::growthSeries_parallel() {
       iDivisors.push_back(i);
 
       for (unsigned int j(1); j <= gs_iSymbolNumerator[0][i]; j++)
-        iCyclotomicTemp.insert(iCyclotomicTemp.end(), iDivisors.begin(),
-                               iDivisors.end());
+        cyclotomicTemp.insert(cyclotomicTemp.end(), iDivisors.begin(),
+                              iDivisors.end());
     }
   }
 
   // --------------------------------------------------------------
   // Simplifications
-  unsigned int iCyclotomicTempSize(iCyclotomicTemp.size()),
-      iCyclotomicMax(Polynomials::iCyclotomicPolynomials.size() - 1);
-  for (unsigned int i(0); i < iCyclotomicTempSize; i++) {
-    if (iCyclotomicMax < iCyclotomicTemp[i] ||
+  unsigned int cyclotomicTempSize(cyclotomicTemp.size()),
+      cyclotomicMax(Polynomials::cyclotomicPolynomials.size() - 1);
+  for (unsigned int i(0); i < cyclotomicTempSize; i++) {
+    if (cyclotomicMax < cyclotomicTemp[i] ||
         !Polynomials::dividePolynomialByPolynomial(
-            growthSeries_iPolynomialDenominator,
-            Polynomials::iCyclotomicPolynomials[iCyclotomicTemp[i]]))
-      growthSeries_iCyclotomicNumerator.push_back(iCyclotomicTemp[i]);
+            growthSeries_polynomialDenominator,
+            Polynomials::cyclotomicPolynomials[cyclotomicTemp[i]]))
+      growthSeries_cyclotomicNumerator.push_back(cyclotomicTemp[i]);
 
-    if (iCyclotomicMax < iCyclotomicTemp[i])
+    if (cyclotomicMax < cyclotomicTemp[i])
       growthSeries_bFractionReduced = false;
   }
 
   // --------------------------------------------------------------
   // Final stuff
-  sort(growthSeries_iCyclotomicNumerator.begin(),
-       growthSeries_iCyclotomicNumerator.end());
+  sort(growthSeries_cyclotomicNumerator.begin(),
+       growthSeries_cyclotomicNumerator.end());
   isGrowthSeriesComputed = true;
 }
 
-void CoxIter::get_iGrowthSeries(vector<unsigned int> &iCyclotomicNumerator,
-                                vector<mpz_class> &iPolynomialDenominator,
-                                bool &bReduced) {
+void CoxIter::get_growthSeries(vector<unsigned int> &cyclotomicNumerator,
+                               vector<mpz_class> &polynomialDenominator,
+                               bool &bReduced) {
   if (!isGrowthSeriesComputed)
     growthSeries();
 
-  iCyclotomicNumerator = growthSeries_iCyclotomicNumerator;
-  iPolynomialDenominator = growthSeries_iPolynomialDenominator;
+  cyclotomicNumerator = growthSeries_cyclotomicNumerator;
+  polynomialDenominator = growthSeries_polynomialDenominator;
   bReduced = growthSeries_bFractionReduced;
 }
 
@@ -2573,11 +2574,11 @@ bool CoxIter::get_bGrowthSeriesReduced() {
   return growthSeries_bFractionReduced;
 }
 
-vector<mpz_class> CoxIter::get_iGrowthSeries_denominator() {
+vector<mpz_class> CoxIter::get_growthSeries_denominator() {
   if (!isGrowthSeriesComputed)
     growthSeries();
 
-  return growthSeries_iPolynomialDenominator;
+  return growthSeries_polynomialDenominator;
 }
 
 void CoxIter::growthSeries_symbolExponentFromProduct(

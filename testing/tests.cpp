@@ -93,13 +93,13 @@ bool Tests::readGraphsFile(string strInput) {
       str_replace(szLineWork, regexpRes[0][0], "");
 
       unsigned int iPower;
-      test.growthSeries_iPolynomialDenominator = vector<mpz_class>(1, 0);
-      test.growthSeries_iCyclotomicNumerator.clear();
+      test.growthSeries_polynomialDenominator = vector<mpz_class>(1, 0);
+      test.growthSeries_cyclotomicNumerator.clear();
 
       vector<unsigned int> iTemp;
 
       if (regexpRes[1][0] != "") // Cyclotomic factors
-        explode(",", regexpRes[1][0], test.growthSeries_iCyclotomicNumerator);
+        explode(",", regexpRes[1][0], test.growthSeries_cyclotomicNumerator);
 
       string strPol(regexpRes[2][0]);
 
@@ -111,13 +111,13 @@ bool Tests::readGraphsFile(string strInput) {
         iPower =
             regexpRes[3][i] == "" ? 1 : abs(stoi(regexpRes[3][i])); // power
 
-        if (iPower + 1 > test.growthSeries_iPolynomialDenominator.size())
-          test.growthSeries_iPolynomialDenominator.insert(
-              test.growthSeries_iPolynomialDenominator.end(),
-              iPower - test.growthSeries_iPolynomialDenominator.size() + 1,
+        if (iPower + 1 > test.growthSeries_polynomialDenominator.size())
+          test.growthSeries_polynomialDenominator.insert(
+              test.growthSeries_polynomialDenominator.end(),
+              iPower - test.growthSeries_polynomialDenominator.size() + 1,
               mpz_class(0));
 
-        test.growthSeries_iPolynomialDenominator[iPower] =
+        test.growthSeries_polynomialDenominator[iPower] =
             (regexpRes[1][i] == "-" ? -1 : 1) *
             (regexpRes[2][i] == "" ? 1 : stoi(regexpRes[2][i]));
 
@@ -130,7 +130,7 @@ bool Tests::readGraphsFile(string strInput) {
       }
 
       if (strPol != "")
-        test.growthSeries_iPolynomialDenominator[0] = stoi(strPol);
+        test.growthSeries_polynomialDenominator[0] = stoi(strPol);
     }
 
     // --------------------------------------------------------
@@ -376,7 +376,7 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
   string strGrowthRate;
   GrowthRate *gr(new GrowthRate());
   GrowthRate_Result grr(
-      gr->grrComputations(ci->get_iGrowthSeries_denominator()));
+      gr->grrComputations(ci->get_growthSeries_denominator()));
   delete gr;
   strGrowthRate = grr.strGrowthRate;
 
@@ -396,15 +396,15 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
 
   // A small test of the growth series
   if (ci->get_isFiniteCovolume() > 0) {
-    vector<mpz_class> iDenom;
-    vector<unsigned int> iCyclotomic;
+    vector<mpz_class> denom;
+    vector<unsigned int> cyclotomic;
     bool bReduced;
 
-    ci->get_iGrowthSeries(iCyclotomic, iDenom, bReduced);
+    ci->get_growthSeries(cyclotomic, denom, bReduced);
 
     if (tests[iTestIndex].bTestGrowthSeries) {
-      if (tests[iTestIndex].growthSeries_iCyclotomicNumerator == iCyclotomic &&
-          tests[iTestIndex].growthSeries_iPolynomialDenominator == iDenom) {
+      if (tests[iTestIndex].growthSeries_cyclotomicNumerator == cyclotomic &&
+          tests[iTestIndex].growthSeries_polynomialDenominator == denom) {
         iTestsSucceded["growthSeries"][0]++;
         of << "OK\tGrowth series\t\t" << tests[iTestIndex].szFile << endl;
       } else {
@@ -415,8 +415,8 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     }
 
     mpz_class iTotalDenom(0);
-    for (unsigned int j(0); j < iDenom.size(); j++)
-      iTotalDenom += iDenom[j];
+    for (unsigned int j(0); j < denom.size(); j++)
+      iTotalDenom += denom[j];
 
     if (ci->get_dimension() % 2) // n is odd, the denominator should vanish in 1
     {
@@ -433,9 +433,9 @@ void Tests::bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci) {
     {
       mpz_class iTotalNum(1), iSum;
 
-      for (auto cyclo : iCyclotomic) {
+      for (auto cyclo : cyclotomic) {
         iSum = 0;
-        for (auto coeff : Polynomials::iCyclotomicPolynomials[cyclo])
+        for (auto coeff : Polynomials::cyclotomicPolynomials[cyclo])
           iSum += coeff;
 
         iTotalNum *= iSum;

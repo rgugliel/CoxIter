@@ -23,7 +23,7 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "polynomials.h"
 
 namespace Polynomials {
-vector<vector<mpz_class>> iCyclotomicPolynomials = vector<vector<mpz_class>>(
+vector<vector<mpz_class>> cyclotomicPolynomials = vector<vector<mpz_class>>(
     {{},
      {-1, 1},
      {1, 1},

@@ -70,16 +70,16 @@ public:
   GrowthRate();
   ~GrowthRate();
 
-  GrowthRate_Result grrComputations(vector<mpz_class> iPolynomial,
+  GrowthRate_Result grrComputations(vector<mpz_class> polynomial,
                                     const bool &bOnlyGrowthRate = false);
 
 private:
-  /*!	\fn irreducibleFactors(const vector< mpz_class >& iPolynomial)
-   * 	Factor the polynomial iPolynomial and store the factors into
-   * t_POLfactors \param iPolynomial(vector< mpz_class >) The polynomial
+  /*!	\fn irreducibleFactors(const vector< mpz_class >& polynomial)
+   * 	Factor the polynomial polynomial and store the factors into
+   * t_POLfactors \param polynomial(vector< mpz_class >) The polynomial
    * (coefficients in GMPlib)
    */
-  void irreducibleFactors(const vector<mpz_class> &iPolynomial);
+  void irreducibleFactors(const vector<mpz_class> &polynomial);
 
   /*!	\fn minimalRoot()
    * 	Find which fact has the smallest (positive, <1) real root and store the

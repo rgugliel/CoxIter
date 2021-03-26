@@ -39,9 +39,9 @@ GrowthRate::GrowthRate() {
 
 GrowthRate::~GrowthRate() { pari_close(); }
 
-GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
+GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> polynomial,
                                               const bool &bOnlyGrowthRate) {
-  irreducibleFactors(iPolynomial);
+  irreducibleFactors(polynomial);
   gGrowthRate = dbltor(
       1.0); // Have to allocate the memory for this outside of some functions
   minimalRoot();
@@ -190,14 +190,14 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
   return grr;
 }
 
-void GrowthRate::irreducibleFactors(const vector<mpz_class> &iPolynomial) {
+void GrowthRate::irreducibleFactors(const vector<mpz_class> &polynomial) {
   // ---------------------------------------------------
   // Factors
   GEN gDenominator, gFactors;
   long int iRCount;
 
   gDenominator =
-      vector2t_POL(iPolynomial);   // Conversion vector< mpz_class > to t_POL
+      vector2t_POL(polynomial);    // Conversion vector< mpz_class > to t_POL
   gFactors = factor(gDenominator); // Factorization of the polynomial
   gFactors = gel(gFactors, 1);     // Irreducible factors
   long k(lg(gFactors) - 1);        // Number of factors

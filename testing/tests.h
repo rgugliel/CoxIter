@@ -66,12 +66,12 @@ struct Test {
 
   bool bTestGrowthSeries;
   vector<mpz_class>
-      growthSeries_iPolynomialDenominator; ///< (i-1)th term contains the
-                                           ///< coefficient of x^i
+      growthSeries_polynomialDenominator; ///< (i-1)th term contains the
+                                          ///< coefficient of x^i
   vector<unsigned int>
-      growthSeries_iCyclotomicNumerator; ///< Contains a list oif cyclotomic
-                                         ///< polynomials
-  string strGrowthRate;                  ///< Empty or the growth rate
+      growthSeries_cyclotomicNumerator; ///< Contains a list oif cyclotomic
+                                        ///< polynomials
+  string strGrowthRate;                 ///< Empty or the growth rate
 };
 
 /*! \class Tests

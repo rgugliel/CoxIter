@@ -444,7 +444,7 @@ void App::run() {
 #ifdef _COMPILE_WITH_PARI_
     try {
       GrowthRate gr;
-      grr = gr.grrComputations(ci.get_iGrowthSeries_denominator());
+      grr = gr.grrComputations(ci.get_growthSeries_denominator());
     } catch (const string &strE) {
       cout << "\n---------------------------------------------------------"
            << endl;

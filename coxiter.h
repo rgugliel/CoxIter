@@ -204,11 +204,11 @@ private:
   unsigned int verticesAtInfinityCount; ///< Number of vertices at infinity
 
   vector<mpz_class>
-      growthSeries_iPolynomialDenominator; ///< (i-1)th term contains the
-                                           ///< coefficient of x^i
+      growthSeries_polynomialDenominator; ///< (i-1)th term contains the
+                                          ///< coefficient of x^i
   vector<unsigned int>
-      growthSeries_iCyclotomicNumerator; ///< Contains a list oif cyclotomic
-                                         ///< polynomials
+      growthSeries_cyclotomicNumerator; ///< Contains a list oif cyclotomic
+                                        ///< polynomials
   bool growthSeries_bFractionReduced; ///< True if the fraction has been reduced
                                       ///< (it is always the case when the
                                       ///< cyclotomic terms are <= 60, which
@@ -695,16 +695,16 @@ public:
   bool get_b_hasEuclideanGraphsOfRank(const unsigned int &iRank) const;
 
   /*!
-   * 	\fn get_iGrowthSeries
+   * 	\fn get_growthSeries
    * 	\brief Return the growth series of the group
    *
-   * 	\param iCyclotomicNumerator(vector<unsigned int>&) Numerator (cyclotomic
-   * factors) \param iPolynomialDenominator(vector< mpz_class >&) Denominator
+   * 	\param cyclotomicNumerator(vector<unsigned int>&) Numerator (cyclotomic
+   * factors) \param polynomialDenominator(vector< mpz_class >&) Denominator
    * 	\param bReduced(bool&) True if the fraction is reduced
    */
-  void get_iGrowthSeries(vector<unsigned int> &iCyclotomicNumerator,
-                         vector<mpz_class> &iPolynomialDenominator,
-                         bool &bReduced);
+  void get_growthSeries(vector<unsigned int> &cyclotomicNumerator,
+                        vector<mpz_class> &polynomialDenominator,
+                        bool &bReduced);
 
   /*!
    * 	\fn get_bGrowthSeriesReduced
@@ -714,7 +714,7 @@ public:
    */
   bool get_bGrowthSeriesReduced();
 
-  vector<mpz_class> get_iGrowthSeries_denominator();
+  vector<mpz_class> get_growthSeries_denominator();
 
   string get_strGrowthSeries();
   string get_strGrowthSeries_raw();
@@ -943,10 +943,10 @@ private:
   void growthSeries_details();
 
   /*!	\fn growthSeries_mergeTerms
-   * 	Given the parameters, compute iPolynomial/iSymbol +=
+   * 	Given the parameters, compute polynomial/iSymbol +=
    * iTemp_polynomial/iTemp_symbol
    *
-   * 	\param iPolynomial(vector< mpz_class >&) First polynomial (by reference)
+   * 	\param polynomial(vector< mpz_class >&) First polynomial (by reference)
    * 	\param iSymbol(vector<short unsigned int>&) First symbol (by reference)
    * 	\param iTemp_polynomial(vector< mpz_class >) Second polynomial
    * 	\param iTemp_symbol(const vector<short unsigned int>&) Second symbol
@@ -955,7 +955,7 @@ private:
    *
    * 	\return Nothing but the first two parameters are modified
    */
-  void growthSeries_mergeTerms(vector<mpz_class> &iPolynomial,
+  void growthSeries_mergeTerms(vector<mpz_class> &polynomial,
                                vector<unsigned int> &iSymbol,
                                vector<mpz_class> iTemp_polynomial,
                                const vector<unsigned int> &iTemp_symbol,

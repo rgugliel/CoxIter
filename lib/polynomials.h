@@ -48,25 +48,25 @@ using namespace std;
 namespace Polynomials {
 /*! 	\fn polynomialDisplay
  * 	\brief Display a polynomial
- * 	\param iPolynomial(const vector< int >& iPolynomial) Integer
+ * 	\param polynomial(const vector< int >& polynomial) Integer
  */
 template <typename Type>
-void polynomialDisplay(const vector<Type> &iPolynomial) {
+void polynomialDisplay(const vector<Type> &polynomial) {
   bool bFirst(true);
-  unsigned int iSize(iPolynomial.size());
+  unsigned int iSize(polynomial.size());
 
   for (unsigned int i(0); i < iSize; i++) {
-    if (iPolynomial[i] != 0) {
+    if (polynomial[i] != 0) {
       if (bFirst) {
-        cout << iPolynomial[i]
+        cout << polynomial[i]
              << (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
         bFirst = false;
       } else {
-        if ((iPolynomial[i] != 1 && iPolynomial[i] != -1) || !i)
-          cout << (iPolynomial[i] > 0 ? " + " : " - ") << abs(iPolynomial[i])
+        if ((polynomial[i] != 1 && polynomial[i] != -1) || !i)
+          cout << (polynomial[i] > 0 ? " + " : " - ") << abs(polynomial[i])
                << (i ? " * x" + string(i > 1 ? "^" + to_string(i) : "") : "");
         else
-          cout << (iPolynomial[i] > 0 ? " + " : " - ")
+          cout << (polynomial[i] > 0 ? " + " : " - ")
                << "x" + string(i > 1 ? "^" + to_string(i) : "");
       }
     }
@@ -75,16 +75,16 @@ void polynomialDisplay(const vector<Type> &iPolynomial) {
 
 /*! 	\fn symbolDisplay
  * 	\brief Display a symbol
- * 	\param iPolynomial(const vector< int >& iPolynomial) Integer
+ * 	\param symbol(const vector< int >& symbol) Integer
  */
-template <typename Type> void symbolDisplay(const vector<Type> &iSymbol) {
+template <typename Type> void symbolDisplay(const vector<Type> &symbol) {
   bool bFirst(true);
-  unsigned int iSize(iSymbol.size());
+  unsigned int iSize(symbol.size());
 
   cout << "[";
   for (unsigned int i(0); i < iSize; i++) {
-    if (iSymbol[i]) {
-      for (unsigned int j(0); j < iSymbol[i]; j++) {
+    if (symbol[i]) {
+      for (unsigned int j(0); j < symbol[i]; j++) {
         cout << (bFirst ? "" : ",") << i;
         bFirst = false;
       }
@@ -95,96 +95,96 @@ template <typename Type> void symbolDisplay(const vector<Type> &iSymbol) {
 
 /*! 	\fn polynomialDotSymbol
  * 	\brief Multiply a polynomial by a symbol
- * 	\param iPolynomial(const vector< Type >& iPolynomial) The polynomial
+ * 	\param polynomial(const vector< Type >& polynomial) The polynomial
  * 	\param iSymbol(const unsigned int&) The symbol
  */
 template <typename Type>
-void polynomialDotSymbol(vector<Type> &iPolynomial,
+void polynomialDotSymbol(vector<Type> &polynomial,
                          const unsigned int &iSymbol) {
-  vector<Type> iPolynomialBackup(iPolynomial);
-  unsigned int iPolynomialDegree(iPolynomial.size() - 1);
+  vector<Type> polynomialBackup(polynomial);
+  unsigned int polynomialDegree(polynomial.size() - 1);
 
   for (unsigned int i(1); i < iSymbol - 1; i++)
-    iPolynomial.push_back(0);
-  iPolynomial.push_back(iPolynomial[iPolynomialDegree]);
+    polynomial.push_back(0);
+  polynomial.push_back(polynomial[polynomialDegree]);
 
-  if (iPolynomialDegree < iSymbol) {
-    for (unsigned int i(1); i <= iPolynomialDegree; i++)
-      iPolynomial[i] = iPolynomial[i - 1] + iPolynomialBackup[i];
+  if (polynomialDegree < iSymbol) {
+    for (unsigned int i(1); i <= polynomialDegree; i++)
+      polynomial[i] = polynomial[i - 1] + polynomialBackup[i];
 
-    fill(iPolynomial.begin() + iPolynomialDegree + 1,
-         iPolynomial.end() - iPolynomialDegree, iPolynomial[iPolynomialDegree]);
+    fill(polynomial.begin() + polynomialDegree + 1,
+         polynomial.end() - polynomialDegree, polynomial[polynomialDegree]);
 
-    for (unsigned int i(1); i <= iPolynomialDegree;
+    for (unsigned int i(1); i <= polynomialDegree;
          i++) // TODO: gérer degré plus petit que symbole
-      iPolynomial[iPolynomialDegree + iSymbol - i - 1] =
-          iPolynomial[iPolynomialDegree + iSymbol - i] +
-          iPolynomialBackup[iPolynomialDegree - i];
+      polynomial[polynomialDegree + iSymbol - i - 1] =
+          polynomial[polynomialDegree + iSymbol - i] +
+          polynomialBackup[polynomialDegree - i];
   } else {
     for (unsigned int i(1); i < iSymbol; i++)
-      iPolynomial[i] = iPolynomial[i - 1] + iPolynomialBackup[i];
+      polynomial[i] = polynomial[i - 1] + polynomialBackup[i];
 
-    for (unsigned int i(iSymbol); i < iPolynomialDegree; i++)
-      iPolynomial[i] = iPolynomial[i - 1] - iPolynomialBackup[i - iSymbol] +
-                       iPolynomialBackup[i];
+    for (unsigned int i(iSymbol); i < polynomialDegree; i++)
+      polynomial[i] = polynomial[i - 1] - polynomialBackup[i - iSymbol] +
+                      polynomialBackup[i];
 
-    for (unsigned int i(1); i < iSymbol && i <= iPolynomialDegree; i++)
-      iPolynomial[iPolynomialDegree + iSymbol - i - 1] =
-          iPolynomial[iPolynomialDegree + iSymbol - i] +
-          iPolynomialBackup[iPolynomialDegree - i];
+    for (unsigned int i(1); i < iSymbol && i <= polynomialDegree; i++)
+      polynomial[polynomialDegree + iSymbol - i - 1] =
+          polynomial[polynomialDegree + iSymbol - i] +
+          polynomialBackup[polynomialDegree - i];
   }
 }
 
 template <typename Type>
-bool dividePolynomialBySymbol(vector<Type> &iPolynomial,
+bool dividePolynomialBySymbol(vector<Type> &polynomial,
                               const unsigned int &iSymbol) {
-  unsigned int iPolynomialDegree(iPolynomial.size() - 1);
+  unsigned int polynomialDegree(polynomial.size() - 1);
 
   // Removing eventual 0
-  while (iPolynomial[iPolynomialDegree] == 0)
-    iPolynomialDegree--;
+  while (polynomial[polynomialDegree] == 0)
+    polynomialDegree--;
 
-  vector<Type> iWorking(iPolynomial.begin(),
-                        iPolynomial.begin() + iPolynomialDegree + 1);
+  vector<Type> iWorking(polynomial.begin(),
+                        polynomial.begin() + polynomialDegree + 1);
   vector<Type> iQuotient;
 
   unsigned int i;
   Type iTemp;
 
-  if (iPolynomialDegree < iSymbol - 1)
+  if (polynomialDegree < iSymbol - 1)
     return false;
 
-  while (iPolynomialDegree >= iSymbol) {
-    iTemp = iWorking[iPolynomialDegree];
+  while (polynomialDegree >= iSymbol) {
+    iTemp = iWorking[polynomialDegree];
     iQuotient.insert(iQuotient.begin(), iTemp);
 
     for (i = 0; i < iSymbol; i++)
-      iWorking[iPolynomialDegree - i] -= iTemp;
+      iWorking[polynomialDegree - i] -= iTemp;
 
-    iPolynomialDegree--;
+    polynomialDegree--;
 
-    while (iWorking[iPolynomialDegree] == 0 && iPolynomialDegree >= 1) {
+    while (iWorking[polynomialDegree] == 0 && polynomialDegree >= 1) {
       iQuotient.insert(iQuotient.begin(), 0);
-      iPolynomialDegree--;
+      polynomialDegree--;
     }
   }
 
-  if (iPolynomialDegree < iSymbol - 1) {
-    for (i = 0; i <= iPolynomialDegree; i++) {
+  if (polynomialDegree < iSymbol - 1) {
+    for (i = 0; i <= polynomialDegree; i++) {
       if (iWorking[i] != 0)
         return false;
     }
   }
 
-  iTemp = iWorking[iPolynomialDegree];
+  iTemp = iWorking[polynomialDegree];
   iQuotient.insert(iQuotient.begin(), iTemp);
 
-  for (i = 0; i < iPolynomialDegree; i++) {
+  for (i = 0; i < polynomialDegree; i++) {
     if (iWorking[i] != iTemp)
       return false;
   }
 
-  iPolynomial = iQuotient;
+  polynomial = iQuotient;
 
   return true;
 }
@@ -239,10 +239,10 @@ bool dividePolynomialByPolynomial(vector<Type> &numerator,
 }
 
 extern vector<vector<mpz_class>>
-    iCyclotomicPolynomials; ///< List of some cyclotomic polynomials (we want to
-                            ///< be able to multiply/divide with the growth
-                            ///< series so we use here BigInteger instead of
-                            ///< int)
+    cyclotomicPolynomials; ///< List of some cyclotomic polynomials (we want to
+                           ///< be able to multiply/divide with the growth
+                           ///< series so we use here BigInteger instead of
+                           ///< int)
 } // namespace Polynomials
 
 #endif
