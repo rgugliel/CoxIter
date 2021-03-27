@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -107,7 +107,7 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_graphs_product_set.html">   45</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graphs_product_set.html">GraphsProductSet</a> {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_graphs_product_set.html#a9d666292940181b9cbb2753f279851ac">   47</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_product_set.html#a9d666292940181b9cbb2753f279851ac">iRank</a>; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_graphs_product_set.html#a1263343c678b4ae6192aa4e76399767d">   47</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_product_set.html#a1263343c678b4ae6192aa4e76399767d">rank</a>; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  set&lt;Graph *, GraphPtrComp&gt;</div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_graphs_product_set.html#a46167404bee43490bbaed6e7d2aa93b1">   49</a></span>&#160;      <a class="code" href="class_graphs_product_set.html#a46167404bee43490bbaed6e7d2aa93b1">graphs</a>; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
@@ -115,9 +115,9 @@ $(function() {
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="class_graphs_product_set.html">GraphsProductSet</a>();</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="class_graphs_product_set.html">GraphsProductSet</a>(<span class="keyword">const</span> <a class="code" href="class_graphs_product.html">GraphsProduct</a> &amp;gp);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  vector&lt;short unsigned int&gt; get_iVertices() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  vector&lt;short unsigned int&gt; get_vertices() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">bool</span> b_areVerticesSubsetOf(<span class="keyword">const</span> <a class="code" href="class_graphs_product_set.html">GraphsProductSet</a> &amp;gp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">bool</span> areVerticesSubsetOf(<span class="keyword">const</span> <a class="code" href="class_graphs_product_set.html">GraphsProductSet</a> &amp;gp) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">friend</span> ostream &amp;<a class="code" href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a>(ostream &amp;o, <span class="keyword">const</span> <a class="code" href="class_graphs_product_set.html">GraphsProductSet</a> &amp;gp);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
@@ -128,12 +128,12 @@ $(function() {
 <div class="ttc" id="aclass_graphs_product_set_html_a46167404bee43490bbaed6e7d2aa93b1"><div class="ttname"><a href="class_graphs_product_set.html#a46167404bee43490bbaed6e7d2aa93b1">GraphsProductSet::graphs</a></div><div class="ttdeci">set&lt; Graph *, GraphPtrComp &gt; graphs</div><div class="ttdoc">Pointeurs vers les graphes qui constituent le produit.</div><div class="ttdef"><b>Definition:</b> graphs.product.set.h:49</div></div>
 <div class="ttc" id="agraphs_8product_8h_html"><div class="ttname"><a href="graphs_8product_8h.html">graphs.product.h</a></div></div>
 <div class="ttc" id="aclass_graphs_product_html"><div class="ttname"><a href="class_graphs_product.html">GraphsProduct</a></div><div class="ttdoc">: Un produit de graphs</div><div class="ttdef"><b>Definition:</b> graphs.product.h:47</div></div>
-<div class="ttc" id="aclass_graphs_product_set_html_a9d666292940181b9cbb2753f279851ac"><div class="ttname"><a href="class_graphs_product_set.html#a9d666292940181b9cbb2753f279851ac">GraphsProductSet::iRank</a></div><div class="ttdeci">unsigned int iRank</div><div class="ttdoc">Rank of the graph.</div><div class="ttdef"><b>Definition:</b> graphs.product.set.h:47</div></div>
+<div class="ttc" id="aclass_graphs_product_set_html_a1263343c678b4ae6192aa4e76399767d"><div class="ttname"><a href="class_graphs_product_set.html#a1263343c678b4ae6192aa4e76399767d">GraphsProductSet::rank</a></div><div class="ttdeci">unsigned int rank</div><div class="ttdoc">Rank of the graph.</div><div class="ttdef"><b>Definition:</b> graphs.product.set.h:47</div></div>
 <div class="ttc" id="agraph_8h_html"><div class="ttname"><a href="graph_8h.html">graph.h</a></div></div>
-<div class="ttc" id="agraph_8cpp_html_ae3f00482d791749219c1c8e9e868ff18"><div class="ttname"><a href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const Graph &amp;g)</div><div class="ttdef"><b>Definition:</b> graph.cpp:37</div></div>
+<div class="ttc" id="agraph_8cpp_html_ae3f00482d791749219c1c8e9e868ff18"><div class="ttname"><a href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const Graph &amp;g)</div><div class="ttdef"><b>Definition:</b> graph.cpp:36</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 19 2021 15:27:26 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 27 2021 14:04:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

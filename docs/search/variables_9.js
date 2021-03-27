@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['ptr_871',['ptr',['../class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a',1,'GraphsListIterator']]],
-  ['ptr_5fmap_5fvertices_5findextolabel_872',['ptr_map_vertices_indexToLabel',['../class_graph.html#a45fbcbe75a806fadf82eeb460871d53f',1,'Graph::ptr_map_vertices_indexToLabel()'],['../class_graphs_list_n.html#a24ef10df1a4beddf40ce4bca879adc8e',1,'GraphsListN::ptr_map_vertices_indexToLabel()']]]
+  ['label_824',['label',['../struct_new_vertex.html#abc67d228c94dc32a96695bea56becb49',1,'NewVertex']]],
+  ['limitmaxvertices_825',['limitMaxVertices',['../class_graphs_list_iterator.html#a64cf5e0afea9cc73a4694996b53c5508',1,'GraphsListIterator']]],
+  ['linkablevertices_826',['linkableVertices',['../class_graph.html#a8e971bb0621c3d72839a1f0da29b7c66',1,'Graph']]],
+  ['listcycles_827',['listCycles',['../class_arithmeticity.html#a8a807736716d2a341f92cc65a9eb61c0',1,'Arithmeticity']]]
 ];

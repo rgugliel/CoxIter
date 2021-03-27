@@ -1,3 +1,7 @@
+# 1.3
+* Integrating a few changes
+* Naming improvement for better readability
+
 # 1.2
 * Bug correction
 * Windows and OSX version are now fully functional

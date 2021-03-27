@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -106,13 +106,12 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_graphs_product.html">   47</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graphs_product.html">GraphsProduct</a> {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  vector&lt;Graph *&gt;</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">   50</a></span>&#160;      <a class="code" href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">graphs</a>;         </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_graphs_product.html#a0c9f469103148fa81bc20f6ff68e0b37">   51</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_product.html#a0c9f469103148fa81bc20f6ff68e0b37">iRank</a>; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="class_graphs_product.html">GraphsProduct</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">   49</a></span>&#160;  vector&lt;Graph *&gt; <a class="code" href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">graphs</a>; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_graphs_product.html#aff8ad7a4cdf7dd0926dec5823de11c8b">   50</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_product.html#aff8ad7a4cdf7dd0926dec5823de11c8b">rank</a>;      </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="class_graphs_product.html">GraphsProduct</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  vector&lt;vector&lt;short unsigned int&gt;&gt; createFootPrint();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">friend</span> ostream &amp;<a class="code" href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a>(ostream &amp;o, <span class="keyword">const</span> <a class="code" href="class_graphs_product.html">GraphsProduct</a> &amp;gp);</div>
@@ -120,14 +119,14 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif // GRAPHS_PRODUCT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_graphs_product_html_a683136adca4e0b59bf105039180704ee"><div class="ttname"><a href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">GraphsProduct::graphs</a></div><div class="ttdeci">vector&lt; Graph * &gt; graphs</div><div class="ttdoc">Pointeurs vers les graphes qui constituent le produit.</div><div class="ttdef"><b>Definition:</b> graphs.product.h:50</div></div>
-<div class="ttc" id="aclass_graphs_product_html_a0c9f469103148fa81bc20f6ff68e0b37"><div class="ttname"><a href="class_graphs_product.html#a0c9f469103148fa81bc20f6ff68e0b37">GraphsProduct::iRank</a></div><div class="ttdeci">unsigned int iRank</div><div class="ttdoc">Rank of the product.</div><div class="ttdef"><b>Definition:</b> graphs.product.h:51</div></div>
+<div class="ttc" id="aclass_graphs_product_html_a683136adca4e0b59bf105039180704ee"><div class="ttname"><a href="class_graphs_product.html#a683136adca4e0b59bf105039180704ee">GraphsProduct::graphs</a></div><div class="ttdeci">vector&lt; Graph * &gt; graphs</div><div class="ttdoc">Pointers to the graphs of the product.</div><div class="ttdef"><b>Definition:</b> graphs.product.h:49</div></div>
 <div class="ttc" id="aclass_graphs_product_html"><div class="ttname"><a href="class_graphs_product.html">GraphsProduct</a></div><div class="ttdoc">: Un produit de graphs</div><div class="ttdef"><b>Definition:</b> graphs.product.h:47</div></div>
+<div class="ttc" id="aclass_graphs_product_html_aff8ad7a4cdf7dd0926dec5823de11c8b"><div class="ttname"><a href="class_graphs_product.html#aff8ad7a4cdf7dd0926dec5823de11c8b">GraphsProduct::rank</a></div><div class="ttdeci">unsigned int rank</div><div class="ttdoc">Rank of the product.</div><div class="ttdef"><b>Definition:</b> graphs.product.h:50</div></div>
 <div class="ttc" id="agraph_8h_html"><div class="ttname"><a href="graph_8h.html">graph.h</a></div></div>
-<div class="ttc" id="agraph_8cpp_html_ae3f00482d791749219c1c8e9e868ff18"><div class="ttname"><a href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const Graph &amp;g)</div><div class="ttdef"><b>Definition:</b> graph.cpp:37</div></div>
+<div class="ttc" id="agraph_8cpp_html_ae3f00482d791749219c1c8e9e868ff18"><div class="ttname"><a href="graph_8cpp.html#ae3f00482d791749219c1c8e9e868ff18">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;o, const Graph &amp;g)</div><div class="ttdef"><b>Definition:</b> graph.cpp:36</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 19 2021 15:27:26 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 27 2021 14:04:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>
