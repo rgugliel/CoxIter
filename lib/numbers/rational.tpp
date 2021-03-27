@@ -22,8 +22,8 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "rational.h"
 
-template <typename T>   
-Rational<T>::Rational() 
+template <typename T>
+Rational<T>::Rational()
 	: a(0), b(1)
 {
 	update();
@@ -37,14 +37,14 @@ Rational<T>::Rational(const int& i)
 }
 
 template <typename T>
-Rational<T>::Rational(T a) 
+Rational<T>::Rational(T a)
 	: a(a), b(1)
 {
 	update();
 }
 
 template <typename T>
-Rational<T>::Rational(T a, T b) 
+Rational<T>::Rational(T a, T b)
 	: a(a), b(b)
 {
 	update();
@@ -61,21 +61,21 @@ void Rational<T>::update()
 	{
 		T iGCD(a);
 		iGCD.gcd(&b);
-		
+
 		a /= iGCD;
 		b /= iGCD;
 	}
 
-	if (b.bIsLessThan(0))
+	if (b.isLessThan(0))
 	{
 		a.multiplyBy(-1);
 		b.multiplyBy(-1);
 	}
 
-	isZero = a.bIsEqualTo(0);
-	hasDenominatorOne = b.bIsEqualTo(1);
-	isOne = hasDenominatorOne && a.bIsEqualTo(1);
-	isMinusOne = hasDenominatorOne && a.bIsEqualTo(-1);
+	isZero = a.isEqualTo(0);
+	hasDenominatorOne = b.isEqualTo(1);
+	isOne = hasDenominatorOne && a.isEqualTo(1);
+	isMinusOne = hasDenominatorOne && a.isEqualTo(-1);
 }
 
 template <typename T>
@@ -152,7 +152,7 @@ Rational<T>& Rational<T>::operator/=(Rational<T> const &n)
 {
 	if (n.isZero)
 		throw(0);
-	
+
 	a *= n.b;
 	b *= n.a;
 	update();
@@ -165,12 +165,12 @@ Rational<T>& Rational<T>::operator=(long int i)
 {
 	a = i;
 	b = 1;
-	
-	isZero = a.bIsEqualTo(0);
-	hasDenominatorOne = b.bIsEqualTo(1);
-	isOne = hasDenominatorOne && a.bIsEqualTo(1);
-	isMinusOne = hasDenominatorOne && a.bIsEqualTo(-1);
-	
+
+	isZero = a.isEqualTo(0);
+	hasDenominatorOne = b.isEqualTo(1);
+	isOne = hasDenominatorOne && a.isEqualTo(1);
+	isMinusOne = hasDenominatorOne && a.isEqualTo(-1);
+
 	return *this;
 }
 
@@ -192,7 +192,7 @@ template <typename T>
 bool Rational<T>::operator>=(const int& ni) const
 {
 	Rational<T> n(*this - ni);
-	return (n.a.bIsGreaterOEThan(0));
+	return (n.a.isGreaterOEThan(0));
 }
 
 template <typename T>

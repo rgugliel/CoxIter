@@ -29,7 +29,7 @@ GrowthRate::GrowthRate() {
    * the roots (so that we can detect when a root is too small).
    * */
   gEpsilon = dbltor(1e-50);
-  iPariPrecision = 8;
+  pariPrecision = 8;
 
   // The following two lines are useless except with the test program.
 
@@ -39,9 +39,9 @@ GrowthRate::GrowthRate() {
 
 GrowthRate::~GrowthRate() { pari_close(); }
 
-GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
-                                              const bool &bOnlyGrowthRate) {
-  irreducibleFactors(iPolynomial);
+GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> polynomial,
+                                              const bool &onlyGrowthRate) {
+  irreducibleFactors(polynomial);
   gGrowthRate = dbltor(
       1.0); // Have to allocate the memory for this outside of some functions
   minimalRoot();
@@ -52,18 +52,18 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
   // ----------------------------------------------------
   // Results
   GrowthRate_Result grr;
-  grr.iPerron = 1;
-  grr.iPisot = -1; // Not decided yed
-  grr.iSalem = -1; // Not decided yed
-  grr.strGrowthRate = GENtostr(gGrowthRate);
+  grr.perron = 1;
+  grr.pisot = -1; // Not decided yed
+  grr.salem = -1; // Not decided yed
+  grr.growthRate = GENtostr(gGrowthRate);
 
   // ----------------------------------------------------
   // Here we know the minimal root and the corresponding polynomial
   GEN gTemp, gRoot, gGrowthRateSquared; // Temp variable
 
-  if (bOnlyGrowthRate) {
+  if (onlyGrowthRate) {
     avma = av; // cleaning the stack
-    grr.bComputed = true;
+    grr.isComputed = true;
     return grr;
   }
 
@@ -71,29 +71,29 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
 
   // ----------------------------------------------------
   // Control variables
-  long int iRealRootsCount(sturm(t_POLfactors[iIndexMaximalRoot])),
-      iRealRootsFound(0); // Number of real roots and the one detected as such
-  long int iRealNegativeRootsCount(
-      sturmpart(t_POLfactors[iIndexMaximalRoot], NULL, gen_0)),
-      iRealNegativeRootsFound(
-          0); // Number of negative real roots and the one detected as such
-  long int iRootsOnUnitCircle(
-      iNumberRootsUnitCircle(t_POLfactors[iIndexMaximalRoot])),
-      iRootsOnUnitCircleFound(0);
-  long int iNumberRootsInsideUnitCircle(0),
-      iNumberRootsMaybeInsideUnitCircle(0);
+  long int realRootsCount(sturm(t_POLfactors[indexMaximalRoot]));
+  long int realRootsFound(
+      0); // Number of real roots and the one detected as such
+  long int realNegativeRootsCount(
+      sturmpart(t_POLfactors[indexMaximalRoot], NULL, gen_0));
+  long int realNegativeRootsFound(
+      0); // Number of negative real roots and the one detected as such
+  long int rootsOnUnitCircle(
+      numberRootsUnitCircle(t_POLfactors[indexMaximalRoot]));
+  long int rootsOnUnitCircleFound(0);
+  long int numberRootsInsideUnitCircle(0);
+  long int numberRootsMaybeInsideUnitCircle(0);
 
-  if (iRootsOnUnitCircle == -1 ||
-      degree(t_POLfactors[iIndexMaximalRoot]) %
-          2)        // The polynomial is not palindromic or the degree is odd
-    grr.iSalem = 0; // Not Salem
+  if (rootsOnUnitCircle == -1 ||
+      degree(t_POLfactors[indexMaximalRoot]) %
+          2)       // The polynomial is not palindromic or the degree is odd
+    grr.salem = 0; // Not Salem
   else
-    grr.iSalem =
-        degree(t_POLfactors[iIndexMaximalRoot]) - 2 == iRootsOnUnitCircle;
+    grr.salem = degree(t_POLfactors[indexMaximalRoot]) - 2 == rootsOnUnitCircle;
 
-  unsigned long iRootsCount(lg(gMaximalRoots));
+  unsigned long rootsCount(lg(gMaximalRoots));
 
-  for (unsigned long int i(1); i < iRootsCount; i++) {
+  for (unsigned long int i(1); i < rootsCount; i++) {
     gRoot = gel(gMaximalRoots, i);
 
     // ----------------------------------------
@@ -102,102 +102,102 @@ GrowthRate_Result GrowthRate::grrComputations(vector<mpz_class> iPolynomial,
 
     // On the unit circle
     if (mpcmp(gEpsilon, absr(gsub(gTemp, gen_1))) > 0) // Probably = 1
-      iRootsOnUnitCircleFound++;
+      rootsOnUnitCircleFound++;
 
     // Inside the unit circle
     if (mpcmp(gadd(gTemp, gEpsilon), gen_1) < 0)
-      iNumberRootsInsideUnitCircle++;
+      numberRootsInsideUnitCircle++;
     if (mpcmp(gsub(gTemp, gEpsilon), gen_1) < 0)
-      iNumberRootsMaybeInsideUnitCircle++;
+      numberRootsMaybeInsideUnitCircle++;
 
     if (mpcmp(absr(gimag(gRoot)), gEpsilon) > 0) // The element is non-real
     {
       // We check that |gRoot|^2 + epsilon < gGrowRate^2
       if (mpcmp(gadd(gTemp, gEpsilon), gGrowthRateSquared) >= 0) {
         if (mpcmp(gsub(gTemp, gEpsilon), gGrowthRateSquared) >= 0)
-          grr.iPerron = -1; // We cannot decide
+          grr.perron = -1; // We cannot decide
         else {
           cout << "Growth rate=";
           output(gGrowthRate);
           cout << endl;
           cout << "Current tested root=";
           output(gRoot);
-          grr.iPerron = 0; // Not Perron
+          grr.perron = 0; // Not Perron
         }
       }
     } else // The root is real
     {
       if (mpcmp(greal(gRoot), gen_0) < 0) // If negative
       {
-        iRealNegativeRootsFound++;
+        realNegativeRootsFound++;
 
         // We check that |gRoot| + epsilon < gGrowRate
         if (mpcmp(gadd(greal(gRoot), gEpsilon), gGrowthRate) >= 0) {
           if (mpcmp(gsub(greal(gRoot), gEpsilon), gGrowthRate) < 0)
-            grr.iPerron = -1; // We cannot decide
+            grr.perron = -1; // We cannot decide
           else {
             cout << "Growth rate=";
             output(gGrowthRate);
             cout << endl;
             cout << "Current tested root=";
             output(gRoot);
-            grr.iPerron = 0; // Not Perron
+            grr.perron = 0; // Not Perron
           }
         }
       }
       // If positive, nothing to do since we selected the smallest positive root
       // and took the inverse
 
-      iRealRootsFound++;
+      realRootsFound++;
     }
 
-    if (grr.iPerron < 1) // 0 (not Perron, -1 cannot decide)
+    if (grr.perron < 1) // 0 (not Perron, -1 cannot decide)
       break;
   }
 
-  if (grr.iPerron == 1 && iRealRootsCount != iRealRootsFound)
+  if (grr.perron == 1 && realRootsCount != realRootsFound)
     throw(string("GrowthRate::grrComputations: Some root have a too small "
                  "imaginary part"));
 
-  if (grr.iPerron == 1 && iRealNegativeRootsCount != iRealNegativeRootsFound)
+  if (grr.perron == 1 && realNegativeRootsCount != realNegativeRootsFound)
     throw(string("GrowthRate::grrComputations: Some negative root is too close "
                  "to zero"));
 
-  if (iNumberRootsInsideUnitCircle != iNumberRootsMaybeInsideUnitCircle) {
+  if (numberRootsInsideUnitCircle != numberRootsMaybeInsideUnitCircle) {
     /*
      * If we were able to determine the number of roots on the unit circle and
      * if these are spare roots, then we can remove them.
      */
 
-    if (iRootsOnUnitCircle == -1 ||
-        iRootsOnUnitCircleFound != iRootsOnUnitCircle ||
-        (iNumberRootsMaybeInsideUnitCircle - iNumberRootsInsideUnitCircle) !=
-            iRootsOnUnitCircle)
-      grr.iPisot = -2; // Cannot decide
+    if (rootsOnUnitCircle == -1 ||
+        rootsOnUnitCircleFound != rootsOnUnitCircle ||
+        (numberRootsMaybeInsideUnitCircle - numberRootsInsideUnitCircle) !=
+            rootsOnUnitCircle)
+      grr.pisot = -2; // Cannot decide
     else
-      iNumberRootsInsideUnitCircle -= iRootsOnUnitCircleFound;
+      numberRootsInsideUnitCircle -= rootsOnUnitCircleFound;
   }
 
-  if (grr.iPisot == -1)
-    grr.iPisot = iNumberRootsInsideUnitCircle ==
-                         (degree(t_POLfactors[iIndexMaximalRoot]) - 1)
-                     ? 1
-                     : 0;
+  if (grr.pisot == -1)
+    grr.pisot = numberRootsInsideUnitCircle ==
+                        (degree(t_POLfactors[indexMaximalRoot]) - 1)
+                    ? 1
+                    : 0;
 
   // ----------------------------------------------------------
   avma = av; // cleaning the stack
-  grr.bComputed = true;
+  grr.isComputed = true;
   return grr;
 }
 
-void GrowthRate::irreducibleFactors(const vector<mpz_class> &iPolynomial) {
+void GrowthRate::irreducibleFactors(const vector<mpz_class> &polynomial) {
   // ---------------------------------------------------
   // Factors
   GEN gDenominator, gFactors;
   long int iRCount;
 
   gDenominator =
-      vector2t_POL(iPolynomial);   // Conversion vector< mpz_class > to t_POL
+      vector2t_POL(polynomial);    // Conversion vector< mpz_class > to t_POL
   gFactors = factor(gDenominator); // Factorization of the polynomial
   gFactors = gel(gFactors, 1);     // Irreducible factors
   long k(lg(gFactors) - 1);        // Number of factors
@@ -222,24 +222,24 @@ void GrowthRate::minimalRoot() {
 
   GEN gTemp;
 
-  long int iRootsBetween1AndInfinity; // Number of roots between 1 and infinity
-  long int iFoundRoots; // Number of roots we wound (to be compared with
-                        // iRootsBetween0And1)
+  long int rootsBetween1AndInfinity; // Number of roots between 1 and infinity
+  long int foundRoots; // Number of roots we wound (to be compared with
+                       // rootsBetween0And1)
 
-  unsigned int iFactorsCount(t_POLfactors.size());
+  unsigned int factorsCount(t_POLfactors.size());
 
-  for (unsigned int j(0); j < iFactorsCount; j++) {
+  for (unsigned int j(0); j < factorsCount; j++) {
     auto f(t_POLfactors[j]);
 
     // ------------------------------------------------
     // Number of roots we have to find
-    iFoundRoots = 0;
-    iRootsBetween1AndInfinity = sturmpart(f, gen_1, NULL);
+    foundRoots = 0;
+    rootsBetween1AndInfinity = sturmpart(f, gen_1, NULL);
 
-    GEN gRoots(roots(f, iPariPrecision));
+    GEN gRoots(roots(f, pariPrecision));
 
-    unsigned long iRootsCount(lg(gRoots));
-    for (unsigned long int i(1); i < iRootsCount; i++) {
+    unsigned long rootsCount(lg(gRoots));
+    for (unsigned long int i(1); i < rootsCount; i++) {
       gTemp = gel(gRoots, i);
 
       if (mpcmp(absr(gimag(gTemp)), gEpsilon) > 0) // The element is non-real
@@ -251,7 +251,7 @@ void GrowthRate::minimalRoot() {
 
       if (mpcmp(greal(gTemp), gen_0) <= 0) // If the root is <= 0
         continue;
-      iFoundRoots++;
+      foundRoots++;
 
       // If some roots are to close
       if (mpcmp(gEpsilon, absr(gsub(gGrowthRate, gTemp))) < 0) {
@@ -262,13 +262,13 @@ void GrowthRate::minimalRoot() {
 
       // Greather than the greatest?
       if (mpcmp(gGrowthRate, greal(gTemp)) < 0) {
-        iIndexMaximalRoot = j;
+        indexMaximalRoot = j;
         gGrowthRate = greal(gTemp);
         gMaximalRoots = gRoots;
       }
     }
 
-    if (iFoundRoots != iRootsBetween1AndInfinity) {
+    if (foundRoots != rootsBetween1AndInfinity) {
       avma = ltop; // cleaning the stack
       throw(string("GrowthRate::minimalRoot() : Number of roots"));
     }
@@ -277,7 +277,7 @@ void GrowthRate::minimalRoot() {
   gerepileall(ltop, 2, &gMaximalRoots, &gGrowthRate);
 }
 
-long int GrowthRate::iNumberRootsUnitCircle(GEN gPol) {
+long int GrowthRate::numberRootsUnitCircle(GEN gPol) {
   pari_sp ltop = avma;
   if (cmp_RgX(gPol, RgX_recip(gPol)) !=
       0) // If the polynomial is not palindromic
@@ -286,8 +286,8 @@ long int GrowthRate::iNumberRootsUnitCircle(GEN gPol) {
     return -1;
   }
 
-  long iDegree(degree(gPol));
-  long iMax(iDegree % 2 ? (iDegree - 1) / 2 : iDegree / 2 - 1);
+  long polDegree(degree(gPol));
+  long max(polDegree % 2 ? (polDegree - 1) / 2 : polDegree / 2 - 1);
 
   // -------------------------------------------
   // some useful polynomials
@@ -295,16 +295,16 @@ long int GrowthRate::iNumberRootsUnitCircle(GEN gPol) {
   GEN gPol101(mkpoln(3, gen_1, gen_0, gen_1)); // x^2 + 1
   GEN gPolResult(mkpoln(1, gen_0));
 
-  if (!(iDegree % 2))
+  if (!(polDegree % 2))
     gPolResult =
-        gmul(gel(gPol, iDegree / 2 + 2), powgi(gPol101, stoi(iDegree / 2)));
+        gmul(gel(gPol, polDegree / 2 + 2), powgi(gPol101, stoi(polDegree / 2)));
 
-  for (long int j(0); j <= iMax; j++) {
+  for (long int j(0); j <= max; j++) {
     GEN gPolTemp(mkpoln(1, gen_0));
-    long int ikMax(iDegree - 2 * j);
-    GEN gkMax(stoi(iDegree - 2 * j));
+    long int ikMax(polDegree - 2 * j);
+    GEN gkMax(stoi(polDegree - 2 * j));
 
-    for (long int k(iDegree % 2); k <= ikMax; k += 2) {
+    for (long int k(polDegree % 2); k <= ikMax; k += 2) {
       if ((ikMax - k) % 4 == 2)
         gPolTemp = gadd(
             gPolTemp,

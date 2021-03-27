@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -93,57 +93,57 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">along with CoxIter. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#ifndef GRAPHS_LIST_ITERATOR_H</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#define GRAPHS_LIST_ITERATOR_H</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="graphs_8list_8h.html">graphs.list.h</a>&quot;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a1e4290dbfd7afdc00db562ea1b67a9a6">   48</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="class_graphs_list_iterator.html#a1e4290dbfd7afdc00db562ea1b67a9a6">iVCount</a>;     </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a6db1efb5d656db1009c6db6d75946052">   49</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="class_graphs_list_iterator.html#a6db1efb5d656db1009c6db6d75946052">iGraphIndex</a>; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">   51</a></span>&#160;  <a class="code" href="class_graphs_list.html">GraphsList</a> *<a class="code" href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">graphsList</a>; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef GRAPHS_LIST_ITERATOR_H</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define GRAPHS_LIST_ITERATOR_H</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="graphs_8list_8h.html">graphs.list.h</a>&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html">   43</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#af37aee370ff6ce773f0e43c82fa8bef2">   45</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="class_graphs_list_iterator.html#af37aee370ff6ce773f0e43c82fa8bef2">verticesCount</a>; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a74c7aa2d70d7aefc8a17c646deb1ae74">   46</a></span>&#160;  <span class="keywordtype">size_t</span> <a class="code" href="class_graphs_list_iterator.html#a74c7aa2d70d7aefc8a17c646deb1ae74">graphIndex</a>;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">   48</a></span>&#160;  <a class="code" href="class_graphs_list.html">GraphsList</a> *<a class="code" href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">graphsList</a>; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a85c919a1e907daacd43e745272eb22d8">   50</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_list_iterator.html#a85c919a1e907daacd43e745272eb22d8">verticesCountMax</a>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a64cf5e0afea9cc73a4694996b53c5508">   51</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_graphs_list_iterator.html#a64cf5e0afea9cc73a4694996b53c5508">limitMaxVertices</a>;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#ade7d67e5655a5ad11a5ea706652fec47">   53</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_graphs_list_iterator.html#ade7d67e5655a5ad11a5ea706652fec47">iVerticesCountMax</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#abc00fdb886b3e270bfc7d8c621a15a88">   54</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_graphs_list_iterator.html#abc00fdb886b3e270bfc7d8c621a15a88">bLimitVerticesMax</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<a class="code" href="class_graphs_list.html">GraphsList</a> *gl);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<span class="keyword">const</span> <a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> &amp;gl);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<a class="code" href="class_graphs_list.html">GraphsList</a> *gl, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;iVerticesCountMin,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;<a class="code" href="class_graphs_list_iterator.html#ade7d67e5655a5ad11a5ea706652fec47">iVerticesCountMax</a> = 0);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <a class="code" href="class_graph.html">Graph</a> *<a class="code" href="class_graphs_list_iterator.html#a2f3e19fb7bbdd2874c09254b0dd91f37">next</a>();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> &amp;<a class="code" href="class_graphs_list_iterator.html#a2c41cb0d80fd4b993a8a3127d6d55c18">operator++</a>();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">   94</a></span>&#160;  <a class="code" href="class_graph.html">Graph</a> *<a class="code" href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">ptr</a>; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif // GRAPHS_LIST_ITERATOR_H</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<a class="code" href="class_graphs_list.html">GraphsList</a> *gl);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<span class="keyword">const</span> <a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> &amp;gl);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>(<a class="code" href="class_graphs_list.html">GraphsList</a> *gl, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;verticesCountMin,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;<a class="code" href="class_graphs_list_iterator.html#a85c919a1e907daacd43e745272eb22d8">verticesCountMax</a> = 0);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="class_graph.html">Graph</a> *<a class="code" href="class_graphs_list_iterator.html#a2f3e19fb7bbdd2874c09254b0dd91f37">next</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="class_graphs_list_iterator.html">GraphsListIterator</a> &amp;<a class="code" href="class_graphs_list_iterator.html#a2c41cb0d80fd4b993a8a3127d6d55c18">operator++</a>();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">   91</a></span>&#160;  <a class="code" href="class_graph.html">Graph</a> *<a class="code" href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">ptr</a>; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif // GRAPHS_LIST_ITERATOR_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_graphs_list_iterator_html_a1e4290dbfd7afdc00db562ea1b67a9a6"><div class="ttname"><a href="class_graphs_list_iterator.html#a1e4290dbfd7afdc00db562ea1b67a9a6">GraphsListIterator::iVCount</a></div><div class="ttdeci">size_t iVCount</div><div class="ttdoc">Nombre de sommets du graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:48</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html_ae9f670b80cd3268dfdb1a627acbe38eb"><div class="ttname"><a href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">GraphsListIterator::graphsList</a></div><div class="ttdeci">GraphsList * graphsList</div><div class="ttdoc">Pointeur vers la liste de graphes.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:51</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_a64cf5e0afea9cc73a4694996b53c5508"><div class="ttname"><a href="class_graphs_list_iterator.html#a64cf5e0afea9cc73a4694996b53c5508">GraphsListIterator::limitMaxVertices</a></div><div class="ttdeci">bool limitMaxVertices</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:51</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_af37aee370ff6ce773f0e43c82fa8bef2"><div class="ttname"><a href="class_graphs_list_iterator.html#af37aee370ff6ce773f0e43c82fa8bef2">GraphsListIterator::verticesCount</a></div><div class="ttdeci">size_t verticesCount</div><div class="ttdoc">Nombre de sommets du graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:45</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_ae9f670b80cd3268dfdb1a627acbe38eb"><div class="ttname"><a href="class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb">GraphsListIterator::graphsList</a></div><div class="ttdeci">GraphsList * graphsList</div><div class="ttdoc">Pointeur vers la liste de graphes.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:48</div></div>
 <div class="ttc" id="aclass_graphs_list_html"><div class="ttname"><a href="class_graphs_list.html">GraphsList</a></div><div class="ttdoc">Liste des graphes.</div><div class="ttdef"><b>Definition:</b> graphs.list.h:40</div></div>
 <div class="ttc" id="agraphs_8list_8h_html"><div class="ttname"><a href="graphs_8list_8h.html">graphs.list.h</a></div></div>
 <div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">This class represents one graph.</div><div class="ttdef"><b>Definition:</b> graph.h:42</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html"><div class="ttname"><a href="class_graphs_list_iterator.html">GraphsListIterator</a></div><div class="ttdoc">Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl)  GraphsListIterator ite...</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:46</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html_abc00fdb886b3e270bfc7d8c621a15a88"><div class="ttname"><a href="class_graphs_list_iterator.html#abc00fdb886b3e270bfc7d8c621a15a88">GraphsListIterator::bLimitVerticesMax</a></div><div class="ttdeci">bool bLimitVerticesMax</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:54</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html_a6db1efb5d656db1009c6db6d75946052"><div class="ttname"><a href="class_graphs_list_iterator.html#a6db1efb5d656db1009c6db6d75946052">GraphsListIterator::iGraphIndex</a></div><div class="ttdeci">size_t iGraphIndex</div><div class="ttdoc">Index du graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:49</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_a74c7aa2d70d7aefc8a17c646deb1ae74"><div class="ttname"><a href="class_graphs_list_iterator.html#a74c7aa2d70d7aefc8a17c646deb1ae74">GraphsListIterator::graphIndex</a></div><div class="ttdeci">size_t graphIndex</div><div class="ttdoc">Index du graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:46</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_a85c919a1e907daacd43e745272eb22d8"><div class="ttname"><a href="class_graphs_list_iterator.html#a85c919a1e907daacd43e745272eb22d8">GraphsListIterator::verticesCountMax</a></div><div class="ttdeci">unsigned int verticesCountMax</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:50</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html"><div class="ttname"><a href="class_graphs_list_iterator.html">GraphsListIterator</a></div><div class="ttdoc">Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl)  GraphsListIterator ite...</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:43</div></div>
 <div class="ttc" id="aclass_graphs_list_iterator_html_a2f3e19fb7bbdd2874c09254b0dd91f37"><div class="ttname"><a href="class_graphs_list_iterator.html#a2f3e19fb7bbdd2874c09254b0dd91f37">GraphsListIterator::next</a></div><div class="ttdeci">Graph * next()</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.cpp:70</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html_ade7d67e5655a5ad11a5ea706652fec47"><div class="ttname"><a href="class_graphs_list_iterator.html#ade7d67e5655a5ad11a5ea706652fec47">GraphsListIterator::iVerticesCountMax</a></div><div class="ttdeci">unsigned int iVerticesCountMax</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:53</div></div>
 <div class="ttc" id="aclass_graphs_list_iterator_html_a2c41cb0d80fd4b993a8a3127d6d55c18"><div class="ttname"><a href="class_graphs_list_iterator.html#a2c41cb0d80fd4b993a8a3127d6d55c18">GraphsListIterator::operator++</a></div><div class="ttdeci">GraphsListIterator &amp; operator++()</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.cpp:79</div></div>
-<div class="ttc" id="aclass_graphs_list_iterator_html_a8a7d2ff079d092b83d8720710a388a5a"><div class="ttname"><a href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">GraphsListIterator::ptr</a></div><div class="ttdeci">Graph * ptr</div><div class="ttdoc">Pointeur vers le graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:94</div></div>
+<div class="ttc" id="aclass_graphs_list_iterator_html_a8a7d2ff079d092b83d8720710a388a5a"><div class="ttname"><a href="class_graphs_list_iterator.html#a8a7d2ff079d092b83d8720710a388a5a">GraphsListIterator::ptr</a></div><div class="ttdeci">Graph * ptr</div><div class="ttdoc">Pointeur vers le graphe courant.</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.h:91</div></div>
 <div class="ttc" id="aclass_graphs_list_iterator_html_a2086113a44e8612a38c9fa1b23228004"><div class="ttname"><a href="class_graphs_list_iterator.html#a2086113a44e8612a38c9fa1b23228004">GraphsListIterator::GraphsListIterator</a></div><div class="ttdeci">GraphsListIterator()</div><div class="ttdef"><b>Definition:</b> graphs.list.iterator.cpp:68</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 19 2021 15:27:26 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 27 2021 14:04:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

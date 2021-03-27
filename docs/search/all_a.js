@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['license_2emd_292',['LICENSE.md',['../_l_i_c_e_n_s_e_8md.html',1,'']]],
-  ['license_293',['LICENSE',['../md__media_data-ssd__rafael_phd_codes__c_09_09__cox_iter__l_i_c_e_n_s_e.html',1,'']]]
+  ['jacobisymbol_232',['jacobiSymbol',['../namespace_math_tools.html#a4fcd4d53cf0e3e8dc7de7ea7907142fe',1,'MathTools::jacobiSymbol(int a_, unsigned b)'],['../namespace_math_tools.html#a5ed562a6c6baa023ded9927cd416b459',1,'MathTools::jacobiSymbol(int a, unsigned int b)']]]
 ];

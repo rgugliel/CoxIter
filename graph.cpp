@@ -22,114 +22,102 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 
 #include "graph.h"
 
-Graph::Graph(const vector<short unsigned int> &iVertices,
+Graph::Graph(const vector<short unsigned int> &vertices,
              vector<string> *ptr_map_vertices_indexToLabel,
-             const vector<bool> &bVerticesLinkable, const unsigned int &iType,
-             const bool &bSpherical, const unsigned int &iDataSupp)
-    : iGraphType(iType), iVertices(iVertices),
-      bVerticesLinkable(bVerticesLinkable), iDataSupp(iDataSupp),
-      bSpherical(bSpherical),
+             const vector<bool> &linkableVertices, const unsigned int &type,
+             const bool &isSpherical, const unsigned int &dataSupp)
+    : type(type), vertices(vertices), linkableVertices(linkableVertices),
+      dataSupp(dataSupp), isSpherical(isSpherical),
       ptr_map_vertices_indexToLabel(ptr_map_vertices_indexToLabel),
       b_map_vertices_indexToLabelIsEmpty(
           !ptr_map_vertices_indexToLabel ||
           ptr_map_vertices_indexToLabel->size() == 0) {}
 
 ostream &operator<<(ostream &o, const Graph &g) {
-  unsigned int iMax(g.iVertices.size()), i;
+  unsigned int verticesCount(g.vertices.size()), i;
 
   // -----------------------------------------------------------------------
   // Nom du graphe
-  o << "\t\t" << (g.bSpherical ? "" : "T") << (char)(g.iGraphType + 65)
-    << (g.bSpherical ? iMax : iMax - 1) << " ; ";
+  o << "\t\t" << (g.isSpherical ? "" : "T") << (char)(g.type + 65)
+    << (g.isSpherical ? verticesCount : verticesCount - 1) << " ; ";
 
   // -----------------------------------------------------------------------
   // sommets qui constituent le graphe
-  for (i = 0; i < iMax; i++) {
+  for (i = 0; i < verticesCount; i++) {
     if (g.b_map_vertices_indexToLabelIsEmpty)
-      o << (g.iVertices[i] + 1) << " ";
+      o << (g.vertices[i] + 1) << " ";
     else
-      o << ((*g.ptr_map_vertices_indexToLabel)[g.iVertices[i]]) << " ";
+      o << ((*g.ptr_map_vertices_indexToLabel)[g.vertices[i]]) << " ";
 
-    if (((g.iGraphType == 3 || g.iGraphType == 4) && i == (iMax - 2)) ||
-        ((g.iGraphType == 1 && !g.bSpherical) &&
-         (i == (iMax - 2) || i == 0))) // (Dn ou En) ou (\tilde Bn)
+    if (((g.type == 3 || g.type == 4) && i == (verticesCount - 2)) ||
+        ((g.type == 1 && !g.isSpherical) &&
+         (i == (verticesCount - 2) || i == 0))) // (Dn ou En) ou (\tilde Bn)
       o << "| ";
   }
 
   // -----------------------------------------------------------------------
   // Poids (pour G_2^k)
-  if (g.iDataSupp && g.bSpherical)
-    o << " (" << g.iDataSupp << ")";
-
-  // Extended debbuging info
-  /*
-  o << "N={";
-  for (i = 0; i < g.bVerticesLinkable.size(); i++)
-  {
-          if (!g.bVerticesLinkable[i])
-                  o << (i + 1) << ",";
-  }
-  o << "}";*/
+  if (g.dataSupp && g.isSpherical)
+    o << " (" << g.dataSupp << ")";
 
   o << endl;
 
   return o;
 }
 
-bool Graph::bIsSubgraphOf(const Graph *grBig) const {
+bool Graph::isSubgraphOf(const Graph *grBig) const {
   if (*this == *grBig)
     return true;
 
-  if (bSpherical && grBig->bSpherical)
-    return bIsSubgraphOf_spherical_spherical(grBig);
-  else if (bSpherical && !grBig->bSpherical)
-    return bIsSubgraphOf_spherical_euclidean(grBig);
+  if (isSpherical && grBig->isSpherical)
+    return isSubgraphOf_spherical_spherical(grBig);
+  else if (isSpherical && !grBig->isSpherical)
+    return isSubgraphOf_spherical_euclidean(grBig);
   else // We do not test other cases
     throw(0);
 }
 
-bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
-  size_t iVerticesCount(iVertices.size()),
-      iVerticesBigCount(grBig->iVertices.size());
+bool Graph::isSubgraphOf_spherical_euclidean(const Graph *grBig) const {
+  size_t verticesCount(vertices.size()),
+      verticesBigCount(grBig->vertices.size());
 
-  if (iVerticesCount == 1)
-    return (find(grBig->iVertices.begin(), grBig->iVertices.end(),
-                 iVertices[0]) != grBig->iVertices.end());
+  if (verticesCount == 1)
+    return (find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]) !=
+            grBig->vertices.end());
 
   // ---------------------------------------------------------------------
   // A_n < TA_m
-  if (iGraphType == 0 && grBig->iGraphType == 0 && iVerticesBigCount > 2) {
-    vector<short unsigned int>::const_iterator itBig(
-        find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[0]));
-    if (itBig == grBig->iVertices.end())
+  if (type == 0 && grBig->type == 0 && verticesBigCount > 2) {
+    auto itBig(
+        find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]));
+    if (itBig == grBig->vertices.end())
       return false;
 
-    int iDir;
+    int direction;
 
-    if ((itBig + 1) != grBig->iVertices.end() && *(itBig + 1) == iVertices[1])
-      iDir = 1;
-    else if ((itBig + 1) == grBig->iVertices.end() &&
-             grBig->iVertices[0] == iVertices[1])
-      iDir = 1;
-    else if ((itBig - 1) >= grBig->iVertices.begin() &&
-             *(itBig - 1) == iVertices[1])
-      iDir = -1;
-    else if ((itBig - 1) < grBig->iVertices.begin() &&
-             grBig->iVertices[iVerticesBigCount - 1] == iVertices[1])
-      iDir = -1;
+    if ((itBig + 1) != grBig->vertices.end() && *(itBig + 1) == vertices[1])
+      direction = 1;
+    else if ((itBig + 1) == grBig->vertices.end() &&
+             grBig->vertices[0] == vertices[1])
+      direction = 1;
+    else if ((itBig - 1) >= grBig->vertices.begin() &&
+             *(itBig - 1) == vertices[1])
+      direction = -1;
+    else if ((itBig - 1) < grBig->vertices.begin() &&
+             grBig->vertices[verticesBigCount - 1] == vertices[1])
+      direction = -1;
     else
       return false;
 
-    for (vector<short unsigned int>::const_iterator itSub(iVertices.begin());
-         itSub != iVertices.end(); ++itSub) {
-      if (*itSub != *itBig)
+    for (const auto &vertex : vertices) {
+      if (vertex != *itBig)
         return false;
 
-      itBig += iDir;
-      if (itBig == grBig->iVertices.end())
-        itBig = grBig->iVertices.begin(); // move to the beginning
-      else if (itBig < grBig->iVertices.begin())
-        itBig = grBig->iVertices.end() - 1; // move to the end
+      itBig += direction;
+      if (itBig == grBig->vertices.end())
+        itBig = grBig->vertices.begin(); // move to the beginning
+      else if (itBig < grBig->vertices.begin())
+        itBig = grBig->vertices.end() - 1; // move to the end
     }
 
     return true;
@@ -137,217 +125,216 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // A_n < TB_m
-  if (iGraphType == 0 && grBig->iGraphType == 1) {
-    if (iVerticesBigCount == 4) {
+  if (type == 0 && grBig->type == 1) {
+    if (verticesBigCount == 4) {
       /* In this case, if we remove the first edge, the obtained A3 is not
        * correct */
-      vector<short unsigned int> iVTemp;
-      iVTemp.push_back(grBig->iVertices[2]);
-      iVTemp.push_back(grBig->iVertices[1]);
-      iVTemp.push_back(grBig->iVertices[3]);
+      vector<short unsigned int> temp;
+      temp.push_back(grBig->vertices[2]);
+      temp.push_back(grBig->vertices[1]);
+      temp.push_back(grBig->vertices[3]);
 
-      return bAnSubAm(iVertices, iVTemp);
+      return isAnSubAm(vertices, temp);
     } else {
-      Graph g(vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                         grBig->iVertices.end()),
+      Graph g(vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                         grBig->vertices.end()),
               0, vector<bool>(0), 3, true, 0);
 
-      return bIsSubgraphOf_spherical_spherical(&g);
+      return isSubgraphOf_spherical_spherical(&g);
     }
   }
 
   // ---------------------------------------------------------------------
   // A_n < TC_m
-  if (iGraphType == 0 && grBig->iGraphType == 2) {
-    return bAnSubAm(iVertices,
-                    vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                               grBig->iVertices.end() - 1));
+  if (type == 0 && grBig->type == 2) {
+    return isAnSubAm(vertices,
+                     vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
   // A_n < TD_m
-  if (iGraphType == 0 && grBig->iGraphType == 3) {
-    if (iVerticesCount <= 3) // could be in one of the ends
+  if (type == 0 && grBig->type == 3) {
+    if (verticesCount <= 3) // could be in one of the ends
     {
-      vector<short unsigned int> iVTemp;
+      vector<short unsigned int> temp;
 
       // left hand side
-      iVTemp.push_back(grBig->iVertices[0]);
-      iVTemp.push_back(grBig->iVertices[2]);
-      iVTemp.push_back(grBig->iVertices[1]);
-      if (bAnSubAm(iVertices, iVTemp))
+      temp.push_back(grBig->vertices[0]);
+      temp.push_back(grBig->vertices[2]);
+      temp.push_back(grBig->vertices[1]);
+      if (isAnSubAm(vertices, temp))
         return true;
-      iVTemp.clear();
+      temp.clear();
 
       // right hand side
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 2]);
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 3]);
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-      if (bAnSubAm(iVertices, iVTemp))
+      temp.push_back(grBig->vertices[verticesBigCount - 2]);
+      temp.push_back(grBig->vertices[verticesBigCount - 3]);
+      temp.push_back(grBig->vertices[verticesBigCount - 1]);
+      if (isAnSubAm(vertices, temp))
         return true;
     }
 
-    vector<short unsigned int>::const_iterator itStart(
-        find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[0]));
-    vector<short unsigned int>::const_iterator itEnd(
-        find(grBig->iVertices.begin(), grBig->iVertices.end(),
-             iVertices[iVerticesCount - 1]));
+    auto itStart =
+        find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]);
+    auto itEnd = find(grBig->vertices.begin(), grBig->vertices.end(),
+                      vertices[verticesCount - 1]);
 
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin() + 2,
-                                      grBig->iVertices.end() -
-                                          2); // basis (middle)
+    vector<short unsigned int> temp(grBig->vertices.begin() + 2,
+                                    grBig->vertices.end() -
+                                        2); // basis (middle)
 
-    if (itStart == grBig->iVertices.begin())
-      iVTemp.insert(iVTemp.begin(), grBig->iVertices[0]);
-    else if (itStart == (grBig->iVertices.begin() + 1))
-      iVTemp.insert(iVTemp.begin(), grBig->iVertices[1]);
+    if (itStart == grBig->vertices.begin())
+      temp.insert(temp.begin(), grBig->vertices[0]);
+    else if (itStart == (grBig->vertices.begin() + 1))
+      temp.insert(temp.begin(), grBig->vertices[1]);
 
-    if (itEnd == grBig->iVertices.end())
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-    else if (itEnd == (grBig->iVertices.end() - 1))
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 2]);
+    if (itEnd == grBig->vertices.end())
+      temp.push_back(grBig->vertices[verticesBigCount - 1]);
+    else if (itEnd == (grBig->vertices.end() - 1))
+      temp.push_back(grBig->vertices[verticesBigCount - 2]);
 
-    return bAnSubAm(iVertices, iVTemp);
+    return isAnSubAm(vertices, temp);
   }
 
   // ---------------------------------------------------------------------
   // A_n < TE_6
-  if (iGraphType == 0 && grBig->iGraphType == 4 && iVerticesBigCount == 7) {
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.begin() + 2);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(grBig->iVertices[4]);
-    iVTemp.push_back(grBig->iVertices[5]);
-    if (bAnSubAm(iVertices, iVTemp))
+  if (type == 0 && grBig->type == 4 && verticesBigCount == 7) {
+    vector<short unsigned int> temp(grBig->vertices.begin(),
+                                    grBig->vertices.begin() + 2);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(grBig->vertices[4]);
+    temp.push_back(grBig->vertices[5]);
+    if (isAnSubAm(vertices, temp))
       return true;
 
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                        grBig->iVertices.begin() + 2);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(grBig->iVertices[2]);
-    iVTemp.push_back(grBig->iVertices[3]);
-    if (bAnSubAm(iVertices, iVTemp))
+    temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                      grBig->vertices.begin() + 2);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(grBig->vertices[2]);
+    temp.push_back(grBig->vertices[3]);
+    if (isAnSubAm(vertices, temp))
       return true;
 
-    iVTemp.clear();
-    iVTemp.push_back(grBig->iVertices[5]);
-    iVTemp.push_back(grBig->iVertices[4]);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(grBig->iVertices[2]);
-    iVTemp.push_back(grBig->iVertices[3]);
-    if (bAnSubAm(iVertices, iVTemp))
+    temp.clear();
+    temp.push_back(grBig->vertices[5]);
+    temp.push_back(grBig->vertices[4]);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(grBig->vertices[2]);
+    temp.push_back(grBig->vertices[3]);
+    if (isAnSubAm(vertices, temp))
       return true;
   }
 
   // ---------------------------------------------------------------------
   // A_n < TE_m
-  if (iGraphType == 0 && grBig->iGraphType == 4) {
-    vector<short unsigned int> iVTemp;
+  if (type == 0 && grBig->type == 4) {
+    vector<short unsigned int> temp;
 
     //-------------------------------------
     // basis
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                        grBig->iVertices.end() - 1);
+    temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                      grBig->vertices.end() - 1);
 
-    if (bAnSubAm(iVertices, iVTemp))
+    if (isAnSubAm(vertices, temp))
       return true;
 
-    iVTemp.clear();
+    temp.clear();
 
     // -------------------------------------
     // left & queue or right & queue
-    if (iVerticesBigCount == 8) // TE7
+    if (verticesBigCount == 8) // TE7
     {
-      iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                          grBig->iVertices.begin() + 4);
-      iVTemp.push_back(grBig->iVertices[7]);
-      if (bAnSubAm(iVertices, iVTemp))
+      temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                        grBig->vertices.begin() + 4);
+      temp.push_back(grBig->vertices[7]);
+      if (isAnSubAm(vertices, temp))
         return true;
 
-      iVTemp.clear();
-      iVTemp = vector<short unsigned int>(grBig->iVertices.begin() + 3,
-                                          grBig->iVertices.end() - 1);
-      iVTemp.insert(iVTemp.begin(), grBig->iVertices[7]);
+      temp.clear();
+      temp = vector<short unsigned int>(grBig->vertices.begin() + 3,
+                                        grBig->vertices.end() - 1);
+      temp.insert(temp.begin(), grBig->vertices[7]);
 
-      return bAnSubAm(iVertices, iVTemp);
-    } else if (iVerticesBigCount == 9) // TE8
+      return isAnSubAm(vertices, temp);
+    } else if (verticesBigCount == 9) // TE8
     {
-      iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                          grBig->iVertices.begin() + 3);
-      iVTemp.push_back(grBig->iVertices[8]);
-      if (bAnSubAm(iVertices, iVTemp))
+      temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                        grBig->vertices.begin() + 3);
+      temp.push_back(grBig->vertices[8]);
+      if (isAnSubAm(vertices, temp))
         return true;
 
-      iVTemp.clear();
-      iVTemp = vector<short unsigned int>(grBig->iVertices.begin() + 2,
-                                          grBig->iVertices.end() - 1);
-      iVTemp.insert(iVTemp.begin(), grBig->iVertices[8]);
-      return bAnSubAm(iVertices, iVTemp);
+      temp.clear();
+      temp = vector<short unsigned int>(grBig->vertices.begin() + 2,
+                                        grBig->vertices.end() - 1);
+      temp.insert(temp.begin(), grBig->vertices[8]);
+      return isAnSubAm(vertices, temp);
     }
   }
 
   // ---------------------------------------------------------------------
   // A_n < TF_4
-  if (iGraphType == 0 && grBig->iGraphType == 5) {
-    if (iVerticesCount > 3)
+  if (type == 0 && grBig->type == 5) {
+    if (verticesCount > 3)
       return false;
 
-    if (bAnSubAm(iVertices,
-                 vector<short unsigned int>(grBig->iVertices.begin(),
-                                            grBig->iVertices.begin() + 3)))
+    if (isAnSubAm(vertices,
+                  vector<short unsigned int>(grBig->vertices.begin(),
+                                             grBig->vertices.begin() + 3)))
       return true;
 
-    if (iVerticesCount == 2)
-      return bAnSubAm(iVertices,
-                      vector<short unsigned int>(grBig->iVertices.end() - 2,
-                                                 grBig->iVertices.end()));
+    if (verticesCount == 2)
+      return isAnSubAm(vertices,
+                       vector<short unsigned int>(grBig->vertices.end() - 2,
+                                                  grBig->vertices.end()));
 
     return false;
   }
 
   // ---------------------------------------------------------------------
   // A_n < TG_2
-  if (iGraphType == 0 && grBig->iGraphType == 6) {
-    if (iVerticesCount > 2)
+  if (type == 0 && grBig->type == 6) {
+    if (verticesCount > 2)
       return false;
 
-    return bAnSubAm(iVertices,
-                    vector<short unsigned int>(grBig->iVertices.begin(),
-                                               grBig->iVertices.begin() + 2));
+    return isAnSubAm(vertices,
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.begin() + 2));
   }
 
   // ---------------------------------------------------------------------
   // B_n < TB_m
-  if (iGraphType == 1 && grBig->iGraphType == 1) {
-    vector<short unsigned int> iVTemp(iVertices);
-    reverse(iVTemp.begin(), iVTemp.end());
+  if (type == 1 && grBig->type == 1) {
+    vector<short unsigned int> temp(vertices);
+    reverse(temp.begin(), temp.end());
 
-    vector<short unsigned int>::const_iterator itSearch(
-        find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[0]));
+    auto itSearch =
+        find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]);
 
-    if (itSearch == grBig->iVertices.end())
+    if (itSearch == grBig->vertices.end())
       return false;
 
     // if we don't use any of the two ends (right ends)
-    if (itSearch + 1 != grBig->iVertices.end() &&
-        itSearch + 2 != grBig->iVertices.end())
-      return (iVTemp == vector<short unsigned int>(grBig->iVertices.begin(),
-                                                   itSearch + 1));
-    else if (itSearch + 1 == grBig->iVertices.end()) {
+    if (itSearch + 1 != grBig->vertices.end() &&
+        itSearch + 2 != grBig->vertices.end())
+      return (temp == vector<short unsigned int>(grBig->vertices.begin(),
+                                                 itSearch + 1));
+    else if (itSearch + 1 == grBig->vertices.end()) {
 
-      vector<short unsigned int> iVTemp2(
-          vector<short unsigned int>(grBig->iVertices.begin(), itSearch - 1));
-      iVTemp2.push_back(grBig->iVertices[iVerticesBigCount - 1]);
+      auto temp2(
+          vector<short unsigned int>(grBig->vertices.begin(), itSearch - 1));
+      temp2.push_back(grBig->vertices[verticesBigCount - 1]);
 
-      return (iVTemp == iVTemp2);
+      return (temp == temp2);
 
-    } else // itSearch + 2 == grBig->iVertices.end()
+    } else // itSearch + 2 == grBig->vertices.end()
     {
-      vector<short unsigned int> iVTemp2(
-          vector<short unsigned int>(grBig->iVertices.begin(), itSearch));
-      iVTemp2.push_back(grBig->iVertices[iVerticesBigCount - 2]);
+      vector<short unsigned int> temp2(
+          vector<short unsigned int>(grBig->vertices.begin(), itSearch));
+      temp2.push_back(grBig->vertices[verticesBigCount - 2]);
 
-      return (iVTemp == iVTemp2);
+      return (temp == temp2);
     }
 
     return false;
@@ -355,90 +342,88 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // B_n < TC_m
-  if (iGraphType == 1 && grBig->iGraphType == 2) {
-    vector<short unsigned int>::const_iterator itSearch(
-        find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[0]));
+  if (type == 1 && grBig->type == 2) {
+    auto itSearch =
+        find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]);
 
-    if (itSearch == grBig->iVertices.end())
+    if (itSearch == grBig->vertices.end())
       return false;
 
     // [3, ..., 3, 4] < [3, ..., 3, 4]
-    if (iVertices[iVerticesCount - 1] ==
-        grBig->iVertices[iVerticesBigCount - 1])
-      return (iVertices ==
-              vector<short unsigned int>(itSearch, grBig->iVertices.end()));
+    if (vertices[verticesCount - 1] == grBig->vertices[verticesBigCount - 1])
+      return (vertices ==
+              vector<short unsigned int>(itSearch, grBig->vertices.end()));
 
     // [3, ..., 3, 4] < [4, 3, ..., 3]
-    if (iVertices[iVerticesCount - 1] == grBig->iVertices[0]) {
-      vector<short unsigned int> iVTemp(grBig->iVertices.begin(), itSearch + 1);
-      reverse(iVTemp.begin(), iVTemp.end());
+    if (vertices[verticesCount - 1] == grBig->vertices[0]) {
+      vector<short unsigned int> temp(grBig->vertices.begin(), itSearch + 1);
+      reverse(temp.begin(), temp.end());
 
-      return (iVTemp == iVertices);
+      return (temp == vertices);
     }
   }
 
   // ---------------------------------------------------------------------
   // B_n < TF_4
-  if (iGraphType == 1 && grBig->iGraphType == 5) {
-    if (iVerticesCount > 4)
+  if (type == 1 && grBig->type == 5) {
+    if (verticesCount > 4)
       return false;
 
     // ----------------------------------------
     // ([4,3] OR [4,3,3]) < ([3,3,4])
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin() +
-                                          (iVerticesCount == 4 ? 0 : 1),
-                                      grBig->iVertices.end() - 1);
-    if (iVertices == iVTemp)
+    vector<short unsigned int> temp(grBig->vertices.begin() +
+                                        (verticesCount == 4 ? 0 : 1),
+                                    grBig->vertices.end() - 1);
+    if (vertices == temp)
       return true;
 
     // ----------------------------------------
     // [4,3] < ([4,3])
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin() + 2,
-                                        grBig->iVertices.end());
-    reverse(iVTemp.begin(), iVTemp.end());
-    return (iVertices == iVTemp);
+    temp = vector<short unsigned int>(grBig->vertices.begin() + 2,
+                                      grBig->vertices.end());
+    reverse(temp.begin(), temp.end());
+    return (vertices == temp);
   }
 
   // ---------------------------------------------------------------------
   // D_n < TB_m
-  if (iGraphType == 3 && grBig->iGraphType == 1) {
-    if (iVerticesBigCount < 5)
+  if (type == 3 && grBig->type == 1) {
+    if (verticesBigCount < 5)
       return false;
 
     // "central" node
-    if (iVertices[iVerticesCount - 3] !=
-        grBig->iVertices[iVerticesBigCount - 3])
+    if (vertices[verticesCount - 3] != grBig->vertices[verticesBigCount - 3])
       return false;
 
-    Graph g(vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                       grBig->iVertices.end()),
+    Graph g(vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                       grBig->vertices.end()),
             0, vector<bool>(false), 3, true, 0);
 
-    return bIsSubgraphOf_spherical_spherical(&g);
+    return isSubgraphOf_spherical_spherical(&g);
   }
 
   // ---------------------------------------------------------------------
   // D_4 < TD_4
-  if (iGraphType == 3 && iVerticesCount == 4 && grBig->iGraphType == 3 &&
-      iVerticesBigCount == 5) {
-    if (iVertices[1] != grBig->iVertices[4]) // comparison of the central node
+  if (type == 3 && verticesCount == 4 && grBig->type == 3 &&
+      verticesBigCount == 5) {
+    if (vertices[1] != grBig->vertices[4]) // comparison of the central node
       return false;
 
     /*
      * Remark:
-     * We should use find(grBig->iVertices.begin(), grBig->iVertices.end() - 1,
-     * -), instead of find(grBig->iVertices.begin(), grBig->iVertices.end(), -)
-     * but it doesn't really matter since the elements of grBig->iVertices are
+     * We should use find(grBig->vertices.begin(), grBig->vertices.end() - 1,
+     * -), instead of find(grBig->vertices.begin(), grBig->vertices.end(), -)
+     * but it doesn't really matter since the elements of grBig->vertices are
      * all distincts.
      */
-    if (find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[0]) ==
-        grBig->iVertices.end())
+    if (find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]) ==
+        grBig->vertices.end())
       return false;
-    if (find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[2]) ==
-        grBig->iVertices.end())
+    if (find(grBig->vertices.begin(), grBig->vertices.end(), vertices[2]) ==
+        grBig->vertices.end())
       return false;
-    if (find(grBig->iVertices.begin(), grBig->iVertices.end(), iVertices[3]) ==
-        grBig->iVertices.end())
+    if (find(grBig->vertices.begin(), grBig->vertices.end(), vertices[3]) ==
+        grBig->vertices.end())
       return false;
 
     return true;
@@ -446,85 +431,85 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // D_n < TD_m
-  if (iGraphType == 3 && grBig->iGraphType == 3) {
+  if (type == 3 && grBig->type == 3) {
     // Test 1
-    Graph g(vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                       grBig->iVertices.end()),
+    Graph g(vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                       grBig->vertices.end()),
             0, vector<bool>(false), 3, true, 0);
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // Test 2
-    vector<short unsigned int> iVTemp(vector<short unsigned int>(
-        grBig->iVertices.begin() + 2, grBig->iVertices.end()));
-    iVTemp.insert(iVTemp.begin(), grBig->iVertices[0]);
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    vector<short unsigned int> temp(vector<short unsigned int>(
+        grBig->vertices.begin() + 2, grBig->vertices.end()));
+    temp.insert(temp.begin(), grBig->vertices[0]);
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // Test 3
-    iVTemp = vector<short unsigned int>(vector<short unsigned int>(
-        grBig->iVertices.begin(), grBig->iVertices.end() - 1));
-    iVTemp[0] = max(grBig->iVertices[0], grBig->iVertices[1]);
-    iVTemp[1] = min(grBig->iVertices[0], grBig->iVertices[1]);
-    reverse(iVTemp.begin(), iVTemp.end());
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    temp = vector<short unsigned int>(vector<short unsigned int>(
+        grBig->vertices.begin(), grBig->vertices.end() - 1));
+    temp[0] = max(grBig->vertices[0], grBig->vertices[1]);
+    temp[1] = min(grBig->vertices[0], grBig->vertices[1]);
+    reverse(temp.begin(), temp.end());
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // Test 4
-    iVTemp = vector<short unsigned int>(vector<short unsigned int>(
-        grBig->iVertices.begin(), grBig->iVertices.end() - 2));
-    iVTemp[0] = max(grBig->iVertices[0], grBig->iVertices[1]);
-    iVTemp[1] = min(grBig->iVertices[0], grBig->iVertices[1]);
-    iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-    reverse(iVTemp.begin(), iVTemp.end());
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    temp = vector<short unsigned int>(vector<short unsigned int>(
+        grBig->vertices.begin(), grBig->vertices.end() - 2));
+    temp[0] = max(grBig->vertices[0], grBig->vertices[1]);
+    temp[1] = min(grBig->vertices[0], grBig->vertices[1]);
+    temp.push_back(grBig->vertices[verticesBigCount - 1]);
+    reverse(temp.begin(), temp.end());
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
   }
 
   // ---------------------------------------------------------------------
   // D_n < TE_6
-  if (iGraphType == 3 && grBig->iGraphType == 4 && iVerticesBigCount == 7) {
+  if (type == 3 && grBig->type == 4 && verticesBigCount == 7) {
     // -------------------------------------------------
     // first test
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.begin() + 2);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(min(grBig->iVertices[2], grBig->iVertices[4]));
-    iVTemp.push_back(max(grBig->iVertices[2], grBig->iVertices[4]));
-    Graph g(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    vector<short unsigned int> temp(grBig->vertices.begin(),
+                                    grBig->vertices.begin() + 2);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(min(grBig->vertices[2], grBig->vertices[4]));
+    temp.push_back(max(grBig->vertices[2], grBig->vertices[4]));
+    Graph g(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // -------------------------------------------------
     // second test
-    iVTemp.clear();
-    iVTemp.push_back(grBig->iVertices[5]);
-    iVTemp.push_back(grBig->iVertices[4]);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(min(grBig->iVertices[2], grBig->iVertices[1]));
-    iVTemp.push_back(max(grBig->iVertices[2], grBig->iVertices[1]));
+    temp.clear();
+    temp.push_back(grBig->vertices[5]);
+    temp.push_back(grBig->vertices[4]);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(min(grBig->vertices[2], grBig->vertices[1]));
+    temp.push_back(max(grBig->vertices[2], grBig->vertices[1]));
 
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // -------------------------------------------------
     // third test
-    iVTemp.clear();
-    iVTemp.push_back(grBig->iVertices[3]);
-    iVTemp.push_back(grBig->iVertices[2]);
-    iVTemp.push_back(grBig->iVertices[6]);
-    iVTemp.push_back(min(grBig->iVertices[4], grBig->iVertices[1]));
-    iVTemp.push_back(max(grBig->iVertices[4], grBig->iVertices[1]));
+    temp.clear();
+    temp.push_back(grBig->vertices[3]);
+    temp.push_back(grBig->vertices[2]);
+    temp.push_back(grBig->vertices[6]);
+    temp.push_back(min(grBig->vertices[4], grBig->vertices[1]));
+    temp.push_back(max(grBig->vertices[4], grBig->vertices[1]));
 
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     return false;
@@ -532,35 +517,34 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // D_n < TE_m
-  if (iGraphType == 3 && grBig->iGraphType == 4) {
-    unsigned int iBigQueueIndex(iVerticesBigCount == 8 ? 3 : 2);
+  if (type == 3 && grBig->type == 4) {
+    unsigned int bigQueueIndex(verticesBigCount == 8 ? 3 : 2);
 
     // -------------------------------------------------
     // first test
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.begin() +
-                                          iBigQueueIndex + 1);
-    iVTemp.push_back(min(grBig->iVertices[iBigQueueIndex + 1],
-                         grBig->iVertices[iVerticesBigCount - 1]));
-    iVTemp.push_back(max(grBig->iVertices[iBigQueueIndex + 1],
-                         grBig->iVertices[iVerticesBigCount - 1]));
-    Graph g(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    vector<short unsigned int> temp(
+        grBig->vertices.begin(), grBig->vertices.begin() + bigQueueIndex + 1);
+    temp.push_back(min(grBig->vertices[bigQueueIndex + 1],
+                       grBig->vertices[verticesBigCount - 1]));
+    temp.push_back(max(grBig->vertices[bigQueueIndex + 1],
+                       grBig->vertices[verticesBigCount - 1]));
+    Graph g(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // -------------------------------------------------
     // second test
-    iVTemp = vector<short unsigned int>(
-        grBig->iVertices.begin() + iBigQueueIndex, grBig->iVertices.end() - 1);
-    reverse(iVTemp.begin(), iVTemp.end());
-    iVTemp.push_back(min(grBig->iVertices[iBigQueueIndex - 1],
-                         grBig->iVertices[iVerticesBigCount - 1]));
-    iVTemp.push_back(max(grBig->iVertices[iBigQueueIndex - 1],
-                         grBig->iVertices[iVerticesBigCount - 1]));
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    temp = vector<short unsigned int>(grBig->vertices.begin() + bigQueueIndex,
+                                      grBig->vertices.end() - 1);
+    reverse(temp.begin(), temp.end());
+    temp.push_back(min(grBig->vertices[bigQueueIndex - 1],
+                       grBig->vertices[verticesBigCount - 1]));
+    temp.push_back(max(grBig->vertices[bigQueueIndex - 1],
+                       grBig->vertices[verticesBigCount - 1]));
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     return false;
@@ -568,83 +552,80 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // E_6 < TE_6
-  if (iGraphType == 4 && iVerticesCount == 6 && grBig->iGraphType == 4 &&
-      iVerticesBigCount == 7) {
-    vector<short unsigned int> iVBigBasis;
+  if (type == 4 && verticesCount == 6 && grBig->type == 4 &&
+      verticesBigCount == 7) {
+    vector<short unsigned int> bigBasis;
 
     // We must find out what the base is
-    if (iVertices[5] == grBig->iVertices[4]) {
-      iVBigBasis.push_back(grBig->iVertices[0]);
-      iVBigBasis.push_back(grBig->iVertices[1]);
-      iVBigBasis.push_back(grBig->iVertices[6]);
-      iVBigBasis.push_back(grBig->iVertices[2]);
-      iVBigBasis.push_back(grBig->iVertices[3]);
-    } else if (iVertices[5] == grBig->iVertices[1]) {
-      iVBigBasis.push_back(grBig->iVertices[5]);
-      iVBigBasis.push_back(grBig->iVertices[4]);
-      iVBigBasis.push_back(grBig->iVertices[6]);
-      iVBigBasis.push_back(grBig->iVertices[2]);
-      iVBigBasis.push_back(grBig->iVertices[3]);
-    } else if (iVertices[5] == grBig->iVertices[2]) {
-      iVBigBasis.push_back(grBig->iVertices[0]);
-      iVBigBasis.push_back(grBig->iVertices[1]);
-      iVBigBasis.push_back(grBig->iVertices[6]);
-      iVBigBasis.push_back(grBig->iVertices[4]);
-      iVBigBasis.push_back(grBig->iVertices[5]);
+    if (vertices[5] == grBig->vertices[4]) {
+      bigBasis.push_back(grBig->vertices[0]);
+      bigBasis.push_back(grBig->vertices[1]);
+      bigBasis.push_back(grBig->vertices[6]);
+      bigBasis.push_back(grBig->vertices[2]);
+      bigBasis.push_back(grBig->vertices[3]);
+    } else if (vertices[5] == grBig->vertices[1]) {
+      bigBasis.push_back(grBig->vertices[5]);
+      bigBasis.push_back(grBig->vertices[4]);
+      bigBasis.push_back(grBig->vertices[6]);
+      bigBasis.push_back(grBig->vertices[2]);
+      bigBasis.push_back(grBig->vertices[3]);
+    } else if (vertices[5] == grBig->vertices[2]) {
+      bigBasis.push_back(grBig->vertices[0]);
+      bigBasis.push_back(grBig->vertices[1]);
+      bigBasis.push_back(grBig->vertices[6]);
+      bigBasis.push_back(grBig->vertices[4]);
+      bigBasis.push_back(grBig->vertices[5]);
     } else
       return false;
 
-    if (iVBigBasis[0] > iVBigBasis[4])
-      reverse(iVBigBasis.begin(), iVBigBasis.end());
+    if (bigBasis[0] > bigBasis[4])
+      reverse(bigBasis.begin(), bigBasis.end());
 
-    return (iVBigBasis ==
-            vector<short unsigned int>(iVertices.begin(), iVertices.end() - 1));
+    return (bigBasis ==
+            vector<short unsigned int>(vertices.begin(), vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
   // E_n < TE_7, TE_8
-  if (iGraphType == 4 && grBig->iGraphType == 4) {
-    if (iVertices[iVerticesCount - 1] !=
-        grBig->iVertices[iVerticesBigCount - 1])
+  if (type == 4 && grBig->type == 4) {
+    if (vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
     // E_6, E_7 < TE7
-    if (iVerticesCount <= 7 && iVerticesBigCount == 8) {
-      vector<short unsigned int> iVBigBasis(grBig->iVertices.begin() + 1,
-                                            grBig->iVertices.begin() +
-                                                iVerticesCount);
-      if (bAnSubAm(vector<short unsigned int>(iVertices.begin(),
-                                              iVertices.end() - 1),
-                   iVBigBasis))
+    if (verticesCount <= 7 && verticesBigCount == 8) {
+      vector<short unsigned int> bigBasis(
+          grBig->vertices.begin() + 1, grBig->vertices.begin() + verticesCount);
+      if (isAnSubAm(
+              vector<short unsigned int>(vertices.begin(), vertices.end() - 1),
+              bigBasis))
         return true;
 
-      if (iVerticesCount == 7 && iVerticesBigCount == 8) // E_7 < TE_7
+      if (verticesCount == 7 && verticesBigCount == 8) // E_7 < TE_7
       {
-        iVBigBasis = vector<short unsigned int>(grBig->iVertices.begin(),
-                                                grBig->iVertices.begin() + 6);
-        reverse(iVBigBasis.begin(), iVBigBasis.end());
+        bigBasis = vector<short unsigned int>(grBig->vertices.begin(),
+                                              grBig->vertices.begin() + 6);
+        reverse(bigBasis.begin(), bigBasis.end());
 
-        return (vector<short unsigned int>(iVertices.begin(),
-                                           iVertices.end() - 1) == iVBigBasis);
+        return (vector<short unsigned int>(vertices.begin(),
+                                           vertices.end() - 1) == bigBasis);
       }
 
       return false;
-    } else if (iVerticesBigCount == 9) // < TE_8
+    } else if (verticesBigCount == 9) // < TE_8
     {
-      vector<short unsigned int> iVBigBasis(grBig->iVertices.begin(),
-                                            grBig->iVertices.begin() +
-                                                iVerticesCount - 1);
+      vector<short unsigned int> bigBasis(
+          grBig->vertices.begin(), grBig->vertices.begin() + verticesCount - 1);
 
-      if (vector<short unsigned int>(iVertices.begin(), iVertices.end() - 1) ==
-          iVBigBasis)
+      if (vector<short unsigned int>(vertices.begin(), vertices.end() - 1) ==
+          bigBasis)
         return true;
 
-      if (iVerticesCount == 6) // E_5 is symmetric
+      if (verticesCount == 6) // E_5 is symmetric
       {
-        reverse(iVBigBasis.begin(), iVBigBasis.end());
+        reverse(bigBasis.begin(), bigBasis.end());
 
-        return ((vector<short unsigned int>(
-                     iVertices.begin(), iVertices.end() - 1) == iVBigBasis));
+        return ((vector<short unsigned int>(vertices.begin(),
+                                            vertices.end() - 1) == bigBasis));
       }
 
       return false;
@@ -654,108 +635,107 @@ bool Graph::bIsSubgraphOf_spherical_euclidean(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // F_4 < TF_4
-  if (iGraphType == 5 && grBig->iGraphType == 5) {
-    return bAnSubAm(iVertices,
-                    vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                               grBig->iVertices.end()));
+  if (type == 5 && grBig->type == 5) {
+    return isAnSubAm(vertices,
+                     vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                                grBig->vertices.end()));
   }
 
   // ---------------------------------------------------------------------
   // G_4 < TB_m
-  if (iGraphType == 6 && iDataSupp == 4 && grBig->iGraphType == 1) {
-    return ((iVertices[0] == grBig->iVertices[0] &&
-             iVertices[1] == grBig->iVertices[1]) ||
-            (iVertices[0] == grBig->iVertices[1] &&
-             iVertices[1] == grBig->iVertices[0]));
+  if (type == 6 && dataSupp == 4 && grBig->type == 1) {
+    return ((vertices[0] == grBig->vertices[0] &&
+             vertices[1] == grBig->vertices[1]) ||
+            (vertices[0] == grBig->vertices[1] &&
+             vertices[1] == grBig->vertices[0]));
   }
 
   // ---------------------------------------------------------------------
   // G_4 < TC_m
-  if (iGraphType == 6 && iDataSupp == 4 && grBig->iGraphType == 2) {
-    if ((iVertices[0] == grBig->iVertices[0] &&
-         iVertices[1] == grBig->iVertices[1]) ||
-        (iVertices[0] == grBig->iVertices[1] &&
-         iVertices[1] == grBig->iVertices[0]))
+  if (type == 6 && dataSupp == 4 && grBig->type == 2) {
+    if ((vertices[0] == grBig->vertices[0] &&
+         vertices[1] == grBig->vertices[1]) ||
+        (vertices[0] == grBig->vertices[1] &&
+         vertices[1] == grBig->vertices[0]))
       return true;
 
-    return ((iVertices[0] == grBig->iVertices[iVerticesBigCount - 1] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 2]) ||
-            (iVertices[0] == grBig->iVertices[iVerticesBigCount - 2] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 1]));
+    return ((vertices[0] == grBig->vertices[verticesBigCount - 1] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 2]) ||
+            (vertices[0] == grBig->vertices[verticesBigCount - 2] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 1]));
   }
 
   // ---------------------------------------------------------------------
   // G_4 < TF_4
-  if (iGraphType == 6 && iDataSupp == 4 && grBig->iGraphType == 5) {
-    return ((iVertices[0] == grBig->iVertices[2] &&
-             iVertices[1] == grBig->iVertices[3]) ||
-            (iVertices[0] == grBig->iVertices[3] &&
-             iVertices[1] == grBig->iVertices[2]));
+  if (type == 6 && dataSupp == 4 && grBig->type == 5) {
+    return ((vertices[0] == grBig->vertices[2] &&
+             vertices[1] == grBig->vertices[3]) ||
+            (vertices[0] == grBig->vertices[3] &&
+             vertices[1] == grBig->vertices[2]));
   }
 
   // ---------------------------------------------------------------------
   // G_6 < TG_2
-  if (iGraphType == 6 && iDataSupp == 6 && grBig->iGraphType == 6) {
-    return ((iVertices[0] == grBig->iVertices[1] &&
-             iVertices[1] == grBig->iVertices[2]) ||
-            (iVertices[1] == grBig->iVertices[1] &&
-             iVertices[0] == grBig->iVertices[2]));
+  if (type == 6 && dataSupp == 6 && grBig->type == 6) {
+    return ((vertices[0] == grBig->vertices[1] &&
+             vertices[1] == grBig->vertices[2]) ||
+            (vertices[1] == grBig->vertices[1] &&
+             vertices[0] == grBig->vertices[2]));
   }
 
   return false;
 }
 
-bool Graph::bIsSubgraphOf_spherical_spherical(const Graph *grBig) const {
-  size_t iVerticesCount(iVertices.size()),
-      iVerticesBigCount(grBig->iVertices.size());
+bool Graph::isSubgraphOf_spherical_spherical(const Graph *grBig) const {
+  size_t verticesCount = vertices.size();
+  size_t verticesBigCount = grBig->vertices.size();
 
-  if (iVerticesBigCount < iVerticesCount)
+  if (verticesBigCount < verticesCount)
     return false;
 
-  if (iVerticesCount == 1)
-    return (find(grBig->iVertices.begin(), grBig->iVertices.end(),
-                 iVertices[0]) != grBig->iVertices.end());
+  if (verticesCount == 1)
+    return find(grBig->vertices.begin(), grBig->vertices.end(), vertices[0]) !=
+           grBig->vertices.end();
 
   // ---------------------------------------------------------------------
   // A_n < A_m
-  if (iGraphType == 0 && grBig->iGraphType == 0) {
-    return bAnSubAm(iVertices, grBig->iVertices);
-  }
+  if (type == 0 && grBig->type == 0)
+    return isAnSubAm(vertices, grBig->vertices);
 
   // ---------------------------------------------------------------------
   // A_n < B_m
-  if (iGraphType == 0 && grBig->iGraphType == 1) {
-    return bAnSubAm(iVertices,
-                    vector<short unsigned int>(grBig->iVertices.begin(),
-                                               grBig->iVertices.end() - 1));
+  if (type == 0 && grBig->type == 1) {
+    return isAnSubAm(vertices,
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
   // A_n < D_m
-  if (iGraphType == 0 && grBig->iGraphType == 3) {
+  if (type == 0 && grBig->type == 3) {
     // base plus une des deux extrémités
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.end() - 1);
-    if (bAnSubAm(iVertices, iVTemp))
+    vector<short unsigned int> temp(grBig->vertices.begin(),
+                                    grBig->vertices.end() - 1);
+    if (isAnSubAm(vertices, temp))
       return true;
 
     // base plus l'autre extrémité
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                        grBig->iVertices.end() - 2);
-    iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-    if (bAnSubAm(iVertices, iVTemp))
+    temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                      grBig->vertices.end() - 2);
+    temp.push_back(grBig->vertices[verticesBigCount - 1]);
+    if (isAnSubAm(vertices, temp))
       return true;
 
     // A_3 dans le "bout du Y"
-    if (iVerticesCount <= 3 && iVerticesBigCount > 3) {
-      iVTemp.clear();
-      iVTemp.push_back(min(grBig->iVertices[iVerticesBigCount - 1],
-                           grBig->iVertices[iVerticesBigCount - 2]));
-      iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 3]);
-      iVTemp.push_back(max(grBig->iVertices[iVerticesBigCount - 1],
-                           grBig->iVertices[iVerticesBigCount - 2]));
+    if (verticesCount <= 3 && verticesBigCount > 3) {
+      temp.clear();
+      temp.push_back(min(grBig->vertices[verticesBigCount - 1],
+                         grBig->vertices[verticesBigCount - 2]));
+      temp.push_back(grBig->vertices[verticesBigCount - 3]);
+      temp.push_back(max(grBig->vertices[verticesBigCount - 1],
+                         grBig->vertices[verticesBigCount - 2]));
 
-      return bAnSubAm(iVertices, iVTemp);
+      return isAnSubAm(vertices, temp);
     }
 
     return false;
@@ -763,138 +743,136 @@ bool Graph::bIsSubgraphOf_spherical_spherical(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // A_n < E_m
-  if (iGraphType == 0 && grBig->iGraphType == 4) {
+  if (type == 0 && grBig->type == 4) {
     // A_n dans la base du E_n
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.end() - 1);
-    if (bAnSubAm(iVertices, iVTemp))
+    vector<short unsigned int> temp(grBig->vertices.begin(),
+                                    grBig->vertices.end() - 1);
+    if (isAnSubAm(vertices, temp))
       return true;
 
     // A_n contient la queue du E_m (début)
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin(),
-                                        grBig->iVertices.begin() + 3);
-    iVTemp.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-    if (bAnSubAm(iVertices, iVTemp))
+    temp = vector<short unsigned int>(grBig->vertices.begin(),
+                                      grBig->vertices.begin() + 3);
+    temp.push_back(grBig->vertices[verticesBigCount - 1]);
+    if (isAnSubAm(vertices, temp))
       return true;
 
     // A_n contient la queue du E_m (fin)
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin() + 2,
-                                        grBig->iVertices.end() - 1);
-    iVTemp.insert(iVTemp.begin(), grBig->iVertices[iVerticesBigCount - 1]);
+    temp = vector<short unsigned int>(grBig->vertices.begin() + 2,
+                                      grBig->vertices.end() - 1);
+    temp.insert(temp.begin(), grBig->vertices[verticesBigCount - 1]);
 
-    return bAnSubAm(iVertices, iVTemp);
+    return isAnSubAm(vertices, temp);
   }
 
   // ---------------------------------------------------------------------
   // A_2 < F_4
-  if (iGraphType == 0 && iVerticesCount == 2 && grBig->iGraphType == 5) {
-    return ((iVertices[0] == grBig->iVertices[0] &&
-             iVertices[1] == grBig->iVertices[1]) ||
-            (iVertices[1] == grBig->iVertices[0] &&
-             iVertices[0] == grBig->iVertices[1]) ||
-            (iVertices[0] == grBig->iVertices[2] &&
-             iVertices[1] == grBig->iVertices[3]) ||
-            (iVertices[1] == grBig->iVertices[2] &&
-             iVertices[0] == grBig->iVertices[3]));
+  if (type == 0 && verticesCount == 2 && grBig->type == 5) {
+    return ((vertices[0] == grBig->vertices[0] &&
+             vertices[1] == grBig->vertices[1]) ||
+            (vertices[1] == grBig->vertices[0] &&
+             vertices[0] == grBig->vertices[1]) ||
+            (vertices[0] == grBig->vertices[2] &&
+             vertices[1] == grBig->vertices[3]) ||
+            (vertices[1] == grBig->vertices[2] &&
+             vertices[0] == grBig->vertices[3]));
   }
 
   // ---------------------------------------------------------------------
   // A_n < H_m
-  if (iGraphType == 0 && grBig->iGraphType == 7) {
-    return bAnSubAm(iVertices,
-                    vector<short unsigned int>(grBig->iVertices.begin(),
-                                               grBig->iVertices.end() - 1));
+  if (type == 0 && grBig->type == 7) {
+    return isAnSubAm(vertices,
+                     vector<short unsigned int>(grBig->vertices.begin(),
+                                                grBig->vertices.end() - 1));
   }
 
   // ---------------------------------------------------------------------
   // B_n < B_m
-  if (iGraphType == 1 && grBig->iGraphType == 1) {
-    return bAnSubAm(iVertices, grBig->iVertices);
+  if (type == 1 && grBig->type == 1) {
+    return isAnSubAm(vertices, grBig->vertices);
   }
 
   // ---------------------------------------------------------------------
   // B_3 < F_4
-  if (iGraphType == 1 && grBig->iGraphType == 5 && iVerticesCount == 3) {
-    if (iVertices == vector<short unsigned int>(grBig->iVertices.begin(),
-                                                grBig->iVertices.begin() + 3))
+  if (type == 1 && grBig->type == 5 && verticesCount == 3) {
+    if (vertices == vector<short unsigned int>(grBig->vertices.begin(),
+                                               grBig->vertices.begin() + 3))
       return true;
 
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin() + 1,
-                                      grBig->iVertices.begin() + 4);
-    reverse(iVTemp.begin(), iVTemp.end());
+    vector<short unsigned int> temp(grBig->vertices.begin() + 1,
+                                    grBig->vertices.begin() + 4);
+    reverse(temp.begin(), temp.end());
 
-    return (iVertices == iVTemp);
+    return (vertices == temp);
   }
 
   // ---------------------------------------------------------------------
   // D_n < D_m
-  if (iGraphType == 3 && grBig->iGraphType == 3) {
-    if (iVerticesCount == 4) // D_4 est très symétrique
+  if (type == 3 && grBig->type == 3) {
+    if (verticesCount == 4) // D_4 est très symétrique
     {
       // central node
-      if (iVertices[1] != grBig->iVertices[iVerticesBigCount - 3])
+      if (vertices[1] != grBig->vertices[verticesBigCount - 3])
         return false;
 
-      vector<short unsigned int> iVTemp1;
-      iVTemp1.push_back(iVertices[0]);
-      iVTemp1.push_back(iVertices[2]);
-      iVTemp1.push_back(iVertices[3]);
+      vector<short unsigned int> temp1;
+      temp1.push_back(vertices[0]);
+      temp1.push_back(vertices[2]);
+      temp1.push_back(vertices[3]);
 
-      vector<short unsigned int> iVTemp2;
-      iVTemp2.push_back(grBig->iVertices[iVerticesBigCount - 1]);
-      iVTemp2.push_back(grBig->iVertices[iVerticesBigCount - 2]);
-      iVTemp2.push_back(grBig->iVertices[iVerticesBigCount - 4]);
+      vector<short unsigned int> temp2;
+      temp2.push_back(grBig->vertices[verticesBigCount - 1]);
+      temp2.push_back(grBig->vertices[verticesBigCount - 2]);
+      temp2.push_back(grBig->vertices[verticesBigCount - 4]);
 
-      sort(iVTemp1.begin(), iVTemp1.end());
-      sort(iVTemp2.begin(), iVTemp2.end());
+      sort(temp1.begin(), temp1.end());
+      sort(temp2.begin(), temp2.end());
 
-      return (iVTemp1 == iVTemp2);
+      return (temp1 == temp2);
     }
 
     // Autres D_n
-    if (iVertices[iVerticesCount - 2] !=
-            grBig->iVertices[iVerticesBigCount - 2] ||
-        iVertices[iVerticesCount - 1] !=
-            grBig->iVertices[iVerticesBigCount - 1])
+    if (vertices[verticesCount - 2] != grBig->vertices[verticesBigCount - 2] ||
+        vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
-    vector<short unsigned int> iVTemp1(iVertices.begin(),
-                                       iVertices.begin() + iVerticesCount - 2);
-    vector<short unsigned int> iVTemp2(
-        grBig->iVertices.begin() + iVerticesBigCount - iVerticesCount,
-        grBig->iVertices.begin() + iVerticesBigCount - 2);
+    vector<short unsigned int> temp1(vertices.begin(),
+                                     vertices.begin() + verticesCount - 2);
+    vector<short unsigned int> temp2(
+        grBig->vertices.begin() + verticesBigCount - verticesCount,
+        grBig->vertices.begin() + verticesBigCount - 2);
 
-    return (iVTemp1 == iVTemp2);
+    return (temp1 == temp2);
   }
 
   // ---------------------------------------------------------------------
   // D_n < E_m
-  if (iGraphType == 3 && grBig->iGraphType == 4) {
+  if (type == 3 && grBig->type == 4) {
     // -------------------------------------------------
     // first test
-    vector<short unsigned int> iVTemp(grBig->iVertices.begin(),
-                                      grBig->iVertices.begin() + 3);
-    iVTemp.push_back(
-        min(grBig->iVertices[3], grBig->iVertices[iVerticesBigCount - 1]));
-    iVTemp.push_back(
-        max(grBig->iVertices[3], grBig->iVertices[iVerticesBigCount - 1]));
-    Graph g(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    vector<short unsigned int> temp(grBig->vertices.begin(),
+                                    grBig->vertices.begin() + 3);
+    temp.push_back(
+        min(grBig->vertices[3], grBig->vertices[verticesBigCount - 1]));
+    temp.push_back(
+        max(grBig->vertices[3], grBig->vertices[verticesBigCount - 1]));
+    Graph g(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     // -------------------------------------------------
     // second test
-    iVTemp = vector<short unsigned int>(grBig->iVertices.begin() + 2,
-                                        grBig->iVertices.end() - 1);
-    reverse(iVTemp.begin(), iVTemp.end());
-    iVTemp.push_back(
-        min(grBig->iVertices[1], grBig->iVertices[iVerticesBigCount - 1]));
-    iVTemp.push_back(
-        max(grBig->iVertices[1], grBig->iVertices[iVerticesBigCount - 1]));
-    g = Graph(iVTemp, 0, vector<bool>(false), 3, true, 0);
+    temp = vector<short unsigned int>(grBig->vertices.begin() + 2,
+                                      grBig->vertices.end() - 1);
+    reverse(temp.begin(), temp.end());
+    temp.push_back(
+        min(grBig->vertices[1], grBig->vertices[verticesBigCount - 1]));
+    temp.push_back(
+        max(grBig->vertices[1], grBig->vertices[verticesBigCount - 1]));
+    g = Graph(temp, 0, vector<bool>(false), 3, true, 0);
 
-    if (bIsSubgraphOf_spherical_spherical(&g))
+    if (isSubgraphOf_spherical_spherical(&g))
       return true;
 
     return false;
@@ -902,23 +880,21 @@ bool Graph::bIsSubgraphOf_spherical_spherical(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // E_n < E_m
-  if (iGraphType == 4 && grBig->iGraphType == 4) {
-    if (iVertices[iVerticesCount - 1] !=
-        grBig->iVertices[iVerticesBigCount - 1])
+  if (type == 4 && grBig->type == 4) {
+    if (vertices[verticesCount - 1] != grBig->vertices[verticesBigCount - 1])
       return false;
 
-    vector<short unsigned int> iVTemp1(iVertices.begin(), iVertices.end() - 1);
-    vector<short unsigned int> iVTemp2(grBig->iVertices.begin(),
-                                       grBig->iVertices.begin() +
-                                           iVerticesCount - 1);
+    vector<short unsigned int> temp1(vertices.begin(), vertices.end() - 1);
+    vector<short unsigned int> temp2(
+        grBig->vertices.begin(), grBig->vertices.begin() + verticesCount - 1);
 
-    if (iVTemp1 == iVTemp2)
+    if (temp1 == temp2)
       return true;
 
-    if (iVerticesCount == 6) // E_5 a une base symétrique
+    if (verticesCount == 6) // E_5 a une base symétrique
     {
-      reverse(iVTemp1.begin(), iVTemp1.end());
-      if (iVTemp1 == iVTemp2)
+      reverse(temp1.begin(), temp1.end());
+      if (temp1 == temp2)
         return true;
     }
 
@@ -927,78 +903,81 @@ bool Graph::bIsSubgraphOf_spherical_spherical(const Graph *grBig) const {
 
   // ---------------------------------------------------------------------
   // G_4 < B_n
-  if (iGraphType == 6 && iDataSupp == 4 && grBig->iGraphType == 1) {
-    return ((iVertices[0] == grBig->iVertices[iVerticesBigCount - 2] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 1]) ||
-            (iVertices[0] == grBig->iVertices[iVerticesBigCount - 1] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 2]));
+  if (type == 6 && dataSupp == 4 && grBig->type == 1) {
+    return ((vertices[0] == grBig->vertices[verticesBigCount - 2] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 1]) ||
+            (vertices[0] == grBig->vertices[verticesBigCount - 1] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 2]));
   }
 
   // ---------------------------------------------------------------------
   // G_m < G_m
-  if (iGraphType == 6 && grBig->iGraphType == 6 &&
-      iDataSupp == grBig->iDataSupp && iVertices == grBig->iVertices) {
-    return ((iVertices[0] == grBig->iVertices[iVerticesBigCount - 2] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 1]) ||
-            (iVertices[0] == grBig->iVertices[iVerticesBigCount - 1] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 2]));
+  if (type == 6 && grBig->type == 6 && dataSupp == grBig->dataSupp &&
+      vertices == grBig->vertices) {
+    return ((vertices[0] == grBig->vertices[verticesBigCount - 2] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 1]) ||
+            (vertices[0] == grBig->vertices[verticesBigCount - 1] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 2]));
   }
 
   // ---------------------------------------------------------------------
   // G_5 < H_m
-  if ((iGraphType == 6 && iDataSupp == 5) && grBig->iGraphType == 7) {
-    return ((iVertices[0] == grBig->iVertices[iVerticesBigCount - 2] &&
-             iVertices[1] == grBig->iVertices[iVerticesBigCount - 1]) ||
-            (iVertices[1] == grBig->iVertices[iVerticesBigCount - 2] &&
-             iVertices[0] == grBig->iVertices[iVerticesBigCount - 1]));
+  if ((type == 6 && dataSupp == 5) && grBig->type == 7) {
+    return ((vertices[0] == grBig->vertices[verticesBigCount - 2] &&
+             vertices[1] == grBig->vertices[verticesBigCount - 1]) ||
+            (vertices[1] == grBig->vertices[verticesBigCount - 2] &&
+             vertices[0] == grBig->vertices[verticesBigCount - 1]));
   }
 
   // ---------------------------------------------------------------------
   // H_3 < H_4
-  if (iGraphType == 7 && grBig->iGraphType == 7) {
-    return (vector<short unsigned int>(grBig->iVertices.begin() + 1,
-                                       grBig->iVertices.begin() +
-                                           iVerticesCount + 1) == iVertices);
+  if (type == 7 && grBig->type == 7) {
+    return (vector<short unsigned int>(grBig->vertices.begin() + 1,
+                                       grBig->vertices.begin() + verticesCount +
+                                           1) == vertices);
   }
 
   return false;
 }
 
-bool Graph::bAnSubAm(const vector<short unsigned int> &iSubV,
-                     const vector<short unsigned int> &iBigV) {
-  vector<short unsigned int>::const_iterator itBig, itSub,
-      it(find(iBigV.begin(), iBigV.end(), iSubV[0]));
+bool Graph::isAnSubAm(const vector<short unsigned int> &subGraphVertices,
+                      const vector<short unsigned int> &bigGraphVertices) {
+  vector<short unsigned int>::const_iterator itBig, itSub;
+  auto it = find(bigGraphVertices.begin(), bigGraphVertices.end(),
+                 subGraphVertices[0]);
 
-  if (it == iBigV.end())
+  if (it == bigGraphVertices.end())
     return false;
 
-  if (iSubV.size() == 1)
+  if (subGraphVertices.size() == 1)
     return true;
 
-  if (iSubV.size() > iBigV.size())
+  if (subGraphVertices.size() > bigGraphVertices.size())
     return false;
 
-  if ((it + 1) == iBigV.end() && *(it - 1) != iSubV[1])
+  if ((it + 1) == bigGraphVertices.end() && *(it - 1) != subGraphVertices[1])
     return false;
 
   // ----------------------------------------------------------------------
   // recherche en avant depuis it
-  if ((it + 1) != iBigV.end() && *(it + 1) == iSubV[1]) {
+  if ((it + 1) != bigGraphVertices.end() && *(it + 1) == subGraphVertices[1]) {
     itBig = it;
-    for (itSub = iSubV.begin(); itSub != iSubV.end() && itBig != iBigV.end();
+    for (itSub = subGraphVertices.begin();
+         itSub != subGraphVertices.end() && itBig != bigGraphVertices.end();
          ++itSub) {
       if (*itSub != *itBig)
         break;
       ++itBig;
     }
 
-    return (itSub == iSubV.end());
+    return (itSub == subGraphVertices.end());
   }
 
   // ----------------------------------------------------------------------
   // recherche en arrière depuis it
   itBig = it;
-  for (itSub = iSubV.begin(); itSub != iSubV.end() && itBig >= iBigV.begin();
+  for (itSub = subGraphVertices.begin();
+       itSub != subGraphVertices.end() && itBig >= bigGraphVertices.begin();
        ++itSub) {
     if (*itSub != *itBig)
       return false;
@@ -1006,43 +985,43 @@ bool Graph::bAnSubAm(const vector<short unsigned int> &iSubV,
     --itBig;
   }
 
-  return (itSub == iSubV.end());
+  return (itSub == subGraphVertices.end());
 }
 
 bool operator==(const Graph &g1, const Graph &g2) {
-  return (g1.iGraphType == g2.iGraphType && g1.iDataSupp == g2.iDataSupp &&
-          g1.iVertices == g2.iVertices && g1.bSpherical == g2.bSpherical);
+  return (g1.type == g2.type && g1.dataSupp == g2.dataSupp &&
+          g1.vertices == g2.vertices && g1.isSpherical == g2.isSpherical);
 }
 
 bool operator<(const Graph &g1, const Graph &g2) {
   if (g1 == g2)
     return false;
 
-  if (g1.bSpherical && !g2.bSpherical)
+  if (g1.isSpherical && !g2.isSpherical)
     return true;
-  if (!g1.bSpherical && g2.bSpherical)
+  if (!g1.isSpherical && g2.isSpherical)
     return false;
 
-  if (g1.iVertices.size() < g2.iVertices.size())
+  if (g1.vertices.size() < g2.vertices.size())
     return true;
-  if (g1.iVertices.size() > g2.iVertices.size())
+  if (g1.vertices.size() > g2.vertices.size())
     return false;
 
-  if (g1.iGraphType < g2.iGraphType)
+  if (g1.type < g2.type)
     return true;
-  if (g1.iGraphType > g2.iGraphType)
+  if (g1.type > g2.type)
     return false;
 
-  if (g1.iGraphType == 6 && g2.iGraphType == 6) {
-    if (g1.iDataSupp < g2.iDataSupp)
+  if (g1.type == 6 && g2.type == 6) {
+    if (g1.dataSupp < g2.dataSupp)
       return true;
-    if (g1.iDataSupp > g2.iDataSupp)
+    if (g1.dataSupp > g2.dataSupp)
       return false;
   }
 
-  if (g1.iVertices < g2.iVertices)
+  if (g1.vertices < g2.vertices)
     return true;
-  if (g1.iVertices > g2.iVertices)
+  if (g1.vertices > g2.vertices)
     return false;
 
   throw(string("Graph::operator<: One missed case"));

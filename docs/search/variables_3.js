@@ -1,19 +1,6 @@
 var searchData=
 [
-  ['gepsilon_797',['gEpsilon',['../class_growth_rate.html#a8668eb3910171091be9fd10dab538088',1,'GrowthRate::gEpsilon()'],['../class_signature.html#ae6855299cbb38e2c8da800ea8b39b738',1,'Signature::gEpsilon()']]],
-  ['ggrowthrate_798',['gGrowthRate',['../class_growth_rate.html#aecc2954c0289e7249763ea2c6282e535',1,'GrowthRate']]],
-  ['gmaximalroots_799',['gMaximalRoots',['../class_growth_rate.html#a51e4a15b08120a63870b81c7868707d7',1,'GrowthRate']]],
-  ['graphs_800',['graphs',['../class_graphs_list.html#a8d17114af1cd4e327ae2273d35d39307',1,'GraphsList::graphs()'],['../class_graphs_list_n.html#adae27c3dff2f747572a64dd91a241467',1,'GraphsListN::graphs()'],['../class_graphs_product.html#a683136adca4e0b59bf105039180704ee',1,'GraphsProduct::graphs()'],['../class_graphs_product_set.html#a46167404bee43490bbaed6e7d2aa93b1',1,'GraphsProductSet::graphs()']]],
-  ['graphscount_801',['graphsCount',['../class_graphs_list.html#a11255ff782c8c1f939c31c87a4b19c50',1,'GraphsList']]],
-  ['graphslist_802',['graphsList',['../class_graphs_list_iterator.html#ae9f670b80cd3268dfdb1a627acbe38eb',1,'GraphsListIterator']]],
-  ['graphslist_5feuclidean_803',['graphsList_euclidean',['../class_cox_iter.html#a810edffb8e1d5fdd6e7b90d11cce4c95',1,'CoxIter']]],
-  ['graphslist_5fspherical_804',['graphsList_spherical',['../class_cox_iter.html#a033b52a840203d44a1213934abffb76a',1,'CoxIter']]],
-  ['graphsproducts_805',['graphsProducts',['../class_cox_iter.html#abddcd62d3c0dedfa2bb63949c1d4e8e8',1,'CoxIter']]],
-  ['graphsproducts_5fbcanbefinitecovolume_806',['graphsProducts_bCanBeFiniteCovolume',['../class_cox_iter.html#a9745ddb0cb793a4713d1bfd28f928b46',1,'CoxIter']]],
-  ['graphsproductscount_5feuclidean_807',['graphsProductsCount_euclidean',['../class_cox_iter.html#a0bca775a6f1e2ab64189cafdc1a03e5e',1,'CoxIter']]],
-  ['graphsproductscount_5fspherical_808',['graphsProductsCount_spherical',['../class_cox_iter.html#a4de8f0a5d3a2246d54cbf0816a419792',1,'CoxIter']]],
-  ['growthseries_5fbfractionreduced_809',['growthSeries_bFractionReduced',['../class_cox_iter.html#aafea54f5809b49185c788ef69f67ac5c',1,'CoxIter']]],
-  ['growthseries_5ficyclotomicnumerator_810',['growthSeries_iCyclotomicNumerator',['../class_cox_iter.html#aaefd0fce0430a8ce937d3720aa89661c',1,'CoxIter::growthSeries_iCyclotomicNumerator()'],['../struct_test.html#aff34acd0df2685fb7ac25a2cae20f115',1,'Test::growthSeries_iCyclotomicNumerator()']]],
-  ['growthseries_5fipolynomialdenominator_811',['growthSeries_iPolynomialDenominator',['../class_cox_iter.html#a0eb677a5468b3dc482674492c1165d27',1,'CoxIter::growthSeries_iPolynomialDenominator()'],['../struct_test.html#a18e2112fa260ad1580eb15d127419e6c',1,'Test::growthSeries_iPolynomialDenominator()']]],
-  ['growthseries_5fraw_812',['growthSeries_raw',['../class_cox_iter.html#acc0e7ca0ce43dcc26f25b842ef02854a',1,'CoxIter']]]
+  ['datasupp_759',['dataSupp',['../class_graph.html#ab22ce5f276526d282675b8eb903449fe',1,'Graph']]],
+  ['debug_760',['debug',['../class_app.html#afd2cb9342da4bac31c7f485d211e6cb0',1,'App::debug()'],['../class_cox_iter.html#a6d88cf0aa30d329a1602abeeffeeddc0',1,'CoxIter::debug()']]],
+  ['dimension_761',['dimension',['../class_cox_iter.html#a77e4f878cd3a64ccdaa0d32f1b0d45df',1,'CoxIter']]]
 ];

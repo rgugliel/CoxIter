@@ -41,8 +41,8 @@ MPZ_rational::MPZ_rational(mpz_class a) : a(a), b(1) { update(); }
 MPZ_rational::MPZ_rational(mpz_class a, mpz_class b) : a(a), b(b) { update(); }
 
 #ifndef _COMPILE_WITHOUT_REGEXP_
-MPZ_rational::MPZ_rational(string szRational) {
-  str_replace(szRational, " ", "");
+MPZ_rational::MPZ_rational(string rational) {
+  str_replace(rational, " ", "");
 
   PCRERegexp reg;
   PCREResult results;
@@ -50,7 +50,7 @@ MPZ_rational::MPZ_rational(string szRational) {
 
   // rationnel sous la forme: a
   iRegexpCount = reg.preg_match_all("^[\\+]{0,1}([\\-]{0,1})([[:digit:]]+)$",
-                                    szRational, results);
+                                    rational, results);
   if (iRegexpCount == -1)
     throw(0);
   else if (iRegexpCount > 0) {
@@ -70,7 +70,7 @@ MPZ_rational::MPZ_rational(string szRational) {
 
   // rationnel sous la forme: a/b
   iRegexpCount = reg.preg_match_all(
-      "^[\\+]{0,1}([\\-]{0,1})([[:digit:]]+)\\/([[:digit:]]+)$", szRational,
+      "^[\\+]{0,1}([\\-]{0,1})([[:digit:]]+)\\/([[:digit:]]+)$", rational,
       results);
   if (iRegexpCount == -1)
     throw(0);

@@ -32,15 +32,15 @@ int main(int argc, char **argv) {
   App app;
 
   // lecture des paramètres donnés au programme
-  if (!app.bReadMainParameters(argc, argv))
+  if (!app.readMainParameters(argc, argv))
     return 0;
 
-  if (app.strOutFilenameBasis == "")
+  if (app.outFilenameBasis == "")
     app.bCoutFile = false;
 
   // si la sortie standard est redirigée dans un fichier (-cf)
   if (app.bCoutFile)
-    cout << "Output is redirected to " << app.strOutFilenameBasis << ".output"
+    cout << "Output is redirected to " << app.outFilenameBasis << ".output"
          << endl;
 
   app.run();

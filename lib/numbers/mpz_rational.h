@@ -65,7 +65,7 @@ public:
 
   MPZ_rational(const int &i);
 #ifndef _COMPILE_WITHOUT_REGEXP_
-  MPZ_rational(string szRational);
+  MPZ_rational(string rational);
 #endif
   bool isInteger() const;
   bool isCOInteger() const;

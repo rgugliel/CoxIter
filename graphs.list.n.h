@@ -40,32 +40,33 @@ using namespace std;
  */
 class GraphsListN {
 private:
-  vector<Graph> graphs;        ///< Liste des graphes trouvés
-  unsigned int iVerticesCount; ///< Nombre de sommets des graphes de la liste
+  vector<Graph> graphs;       ///< Liste des graphes trouvés
+  unsigned int verticesCount; ///< Nombre de sommets des graphes de la liste
 
   vector<string>
       *ptr_map_vertices_indexToLabel; ///< Pointeur vers la correspondance
 
 public:
-  GraphsListN(unsigned int iVerticesCount,
+  GraphsListN(unsigned int verticesCount,
               vector<string> *ptr_map_vertices_indexToLabel);
 
   /*! 	\fn addGraph
    * 	\brief Ajoute un graphe à la liste
-   * 	\param iVertices Sommets du graphe
-   * 	\param bVerticesLinkable Sommets qui sont liables au graphes
-   * 	\param iType(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
-   *= (0, 1, 3, 4, 5, 6, 7) \param bSpherical(bool) True si sphérique, false si
-   *euclidien \param iVertexSupp1 Premier sommet supplémentaire (par exemple
-   *pour les B) \param iVertexSupp2 Second sommet supplémentaire (par exemple
-   *pour les B) \param iDataSupp(const unsigned int &): donnée supplémentaire
-   *(par exemple, pour le G_2, le poids)
+   * 	\param vertices Sommets du graphe
+   * 	\param linkableVertices Sommets qui sont liables au graphes
+   * 	\param type(const unsigned int &): Type du graphe (A, B, D, E, F, G, H)
+   *= (0, 1, 3, 4, 5, 6, 7)
+   *  \param isSpherical(bool) True si sphérique, false si euclidien
+   *  \param vertexSupp1 Premier sommet supplémentaire (par exemple pour les B)
+   *  \param vertexSupp2 Second sommet supplémentaire (par exemple pour les B)
+   *  \param dataSupp(const unsigned int &): donnée supplémentaire (par exemple,
+   *pour le G_2, le poids)
    */
-  void addGraph(vector<short unsigned int> iVertices,
-                const vector<bool> &bVerticesLinkable, const unsigned &iType,
-                bool bSpherical, const short unsigned int &iVertexSupp1 = 0,
-                const short unsigned int &iVertexSupp2 = 0,
-                const unsigned int &iDataSupp = 0);
+  void addGraph(vector<short unsigned int> vertices,
+                const vector<bool> &linkableVertices, const unsigned &type,
+                bool isSpherical, const short unsigned int &vertexSupp1 = 0,
+                const short unsigned int &vertexSupp2 = 0,
+                const unsigned int &dataSupp = 0);
 
   /*!	\fn addGraphsList
    * 	\brief Concatenate another list to the current list
@@ -89,18 +90,18 @@ public:
 
   /*! \fn next
    * \brief Renvoie un pointeur vers le prochain élément
-   * \param iGraphIndex Index du graphe en cours
+   * \param graphIndex Index du graphe en cours
    * \return Pointeur vers l'élément (ou 0 si la fin de la liste est atteinte)
    */
-  Graph *next(const size_t &iGraphIndex);
+  Graph *next(const size_t &graphIndex);
 
-  /*!	\fn get_iVerticesCount
-   * 	\brief Return the number of vertices of the graphs of the lsit
-   * (this->iVerticesCount)
+  /*!	\fn get_verticesCount
+   * 	\brief Return the number of vertices of the graphs of the list
+   * (this->verticesCount)
    *
-   * 	\return this->iVerticesCount(unsigned int)
+   * 	\return this->verticesCount(unsigned int)
    */
-  unsigned int get_iVerticesCount() const;
+  unsigned int get_verticesCount() const;
 
   /*!	\fn get_graphs
    * 	\brief Return the list of graphs

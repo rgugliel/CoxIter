@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['_7earithmeticity_740',['~Arithmeticity',['../class_arithmeticity.html#a8ff84f44dee28129dfa2c8345933d242',1,'Arithmeticity']]],
-  ['_7ecoxiter_741',['~CoxIter',['../class_cox_iter.html#ac4381c2e35db1bbeec399fc347ec2c96',1,'CoxIter']]],
-  ['_7egrowthrate_742',['~GrowthRate',['../class_growth_rate.html#ae4dffaa9e8798f8838a46877c0857746',1,'GrowthRate']]],
-  ['_7epcreregexp_743',['~PCRERegexp',['../class_p_c_r_e_regexp.html#ad132f89b028b47ae40a79cf957949218',1,'PCRERegexp']]],
-  ['_7esignature_744',['~Signature',['../class_signature.html#ad0bb12039b385e4600dddc7d703f52fb',1,'Signature']]]
+  ['ugcd_724',['ugcd',['../namespace_math_tools.html#ac486d4ac30f930ff522194b59c7d363b',1,'MathTools::ugcd()'],['../mpz__rational_8cpp.html#a0169081ce7766fcd7da250bd8355f24b',1,'ugcd():&#160;mpz_rational.cpp']]],
+  ['update_725',['update',['../class_m_p_z__rational.html#a1799fefc602af411e6ca28f974cf23ff',1,'MPZ_rational::update()'],['../class_rational.html#aab76e08eb07563d7227a355323abb1d8',1,'Rational::update()']]]
 ];

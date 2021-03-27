@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CoxIter
-   &#160;<span id="projectnumber">1.2</span>
+   &#160;<span id="projectnumber">1.3</span>
    </div>
    <div id="projectbrief">CoxIter - Computing invariants of hyperbolic Coxeter groups</div>
   </td>
@@ -79,7 +79,11 @@ $(function() {
 <tr id="row_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_graphs_list.html" target="_self">GraphsList</a></td><td class="desc">Liste des graphes </td></tr>
 <tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_graphs_list_iterator.html" target="_self">GraphsListIterator</a></td><td class="desc">Permet de parcourir une liste de graphes Utilisation (pour un <a class="el" href="class_graphs_list.html" title="Liste des graphes.">GraphsList</a> *gl)<br  />
  <a class="el" href="class_graphs_list_iterator.html" title="Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl)  GraphsListIterator ite...">GraphsListIterator</a> iter(gl);<br  />
- </td></tr>
+ while (iter.ptr)<br  />
+ {<br  />
+ cout &lt;&lt; "iter; " &lt;&lt; *iter.ptr &lt;&lt; endl;<br  />
+ ++iter;<br  />
+ } </td></tr>
 <tr id="row_9_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_graphs_list_n.html" target="_self">GraphsListN</a></td><td class="desc">Liste des graphes d'une taille donnée </td></tr>
 <tr id="row_10_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_graphs_product.html" target="_self">GraphsProduct</a></td><td class="desc">: Un produit de graphs </td></tr>
 <tr id="row_11_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_graphs_product_set.html" target="_self">GraphsProductSet</a></td><td class="desc"></td></tr>
@@ -99,7 +103,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 19 2021 15:27:26 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 27 2021 14:04:11 for CoxIter by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

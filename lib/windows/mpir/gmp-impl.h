@@ -2432,7 +2432,7 @@ __GMP_DECLSPEC void mpn_com_n _PROTO((mp_ptr, mp_srcptr, mp_size_t));
 #endif
 
 #if HAVE_NATIVE_mpn_not
-#define mpn_not __MPN(not)
+#define mpn_not __MPN(not )
 __GMP_DECLSPEC void mpn_not _PROTO((mp_ptr, mp_size_t));
 #else
 #define mpn_not(__xp, __n) mpn_com((__xp), (__xp), (__n))

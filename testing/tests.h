@@ -50,28 +50,28 @@ using namespace std;
  * \brief Contains information to perform a test
  */
 struct Test {
-  string szFile; ///< Path to the .coxiter file
+  string filename; ///< Path to the .coxiter file
 
-  bool bTestEuler;       ///< If we have to check the Euler characteristic
+  bool testEuler;        ///< If we have to check the Euler characteristic
   MPZ_rational brResult; ///< Theoretical Euler characteristic
 
-  bool bTestFVector;             ///< If we have to check the f-vector
-  vector<unsigned int> iFVector; ///< Theoretical value
+  bool testFVector;             ///< If we have to check the f-vector
+  vector<unsigned int> fVector; ///< Theoretical value
 
-  bool bTestCompacity;     ///< True if we test the cocompacity
-  bool bIsCompact;         ///< True if the group is cocompact, false otherwise
-  bool bIsFiniteVolume;    ///< True if finite covolume
-  bool bTestArithmeticity; ///< True if we test the arithmeticity
-  bool bIsArithmetic;      ///< True if arithmetic
+  bool testCompacity;     ///< True if we test the cocompacity
+  bool isCompact;         ///< True if the group is cocompact, false otherwise
+  bool isFiniteVolume;    ///< True if finite covolume
+  bool testArithmeticity; ///< True if we test the arithmeticity
+  bool isArithmetic;      ///< True if arithmetic
 
-  bool bTestGrowthSeries;
+  bool testGrowthSeries;
   vector<mpz_class>
-      growthSeries_iPolynomialDenominator; ///< (i-1)th term contains the
-                                           ///< coefficient of x^i
+      growthSeries_polynomialDenominator; ///< (i-1)th term contains the
+                                          ///< coefficient of x^i
   vector<unsigned int>
-      growthSeries_iCyclotomicNumerator; ///< Contains a list oif cyclotomic
-                                         ///< polynomials
-  string strGrowthRate;                  ///< Empty or the growth rate
+      growthSeries_cyclotomicNumerator; ///< Contains a list oif cyclotomic
+                                        ///< polynomials
+  string growthRate;                    ///< Empty or the growth rate
 };
 
 /*! \class Tests
@@ -79,16 +79,16 @@ struct Test {
  */
 class Tests {
 private:
-  string strError;         ///< Eventually, error code
-  string strInputFilename; ///< File which contains the tests
-  vector<Test> tests;      ///< Tests toi be performed
+  string error;         ///< Eventually, error code
+  string inputFilename; ///< File which contains the tests
+  vector<Test> tests;   ///< Tests toi be performed
 
   ofstream of; ///< Output to file
 
   map<string, array<unsigned int, 2>>
-      iTestsSucceded; ///< For each test, number of success, failure
-  map<string, string> strTestDescription; ///< For each test, description
-  unsigned int iTestsUnknownErrors;       ///< Number of other errors
+      testsSucceded; ///< For each test, number of success, failure
+  map<string, string> testDescription; ///< For each test, description
+  unsigned int testsUnknownErrors;     ///< Number of other errors
 
 public:
   Tests();
@@ -97,37 +97,37 @@ public:
    * 	\fn readGraphsFile
    * 	\brief Read the graph which contains the tests
    *
-   * 	\param szInputFilename(string) File to read
+   * 	\param inputFilename(string) File to read
    * 	\return True if success
    */
-  bool readGraphsFile(string szInputFilename);
+  bool readGraphsFile(string inputFilename);
 
   /*!
-   * 	\fn bRunTests
+   * 	\fn runTests
    * 	\brief Perform the tests
    */
-  bool bRunTests();
+  bool runTests();
 
-  string get_strError() const;
+  string get_error() const;
   vector<Test> get_tests() const;
-  unsigned int get_iTestsCount() const;
+  unsigned int get_testsCount() const;
 
 private:
-  bool bRunTests_computations(const unsigned int &iTestIndex, CoxIter *ci);
-  void bRunTests_arithmeticity(const unsigned int &iTestIndex, CoxIter *ci);
-  void bRunTests_cocompactness_cofiniteness(const unsigned int &iTestIndex,
-                                            CoxIter *ci);
-  void bRunTests_growth(const unsigned int &iTestIndex, CoxIter *ci);
-  void bRunTests_signature(const unsigned int &iTestIndex, CoxIter *ci,
-                           const unsigned int &iDim);
-  void bRunTests_Euler(const unsigned int &iTestIndex, CoxIter *ci);
-  void bRunTests_FVector(const unsigned int &iTestIndex, CoxIter *ci);
+  bool runTests_computations(const unsigned int &testIndex, CoxIter *ci);
+  void runTests_arithmeticity(const unsigned int &testIndex, CoxIter *ci);
+  void runTests_cocompactness_cofiniteness(const unsigned int &testIndex,
+                                           CoxIter *ci);
+  void runTests_growth(const unsigned int &testIndex, CoxIter *ci);
+  void runTests_signature(const unsigned int &testIndex, CoxIter *ci,
+                          const unsigned int &dim);
+  void runTests_euler(const unsigned int &testIndex, CoxIter *ci);
+  void runTests_fVector(const unsigned int &testIndex, CoxIter *ci);
 
-  void bRunTests_error(const unsigned int &iTestIndex, const string &strTest,
-                       const string &strExpected, const string &strComputed);
+  void runTestsError(const unsigned int &testIndex, const string &test,
+                     const string &expected, const string &computed);
 
-  void bRunTests_init();
-  void bRunTests_displayInfo();
+  void runTests_init();
+  void runTests_displayInfo();
 
   string strIntToString(const int &i); ///< [*, 0, 1] => "?", "no", "yes"
 };

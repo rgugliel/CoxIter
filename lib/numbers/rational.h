@@ -94,7 +94,7 @@ template <typename T> ostream &operator<<(ostream &, Rational<T> const &);
 
 template <typename T> T abs(const T &r) {
   T rabs(r);
-  if (rabs.a.bIsLessThan(0))
+  if (rabs.a.isLessThan(0))
     rabs.a.multiplyBy(-1);
 
   return rabs;

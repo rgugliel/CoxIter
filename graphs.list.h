@@ -41,35 +41,36 @@ class GraphsList {
 public:
   /*! 	\fn GraphsList
    * 	\brief Crée la liste de graphes
-   * 	\param iVerticesCount Nombre de sommets du graphe lu
+   * 	\param maxVertices Nombre de sommets du graphe lu
    * 	\param ptr_map_vertices_indexToLabel(vector< string > *) Pointeur vers
    * la correspondance index --> label des sommets
    */
-  GraphsList(size_t iVerticesCount,
-             vector<string> *ptr_map_vertices_indexToLabel);
+  GraphsList(size_t maxVertices, vector<string> *ptr_map_vertices_indexToLabel);
 
   /*!
    * 	\fn addGraph
    * 	\brief Ajoute un graphe
    *
-   * 	\param iVertices(const vector< unsigned int > &): tableau contenant les
-   * sommets \param bVerticesLinkable(const vector< bool > &): sommets qui sont
-   * liables (ou non) au graphe \param iType(const unsigned int &): Type du
-   * graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7) \param
-   * bSpherical(bool): true si graphe sphérique, false sinon \param
-   * iVertexSupp1(const unsigned int &): éventuellement, premier sommet
+   * 	\param vertices(const vector< unsigned int > &): tableau contenant les
+   * sommets
+   *  \param linkableVertices(const vector< bool > &): sommets qui sont
+   * liables (ou non) au graphe
+   *  \param type(const unsigned int &): Type du
+   * graphe (A, B, D, E, F, G, H) = (0, 1, 3, 4, 5, 6, 7)
+   *  \param isSpherical(bool): true si graphe sphérique, false sinon
+   *  \param vertexSupp1(const unsigned int &): éventuellement, premier sommet
    * supplémentaire (dans le cas du Dn, par exemple) // TODO: valeur par défaut
-   * meilleure que 0? \param iVertexSupp2(const unsigned int &): éventuellement,
-   * deuxième sommet supplémentaire (dans le cas du Dn, par exemple) \param
-   * iDataSupp(const unsigned int &): donnée supplémentaire (par exemple, pour
-   * le G_2, le poids)
+   * meilleure que 0?
+   *  \param vertexSupp2(const unsigned int &): éventuellement,
+   * deuxième sommet supplémentaire (dans le cas du Dn, par exemple)
+   *  \param dataSupp(const unsigned int &): donnée supplémentaire (par exemple,
+   * pour le G_2, le poids)
    */
-  void addGraph(const vector<short unsigned int> &iVertices,
-                const vector<bool> &bVerticesLinkable,
-                const unsigned int &iType, bool bSpherical,
-                const unsigned int &iVertexSupp1 = 0,
-                const unsigned int &iVertexSupp2 = 0,
-                const unsigned int &iDataSupp = 0);
+  void addGraph(const vector<short unsigned int> &vertices,
+                const vector<bool> &linkableVertices, const unsigned int &type,
+                bool isSpherical, const unsigned int &vertexSupp1 = 0,
+                const unsigned int &vertexSupp2 = 0,
+                const unsigned int &dataSupp = 0);
 
   /*!	\fn begin
    * 	\brief Retourne un pointeur sur le premier graphe de la liste
@@ -81,22 +82,22 @@ public:
   /*!	\fn next
    * 	\brief Retourne un pointeur sur l'élément suivant de la liste
    *
-   * 	\param iVCount(size_t &): Nombre de sommets du graphe actuel
-   * 	\param iGraphIndex(size_t &): Index du graphe actuel (i.e. position dans
-   * la liste des graphes de taille iVCount)
+   * 	\param verticesCount(size_t &): Nombre de sommets du graphe actuel
+   * 	\param graphIndex(size_t &): Index du graphe actuel (i.e. position dans
+   * la liste des graphes de taille verticesCount)
    *
    * 	\return Pointeur sur le graphe (Graph *) ou 0 si la fin de la liste est
    * atteinte
    */
-  Graph *next(size_t &iVCount, size_t &iGraphIndex);
+  Graph *next(size_t &verticesCount, size_t &graphIndex);
 
 public: // Remark: this is public for read-only purpose!
   vector<GraphsListN>
       graphs; ///< List of list of graphs (by number of vertices)
   vector<size_t> graphsCount; ///< Number of graphs (by number of vertices)
 
-  size_t iGraphsCount;   ///< Total number of graphs
-  size_t iVerticesCount; ///< Maximum number of vertices in the graphs
+  size_t totalGraphsCount; ///< Total number of graphs
+  size_t maxVertices;      ///< Maximum number of vertices in the graphs
 
 public:
   friend ostream &operator<<(ostream &, GraphsList const &);

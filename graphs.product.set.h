@@ -44,7 +44,7 @@ using namespace std;
 
 class GraphsProductSet {
 public:
-  unsigned int iRank; ///< Rank of the graph
+  unsigned int rank; ///< Rank of the graph
   set<Graph *, GraphPtrComp>
       graphs; ///< Pointeurs vers les graphes qui constituent le produit
 
@@ -52,19 +52,19 @@ public:
   GraphsProductSet();
   GraphsProductSet(const GraphsProduct &gp);
 
-  /*!	\fn get_iVertices
+  /*!	\fn getvces
    * 	\brief Get the list of vertices of the product
    *
    * 	\return vertices(vector< unsigned int >)
    */
-  vector<short unsigned int> get_iVertices() const;
+  vector<short unsigned int> get_vertices() const;
 
-  /*!	\fn b_areVerticesSubsetOf
+  /*!	\fn areVerticesSubsetOf
    * 	\brief Test if the vertices appear in another Product
    * 	\param gp(const GraphsProductSet&): The other product
    * 	\return Bool
    */
-  bool b_areVerticesSubsetOf(const GraphsProductSet &gp) const;
+  bool areVerticesSubsetOf(const GraphsProductSet &gp) const;
 
   friend ostream &operator<<(ostream &o, const GraphsProductSet &gp);
 };

@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['next_667',['next',['../class_graphs_list.html#aa181a1dcfb9182a2dc024c3c594cb4c2',1,'GraphsList::next()'],['../class_graphs_list_iterator.html#a2f3e19fb7bbdd2874c09254b0dd91f37',1,'GraphsListIterator::next()'],['../class_graphs_list_n.html#abfb46be4d8bc8331e61f524dc1fe2c42',1,'GraphsListN::next()']]]
+  ['linearizationmatrix_5fcol_623',['linearizationMatrix_col',['../coxiter_8h.html#a4ffa0b876a4dfc443c8636dca95cea44',1,'coxiter.h']]],
+  ['linearizationmatrix_5findex_624',['linearizationMatrix_index',['../coxiter_8h.html#aedfb9173e3fc9d7b392392ec13485c0e',1,'coxiter.h']]],
+  ['linearizationmatrix_5frow_625',['linearizationMatrix_row',['../coxiter_8h.html#a40900417ad2fb5e3c772a5d3250d00e7',1,'coxiter.h']]],
+  ['listdivisors_626',['listDivisors',['../namespace_math_tools.html#a5df61ab061b5ae7a778fbe1fe03ad5e7',1,'MathTools']]]
 ];

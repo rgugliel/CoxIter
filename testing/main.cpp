@@ -39,12 +39,12 @@ int main() {
     return 0;
   }
 
-  cout << "Number of graphs that will be read: " << t.get_iTestsCount() << endl;
+  cout << "Number of graphs that will be read: " << t.get_testsCount() << endl;
 
   timeStart = chrono::system_clock::now();
 
-  if (!t.bRunTests()) {
-    cout << "Error\n\t" << t.get_strError() << endl;
+  if (!t.runTests()) {
+    cout << "Error\n\t" << t.get_error() << endl;
     cout << "Aborting" << endl;
     return 0;
   }

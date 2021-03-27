@@ -23,64 +23,64 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "arithmeticity.h"
 
 Arithmeticity::Arithmeticity()
-    : iVerticesCount(0), bNotArithmetic(false), ci(0), bListCycles(false) {}
+    : verticesCount(0), notArithmetic(false), ci(0), listCycles(false) {}
 
 Arithmeticity::~Arithmeticity() {}
 
-void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
+void Arithmeticity::test(CoxIter &ci_, const bool &listCycles_) {
   ci = &ci_;
-  bListCycles = bListCycles_;
-  strListCycles.clear();
-  if (ci->get_iIsCocompact() !=
+  listCycles = listCycles_;
+  allCycles.clear();
+  if (ci->get_isCocompact() !=
       0) // If the graph is cocompact (1) or if we don't know (-1)
   {
-    strError = "GROUP COCOMPACTNESS";
-    ci->set_iIsArithmetic(-1);
+    error = "GROUP COCOMPACTNESS";
+    ci->set_isArithmetic(-1);
     return;
   }
 
   size_t i, j;
 
-  iCoxeterMatrix = ci->get_iCoxeterMatrix();
+  coxeterMatrix = ci->get_coxeterMatrix();
 
-  iVerticesCount = ci->get_iVerticesCount();
-  iReferencesToLabels.clear();
-  bNotArithmetic = false;
+  verticesCount = ci->get_verticesCount();
+  referencesToLabels.clear();
+  notArithmetic = false;
 
   // ------------------------------------------------------
   // Cycles consisting of two elements
-  bool bSQRT2(false), bSQRT3(false);
+  bool isSqrt2(false), isSqrt3(false);
 
-  for (i = 0; i < iVerticesCount; i++) {
-    iReferencesToLabels.push_back(i);
+  for (i = 0; i < verticesCount; i++) {
+    referencesToLabels.push_back(i);
 
     for (j = 0; j < i; j++) {
       if (i == j)
         continue;
 
-      if (iCoxeterMatrix[i][j] != 1 && iCoxeterMatrix[i][j] != 0 &&
-          iCoxeterMatrix[i][j] != 2 && iCoxeterMatrix[i][j] != 3 &&
-          iCoxeterMatrix[i][j] != 4 && iCoxeterMatrix[i][j] != 6) {
-        if (ci->get_bDebug())
-          cout << "\tNot arithmetic: 2*G(" << ci->get_strVertexLabel(i) << ","
-               << ci->get_strVertexLabel(j) << ") = pi/" << iCoxeterMatrix[i][j]
+      if (coxeterMatrix[i][j] != 1 && coxeterMatrix[i][j] != 0 &&
+          coxeterMatrix[i][j] != 2 && coxeterMatrix[i][j] != 3 &&
+          coxeterMatrix[i][j] != 4 && coxeterMatrix[i][j] != 6) {
+        if (ci->get_debug())
+          cout << "\tNot arithmetic: 2*G(" << ci->get_vertexLabel(i) << ","
+               << ci->get_vertexLabel(j) << ") = pi/" << coxeterMatrix[i][j]
                << endl;
 
-        ci->set_iIsArithmetic(0);
+        ci->set_isArithmetic(0);
         return;
       }
 
-      if (iCoxeterMatrix[i][j] == 4)
-        bSQRT2 = true;
-      else if (iCoxeterMatrix[i][j] == 6)
-        bSQRT3 = true;
-      else if (iCoxeterMatrix[i][j] == 1) {
-        string strC("4 * " + string("l") + to_string(j) + "m" + to_string(i) +
-                    "^2");
+      if (coxeterMatrix[i][j] == 4)
+        isSqrt2 = true;
+      else if (coxeterMatrix[i][j] == 6)
+        isSqrt3 = true;
+      else if (coxeterMatrix[i][j] == 1) {
+        string cycle("4 * " + string("l") + to_string(j) + "m" + to_string(i) +
+                     "^2");
 
-        auto it(lower_bound(strListCycles.begin(), strListCycles.end(), strC));
-        if (it == strListCycles.end() || *it != strC)
-          strListCycles.insert(it, strC);
+        auto it(lower_bound(allCycles.begin(), allCycles.end(), cycle));
+        if (it == allCycles.end() || *it != cycle)
+          allCycles.insert(it, cycle);
       }
     }
   }
@@ -89,16 +89,16 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
   // Here, we know that m_{ij} \in {2,3,4,6,infty}
 
   // If true, the group is arithmetic
-  if (!bSQRT2 && !bSQRT3 && !ci->get_bHasDottedLine()) {
-    ci->set_iIsArithmetic(1);
+  if (!isSqrt2 && !isSqrt3 && !ci->get_hasDottedLine()) {
+    ci->set_isArithmetic(1);
     return;
   }
 
-  while (collapseQueues() && iVerticesCount)
+  while (collapseQueues() && verticesCount)
     ;
 
-  if (iVerticesCount <= 2) {
-    ci->set_iIsArithmetic(1);
+  if (verticesCount <= 2) {
+    ci->set_isArithmetic(1);
     return;
   }
 
@@ -108,59 +108,59 @@ void Arithmeticity::test(CoxIter &ci_, const bool &bListCycles_) {
 }
 
 unsigned int Arithmeticity::collapseQueues() {
-  vector<unsigned int> iVerticesToRemove;
-  vector<unsigned int> iNumberNeighbours(
-      iVerticesCount, 0); // For each vertex, number of neighbours
+  vector<unsigned int> verticesToRemove;
+  vector<unsigned int> neighboursCount(
+      verticesCount, 0); // For each vertex, number of neighbours
   unsigned int i, j, k;
-  unsigned int iPreviousVertex, iCurrrentVertex;
+  unsigned int previousVertex, currrentVertex;
 
   // ------------------------------------------------------
   // We count the number of neighbours of each vertex
-  for (i = 0; i < iVerticesCount; i++) {
-    for (j = 0; j < iVerticesCount; j++) {
-      if (iCoxeterMatrix[i][j] != 2)
-        iNumberNeighbours[i]++;
+  for (i = 0; i < verticesCount; i++) {
+    for (j = 0; j < verticesCount; j++) {
+      if (coxeterMatrix[i][j] != 2)
+        neighboursCount[i]++;
     }
   }
 
   // ------------------------------------------------------
   // We determine wich vertices we have to remove
-  for (i = 0; i < iVerticesCount; i++) {
-    if (iNumberNeighbours[i] == 1) // If this is a queue
+  for (i = 0; i < verticesCount; i++) {
+    if (neighboursCount[i] == 1) // If this is a queue
     {
-      iVerticesToRemove.push_back(i);
+      verticesToRemove.push_back(i);
 
       // vertex next to the queue
-      for (iCurrrentVertex = 0; iCurrrentVertex < iVerticesCount;
-           iCurrrentVertex++) {
-        if (iCoxeterMatrix[i][iCurrrentVertex] != 2 &&
-            iNumberNeighbours[iCurrrentVertex] == 2) {
-          iVerticesToRemove.push_back(iCurrrentVertex);
+      for (currrentVertex = 0; currrentVertex < verticesCount;
+           currrentVertex++) {
+        if (coxeterMatrix[i][currrentVertex] != 2 &&
+            neighboursCount[currrentVertex] == 2) {
+          verticesToRemove.push_back(currrentVertex);
           break;
         }
       }
 
-      if (iCurrrentVertex ==
-          iVerticesCount) // If we cannot remove more than one vertex
+      if (currrentVertex ==
+          verticesCount) // If we cannot remove more than one vertex
         continue;
 
-      iPreviousVertex = i;
+      previousVertex = i;
 
       // Here: i ------- iCurrentVertex
 
       // We continue the path
       while (true) {
-        for (k = 0; k < iVerticesCount; k++) {
-          if (iCoxeterMatrix[iCurrrentVertex][k] != 2 &&
-              iNumberNeighbours[k] == 2 && k != iPreviousVertex) {
-            iVerticesToRemove.push_back(k);
-            iPreviousVertex = iCurrrentVertex;
-            iCurrrentVertex = k;
+        for (k = 0; k < verticesCount; k++) {
+          if (coxeterMatrix[currrentVertex][k] != 2 &&
+              neighboursCount[k] == 2 && k != previousVertex) {
+            verticesToRemove.push_back(k);
+            previousVertex = currrentVertex;
+            currrentVertex = k;
             break;
           }
         }
 
-        if (k == iVerticesCount) // The end of the path
+        if (k == verticesCount) // The end of the path
           break;
       }
     }
@@ -168,196 +168,187 @@ unsigned int Arithmeticity::collapseQueues() {
 
   // ------------------------------------------------------
   // We remove the vertices
-  sort(iVerticesToRemove.begin(), iVerticesToRemove.end());
-  iVerticesToRemove = vector<unsigned int>(
-      iVerticesToRemove.begin(),
-      unique(iVerticesToRemove.begin(), iVerticesToRemove.end()));
+  sort(verticesToRemove.begin(), verticesToRemove.end());
+  verticesToRemove = vector<unsigned int>(
+      verticesToRemove.begin(),
+      unique(verticesToRemove.begin(), verticesToRemove.end()));
 
-  if (iVerticesToRemove.size() ==
-      iVerticesCount) // If we remove all the vertices
+  if (verticesToRemove.size() == verticesCount) // If we remove all the vertices
   {
-    iCoxeterMatrix = vector<vector<unsigned int>>(0, vector<unsigned int>(0));
-    iVerticesCount = 0;
+    coxeterMatrix = vector<vector<unsigned int>>(0, vector<unsigned int>(0));
+    verticesCount = 0;
 
-    return iVerticesToRemove.size();
+    return verticesToRemove.size();
   }
 
-  reverse(iVerticesToRemove.begin(), iVerticesToRemove.end());
-  for (vector<unsigned int>::const_iterator it(iVerticesToRemove.begin());
-       it != iVerticesToRemove.end(); ++it) {
-    iCoxeterMatrix.erase(iCoxeterMatrix.begin() + *it);
-    iReferencesToLabels.erase(iReferencesToLabels.begin() + *it);
+  reverse(verticesToRemove.begin(), verticesToRemove.end());
+  for (vector<unsigned int>::const_iterator it(verticesToRemove.begin());
+       it != verticesToRemove.end(); ++it) {
+    coxeterMatrix.erase(coxeterMatrix.begin() + *it);
+    referencesToLabels.erase(referencesToLabels.begin() + *it);
 
-    for (vector<vector<unsigned int>>::iterator itRow(iCoxeterMatrix.begin());
-         itRow != iCoxeterMatrix.end(); ++itRow)
+    for (vector<vector<unsigned int>>::iterator itRow(coxeterMatrix.begin());
+         itRow != coxeterMatrix.end(); ++itRow)
       itRow->erase(itRow->begin() + *it);
   }
 
-  iVerticesCount -= iVerticesToRemove.size();
-  return iVerticesToRemove.size();
+  verticesCount -= verticesToRemove.size();
+  return verticesToRemove.size();
 }
 
 void Arithmeticity::testCycles() {
-  for (unsigned int i(0); i < iVerticesCount; i++) {
-    iPath.clear();
-    bVerticesVisited = vector<bool>(iVerticesCount, false);
-    bEdgesVisited = vector<vector<bool>>(iVerticesCount,
-                                         vector<bool>(iVerticesCount, false));
+  for (unsigned int i(0); i < verticesCount; i++) {
+    path.clear();
+    visitedVertices = vector<bool>(verticesCount, false);
+    visitedEdges =
+        vector<vector<bool>>(verticesCount, vector<bool>(verticesCount, false));
     findCycles(i, i);
 
-    if (bNotArithmetic) {
-      ci->set_iIsArithmetic(0);
+    if (notArithmetic) {
+      ci->set_isArithmetic(0);
       return;
     }
   }
 
-  if (!ci->get_bHasDottedLine())
-    ci->set_iIsArithmetic(1);
+  if (!ci->get_hasDottedLine())
+    ci->set_isArithmetic(1);
   else
-    ci->set_iIsArithmetic(-1);
+    ci->set_isArithmetic(-1);
 }
 
-void Arithmeticity::findCycles(const unsigned int &iRoot,
-                               const unsigned int &iFrom) {
-  iPath.push_back(iRoot); // We add the vertex to the path
+void Arithmeticity::findCycles(const unsigned int &root,
+                               const unsigned int &from) {
+  path.push_back(root); // We add the vertex to the path
 
-  for (unsigned int i(iPath[0]); i < iVerticesCount; i++) {
+  for (unsigned int i(path[0]); i < verticesCount; i++) {
     // If i is a neighbour and if we did not visit this edge
-    if (iCoxeterMatrix[iRoot][i] != 2 && !bEdgesVisited[iRoot][i]) {
-      if (i == iPath[0]) {
-        if (iPath[1] <
-            iPath[iPath.size() - 1]) // We do not to test each cycle twice
+    if (coxeterMatrix[root][i] != 2 && !visitedEdges[root][i]) {
+      if (i == path[0]) {
+        if (path[1] <
+            path[path.size() - 1]) // We do not to test each cycle twice
           testCycle();
 
-        if (bNotArithmetic) {
-          if (ci->get_bDebug()) {
+        if (notArithmetic) {
+          if (ci->get_debug()) {
             cout << "\tNot arithmetic\n\t\tCycle: ";
-            for (vector<unsigned int>::const_iterator it(iPath.begin());
-                 it != iPath.end();
+            for (vector<unsigned int>::const_iterator it(path.begin());
+                 it != path.end();
                  ++it) // We display the components of the cycle
-              cout << (it == iPath.begin() ? "" : ", ")
-                   << ci->get_strVertexLabel(iReferencesToLabels[*it]);
+              cout << (it == path.begin() ? "" : ", ")
+                   << ci->get_vertexLabel(referencesToLabels[*it]);
             cout << endl;
           }
 
           return;
         }
-      } else if (find(iPath.begin(), iPath.end(), i) == iPath.end()) {
-        bEdgesVisited[iRoot][i] = bEdgesVisited[i][iRoot] = true;
-        findCycles(i, iRoot);
+      } else if (find(path.begin(), path.end(), i) == path.end()) {
+        visitedEdges[root][i] = visitedEdges[i][root] = true;
+        findCycles(i, root);
 
-        if (bNotArithmetic)
+        if (notArithmetic)
           return;
       }
     }
   }
 
-  if (iFrom != iRoot)
-    bEdgesVisited[iRoot][iFrom] = bEdgesVisited[iFrom][iRoot] = false;
+  if (from != root)
+    visitedEdges[root][from] = visitedEdges[from][root] = false;
 
-  iPath.pop_back();
+  path.pop_back();
 }
 
 void Arithmeticity::testCycle() {
-  unsigned int iPathSize(iPath.size());
+  unsigned int pathSize(path.size());
 
-  if (!bListCycles) {
-    bool bNumberSQRT2Even(
-        iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 4 ? false : true),
-        bNumberSQRT3Even(
-            iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 6 ? false : true);
+  if (!listCycles) {
+    bool isSqrt2CountEven = coxeterMatrix[path[0]][path[pathSize - 1]] != 4;
+    bool isSqrt3CountEven = coxeterMatrix[path[0]][path[pathSize - 1]] != 6;
 
-    for (unsigned int i(1); i < iPathSize; i++) {
-      if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 4)
-        bNumberSQRT2Even = bNumberSQRT2Even ? false : true;
-      else if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 6)
-        bNumberSQRT3Even = bNumberSQRT3Even ? false : true;
-      else if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] ==
+    for (unsigned int i(1); i < pathSize; i++) {
+      if (coxeterMatrix[path[i]][path[i - 1]] == 4)
+        isSqrt2CountEven = isSqrt2CountEven ? false : true;
+      else if (coxeterMatrix[path[i]][path[i - 1]] == 6)
+        isSqrt3CountEven = isSqrt3CountEven ? false : true;
+      else if (coxeterMatrix[path[i]][path[i - 1]] ==
                1) // Because of the dotted line we cannot say anything for this
                   // cycle
         return;
     }
 
-    if (iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] ==
-        1) // Because of the dotted line we cannot say anything for this cycle
+    // Because of the dotted line we cannot say anything for this cycle
+    if (coxeterMatrix[path[0]][path[pathSize - 1]] == 1)
       return;
 
-    bNotArithmetic = !bNumberSQRT2Even || !bNumberSQRT3Even;
+    notArithmetic = !isSqrt2CountEven || !isSqrt3CountEven;
   } else {
-    unsigned int iPathSize(iPath.size());
+    unsigned int pathSize(path.size());
 
-    int iNumberDotted(iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 1 ? 1
-                                                                          : 0);
-    int iNumber2(iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 0 ? 1 : 0);
-    int iNumberSQRT2(iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 4 ? 1
-                                                                         : 0);
-    int iNumberSQRT3(iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 6 ? 1
-                                                                         : 0);
+    int dottedCount(coxeterMatrix[path[0]][path[pathSize - 1]] == 1 ? 1 : 0);
+    int twoCount(coxeterMatrix[path[0]][path[pathSize - 1]] == 0 ? 1 : 0);
+    int sqrt2Count(coxeterMatrix[path[0]][path[pathSize - 1]] == 4 ? 1 : 0);
+    int sqrt3Count(coxeterMatrix[path[0]][path[pathSize - 1]] == 6 ? 1 : 0);
 
-    for (unsigned int i(1); i < iPathSize; i++) {
-      if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 0)
-        iNumber2++;
-      else if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 4)
-        iNumberSQRT2++;
-      else if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 6)
-        iNumberSQRT3++;
-      else if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] ==
+    for (unsigned int i(1); i < pathSize; i++) {
+      if (coxeterMatrix[path[i]][path[i - 1]] == 0)
+        twoCount++;
+      else if (coxeterMatrix[path[i]][path[i - 1]] == 4)
+        sqrt2Count++;
+      else if (coxeterMatrix[path[i]][path[i - 1]] == 6)
+        sqrt3Count++;
+      else if (coxeterMatrix[path[i]][path[i - 1]] ==
                1) // Because of the dotted line we cannot say anything for this
                   // cycle
-        iNumberDotted++;
+        dottedCount++;
     }
 
-    if (iNumberDotted == 0)
-      bNotArithmetic = (iNumberSQRT2 % 2) || (iNumberSQRT3 % 2);
+    if (dottedCount == 0)
+      notArithmetic = (sqrt2Count % 2) || (sqrt3Count % 2);
     else {
-      string strTemp;
+      string temp;
 
-      iNumber2 += iNumberDotted;
+      twoCount += dottedCount;
 
-      if (iNumberSQRT2 > 1)
-        iNumber2 += ((iNumberSQRT2 % 2) ? iNumberSQRT2 - 1 : iNumberSQRT2) / 2;
+      if (sqrt2Count > 1)
+        twoCount += ((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2;
 
-      if (iNumber2)
-        strTemp +=
-            (strTemp == "" ? "" : " * ") + string("2^") + to_string(iNumber2);
+      if (twoCount)
+        temp += (temp == "" ? "" : " * ") + string("2^") + to_string(twoCount);
 
-      if (iNumberSQRT3 > 1)
-        strTemp +=
-            (strTemp == "" ? "" : " * ") + string("3^") +
-            to_string(((iNumberSQRT2 % 2) ? iNumberSQRT2 - 1 : iNumberSQRT2) /
-                      2);
+      if (sqrt3Count > 1)
+        temp += (temp == "" ? "" : " * ") + string("3^") +
+                to_string(((sqrt2Count % 2) ? sqrt2Count - 1 : sqrt2Count) / 2);
 
-      if (iNumberSQRT2 % 2)
-        strTemp += (strTemp == "" ? "" : " * ") + string("Sqrt[2]");
+      if (sqrt2Count % 2)
+        temp += (temp == "" ? "" : " * ") + string("Sqrt[2]");
 
-      if (iNumberSQRT3 % 2)
-        strTemp += (strTemp == "" ? "" : " * ") + string("Sqrt[3]");
+      if (sqrt3Count % 2)
+        temp += (temp == "" ? "" : " * ") + string("Sqrt[3]");
 
-      for (unsigned int i(1); i < iPathSize; i++) {
-        if (iCoxeterMatrix[iPath[i]][iPath[i - 1]] == 1)
-          strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                     to_string(min(iReferencesToLabels[iPath[i]],
-                                   iReferencesToLabels[iPath[i - 1]])) +
-                     "m" +
-                     to_string(max(iReferencesToLabels[iPath[i]],
-                                   iReferencesToLabels[iPath[i - 1]]));
+      for (unsigned int i(1); i < pathSize; i++) {
+        if (coxeterMatrix[path[i]][path[i - 1]] == 1)
+          temp += (temp == "" ? "" : " * ") + string("l") +
+                  to_string(min(referencesToLabels[path[i]],
+                                referencesToLabels[path[i - 1]])) +
+                  "m" +
+                  to_string(max(referencesToLabels[path[i]],
+                                referencesToLabels[path[i - 1]]));
       }
 
-      if (iCoxeterMatrix[iPath[0]][iPath[iPathSize - 1]] == 1)
-        strTemp += (strTemp == "" ? "" : " * ") + string("l") +
-                   to_string(min(iReferencesToLabels[iPath[0]],
-                                 iReferencesToLabels[iPath[iPathSize - 1]])) +
-                   "m" +
-                   to_string(max(iReferencesToLabels[iPath[0]],
-                                 iReferencesToLabels[iPath[iPathSize - 1]]));
+      if (coxeterMatrix[path[0]][path[pathSize - 1]] == 1)
+        temp += (temp == "" ? "" : " * ") + string("l") +
+                to_string(min(referencesToLabels[path[0]],
+                              referencesToLabels[path[pathSize - 1]])) +
+                "m" +
+                to_string(max(referencesToLabels[path[0]],
+                              referencesToLabels[path[pathSize - 1]]));
 
-      auto it(lower_bound(strListCycles.begin(), strListCycles.end(), strTemp));
-      if (it == strListCycles.end() || *it != strTemp)
-        strListCycles.insert(it, strTemp);
+      const auto it(lower_bound(allCycles.begin(), allCycles.end(), temp));
+      if (it == allCycles.end() || *it != temp)
+        allCycles.insert(it, temp);
     }
   }
 }
 
-vector<string> Arithmeticity::get_strListCycles() { return strListCycles; }
+vector<string> Arithmeticity::get_allCycles() { return allCycles; }
 
-string Arithmeticity::get_strError() { return strError; }
+string Arithmeticity::get_error() { return error; }

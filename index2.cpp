@@ -23,22 +23,23 @@ along with CoxIter. If not, see <http://www.gnu.org/licenses/>.
 #include "index2.h"
 
 Index2::Index2(CoxIter *ci)
-    : ci(ci), iVerticesCount(ci->get_iVerticesCount()), iNewVerticesCount(0),
-      iCox(ci->get_iCoxeterMatrix()) {}
+    : ci(ci), verticesCount(ci->get_verticesCount()), iNewVerticesCount(0),
+      coxeterMatrix(ci->get_coxeterMatrix()) {}
 
-bool Index2::bIsVertexAdmissible(const string &strVertexName) {
+bool Index2::isVertexAdmissible(const string &vertexLabel) {
 
-  if (!ci->bIsVertexValid(strVertexName)) {
-    strError = "Invalid vertex name: " + strVertexName;
+  if (!ci->isVertexValid(vertexLabel)) {
+    error = "Invalid vertex name: " + vertexLabel;
     return false;
   }
 
-  unsigned int iV(ci->get_iVertexIndex(strVertexName));
+  unsigned int index(ci->get_vertexIndex(vertexLabel));
 
-  for (unsigned int i(0); i < iVerticesCount; i++) {
-    if (iCox[iV][i] != 0 && iCox[iV][i] != 1 && (iCox[iV][i] % 2)) {
-      strError = "m(" + strVertexName + "," + ci->get_strVertexLabel(i) +
-                 ") is not even";
+  for (unsigned int i(0); i < verticesCount; i++) {
+    if (coxeterMatrix[index][i] != 0 && coxeterMatrix[index][i] != 1 &&
+        (coxeterMatrix[index][i] % 2)) {
+      error =
+          "m(" + vertexLabel + "," + ci->get_vertexLabel(i) + ") is not even";
       return false;
     }
   }
@@ -46,62 +47,61 @@ bool Index2::bIsVertexAdmissible(const string &strVertexName) {
   return true;
 }
 
-bool Index2::removeVertex(const string &strVertexName) {
-  unsigned int iWeight;
+bool Index2::removeVertex(const string &vertexName) {
+  unsigned int weight;
 
   // -------------------------------------------------------
   // some verifications, firsts constructions
-  if (!bIsVertexAdmissible(strVertexName))
+  if (!isVertexAdmissible(vertexName))
     return false;
 
-  iVertex = ci->get_iVertexIndex(strVertexName);
+  vertex = ci->get_vertexIndex(vertexName);
 
   // Remark: we don't merge the previous and the next loop. Thus, if there is a
   // problem, we do not change the CoxIter object.
 
   // -------------------------------------------------------
   // new vertices
-  for (unsigned int i(0); i < iVerticesCount; i++) {
+  for (unsigned int i(0); i < verticesCount; i++) {
     // If they don't commute, this will add a new vertex
-    if (iCox[iVertex][i] != 2) {
+    if (coxeterMatrix[vertex][i] != 2) {
       NewVertex nv;
-      nv.iIndex = iVerticesCount + iNewVerticesCount - 1;
+      nv.index = verticesCount + iNewVerticesCount - 1;
 
-      nv.iOriginVertex = i;
-      nv.strLabel =
-          ci->get_strVertexLabel(iVertex) + "_" + ci->get_strVertexLabel(i);
+      nv.originVertex = i;
+      nv.label = ci->get_vertexLabel(vertex) + "_" + ci->get_vertexLabel(i);
 
       newVertices.push_back(nv);
-      ci->map_vertices_labels_addReference(nv.strLabel);
+      ci->map_vertices_labels_addReference(nv.label);
 
       iNewVerticesCount++;
     }
   }
 
-  ci->map_vertices_labels_removeReference(iVertex);
+  ci->map_vertices_labels_removeReference(vertex);
 
   // -------------------------------------------------------
   // new adjacency matrix
-  for (unsigned int i(0); i <= (iVerticesCount + iNewVerticesCount - 1);
+  for (unsigned int i(0); i <= (verticesCount + iNewVerticesCount - 1);
        i++) // the -1 is for the vertex we removed
   {
-    if (i == iVertex)
+    if (i == vertex)
       continue;
 
     iNewCox.push_back(
-        vector<unsigned int>(iVerticesCount + iNewVerticesCount - 1,
+        vector<unsigned int>(verticesCount + iNewVerticesCount - 1,
                              2)); // TODO: tout construire en une fois
   }
 
   // we fill the old values (upper left square)
-  for (unsigned int i(0); i < iVerticesCount; i++) {
-    if (i == iVertex)
+  for (unsigned int i(0); i < verticesCount; i++) {
+    if (i == vertex)
       continue;
 
     for (unsigned int j(0); j <= i; j++)
-      iNewCox[i > iVertex ? i - 1 : i][j > iVertex ? j - 1 : j] =
-          iNewCox[j > iVertex ? j - 1 : j][i > iVertex ? i - 1 : i] =
-              iCox[i][j];
+      iNewCox[i > vertex ? i - 1 : i][j > vertex ? j - 1 : j] =
+          iNewCox[j > vertex ? j - 1 : j][i > vertex ? i - 1 : i] =
+              coxeterMatrix[i][j];
   }
 
   // -------------------------------------------------------
@@ -114,46 +114,46 @@ bool Index2::removeVertex(const string &strVertexName) {
     // NewVertex.iOriginVertex
 
     // for every old vertex
-    for (unsigned int i(0); i < iVerticesCount;
+    for (unsigned int i(0); i < verticesCount;
          i++) // Goal: find m(t0 * sj * t0, si)
     {
-      if (i == iVertex) // we removed this vertex
+      if (i == vertex) // we removed this vertex
         continue;
 
-      if ((*itNew).iOriginVertex == i) // m(t0 * si * t0, si) = m(t0, si) / 2
-        iWeight = iCox[iVertex][i] == 0 || iCox[iVertex][i] == 1
-                      ? iCox[iVertex][i]
-                      : iCox[iVertex][i] / 2;
+      if ((*itNew).originVertex == i) // m(t0 * si * t0, si) = m(t0, si) / 2
+        weight = coxeterMatrix[vertex][i] == 0 || coxeterMatrix[vertex][i] == 1
+                     ? coxeterMatrix[vertex][i]
+                     : coxeterMatrix[vertex][i] / 2;
       else {
-        if (iCox[i][iVertex] ==
+        if (coxeterMatrix[i][vertex] ==
             2) // If si commutes with t0, then m(t0 * sj * t0, si) = m(sj, si)
-          iWeight = iCox[(*itNew).iOriginVertex][i];
-        else if (iCox[(*itNew).iOriginVertex][iVertex] != 2) {
-          if (iCox[iVertex][i] == 4 &&
-              iCox[iVertex][(*itNew).iOriginVertex] == 4 &&
-              iCox[i][(*itNew).iOriginVertex] == 2)
-            iWeight = 0;
+          weight = coxeterMatrix[(*itNew).originVertex][i];
+        else if (coxeterMatrix[(*itNew).originVertex][vertex] != 2) {
+          if (coxeterMatrix[vertex][i] == 4 &&
+              coxeterMatrix[vertex][(*itNew).originVertex] == 4 &&
+              coxeterMatrix[i][(*itNew).originVertex] == 2)
+            weight = 0;
           else
-            iWeight = 1;
+            weight = 1;
         } else
           throw(string("Index2::removeVertex: Error")); // TODO: idem
       }
 
-      iNewCox[i > iVertex ? i - 1 : i][(*itNew).iIndex] = iWeight;
-      iNewCox[(*itNew).iIndex][i > iVertex ? i - 1 : i] = iWeight;
+      iNewCox[i > vertex ? i - 1 : i][(*itNew).index] = weight;
+      iNewCox[(*itNew).index][i > vertex ? i - 1 : i] = weight;
     }
 
     // for every new vertex t0 * si * t0
     for (vector<NewVertex>::const_iterator itNewSub(newVertices.begin());
          itNewSub != itNew; ++itNewSub) {
-      iNewCox[(*itNew).iIndex][(*itNewSub).iIndex] =
-          iCox[(*itNew).iOriginVertex][(*itNewSub).iOriginVertex];
-      iNewCox[(*itNewSub).iIndex][(*itNew).iIndex] =
-          iCox[(*itNew).iOriginVertex][(*itNewSub).iOriginVertex];
+      iNewCox[(*itNew).index][(*itNewSub).index] =
+          coxeterMatrix[(*itNew).originVertex][(*itNewSub).originVertex];
+      iNewCox[(*itNewSub).index][(*itNew).index] =
+          coxeterMatrix[(*itNew).originVertex][(*itNewSub).originVertex];
     }
   }
 
-  ci->set_iCoxeterMatrix(iNewCox);
+  ci->set_coxeterMatrix(iNewCox);
 
   return true;
 }
@@ -169,4 +169,4 @@ void Index2::printMatrix(vector<vector<unsigned int>> *iMatrix) {
   }
 }
 
-string Index2::get_strError() const { return strError; }
+string Index2::get_error() const { return error; }

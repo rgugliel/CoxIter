@@ -45,7 +45,7 @@ public:
   Signature();
   ~Signature();
 
-  array<unsigned int, 3> iComputeSignature(string strMatrix);
+  array<unsigned int, 3> computeSignature(string matrix);
 };
 
 #endif // SIGNATURE_H
