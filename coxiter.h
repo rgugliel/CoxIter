@@ -332,7 +332,7 @@ public:
    * 	\brief Explore the graph (via coxeterMatrix) to gind subgraphs
    *
    * 	First, we find all the chains startings from every vertex. Then, we
-   * wxpand the chains to spherical and euclidean graphs
+   * expand the chains to spherical and euclidean graphs
    */
   void exploreGraph();
 
