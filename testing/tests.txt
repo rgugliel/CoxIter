@@ -99,6 +99,8 @@
 "group units qf/6-1+1xT2,1,1,1,1,1,1.coxiter"	cocompact
 "group units qf/7-1xT5,1,1,1,1,1,1,1.coxiter"	0	cocompact
 
+"13-valery-uga.coxiter" 0 non-cocompact
+
 "constructions/18-Gamma.coxiter"		non-cocompact
 "18-vinb14_gamma2.coxiter"		non-cocompact
 "Tumarkin pyramids n+2/17-tum04_13_01.coxiter" 0	non-cocompact

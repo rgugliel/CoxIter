@@ -1037,8 +1037,10 @@ void CoxIter::B3ToF4_B4ToTF4(const vector<bool> &linkableVerticesStart,
         continue;
 
       for (j = 0; j < verticesCount; j++) {
-        if (coxeterMatrix[j][v2] != 2 || coxeterMatrix[j][endVertex] != 2 ||
-            coxeterMatrix[j][i] != 2)
+        if (coxeterMatrix[j][v2] != 2 ||
+            coxeterMatrix[j][endVertex] != 2 ||
+            coxeterMatrix[j][i] != 2 ||
+            (!isSpherical && coxeterMatrix[j][pathTemp[2]] != 2))
           linkableVertices[j] = false;
       }
 
