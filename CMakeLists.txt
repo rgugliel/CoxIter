@@ -35,7 +35,7 @@ find_library( GMPXX_LIBRARY gmpxx REQUIRED )
 find_path( GMPXX_INCLUDE_DIR gmpxx.h REQUIRED )
 
 find_library( PARI_LIBRARY pari )
-find_path( PARI_INCLUDE_DIR pari.h )
+find_path( PARI_INCLUDE_DIR pari/pari.h )
 
 # ------------------------------------------------------------------
 # Set up targets
@@ -61,10 +61,9 @@ endif()
 if( PARI_LIBRARY )
 	add_library( coxiter_pari STATIC lib/paripolynomials.cpp growthrate.cpp signature.cpp )
 	target_link_libraries( coxiter_pari PUBLIC ${GMP_LIBRARY} ${GMPXX_LIBRARY} ${PARI_LIBRARY} )
-	target_include_directories( coxiter_pari PUBLIC ${GMPXX_INCLUDE_DIR} )
+	target_include_directories( coxiter_pari PUBLIC ${GMPXX_INCLUDE_DIR} ${PARI_INCLUDE_DIR} )
 	
 	target_link_libraries( coxiter PRIVATE coxiter_pari )
-	target_link_libraries( coxiter PRIVATE  )
 	add_definitions(-D_COMPILE_WITH_PARI_)
 else()
 	message( WARNING "Warning: PARI library was not found. CoxIter won't be able to compute growth rate and signature." )
