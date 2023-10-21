@@ -23,12 +23,11 @@ var searchData=
   ['computegrowthseries_49',['computeGrowthSeries',['../class_app.html#aaa49478c00511a42e6d0d4e8f8570bc1',1,'App']]],
   ['computesignature_50',['computeSignature',['../class_app.html#a7bd7a828b69c7c5a2321d8333a2ddf4d',1,'App::computeSignature()'],['../class_signature.html#a1f33e98ba9fde32cea1325c86df58321',1,'Signature::computeSignature()']]],
   ['coxetermatrix_51',['coxeterMatrix',['../class_arithmeticity.html#a411ab7552756e3b7293add97bb385783',1,'Arithmeticity::coxeterMatrix()'],['../class_cox_iter.html#a403d05370533b3febc1553adcf42d6a0',1,'CoxIter::coxeterMatrix()'],['../class_index2.html#a6cd4b31c15fbf8c847545c378e5746c6',1,'Index2::coxeterMatrix()']]],
-  ['coxiter_52',['CoxIter',['../class_cox_iter.html',1,'CoxIter'],['../class_cox_iter.html#af46b8451fb89c8c99d14f2fe2ef07441',1,'CoxIter::CoxIter()'],['../class_cox_iter.html#a439b3eded3a054b55713549bed1fecaa',1,'CoxIter::CoxIter(const vector&lt; vector&lt; unsigned int &gt;&gt; &amp;iMatrix, const unsigned int &amp;dimension)'],['../class_cox_iter.html#afd3affd49a404850e417523d455db5bb',1,'CoxIter::CoxIter(const CoxIter &amp;)']]],
+  ['coxiter_52',['CoxIter',['../class_cox_iter.html#af46b8451fb89c8c99d14f2fe2ef07441',1,'CoxIter::CoxIter()'],['../class_cox_iter.html#a439b3eded3a054b55713549bed1fecaa',1,'CoxIter::CoxIter(const vector&lt; vector&lt; unsigned int &gt;&gt; &amp;iMatrix, const unsigned int &amp;dimension)'],['../class_cox_iter.html#afd3affd49a404850e417523d455db5bb',1,'CoxIter::CoxIter(const CoxIter &amp;)'],['../class_cox_iter.html',1,'CoxIter'],['../md__media_data_ssd__rafael_phd_codes__c____cox_iter__r_e_a_d_m_e.html',1,'(Global Namespace)']]],
   ['coxiter_2ecpp_53',['coxiter.cpp',['../coxiter_8cpp.html',1,'']]],
   ['coxiter_2eh_54',['coxiter.h',['../coxiter_8h.html',1,'']]],
   ['createfootprint_55',['createFootPrint',['../class_graphs_product.html#add1b85d9a659edeea8f1661cd74d106d',1,'GraphsProduct']]],
   ['cycleelement_56',['CycleElement',['../struct_cycle_element.html',1,'']]],
   ['cycles_57',['Cycles',['../struct_cycles.html',1,'']]],
-  ['cyclotomicpolynomials_58',['cyclotomicPolynomials',['../namespace_polynomials.html#a535e0bf4a18d3386963caad414feedf5',1,'Polynomials']]],
-  ['coxiter_59',['CoxIter',['../md__media_data-ssd__rafael_phd_codes__c_09_09__cox_iter__r_e_a_d_m_e.html',1,'']]]
+  ['cyclotomicpolynomials_58',['cyclotomicPolynomials',['../namespace_polynomials.html#a535e0bf4a18d3386963caad414feedf5',1,'Polynomials']]]
 ];

@@ -1,17 +1,17 @@
 <map id="number_template.h" name="number_template.h">
-<area shape="rect" id="node1" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...)" alt="" coords="281,5,431,32"/>
-<area shape="rect" id="node2" href="$mpz__rational_8h.html" title="Rational number." alt="" coords="214,80,333,107"/>
-<area shape="rect" id="node15" href="$number__template_8cpp.html" title="Not really useful." alt="" coords="356,80,521,107"/>
-<area shape="rect" id="node3" href="$coxiter_8h.html" title=" " alt="" coords="234,155,313,181"/>
+<area shape="rect" id="node1" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...)" alt="" coords="255,5,406,32"/>
+<area shape="rect" id="node2" href="$mpz__rational_8h.html" title="Rational number." alt="" coords="189,80,307,107"/>
+<area shape="rect" id="node15" href="$number__template_8cpp.html" title="Not really useful." alt="" coords="331,80,496,107"/>
+<area shape="rect" id="node3" href="$coxiter_8h.html" title=" " alt="" coords="209,155,287,181"/>
 <area shape="rect" id="node8" href="$tests_8h.html" title=" " alt="" coords="67,304,133,331"/>
-<area shape="rect" id="node14" href="$mpz__rational_8cpp.html" title=" " alt="" coords="337,155,471,181"/>
-<area shape="rect" id="node4" href="$arithmeticity_8h.html" title=" " alt="" coords="151,229,267,256"/>
-<area shape="rect" id="node5" href="$app_8h.html" title=" " alt="" coords="381,304,440,331"/>
-<area shape="rect" id="node11" href="$index2_8h.html" title=" " alt="" coords="461,229,539,256"/>
-<area shape="rect" id="node13" href="$coxiter_8cpp.html" title=" " alt="" coords="292,229,385,256"/>
-<area shape="rect" id="node7" href="$arithmeticity_8cpp.html" title=" " alt="" coords="157,304,288,331"/>
-<area shape="rect" id="node6" href="$app_8cpp.html" title=" " alt="" coords="374,379,447,405"/>
+<area shape="rect" id="node14" href="$mpz__rational_8cpp.html" title=" " alt="" coords="311,155,446,181"/>
+<area shape="rect" id="node4" href="$app_8h.html" title=" " alt="" coords="380,304,439,331"/>
+<area shape="rect" id="node6" href="$arithmeticity_8h.html" title=" " alt="" coords="255,229,371,256"/>
+<area shape="rect" id="node11" href="$coxiter_8cpp.html" title=" " alt="" coords="137,229,231,256"/>
+<area shape="rect" id="node12" href="$index2_8h.html" title=" " alt="" coords="447,229,526,256"/>
+<area shape="rect" id="node5" href="$app_8cpp.html" title=" " alt="" coords="373,379,446,405"/>
+<area shape="rect" id="node7" href="$arithmeticity_8cpp.html" title=" " alt="" coords="225,304,356,331"/>
 <area shape="rect" id="node9" href="$main_8cpp.html" title=" " alt="" coords="5,379,88,405"/>
 <area shape="rect" id="node10" href="$tests_8cpp.html" title=" " alt="" coords="113,379,194,405"/>
-<area shape="rect" id="node12" href="$index2_8cpp.html" title=" " alt="" coords="464,304,557,331"/>
+<area shape="rect" id="node13" href="$index2_8cpp.html" title=" " alt="" coords="463,304,556,331"/>
 </map>
