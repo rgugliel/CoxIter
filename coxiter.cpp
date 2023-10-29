@@ -48,8 +48,8 @@ CoxIter::CoxIter(const vector<vector<unsigned int>> &matrix,
       bWriteInfo(false), debug(false), useOpenMP(true), brEulerCaracteristic(0),
       graphsList_spherical(nullptr), graphsList_euclidean(nullptr),
       dimension(dimension), euclideanMaxRankFound(0), sphericalMaxRankFound(0),
-      isDimensionGuessed(false), fVectorAlternateSum(0), isCocompact(-1),
-      isFiniteCovolume(-1), verticesAtInfinityCount(0), verticesCount(0),
+      isDimensionGuessed(false), fVectorAlternateSum(0), isCocompact(-2),
+      isFiniteCovolume(-2), verticesAtInfinityCount(0), verticesCount(0),
       outCout(0), sBufOld(0), error(""), ouputMathematicalFormat("") {
   verticesCount = matrix.size();
 
