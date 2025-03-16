@@ -127,11 +127,13 @@ To install dependencies using brew:
 First, open a terminal and enter the following command to install the prerequisites:
 \code
 xcode-select --install
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install cmake graphviz pcre++ pari gmp
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install graphviz pcre pari gmp cmake
 brew install Caskroom/cask/xquartz
 brew install libomp
 \endcode
+
+Note: It seems that the computation of the signature using Pari can be incorrect on Mac.
 
 If you prefer to use MacPorts, then you can do
 \code

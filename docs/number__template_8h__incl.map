@@ -1,4 +1,5 @@
 <map id="number_template.h" name="number_template.h">
-<area shape="rect" id="node1" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...)" alt="" coords="5,5,156,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="41,80,121,107"/>
+<area shape="rect" id="Node000001" title="Permet d&#39;avoir un type générique (regroupant Number_rational, ...)" alt="" coords="5,5,139,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="36,79,108,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,31,75,65,69,65,69,31"/>
 </map>

@@ -1,9 +1,15 @@
 <map id="arithmeticity.h" name="arithmeticity.h">
-<area shape="rect" id="node1" title=" " alt="" coords="103,5,219,32"/>
-<area shape="rect" id="node2" href="$app_8h.html" title=" " alt="" coords="13,80,71,107"/>
-<area shape="rect" id="node4" href="$arithmeticity_8cpp.html" title=" " alt="" coords="95,80,226,107"/>
-<area shape="rect" id="node5" href="$tests_8h.html" title=" " alt="" coords="250,80,317,107"/>
-<area shape="rect" id="node3" href="$app_8cpp.html" title=" " alt="" coords="5,155,79,181"/>
-<area shape="rect" id="node6" href="$main_8cpp.html" title=" " alt="" coords="189,155,271,181"/>
-<area shape="rect" id="node7" href="$tests_8cpp.html" title=" " alt="" coords="296,155,377,181"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="97,5,200,31"/>
+<area shape="rect" id="Node000002" href="$app_8h.html" title=" " alt="" coords="12,79,67,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,40,59,81,56,76,118,36"/>
+<area shape="rect" id="Node000004" href="$arithmeticity_8cpp.html" title=" " alt="" coords="91,79,207,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="151,44,151,79,146,79,146,44"/>
+<area shape="rect" id="Node000005" href="$tests_8h.html" title=" " alt="" coords="231,79,293,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="180,36,245,76,242,81,177,40"/>
+<area shape="rect" id="Node000003" href="$app_8cpp.html" title=" " alt="" coords="5,152,73,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="42,118,42,152,37,152,37,118"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html" title=" " alt="" coords="174,152,249,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="248,117,222,153,217,150,243,114"/>
+<area shape="rect" id="Node000007" href="$tests_8cpp.html" title=" " alt="" coords="273,152,349,177"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="280,114,306,150,301,153,276,117"/>
 </map>

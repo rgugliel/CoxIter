@@ -1,5 +1,7 @@
 <map id="GraphsListIterator" name="GraphsListIterator">
-<area shape="rect" id="node1" title="Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl) &#160;GraphsListIterator ite..." alt="" coords="32,95,171,121"/>
-<area shape="rect" id="node2" href="$class_graphs_list.html" title="Liste des graphes." alt="" coords="5,5,96,32"/>
-<area shape="rect" id="node3" href="$class_graph.html" title="This class represents one graph." alt="" coords="123,5,184,32"/>
+<area shape="rect" id="Node000001" title="Permet de parcourir une liste de graphes Utilisation (pour un GraphsList *gl) &#160;GraphsListIterator ite..." alt="" coords="33,93,159,119"/>
+<area shape="rect" id="Node000002" href="$class_graphs_list.html" title="Liste des graphes." alt="" coords="5,5,91,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,44,52,68,62,81,75,91,72,95,58,85,47,70,42,45"/>
+<area shape="rect" id="Node000003" href="$class_graph.html" title="This class represents one graph." alt="" coords="115,5,173,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,44,105,94,100,91,129,41"/>
 </map>

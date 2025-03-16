@@ -1,5 +1,7 @@
 <map id="Test" name="Test">
-<area shape="rect" id="node1" title="Contains information to perform a test." alt="" coords="51,171,99,197"/>
-<area shape="rect" id="node2" href="$class_m_p_z__rational.html" title=" " alt="" coords="21,81,129,108"/>
-<area shape="rect" id="node3" href="$class_number__template.html" title=" " alt="" coords="5,5,145,32"/>
+<area shape="rect" id="Node000001" title="Contains information to perform a test." alt="" coords="45,168,91,193"/>
+<area shape="rect" id="Node000002" href="$class_m_p_z__rational.html" title=" " alt="" coords="19,80,117,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,119,71,167,65,167,65,119"/>
+<area shape="rect" id="Node000003" href="$class_number__template.html" title=" " alt="" coords="5,5,131,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="71,45,71,80,65,80,65,45"/>
 </map>

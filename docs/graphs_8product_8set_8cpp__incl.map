@@ -1,12 +1,27 @@
 <map id="graphs.product.set.cpp" name="graphs.product.set.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="193,5,363,32"/>
-<area shape="rect" id="node2" href="$graphs_8product_8set_8h.html" title=" " alt="" coords="201,80,355,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,304,76,331"/>
-<area shape="rect" id="node4" title=" " alt="" coords="387,155,430,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="401,304,459,331"/>
-<area shape="rect" id="node6" href="$graph_8h.html" title=" " alt="" coords="191,229,261,256"/>
-<area shape="rect" id="node10" href="$graphs_8product_8h.html" title=" " alt="" coords="110,155,241,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="291,304,377,331"/>
-<area shape="rect" id="node8" title=" " alt="" coords="187,304,267,331"/>
-<area shape="rect" id="node9" title=" " alt="" coords="100,304,163,331"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="181,5,335,31"/>
+<area shape="rect" id="Node000002" href="$graphs_8product_8set_8h.html" title=" " alt="" coords="187,79,329,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,31,261,65,255,65,255,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,299,68,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="188,106,137,123,113,137,92,154,70,185,55,220,46,255,41,285,36,285,40,254,50,218,65,182,88,150,110,132,135,118,186,101"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="369,152,409,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="280,102,358,144,356,148,278,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="371,299,425,324"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="268,103,385,285,381,288,263,106"/>
+<area shape="rect" id="Node000006" href="$graph_8h.html" title=" " alt="" coords="177,225,243,251"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="257,105,235,178,222,213,217,211,230,176,252,103"/>
+<area shape="rect" id="Node000010" href="$graphs_8product_8h.html" title=" " alt="" coords="101,152,220,177"/>
+<area shape="poly" id="edge11_Node000002_Node000010" title=" " alt="" coords="244,106,189,146,186,141,241,102"/>
+<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="183,253,79,296,77,291,181,248"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="241,248,359,292,357,297,239,253"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="271,299,346,324"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="227,249,283,288,280,293,224,253"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="175,299,247,324"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="213,251,214,285,208,285,208,251"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="93,299,151,324"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="198,253,149,292,145,288,194,249"/>
+<area shape="poly" id="edge12_Node000010_Node000003" title=" " alt="" coords="153,180,57,290,53,287,148,176"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="181,175,369,289,366,294,178,180"/>
+<area shape="poly" id="edge15_Node000010_Node000006" title=" " alt="" coords="171,176,196,213,192,216,167,179"/>
+<area shape="poly" id="edge14_Node000010_Node000009" title=" " alt="" coords="160,178,131,286,126,285,155,177"/>
 </map>
