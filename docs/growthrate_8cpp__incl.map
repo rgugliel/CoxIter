@@ -1,9 +1,18 @@
 <map id="growthrate.cpp" name="growthrate.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="124,5,244,32"/>
-<area shape="rect" id="node2" href="$growthrate_8h.html" title=" " alt="" coords="131,80,237,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,229,93,256"/>
-<area shape="rect" id="node4" title=" " alt="" coords="135,229,198,256"/>
-<area shape="rect" id="node5" title=" " alt="" coords="242,229,321,256"/>
-<area shape="rect" id="node6" title=" " alt="" coords="339,155,419,181"/>
-<area shape="rect" id="node7" href="$paripolynomials_8h.html" title=" " alt="" coords="105,155,263,181"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="117,5,225,31"/>
+<area shape="rect" id="Node000002" href="$growthrate_8h.html" title=" " alt="" coords="124,79,219,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,31,174,65,169,65,169,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,225,84,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,106,114,126,83,154,65,183,53,213,48,211,60,181,79,150,111,122,145,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="125,225,183,251"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="145,106,115,125,101,138,91,153,88,170,95,187,108,202,124,216,121,220,104,206,90,189,83,171,86,151,97,135,112,121,143,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="225,225,297,251"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="199,102,230,121,245,135,256,151,266,181,267,211,261,211,261,182,252,153,241,138,227,126,196,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="317,152,389,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="201,102,311,144,309,149,199,107"/>
+<area shape="rect" id="Node000007" href="$paripolynomials_8h.html" title=" " alt="" coords="101,152,241,177"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="174,104,174,138,169,138,169,104"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="152,180,79,221,76,216,150,175"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="171,178,163,213,157,212,166,177"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="187,175,237,214,234,219,184,179"/>
 </map>

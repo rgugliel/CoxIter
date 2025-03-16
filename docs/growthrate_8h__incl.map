@@ -1,8 +1,16 @@
 <map id="growthrate.h" name="growthrate.h">
-<area shape="rect" id="node1" title=" " alt="" coords="131,5,237,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,155,93,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="135,155,198,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="242,155,321,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="339,80,419,107"/>
-<area shape="rect" id="node6" href="$paripolynomials_8h.html" title=" " alt="" coords="105,80,263,107"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="124,5,219,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,84,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,33,114,53,83,80,65,110,53,140,48,138,60,107,79,77,111,48,145,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,152,183,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="145,33,115,52,101,65,91,80,88,97,95,113,108,129,124,142,121,146,104,132,90,116,83,97,86,78,97,61,112,48,143,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="225,152,297,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="199,28,230,48,245,61,256,77,266,108,267,138,261,138,261,109,252,80,241,65,227,52,196,33"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="317,79,389,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="201,28,311,71,309,76,199,33"/>
+<area shape="rect" id="Node000006" href="$paripolynomials_8h.html" title=" " alt="" coords="101,79,241,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="174,31,174,65,169,65,169,31"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="152,106,79,147,76,143,150,102"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="171,105,163,140,157,138,166,104"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="187,102,237,141,234,145,184,106"/>
 </map>

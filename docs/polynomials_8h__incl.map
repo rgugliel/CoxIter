@@ -1,10 +1,17 @@
 <map id="polynomials.h" name="polynomials.h">
-<area shape="rect" id="node1" title="Some mathematical functions regarding polynomials." alt="" coords="261,5,375,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,68,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="93,80,173,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="197,80,268,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="293,80,343,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="367,80,426,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="451,80,513,107"/>
-<area shape="rect" id="node8" title=" " alt="" coords="537,80,616,107"/>
+<area shape="rect" id="Node000001" title="Some mathematical functions regarding polynomials." alt="" coords="243,5,346,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,64,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,33,78,81,76,76,252,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="88,79,160,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,33,165,76,163,71,266,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="185,79,247,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="284,33,241,71,237,68,280,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="271,79,318,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="297,31,297,65,292,65,292,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="342,79,397,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="308,29,349,67,345,71,305,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="421,79,480,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="321,28,414,70,412,75,319,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="504,79,576,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="335,28,492,73,490,78,333,33"/>
 </map>

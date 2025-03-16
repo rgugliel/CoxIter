@@ -1,7 +1,11 @@
 <map id="Index2" name="Index2">
-<area shape="rect" id="node1" title="Extract an index two subroup (based on Gal, Bonnafé&#45;Dyer)" alt="" coords="123,275,190,301"/>
-<area shape="rect" id="node2" href="$class_cox_iter.html" title="Main class for the work." alt="" coords="122,185,191,212"/>
-<area shape="rect" id="node3" href="$class_m_p_z__rational.html" title=" " alt="" coords="21,81,129,108"/>
-<area shape="rect" id="node4" href="$class_number__template.html" title=" " alt="" coords="5,5,145,32"/>
-<area shape="rect" id="node5" href="$class_graphs_list.html" title="Liste des graphes." alt="" coords="194,81,285,108"/>
+<area shape="rect" id="Node000001" title="Extract an index two subroup (based on Gal, Bonnafé&#45;Dyer)" alt="" coords="96,271,157,296"/>
+<area shape="rect" id="Node000002" href="$class_cox_iter.html" title="Main class for the work." alt="" coords="94,183,159,208"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="129,222,129,270,124,270,124,222"/>
+<area shape="rect" id="Node000003" href="$class_graphs_list.html" title="Liste des graphes." alt="" coords="5,80,91,105"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="45,119,45,139,52,157,71,175,95,185,93,190,68,179,47,160,40,140,40,119"/>
+<area shape="rect" id="Node000004" href="$class_m_p_z__rational.html" title=" " alt="" coords="156,80,255,105"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="200,119,191,140,178,160,149,185,146,181,174,157,186,138,195,117"/>
+<area shape="rect" id="Node000005" href="$class_number__template.html" title=" " alt="" coords="143,5,268,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="208,45,208,80,203,80,203,45"/>
 </map>
