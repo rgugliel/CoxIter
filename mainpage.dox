@@ -82,7 +82,7 @@ sudo apt-get install g++ cmake graphviz libpcre3-dev libpari-dev libgmp-dev git
 
 On Fedora, type the following commands in a Shell:
 \code
-sudo dnf install g++ cmake graphviz pcre-devel pari-devel git
+sudo dnf install g++ cmake graphviz pcre-devel pari-devel gmp-devel git
 \endcode
 
 \subsection main_compilation_gnu_compile Compilation
